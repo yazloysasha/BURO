@@ -1,0 +1,125 @@
+{
+ "image": "skin_black.png",
+ "frameW": 32,
+ "frameH": 32,
+ "facing": "right",
+ "source_cat": "Cat-2",
+ "anchor": "bottom-center; feet on row y=31",
+ "animations": {
+  "idle": {
+   "row": 0,
+   "frames": 10,
+   "fps": 8,
+   "y": 0,
+   "source": "Cat-2-Idle.png"
+  },
+  "walk": {
+   "row": 1,
+   "frames": 8,
+   "fps": 10,
+   "y": 32,
+   "source": "Cat-2-Walk.png"
+  },
+  "run": {
+   "row": 2,
+   "frames": 8,
+   "fps": 12,
+   "y": 64,
+   "source": "Cat-2-Run.png"
+  },
+  "sit": {
+   "row": 3,
+   "frames": 1,
+   "fps": 1,
+   "y": 96,
+   "source": "Cat-2-Sitting.png"
+  },
+  "sleep1": {
+   "row": 4,
+   "frames": 1,
+   "fps": 1,
+   "y": 128,
+   "source": "Cat-2-Sleeping1.png"
+  },
+  "sleep2": {
+   "row": 5,
+   "frames": 1,
+   "fps": 1,
+   "y": 160,
+   "source": "Cat-2-Sleeping2.png"
+  },
+  "lay": {
+   "row": 6,
+   "frames": 8,
+   "fps": 8,
+   "y": 192,
+   "source": "Cat-2-Laying.png"
+  },
+  "meow": {
+   "row": 7,
+   "frames": 4,
+   "fps": 8,
+   "y": 224,
+   "source": "Cat-2-Meow.png"
+  },
+  "itch": {
+   "row": 8,
+   "frames": 2,
+   "fps": 6,
+   "y": 256,
+   "source": "Cat-2-Itch.png"
+  },
+  "lick1": {
+   "row": 9,
+   "frames": 5,
+   "fps": 8,
+   "y": 288,
+   "source": "Cat-2-Licking 1.png"
+  },
+  "lick2": {
+   "row": 10,
+   "frames": 5,
+   "fps": 8,
+   "y": 320,
+   "source": "Cat-2-Licking 2.png"
+  },
+  "stretch": {
+   "row": 11,
+   "frames": 13,
+   "fps": 10,
+   "y": 352,
+   "source": "Cat-2-Stretching.png"
+  },
+  "hurt": {
+   "row": 12,
+   "frames": 2,
+   "fps": 12,
+   "y": 384,
+   "source": "GENERATED (tint of idle frame 0)"
+  }
+ },
+ "aliases": {
+  "attack": {
+   "use": "run",
+   "frames": [
+    2,
+    3,
+    4,
+    5
+   ],
+   "note": "no attack anim in pack; lunge = run frames + code tween"
+  },
+  "taunt": {
+   "use": "meow"
+  },
+  "special": {
+   "use": "stretch"
+  },
+  "rest": {
+   "use": "sleep1"
+  },
+  "victory": {
+   "use": "lick1"
+  }
+ }
+}

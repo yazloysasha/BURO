@@ -1,0 +1,857 @@
+[
+ {
+  "id": "camel",
+  "file": "sprites/animals/camel.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #130",
+  "name_guess": false,
+  "note": ""
+ },
+ {
+  "id": "owl_white",
+  "file": "sprites/animals/owl_white.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #131",
+  "name_guess": false,
+  "note": ""
+ },
+ {
+  "id": "owlet",
+  "file": "sprites/animals/owlet.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #132",
+  "name_guess": true,
+  "note": ""
+ },
+ {
+  "id": "owl_brown",
+  "file": "sprites/animals/owl_brown.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #133",
+  "name_guess": true,
+  "note": ""
+ },
+ {
+  "id": "hedgehog",
+  "file": "sprites/animals/hedgehog.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #134",
+  "name_guess": true,
+  "note": ""
+ },
+ {
+  "id": "eagle",
+  "file": "sprites/animals/eagle.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #135",
+  "name_guess": false,
+  "note": ""
+ },
+ {
+  "id": "eagle_bald",
+  "file": "sprites/animals/eagle_bald.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #136",
+  "name_guess": true,
+  "note": ""
+ },
+ {
+  "id": "crow",
+  "file": "sprites/animals/crow.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #137",
+  "name_guess": false,
+  "note": ""
+ },
+ {
+  "id": "mole",
+  "file": "sprites/animals/mole.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #138",
+  "name_guess": true,
+  "note": ""
+ },
+ {
+  "id": "bat_brown",
+  "file": "sprites/animals/bat_brown.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #139",
+  "name_guess": true,
+  "note": ""
+ },
+ {
+  "id": "flying_beast",
+  "file": "sprites/animals/flying_beast.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #140",
+  "name_guess": true,
+  "note": ""
+ },
+ {
+  "id": "lizard",
+  "file": "sprites/animals/lizard.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #147",
+  "name_guess": false,
+  "note": ""
+ },
+ {
+  "id": "frog",
+  "file": "sprites/animals/frog.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #148",
+  "name_guess": false,
+  "note": ""
+ },
+ {
+  "id": "crocodile",
+  "file": "sprites/animals/crocodile.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #149",
+  "name_guess": true,
+  "note": ""
+ },
+ {
+  "id": "turtle",
+  "file": "sprites/animals/turtle.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #150",
+  "name_guess": false,
+  "note": ""
+ },
+ {
+  "id": "chicken",
+  "file": "sprites/animals/chicken.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #151",
+  "name_guess": false,
+  "note": ""
+ },
+ {
+  "id": "cow",
+  "file": "sprites/animals/cow.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #152",
+  "name_guess": false,
+  "note": ""
+ },
+ {
+  "id": "goat",
+  "file": "sprites/animals/goat.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #153",
+  "name_guess": false,
+  "note": ""
+ },
+ {
+  "id": "sheep",
+  "file": "sprites/animals/sheep.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #154",
+  "name_guess": false,
+  "note": ""
+ },
+ {
+  "id": "emu",
+  "file": "sprites/animals/emu.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #155",
+  "name_guess": true,
+  "note": ""
+ },
+ {
+  "id": "zebra",
+  "file": "sprites/animals/zebra.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #156",
+  "name_guess": false,
+  "note": ""
+ },
+ {
+  "id": "lion",
+  "file": "sprites/animals/lion.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #157",
+  "name_guess": false,
+  "note": ""
+ },
+ {
+  "id": "tiger",
+  "file": "sprites/animals/tiger.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #158",
+  "name_guess": false,
+  "note": ""
+ },
+ {
+  "id": "elephant",
+  "file": "sprites/animals/elephant.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #159",
+  "name_guess": false,
+  "note": ""
+ },
+ {
+  "id": "giraffe",
+  "file": "sprites/animals/giraffe.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #160",
+  "name_guess": false,
+  "note": ""
+ },
+ {
+  "id": "boar",
+  "file": "sprites/animals/boar.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #161",
+  "name_guess": false,
+  "note": ""
+ },
+ {
+  "id": "deer",
+  "file": "sprites/animals/deer.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #162",
+  "name_guess": false,
+  "note": ""
+ },
+ {
+  "id": "elk",
+  "file": "sprites/animals/elk.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #163",
+  "name_guess": true,
+  "note": ""
+ },
+ {
+  "id": "bear_brown",
+  "file": "sprites/animals/bear_brown.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #164",
+  "name_guess": false,
+  "note": ""
+ },
+ {
+  "id": "bear_polar",
+  "file": "sprites/animals/bear_polar.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #165",
+  "name_guess": false,
+  "note": ""
+ },
+ {
+  "id": "gorilla_dark",
+  "file": "sprites/animals/gorilla_dark.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #166",
+  "name_guess": true,
+  "note": ""
+ },
+ {
+  "id": "gorilla",
+  "file": "sprites/animals/gorilla.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #167",
+  "name_guess": false,
+  "note": ""
+ },
+ {
+  "id": "chimp",
+  "file": "sprites/animals/chimp.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #168",
+  "name_guess": true,
+  "note": ""
+ },
+ {
+  "id": "monkey",
+  "file": "sprites/animals/monkey.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #169",
+  "name_guess": false,
+  "note": ""
+ },
+ {
+  "id": "fox",
+  "file": "sprites/animals/fox.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #170",
+  "name_guess": true,
+  "note": ""
+ },
+ {
+  "id": "rhino",
+  "file": "sprites/animals/rhino.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #171",
+  "name_guess": false,
+  "note": ""
+ },
+ {
+  "id": "hippo",
+  "file": "sprites/animals/hippo.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #172",
+  "name_guess": false,
+  "note": ""
+ },
+ {
+  "id": "shark",
+  "file": "sprites/animals/shark.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #173",
+  "name_guess": false,
+  "note": ""
+ },
+ {
+  "id": "orca",
+  "file": "sprites/animals/orca.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #174",
+  "name_guess": false,
+  "note": ""
+ },
+ {
+  "id": "dolphin",
+  "file": "sprites/animals/dolphin.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #175",
+  "name_guess": false,
+  "note": ""
+ },
+ {
+  "id": "squirrel",
+  "file": "sprites/animals/squirrel.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #176",
+  "name_guess": false,
+  "note": ""
+ },
+ {
+  "id": "otter",
+  "file": "sprites/animals/otter.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #177",
+  "name_guess": true,
+  "note": ""
+ },
+ {
+  "id": "rabbit",
+  "file": "sprites/animals/rabbit.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #178",
+  "name_guess": false,
+  "note": ""
+ },
+ {
+  "id": "raccoon",
+  "file": "sprites/animals/raccoon.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #179",
+  "name_guess": false,
+  "note": ""
+ },
+ {
+  "id": "badger",
+  "file": "sprites/animals/badger.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #180",
+  "name_guess": true,
+  "note": ""
+ },
+ {
+  "id": "fish_big_green",
+  "file": "sprites/animals/fish_big_green.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #61",
+  "name_guess": true,
+  "note": ""
+ },
+ {
+  "id": "fish_big_pink",
+  "file": "sprites/animals/fish_big_pink.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #62",
+  "name_guess": true,
+  "note": ""
+ },
+ {
+  "id": "fish_big_grey",
+  "file": "sprites/animals/fish_big_grey.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #63",
+  "name_guess": true,
+  "note": ""
+ },
+ {
+  "id": "fish_big_gold",
+  "file": "sprites/animals/fish_big_gold.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #64",
+  "name_guess": true,
+  "note": ""
+ },
+ {
+  "id": "fish_big_orange",
+  "file": "sprites/animals/fish_big_orange.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #65",
+  "name_guess": true,
+  "note": ""
+ },
+ {
+  "id": "fish_green",
+  "file": "sprites/animals/fish_green.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #71",
+  "name_guess": true,
+  "note": ""
+ },
+ {
+  "id": "fish_pink",
+  "file": "sprites/animals/fish_pink.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #72",
+  "name_guess": true,
+  "note": ""
+ },
+ {
+  "id": "fish_grey",
+  "file": "sprites/animals/fish_grey.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #73",
+  "name_guess": true,
+  "note": ""
+ },
+ {
+  "id": "fish_gold",
+  "file": "sprites/animals/fish_gold.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #74",
+  "name_guess": true,
+  "note": ""
+ },
+ {
+  "id": "fish_orange",
+  "file": "sprites/animals/fish_orange.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #75",
+  "name_guess": true,
+  "note": ""
+ },
+ {
+  "id": "snake_green",
+  "file": "sprites/animals/snake_green.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #41",
+  "name_guess": false,
+  "note": ""
+ },
+ {
+  "id": "snake_sand",
+  "file": "sprites/animals/snake_sand.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #42",
+  "name_guess": true,
+  "note": ""
+ },
+ {
+  "id": "horse",
+  "file": "sprites/animals/horse.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #51",
+  "name_guess": false,
+  "note": ""
+ },
+ {
+  "id": "unicorn",
+  "file": "sprites/animals/unicorn.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #52",
+  "name_guess": false,
+  "note": ""
+ },
+ {
+  "id": "pegasus",
+  "file": "sprites/animals/pegasus.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #53",
+  "name_guess": false,
+  "note": ""
+ },
+ {
+  "id": "unicorn_dark",
+  "file": "sprites/animals/unicorn_dark.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #55",
+  "name_guess": true,
+  "note": ""
+ },
+ {
+  "id": "cat_beast_dark",
+  "file": "sprites/animals/cat_beast_dark.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #94",
+  "name_guess": true,
+  "note": ""
+ },
+ {
+  "id": "cat_grey",
+  "file": "sprites/animals/cat_grey.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #95",
+  "name_guess": true,
+  "note": ""
+ },
+ {
+  "id": "parrot",
+  "file": "sprites/animals/parrot.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #104",
+  "name_guess": true,
+  "note": ""
+ },
+ {
+  "id": "griffin",
+  "file": "sprites/animals/griffin.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #105",
+  "name_guess": true,
+  "note": ""
+ },
+ {
+  "id": "griffin_brown",
+  "file": "sprites/animals/griffin_brown.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #106",
+  "name_guess": true,
+  "note": ""
+ },
+ {
+  "id": "owl_grey",
+  "file": "sprites/animals/owl_grey.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #118",
+  "name_guess": true,
+  "note": ""
+ },
+ {
+  "id": "dragon_white",
+  "file": "sprites/animals/dragon_white.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #31",
+  "name_guess": false,
+  "note": ""
+ },
+ {
+  "id": "dragon_blue",
+  "file": "sprites/animals/dragon_blue.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #32",
+  "name_guess": false,
+  "note": ""
+ },
+ {
+  "id": "dragon_grey",
+  "file": "sprites/animals/dragon_grey.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #33",
+  "name_guess": false,
+  "note": ""
+ },
+ {
+  "id": "dragon_red",
+  "file": "sprites/animals/dragon_red.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #34",
+  "name_guess": false,
+  "note": ""
+ },
+ {
+  "id": "dragon_green",
+  "file": "sprites/animals/dragon_green.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #35",
+  "name_guess": false,
+  "note": ""
+ },
+ {
+  "id": "wolf_grey",
+  "file": "sprites/animals/wolf_grey.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #24",
+  "name_guess": true,
+  "note": ""
+ },
+ {
+  "id": "bear_owl",
+  "file": "sprites/animals/bear_owl.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #91",
+  "name_guess": true,
+  "note": ""
+ },
+ {
+  "id": "bear_standing",
+  "file": "sprites/animals/bear_standing.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #102",
+  "name_guess": true,
+  "note": ""
+ },
+ {
+  "id": "lion_cub",
+  "file": "sprites/animals/lion_cub.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #108",
+  "name_guess": true,
+  "note": ""
+ },
+ {
+  "id": "bat",
+  "file": "sprites/animals/bat.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Dungeon #120",
+  "name_guess": false,
+  "note": ""
+ },
+ {
+  "id": "rat_brown",
+  "file": "sprites/animals/rat_brown.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Dungeon #123",
+  "name_guess": false,
+  "note": ""
+ },
+ {
+  "id": "rat_grey",
+  "file": "sprites/animals/rat_grey.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Dungeon #124",
+  "name_guess": false,
+  "note": ""
+ },
+ {
+  "id": "crab",
+  "file": "sprites/animals/crab.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Dungeon #110",
+  "name_guess": true,
+  "note": "red crab-like creature"
+ },
+ {
+  "id": "hamster",
+  "file": "sprites/animals/hamster.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Dungeon #123 RECOLOR",
+  "name_guess": true,
+  "note": "hamster = golden recolor of the brown rat sprite (no real hamster sprite in any pack)"
+ },
+ {
+  "id": "dog",
+  "file": "sprites/animals/dog.png",
+  "w": 16,
+  "h": 16,
+  "source": "Tiny Creatures #170 RECOLOR",
+  "name_guess": true,
+  "note": "dog = desaturated brown recolor of fox sprite #170 (no dog sprite in packs)"
+ },
+ {
+  "id": "bug_bee",
+  "file": "sprites/animals/bug_bee.png",
+  "w": 8,
+  "h": 8,
+  "source": "Madameberry cute bugs (frame 1)",
+  "name_guess": false,
+  "note": "8x8 native"
+ },
+ {
+  "id": "bug_beetle",
+  "file": "sprites/animals/bug_beetle.png",
+  "w": 8,
+  "h": 8,
+  "source": "Madameberry cute bugs (frame 1)",
+  "name_guess": false,
+  "note": "8x8 native"
+ },
+ {
+  "id": "bug_dragonfly",
+  "file": "sprites/animals/bug_dragonfly.png",
+  "w": 8,
+  "h": 8,
+  "source": "Madameberry cute bugs (frame 1)",
+  "name_guess": false,
+  "note": "8x8 native"
+ },
+ {
+  "id": "bug_firefly",
+  "file": "sprites/animals/bug_firefly.png",
+  "w": 8,
+  "h": 8,
+  "source": "Madameberry cute bugs (frame 1)",
+  "name_guess": false,
+  "note": "8x8 native"
+ },
+ {
+  "id": "bug_gnat",
+  "file": "sprites/animals/bug_gnat.png",
+  "w": 8,
+  "h": 8,
+  "source": "Madameberry cute bugs (frame 1)",
+  "name_guess": false,
+  "note": "8x8 native"
+ },
+ {
+  "id": "bug_moth",
+  "file": "sprites/animals/bug_moth.png",
+  "w": 8,
+  "h": 8,
+  "source": "Madameberry cute bugs (frame 1)",
+  "name_guess": false,
+  "note": "8x8 native"
+ },
+ {
+  "id": "cat_ginger",
+  "file": "sprites/animals/cat_ginger.png",
+  "w": 32,
+  "h": 32,
+  "source": "LuizMelo Pet Cats Pack Cat-1 Sitting",
+  "name_guess": false,
+  "note": "32x32"
+ },
+ {
+  "id": "cat_black",
+  "file": "sprites/animals/cat_black.png",
+  "w": 32,
+  "h": 32,
+  "source": "LuizMelo Pet Cats Pack Cat-2 Sitting",
+  "name_guess": false,
+  "note": "32x32"
+ },
+ {
+  "id": "cat_siamese",
+  "file": "sprites/animals/cat_siamese.png",
+  "w": 32,
+  "h": 32,
+  "source": "LuizMelo Pet Cats Pack Cat-3 Sitting",
+  "name_guess": false,
+  "note": "32x32"
+ },
+ {
+  "id": "cat_sphynx",
+  "file": "sprites/animals/cat_sphynx.png",
+  "w": 32,
+  "h": 32,
+  "source": "LuizMelo Pet Cats Pack Cat-4 Sitting",
+  "name_guess": false,
+  "note": "32x32"
+ },
+ {
+  "id": "cat_white_fluffy",
+  "file": "sprites/animals/cat_white_fluffy.png",
+  "w": 32,
+  "h": 32,
+  "source": "LuizMelo Pet Cats Pack Cat-5 Sitting",
+  "name_guess": false,
+  "note": "32x32"
+ },
+ {
+  "id": "cat_grey_tabby",
+  "file": "sprites/animals/cat_grey_tabby.png",
+  "w": 32,
+  "h": 32,
+  "source": "LuizMelo Pet Cats Pack Cat-6 Sitting",
+  "name_guess": false,
+  "note": "32x32"
+ },
+ {
+  "id": "cat_kitkus",
+  "file": "sprites/animals/cat_kitkus.png",
+  "w": 16,
+  "h": 16,
+  "source": "kotnaszynce cute kitty",
+  "name_guess": false,
+  "note": ""
+ }
+]

@@ -1,0 +1,199 @@
+{
+ "image": "enemies.png",
+ "frameW": 16,
+ "frameH": 16,
+ "enemies": {
+  "klobster": {
+   "row": 0,
+   "y": 0,
+   "frames": 1,
+   "name_ru": "Клобстер",
+   "source": "Tiny Creatures #144 (recolor)",
+   "note": "cockroach-like beetle recolored reddish-brown; signature enemy"
+  },
+  "klobster_king": {
+   "row": 1,
+   "y": 16,
+   "frames": 1,
+   "name_ru": "Королевский клобстер",
+   "source": "Tiny Creatures #144 (recolor + drawn crown)",
+   "note": "mini-boss"
+  },
+  "klobster_toxic": {
+   "row": 2,
+   "y": 32,
+   "frames": 1,
+   "name_ru": "Токсичный клобстер",
+   "source": "Tiny Creatures #144 (recolor)",
+   "note": "variant"
+  },
+  "klobster_glitch": {
+   "row": 3,
+   "y": 48,
+   "frames": 1,
+   "name_ru": "Глючный клобстер",
+   "source": "Tiny Creatures #144 (recolor)",
+   "note": "variant"
+  },
+  "beetle": {
+   "row": 4,
+   "y": 64,
+   "frames": 1,
+   "name_ru": "Жук",
+   "source": "Tiny Creatures #144",
+   "note": ""
+  },
+  "ant_giant": {
+   "row": 5,
+   "y": 80,
+   "frames": 1,
+   "name_ru": "Гигантский муравей",
+   "source": "Tiny Creatures #143",
+   "note": ""
+  },
+  "ant_red": {
+   "row": 6,
+   "y": 96,
+   "frames": 2,
+   "name_ru": "Рыжий муравей",
+   "source": "OGA 16x16 Ant Enemies",
+   "note": "2-frame walk"
+  },
+  "ant_grey": {
+   "row": 7,
+   "y": 112,
+   "frames": 2,
+   "name_ru": "Серый муравей",
+   "source": "OGA 16x16 Ant Enemies",
+   "note": "2-frame walk"
+  },
+  "wasp": {
+   "row": 8,
+   "y": 128,
+   "frames": 1,
+   "name_ru": "Оса",
+   "source": "Tiny Creatures #141",
+   "note": "bee/wasp"
+  },
+  "fly": {
+   "row": 9,
+   "y": 144,
+   "frames": 1,
+   "name_ru": "Муха",
+   "source": "Tiny Creatures #142",
+   "note": "fly/mosquito (name_guess)"
+  },
+  "spider": {
+   "row": 10,
+   "y": 160,
+   "frames": 1,
+   "name_ru": "Паук",
+   "source": "Tiny Dungeon #122",
+   "note": ""
+  },
+  "scorpion": {
+   "row": 11,
+   "y": 176,
+   "frames": 1,
+   "name_ru": "Скорпион",
+   "source": "Tiny Creatures #146",
+   "note": ""
+  },
+  "worm": {
+   "row": 12,
+   "y": 192,
+   "frames": 1,
+   "name_ru": "Червь",
+   "source": "Tiny Creatures #145",
+   "note": "coiled segmented worm (name_guess)"
+  },
+  "moth": {
+   "row": 13,
+   "y": 208,
+   "frames": 2,
+   "name_ru": "Моль",
+   "source": "Madameberry cute bugs",
+   "note": "8x8 art padded into 16x16, 2 frames"
+  },
+  "firefly": {
+   "row": 14,
+   "y": 224,
+   "frames": 2,
+   "name_ru": "Светлячок",
+   "source": "Madameberry cute bugs",
+   "note": "8x8 padded, 2 frames"
+  },
+  "gnat": {
+   "row": 15,
+   "y": 240,
+   "frames": 2,
+   "name_ru": "Мошка",
+   "source": "Madameberry cute bugs",
+   "note": "8x8 padded, 2 frames"
+  },
+  "dragonfly": {
+   "row": 16,
+   "y": 256,
+   "frames": 2,
+   "name_ru": "Стрекоза",
+   "source": "Madameberry cute bugs",
+   "note": "8x8 padded, 2 frames"
+  },
+  "bee_small": {
+   "row": 17,
+   "y": 272,
+   "frames": 2,
+   "name_ru": "Пчёлка",
+   "source": "Madameberry cute bugs",
+   "note": "8x8 padded, 2 frames"
+  },
+  "beetle_small": {
+   "row": 18,
+   "y": 288,
+   "frames": 2,
+   "name_ru": "Жучок",
+   "source": "Madameberry cute bugs",
+   "note": "8x8 padded, 2 frames"
+  },
+  "rat": {
+   "row": 19,
+   "y": 304,
+   "frames": 1,
+   "name_ru": "Крыса",
+   "source": "Tiny Dungeon #123",
+   "note": "non-insect extra"
+  },
+  "bat": {
+   "row": 20,
+   "y": 320,
+   "frames": 1,
+   "name_ru": "Летучая мышь",
+   "source": "Tiny Dungeon #120",
+   "note": "non-insect extra"
+  },
+  "ghost": {
+   "row": 21,
+   "y": 336,
+   "frames": 1,
+   "name_ru": "Призрак",
+   "source": "Tiny Dungeon #121",
+   "note": "non-insect extra"
+  },
+  "slime": {
+   "row": 22,
+   "y": 352,
+   "frames": 1,
+   "name_ru": "Слизень",
+   "source": "Tiny Dungeon #108",
+   "note": "green slime/ghost (name_guess)"
+  },
+  "mimic": {
+   "row": 23,
+   "y": 368,
+   "frames": 1,
+   "name_ru": "Мимик",
+   "source": "Tiny Dungeon #92",
+   "note": "chest mimic"
+  }
+ }
+}

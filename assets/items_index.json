@@ -1,0 +1,5777 @@
+[
+ {
+  "file": "sprites/items/rpg496_a_armor04.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "clothes"
+ },
+ {
+  "file": "sprites/items/rpg496_a_armor05.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "clothes"
+ },
+ {
+  "file": "sprites/items/rpg496_a_armour01.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "clothes"
+ },
+ {
+  "file": "sprites/items/rpg496_a_armour02.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "clothes"
+ },
+ {
+  "file": "sprites/items/rpg496_a_armour03.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "clothes"
+ },
+ {
+  "file": "sprites/items/rpg496_a_clothing01.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "clothes"
+ },
+ {
+  "file": "sprites/items/rpg496_a_clothing02.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "clothes"
+ },
+ {
+  "file": "sprites/items/rpg496_a_shoes01.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "clothes"
+ },
+ {
+  "file": "sprites/items/rpg496_a_shoes02.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "clothes"
+ },
+ {
+  "file": "sprites/items/rpg496_a_shoes03.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "clothes"
+ },
+ {
+  "file": "sprites/items/rpg496_a_shoes04.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "clothes"
+ },
+ {
+  "file": "sprites/items/rpg496_a_shoes05.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "clothes"
+ },
+ {
+  "file": "sprites/items/rpg496_a_shoes06.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "clothes"
+ },
+ {
+  "file": "sprites/items/rpg496_a_shoes07.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "clothes"
+ },
+ {
+  "file": "sprites/items/rpg496_ac_medal01.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "jewelry"
+ },
+ {
+  "file": "sprites/items/rpg496_ac_medal02.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "jewelry"
+ },
+ {
+  "file": "sprites/items/rpg496_ac_medal03.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "jewelry"
+ },
+ {
+  "file": "sprites/items/rpg496_ac_medal04.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "jewelry"
+ },
+ {
+  "file": "sprites/items/rpg496_ac_necklace01.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "jewelry"
+ },
+ {
+  "file": "sprites/items/rpg496_ac_necklace02.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "jewelry"
+ },
+ {
+  "file": "sprites/items/rpg496_ac_necklace03.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "jewelry"
+ },
+ {
+  "file": "sprites/items/rpg496_ac_necklace04.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "jewelry"
+ },
+ {
+  "file": "sprites/items/rpg496_ac_necklace05.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "jewelry"
+ },
+ {
+  "file": "sprites/items/rpg496_ac_necklace06.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "jewelry"
+ },
+ {
+  "file": "sprites/items/rpg496_ac_necklace07.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "jewelry"
+ },
+ {
+  "file": "sprites/items/rpg496_ac_necklace08.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "jewelry"
+ },
+ {
+  "file": "sprites/items/rpg496_ac_ring01.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "jewelry"
+ },
+ {
+  "file": "sprites/items/rpg496_ac_ring02.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "jewelry"
+ },
+ {
+  "file": "sprites/items/rpg496_c_elm01.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "clothes"
+ },
+ {
+  "file": "sprites/items/rpg496_c_elm03.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "clothes"
+ },
+ {
+  "file": "sprites/items/rpg496_c_elm04.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "clothes"
+ },
+ {
+  "file": "sprites/items/rpg496_c_hat01.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "clothes"
+ },
+ {
+  "file": "sprites/items/rpg496_c_hat02.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "clothes"
+ },
+ {
+  "file": "sprites/items/rpg496_e_bones02.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "material"
+ },
+ {
+  "file": "sprites/items/rpg496_e_bones03.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "material"
+ },
+ {
+  "file": "sprites/items/rpg496_e_gold01.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "material"
+ },
+ {
+  "file": "sprites/items/rpg496_e_gold02.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "material"
+ },
+ {
+  "file": "sprites/items/rpg496_e_metal01.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "material"
+ },
+ {
+  "file": "sprites/items/rpg496_e_metal02.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "material"
+ },
+ {
+  "file": "sprites/items/rpg496_e_metal03.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "material"
+ },
+ {
+  "file": "sprites/items/rpg496_e_metal04.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "material"
+ },
+ {
+  "file": "sprites/items/rpg496_e_metal05.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "material"
+ },
+ {
+  "file": "sprites/items/rpg496_e_metal06.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "material"
+ },
+ {
+  "file": "sprites/items/rpg496_e_metal07.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "material"
+ },
+ {
+  "file": "sprites/items/rpg496_e_metal08.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "material"
+ },
+ {
+  "file": "sprites/items/rpg496_e_metal09.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "material"
+ },
+ {
+  "file": "sprites/items/rpg496_e_wood01.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "material"
+ },
+ {
+  "file": "sprites/items/rpg496_e_wood02.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "material"
+ },
+ {
+  "file": "sprites/items/rpg496_e_wood03.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "material"
+ },
+ {
+  "file": "sprites/items/rpg496_e_wood04.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "material"
+ },
+ {
+  "file": "sprites/items/rpg496_i_agate.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/rpg496_i_amethist.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/rpg496_i_antidote.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/rpg496_i_bat_wing.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/rpg496_i_birds_beak.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/rpg496_i_bone.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/rpg496_i_book.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/rpg496_i_bottle01.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/rpg496_i_bottle02.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/rpg496_i_bottle03.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/rpg496_i_bottle04.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/rpg496_i_bronze_bar.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/rpg496_i_bronze_coin.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/rpg496_i_c_banana.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/rpg496_i_c_bread.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/rpg496_i_c_carrot.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/rpg496_i_c_cheese.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/rpg496_i_c_cherry.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/rpg496_i_c_fish.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/rpg496_i_c_grapes.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/rpg496_i_c_green_grapes.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/rpg496_i_c_green_pepper.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/rpg496_i_c_lemon.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/rpg496_i_c_meat.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/rpg496_i_c_mulberry.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/rpg496_i_c_mushroom.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/rpg496_i_c_nut.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/rpg496_i_c_orange.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/rpg496_i_c_pear.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/rpg496_i_c_pie.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/rpg496_i_c_pineapple.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/rpg496_i_c_radish.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/rpg496_i_c_raw_fish.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/rpg496_i_c_raw_meat.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/rpg496_i_c_red_pepper.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/rpg496_i_c_strawberry.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/rpg496_i_c_watermellon.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/rpg496_i_c_yellow_pepper.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/rpg496_i_cannon01.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/rpg496_i_cannon02.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/rpg496_i_cannon03.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/rpg496_i_cannon04.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/rpg496_i_cannon05.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/rpg496_i_chest01.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "container"
+ },
+ {
+  "file": "sprites/items/rpg496_i_chest02.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "container"
+ },
+ {
+  "file": "sprites/items/rpg496_i_clock.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/rpg496_i_clover.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/rpg496_i_coal.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/rpg496_i_crystal01.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/rpg496_i_crystal02.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/rpg496_i_crystal03.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/rpg496_i_diamond.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/rpg496_i_eye.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/rpg496_i_fabric.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/rpg496_i_fang.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/rpg496_i_feather01.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/rpg496_i_feather02.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/rpg496_i_fish_tail.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/rpg496_i_fox_tail.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/rpg496_i_frog_leg.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/rpg496_i_gold_bar.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/rpg496_i_gold_coin.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/rpg496_i_ink.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/rpg496_i_iron_ball.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/rpg496_i_jade.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/rpg496_i_key01.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "key"
+ },
+ {
+  "file": "sprites/items/rpg496_i_key02.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "key"
+ },
+ {
+  "file": "sprites/items/rpg496_i_key03.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "key"
+ },
+ {
+  "file": "sprites/items/rpg496_i_key04.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "key"
+ },
+ {
+  "file": "sprites/items/rpg496_i_key05.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "key"
+ },
+ {
+  "file": "sprites/items/rpg496_i_key06.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "key"
+ },
+ {
+  "file": "sprites/items/rpg496_i_key07.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "key"
+ },
+ {
+  "file": "sprites/items/rpg496_i_leaf.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/rpg496_i_map.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/rpg496_i_mirror.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/rpg496_i_opal.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/rpg496_i_rabbit_paw.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/rpg496_i_rock01.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/rpg496_i_rock02.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/rpg496_i_rock03.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/rpg496_i_rock04.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/rpg496_i_rock05.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/rpg496_i_ruby.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/rpg496_i_sapphire.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/rpg496_i_scorpion_claw.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/rpg496_i_scroll.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/rpg496_i_scroll02.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/rpg496_i_silver_bar.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/rpg496_i_silver_coin.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/rpg496_i_snail_shell.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/rpg496_i_solid_shell.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/rpg496_i_telescope.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/rpg496_i_tentacle.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/rpg496_i_torch01.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/rpg496_i_torch02.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/rpg496_i_water.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/rpg496_i_wolf_fur.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/rpg496_p_blue01.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/rpg496_p_blue02.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/rpg496_p_blue03.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/rpg496_p_blue04.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/rpg496_p_blue05.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/rpg496_p_blue06.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/rpg496_p_blue07.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/rpg496_p_blue08.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/rpg496_p_green01.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/rpg496_p_green02.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/rpg496_p_green03.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/rpg496_p_green04.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/rpg496_p_green05.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/rpg496_p_green06.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/rpg496_p_medicine01.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/rpg496_p_medicine02.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/rpg496_p_medicine03.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/rpg496_p_medicine04.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/rpg496_p_medicine05.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/rpg496_p_medicine06.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/rpg496_p_medicine07.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/rpg496_p_medicine08.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/rpg496_p_medicine09.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/rpg496_p_orange01.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/rpg496_p_orange02.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/rpg496_p_orange03.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/rpg496_p_orange04.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/rpg496_p_orange05.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/rpg496_p_orange06.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/rpg496_p_pink01.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/rpg496_p_pink02.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/rpg496_p_pink03.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/rpg496_p_pink04.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/rpg496_p_pink05.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/rpg496_p_pink06.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/rpg496_p_pink07.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/rpg496_p_pink08.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/rpg496_p_red01.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/rpg496_p_red02.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/rpg496_p_red03.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/rpg496_p_red04.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/rpg496_p_red05.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/rpg496_p_red06.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/rpg496_p_red07.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/rpg496_p_white01.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/rpg496_p_white02.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/rpg496_p_white03.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/rpg496_p_white04.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/rpg496_p_white05.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/rpg496_p_yellow01.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/rpg496_p_yellow02.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/rpg496_p_yellow03.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/rpg496_p_yellow04.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/rpg496_p_yellow05.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/rpg496_p_yellow06.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/rpg496_p_yellow07.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/rpg496_p_yellow08.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/rpg496_w_axe001.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_axe002.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_axe003.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_axe004.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_axe005.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_axe006.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_axe007.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_axe008.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_axe009.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_axe010.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_axe011.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_axe012.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_axe013.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_axe014.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_book01.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_book02.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_book03.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_book04.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_book05.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_book06.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_book07.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_bow01.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_bow02.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_bow03.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_bow04.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_bow05.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_bow06.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_bow07.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_bow08.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_bow09.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_bow10.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_bow11.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_bow12.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_bow13.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_bow14.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_bow15.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_bow16.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_bow17.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_dagger001.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_dagger002.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_dagger003.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_dagger004.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_dagger005.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_dagger006.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_dagger007.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_dagger008.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_dagger009.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_dagger010.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_dagger011.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_dagger012.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_dagger013.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_dagger014.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_dagger015.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_dagger016.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_dagger017.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_dagger018.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_dagger019.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_dagger020.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_dagger021.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_fist001.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_fist002.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_fist003.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_fist004.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_fist005.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_gold_axe.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_gold_bow.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_gold_dagger.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_gold_mace.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_gold_spear.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_gold_sword.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_gun001.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_gun002.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_gun003.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_mace001.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_mace002.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_mace003.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_mace004.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_mace005.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_mace006.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_mace007.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_mace008.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_mace009.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_mace010.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_mace011.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_mace012.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_mace013.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_mace014.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_mace15.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_mace16.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_spear001.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_spear002.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_spear003.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_spear004.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_spear005.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_spear006.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_spear007.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_spear008.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_spear009.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_spear010.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_spear011.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_spear012.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_spear013.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_spear014.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_staff01.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_staff02.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_staff03.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_staff04.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_staff05.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_staff06.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_staff07.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_staff08.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_sword001.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_sword002.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_sword003.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_sword004.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_sword005.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_sword006.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_sword007.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_sword008.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_sword009.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_sword010.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_sword011.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_sword012.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_sword013.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_sword014.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_sword015.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_sword016.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_sword017.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_sword018.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_sword019.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_sword020.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_sword021.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_sword022.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_throw001.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_throw002.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_throw003.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_throw004.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/rpg496_w_throw05.png",
+  "source": "496 pixel art icons (gnola14, CC0)",
+  "w": 34,
+  "h": 34,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_armor_01a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "clothes"
+ },
+ {
+  "file": "sprites/items/kyrise_armor_01b.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "clothes"
+ },
+ {
+  "file": "sprites/items/kyrise_armor_01c.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "clothes"
+ },
+ {
+  "file": "sprites/items/kyrise_armor_01d.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "clothes"
+ },
+ {
+  "file": "sprites/items/kyrise_armor_01e.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "clothes"
+ },
+ {
+  "file": "sprites/items/kyrise_arrow_01a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_arrow_01b.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_arrow_01c.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_arrow_01d.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_arrow_01e.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_arrow_02a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_arrow_02b.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_arrow_02c.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_arrow_02d.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_arrow_02e.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_arrow_03a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_arrow_03b.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_arrow_03c.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_arrow_03d.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_arrow_03e.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_bone01a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/kyrise_book_01a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "book"
+ },
+ {
+  "file": "sprites/items/kyrise_book_01b.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "book"
+ },
+ {
+  "file": "sprites/items/kyrise_book_01c.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "book"
+ },
+ {
+  "file": "sprites/items/kyrise_book_01d.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "book"
+ },
+ {
+  "file": "sprites/items/kyrise_book_01e.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "book"
+ },
+ {
+  "file": "sprites/items/kyrise_book_01f.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "book"
+ },
+ {
+  "file": "sprites/items/kyrise_book_01g.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "book"
+ },
+ {
+  "file": "sprites/items/kyrise_book_02a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "book"
+ },
+ {
+  "file": "sprites/items/kyrise_book_02b.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "book"
+ },
+ {
+  "file": "sprites/items/kyrise_book_02c.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "book"
+ },
+ {
+  "file": "sprites/items/kyrise_book_02d.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "book"
+ },
+ {
+  "file": "sprites/items/kyrise_book_02e.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "book"
+ },
+ {
+  "file": "sprites/items/kyrise_book_02f.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "book"
+ },
+ {
+  "file": "sprites/items/kyrise_book_02g.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "book"
+ },
+ {
+  "file": "sprites/items/kyrise_book_03a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "book"
+ },
+ {
+  "file": "sprites/items/kyrise_book_03b.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "book"
+ },
+ {
+  "file": "sprites/items/kyrise_book_03c.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "book"
+ },
+ {
+  "file": "sprites/items/kyrise_book_03d.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "book"
+ },
+ {
+  "file": "sprites/items/kyrise_book_03e.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "book"
+ },
+ {
+  "file": "sprites/items/kyrise_book_03f.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "book"
+ },
+ {
+  "file": "sprites/items/kyrise_book_03g.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "book"
+ },
+ {
+  "file": "sprites/items/kyrise_book_04a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "book"
+ },
+ {
+  "file": "sprites/items/kyrise_book_04b.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "book"
+ },
+ {
+  "file": "sprites/items/kyrise_book_04c.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "book"
+ },
+ {
+  "file": "sprites/items/kyrise_book_04d.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "book"
+ },
+ {
+  "file": "sprites/items/kyrise_book_04e.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "book"
+ },
+ {
+  "file": "sprites/items/kyrise_book_04f.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "book"
+ },
+ {
+  "file": "sprites/items/kyrise_book_04g.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "book"
+ },
+ {
+  "file": "sprites/items/kyrise_book_05a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "book"
+ },
+ {
+  "file": "sprites/items/kyrise_book_05b.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "book"
+ },
+ {
+  "file": "sprites/items/kyrise_book_05c.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "book"
+ },
+ {
+  "file": "sprites/items/kyrise_book_05d.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "book"
+ },
+ {
+  "file": "sprites/items/kyrise_book_05e.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "book"
+ },
+ {
+  "file": "sprites/items/kyrise_book_05f.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "book"
+ },
+ {
+  "file": "sprites/items/kyrise_book_05g.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "book"
+ },
+ {
+  "file": "sprites/items/kyrise_book_06a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "book"
+ },
+ {
+  "file": "sprites/items/kyrise_book_06b.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "book"
+ },
+ {
+  "file": "sprites/items/kyrise_book_06c.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "book"
+ },
+ {
+  "file": "sprites/items/kyrise_book_06d.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "book"
+ },
+ {
+  "file": "sprites/items/kyrise_book_06e.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "book"
+ },
+ {
+  "file": "sprites/items/kyrise_book_06f.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "book"
+ },
+ {
+  "file": "sprites/items/kyrise_book_06g.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "book"
+ },
+ {
+  "file": "sprites/items/kyrise_boots_01a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "clothes"
+ },
+ {
+  "file": "sprites/items/kyrise_boots_01b.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "clothes"
+ },
+ {
+  "file": "sprites/items/kyrise_boots_01c.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "clothes"
+ },
+ {
+  "file": "sprites/items/kyrise_boots_01d.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "clothes"
+ },
+ {
+  "file": "sprites/items/kyrise_boots_01e.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "clothes"
+ },
+ {
+  "file": "sprites/items/kyrise_bow_01a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_bow_01b.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_bow_01cc.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_bow_01d.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_bow_01e.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_bow_02a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_bow_02b.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_bow_02cc.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_bow_02d.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_bow_02e.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_bow_03a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_bow_03b.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_bow_03c.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_bow_03d.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_bow_03e.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_candle_01a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "household"
+ },
+ {
+  "file": "sprites/items/kyrise_candle_01b.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "household"
+ },
+ {
+  "file": "sprites/items/kyrise_candy_01a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/kyrise_candy_01b.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/kyrise_candy_01c.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/kyrise_candy_01d.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/kyrise_candy_01e.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/kyrise_candy_01f.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/kyrise_candy_01g.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/kyrise_candy_02a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/kyrise_candy_02b.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/kyrise_candy_02c.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/kyrise_candy_02d.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/kyrise_candy_02e.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/kyrise_candy_02f.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/kyrise_candy_02g.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/kyrise_coin_01a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "currency"
+ },
+ {
+  "file": "sprites/items/kyrise_coin_01b.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "currency"
+ },
+ {
+  "file": "sprites/items/kyrise_coin_01c.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "currency"
+ },
+ {
+  "file": "sprites/items/kyrise_coin_01d.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "currency"
+ },
+ {
+  "file": "sprites/items/kyrise_coin_01e.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "currency"
+ },
+ {
+  "file": "sprites/items/kyrise_coin_02a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "currency"
+ },
+ {
+  "file": "sprites/items/kyrise_coin_02b.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "currency"
+ },
+ {
+  "file": "sprites/items/kyrise_coin_02c.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "currency"
+ },
+ {
+  "file": "sprites/items/kyrise_coin_02d.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "currency"
+ },
+ {
+  "file": "sprites/items/kyrise_coin_02e.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "currency"
+ },
+ {
+  "file": "sprites/items/kyrise_coin_03a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "currency"
+ },
+ {
+  "file": "sprites/items/kyrise_coin_03b.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "currency"
+ },
+ {
+  "file": "sprites/items/kyrise_coin_03c.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "currency"
+ },
+ {
+  "file": "sprites/items/kyrise_coin_03d.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "currency"
+ },
+ {
+  "file": "sprites/items/kyrise_coin_03e.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "currency"
+ },
+ {
+  "file": "sprites/items/kyrise_coin_04a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "currency"
+ },
+ {
+  "file": "sprites/items/kyrise_coin_04b.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "currency"
+ },
+ {
+  "file": "sprites/items/kyrise_coin_04c.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "currency"
+ },
+ {
+  "file": "sprites/items/kyrise_coin_04d.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "currency"
+ },
+ {
+  "file": "sprites/items/kyrise_coin_04e.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "currency"
+ },
+ {
+  "file": "sprites/items/kyrise_coin_05a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "currency"
+ },
+ {
+  "file": "sprites/items/kyrise_coin_05b.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "currency"
+ },
+ {
+  "file": "sprites/items/kyrise_coin_05c.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "currency"
+ },
+ {
+  "file": "sprites/items/kyrise_coin_05d.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "currency"
+ },
+ {
+  "file": "sprites/items/kyrise_coin_05e.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "currency"
+ },
+ {
+  "file": "sprites/items/kyrise_cookie_01a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/kyrise_cotton_01a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "material"
+ },
+ {
+  "file": "sprites/items/kyrise_crystal_01a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "gem"
+ },
+ {
+  "file": "sprites/items/kyrise_crystal_01b.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "gem"
+ },
+ {
+  "file": "sprites/items/kyrise_crystal_01c.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "gem"
+ },
+ {
+  "file": "sprites/items/kyrise_crystal_01d.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "gem"
+ },
+ {
+  "file": "sprites/items/kyrise_crystal_01e.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "gem"
+ },
+ {
+  "file": "sprites/items/kyrise_crystal_01f.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "gem"
+ },
+ {
+  "file": "sprites/items/kyrise_crystal_01g.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "gem"
+ },
+ {
+  "file": "sprites/items/kyrise_crystal_01h.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "gem"
+ },
+ {
+  "file": "sprites/items/kyrise_crystal_01i.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "gem"
+ },
+ {
+  "file": "sprites/items/kyrise_crystal_01j.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "gem"
+ },
+ {
+  "file": "sprites/items/kyrise_cup_01a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "household"
+ },
+ {
+  "file": "sprites/items/kyrise_cup_01b.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "household"
+ },
+ {
+  "file": "sprites/items/kyrise_cup_02a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "household"
+ },
+ {
+  "file": "sprites/items/kyrise_cup_02b.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "household"
+ },
+ {
+  "file": "sprites/items/kyrise_fish_01a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/kyrise_fish_01b.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/kyrise_fish_01c.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/kyrise_fish_01d.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/kyrise_fish_01e.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/kyrise_flower_01a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "nature"
+ },
+ {
+  "file": "sprites/items/kyrise_flower_02a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "nature"
+ },
+ {
+  "file": "sprites/items/kyrise_fruit_01a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/kyrise_fruit_01b.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/kyrise_gem_01a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "gem"
+ },
+ {
+  "file": "sprites/items/kyrise_gem_01b.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "gem"
+ },
+ {
+  "file": "sprites/items/kyrise_gem_01c.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "gem"
+ },
+ {
+  "file": "sprites/items/kyrise_gem_01d.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "gem"
+ },
+ {
+  "file": "sprites/items/kyrise_gem_01e.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "gem"
+ },
+ {
+  "file": "sprites/items/kyrise_gem_01f.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "gem"
+ },
+ {
+  "file": "sprites/items/kyrise_gem_01g.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "gem"
+ },
+ {
+  "file": "sprites/items/kyrise_gem_01h.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "gem"
+ },
+ {
+  "file": "sprites/items/kyrise_gem_01i.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "gem"
+ },
+ {
+  "file": "sprites/items/kyrise_gem_01j.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "gem"
+ },
+ {
+  "file": "sprites/items/kyrise_gift_01a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "lootbox"
+ },
+ {
+  "file": "sprites/items/kyrise_gift_01b.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "lootbox"
+ },
+ {
+  "file": "sprites/items/kyrise_gift_01c.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "lootbox"
+ },
+ {
+  "file": "sprites/items/kyrise_gift_01d.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "lootbox"
+ },
+ {
+  "file": "sprites/items/kyrise_gift_01e.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "lootbox"
+ },
+ {
+  "file": "sprites/items/kyrise_gift_01f.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "lootbox"
+ },
+ {
+  "file": "sprites/items/kyrise_giftopen_01a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "lootbox"
+ },
+ {
+  "file": "sprites/items/kyrise_giftopen_01b.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "lootbox"
+ },
+ {
+  "file": "sprites/items/kyrise_giftopen_01c.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "lootbox"
+ },
+ {
+  "file": "sprites/items/kyrise_giftopen_01d.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "lootbox"
+ },
+ {
+  "file": "sprites/items/kyrise_giftopen_01e.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "lootbox"
+ },
+ {
+  "file": "sprites/items/kyrise_giftopen_01f.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "lootbox"
+ },
+ {
+  "file": "sprites/items/kyrise_gloves_01a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "clothes"
+ },
+ {
+  "file": "sprites/items/kyrise_gloves_01b.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "clothes"
+ },
+ {
+  "file": "sprites/items/kyrise_gloves_01c.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "clothes"
+ },
+ {
+  "file": "sprites/items/kyrise_gloves_01d.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "clothes"
+ },
+ {
+  "file": "sprites/items/kyrise_gloves_01e.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "clothes"
+ },
+ {
+  "file": "sprites/items/kyrise_hat_01a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "clothes"
+ },
+ {
+  "file": "sprites/items/kyrise_hat_01b.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "clothes"
+ },
+ {
+  "file": "sprites/items/kyrise_hat_01c.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "clothes"
+ },
+ {
+  "file": "sprites/items/kyrise_hat_01d.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "clothes"
+ },
+ {
+  "file": "sprites/items/kyrise_hat_01e.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "clothes"
+ },
+ {
+  "file": "sprites/items/kyrise_hat_01f.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "clothes"
+ },
+ {
+  "file": "sprites/items/kyrise_helmet_01a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/kyrise_helmet_01b.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/kyrise_helmet_01c.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/kyrise_helmet_01d.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/kyrise_helmet_01e.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/kyrise_helmet_02a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/kyrise_helmet_02b.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/kyrise_helmet_02c.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/kyrise_helmet_02d.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/kyrise_helmet_02e.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "misc"
+ },
+ {
+  "file": "sprites/items/kyrise_ingot_01a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "material"
+ },
+ {
+  "file": "sprites/items/kyrise_ingot_01b.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "material"
+ },
+ {
+  "file": "sprites/items/kyrise_ingot_01c.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "material"
+ },
+ {
+  "file": "sprites/items/kyrise_ingot_01d.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "material"
+ },
+ {
+  "file": "sprites/items/kyrise_ingot_01e.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "material"
+ },
+ {
+  "file": "sprites/items/kyrise_key_01a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "key"
+ },
+ {
+  "file": "sprites/items/kyrise_key_01b.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "key"
+ },
+ {
+  "file": "sprites/items/kyrise_key_01c.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "key"
+ },
+ {
+  "file": "sprites/items/kyrise_key_01d.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "key"
+ },
+ {
+  "file": "sprites/items/kyrise_key_01e.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "key"
+ },
+ {
+  "file": "sprites/items/kyrise_key_02a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "key"
+ },
+ {
+  "file": "sprites/items/kyrise_key_02b.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "key"
+ },
+ {
+  "file": "sprites/items/kyrise_key_02c.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "key"
+ },
+ {
+  "file": "sprites/items/kyrise_key_02d.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "key"
+ },
+ {
+  "file": "sprites/items/kyrise_key_02e.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "key"
+ },
+ {
+  "file": "sprites/items/kyrise_leaf_01a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "nature"
+ },
+ {
+  "file": "sprites/items/kyrise_necklace_01a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "jewelry"
+ },
+ {
+  "file": "sprites/items/kyrise_necklace_01b.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "jewelry"
+ },
+ {
+  "file": "sprites/items/kyrise_necklace_01c.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "jewelry"
+ },
+ {
+  "file": "sprites/items/kyrise_necklace_01d.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "jewelry"
+ },
+ {
+  "file": "sprites/items/kyrise_necklace_01e.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "jewelry"
+ },
+ {
+  "file": "sprites/items/kyrise_necklace_02a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "jewelry"
+ },
+ {
+  "file": "sprites/items/kyrise_necklace_02b.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "jewelry"
+ },
+ {
+  "file": "sprites/items/kyrise_necklace_02c.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "jewelry"
+ },
+ {
+  "file": "sprites/items/kyrise_necklace_02d.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "jewelry"
+ },
+ {
+  "file": "sprites/items/kyrise_necklace_02e.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "jewelry"
+ },
+ {
+  "file": "sprites/items/kyrise_necklace_03a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "jewelry"
+ },
+ {
+  "file": "sprites/items/kyrise_necklace_03b.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "jewelry"
+ },
+ {
+  "file": "sprites/items/kyrise_necklace_03c.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "jewelry"
+ },
+ {
+  "file": "sprites/items/kyrise_necklace_03d.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "jewelry"
+ },
+ {
+  "file": "sprites/items/kyrise_necklace_03e.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "jewelry"
+ },
+ {
+  "file": "sprites/items/kyrise_pearl_01a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "jewelry"
+ },
+ {
+  "file": "sprites/items/kyrise_pearl_01b.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "jewelry"
+ },
+ {
+  "file": "sprites/items/kyrise_pearl_01c.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "jewelry"
+ },
+ {
+  "file": "sprites/items/kyrise_pearl_01d.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "jewelry"
+ },
+ {
+  "file": "sprites/items/kyrise_pearl_01e.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "jewelry"
+ },
+ {
+  "file": "sprites/items/kyrise_plank_01a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "material"
+ },
+ {
+  "file": "sprites/items/kyrise_potion_01a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/kyrise_potion_01b.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/kyrise_potion_01c.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/kyrise_potion_01d.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/kyrise_potion_01e.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/kyrise_potion_01f.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/kyrise_potion_01g.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/kyrise_potion_01h.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/kyrise_potion_02a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/kyrise_potion_02b.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/kyrise_potion_02c.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/kyrise_potion_02d.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/kyrise_potion_02e.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/kyrise_potion_02f.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/kyrise_potion_02g.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/kyrise_potion_02h.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/kyrise_potion_03a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/kyrise_potion_03b.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/kyrise_potion_03c.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/kyrise_potion_03d.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/kyrise_potion_03e.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/kyrise_potion_03f.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/kyrise_potion_03g.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/kyrise_potion_03h.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/kyrise_ring_01a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "jewelry"
+ },
+ {
+  "file": "sprites/items/kyrise_ring_01b.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "jewelry"
+ },
+ {
+  "file": "sprites/items/kyrise_ring_01c.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "jewelry"
+ },
+ {
+  "file": "sprites/items/kyrise_ring_01d.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "jewelry"
+ },
+ {
+  "file": "sprites/items/kyrise_ring_01e.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "jewelry"
+ },
+ {
+  "file": "sprites/items/kyrise_ring_02a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "jewelry"
+ },
+ {
+  "file": "sprites/items/kyrise_ring_02b.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "jewelry"
+ },
+ {
+  "file": "sprites/items/kyrise_ring_02c.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "jewelry"
+ },
+ {
+  "file": "sprites/items/kyrise_ring_02d.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "jewelry"
+ },
+ {
+  "file": "sprites/items/kyrise_ring_02e.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "jewelry"
+ },
+ {
+  "file": "sprites/items/kyrise_ring_03a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "jewelry"
+ },
+ {
+  "file": "sprites/items/kyrise_ring_03b.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "jewelry"
+ },
+ {
+  "file": "sprites/items/kyrise_ring_03c.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "jewelry"
+ },
+ {
+  "file": "sprites/items/kyrise_ring_03d.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "jewelry"
+ },
+ {
+  "file": "sprites/items/kyrise_ring_03e.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "jewelry"
+ },
+ {
+  "file": "sprites/items/kyrise_scroll_01a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "book"
+ },
+ {
+  "file": "sprites/items/kyrise_scroll_01b.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "book"
+ },
+ {
+  "file": "sprites/items/kyrise_scroll_01c.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "book"
+ },
+ {
+  "file": "sprites/items/kyrise_scroll_01d.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "book"
+ },
+ {
+  "file": "sprites/items/kyrise_scroll_01e.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "book"
+ },
+ {
+  "file": "sprites/items/kyrise_scroll_01f.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "book"
+ },
+ {
+  "file": "sprites/items/kyrise_scroll_01g.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "book"
+ },
+ {
+  "file": "sprites/items/kyrise_scroll_01h.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "book"
+ },
+ {
+  "file": "sprites/items/kyrise_shard_01a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "gem"
+ },
+ {
+  "file": "sprites/items/kyrise_shard_01b.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "gem"
+ },
+ {
+  "file": "sprites/items/kyrise_shard_01c.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "gem"
+ },
+ {
+  "file": "sprites/items/kyrise_shard_01d.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "gem"
+ },
+ {
+  "file": "sprites/items/kyrise_shard_01e.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "gem"
+ },
+ {
+  "file": "sprites/items/kyrise_shard_01f.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "gem"
+ },
+ {
+  "file": "sprites/items/kyrise_shard_01g.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "gem"
+ },
+ {
+  "file": "sprites/items/kyrise_shard_01h.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "gem"
+ },
+ {
+  "file": "sprites/items/kyrise_shard_01i.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "gem"
+ },
+ {
+  "file": "sprites/items/kyrise_shard_01j.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "gem"
+ },
+ {
+  "file": "sprites/items/kyrise_shield_01a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_shield_01b.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_shield_01c.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_shield_01d.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_shield_01e.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_shield_02a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_shield_02b.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_shield_02c.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_shield_02d.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_shield_02e.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_shield_03a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_shield_03b.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_shield_03c.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_shield_03d.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_shield_03e.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_skull_01a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "junk"
+ },
+ {
+  "file": "sprites/items/kyrise_skull_01b.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "junk"
+ },
+ {
+  "file": "sprites/items/kyrise_spellbook_01a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "book"
+ },
+ {
+  "file": "sprites/items/kyrise_spellbook_01b.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "book"
+ },
+ {
+  "file": "sprites/items/kyrise_spellbook_01c.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "book"
+ },
+ {
+  "file": "sprites/items/kyrise_spellbook_01d.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "book"
+ },
+ {
+  "file": "sprites/items/kyrise_spellbook_01e.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "book"
+ },
+ {
+  "file": "sprites/items/kyrise_spellbook_02a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "book"
+ },
+ {
+  "file": "sprites/items/kyrise_spellbook_02b.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "book"
+ },
+ {
+  "file": "sprites/items/kyrise_spellbook_02c.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "book"
+ },
+ {
+  "file": "sprites/items/kyrise_spellbook_02d.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "book"
+ },
+ {
+  "file": "sprites/items/kyrise_spellbook_02e.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "book"
+ },
+ {
+  "file": "sprites/items/kyrise_spellbook_03a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "book"
+ },
+ {
+  "file": "sprites/items/kyrise_spellbook_03b.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "book"
+ },
+ {
+  "file": "sprites/items/kyrise_spellbook_03c.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "book"
+ },
+ {
+  "file": "sprites/items/kyrise_spellbook_03d.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "book"
+ },
+ {
+  "file": "sprites/items/kyrise_spellbook_03e.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "book"
+ },
+ {
+  "file": "sprites/items/kyrise_staff_01a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_staff_01b.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_staff_01c.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_staff_01d.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_staff_01e.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_staff_02ab.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_staff_02b.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_staff_02c.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_staff_02d.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_staff_02e.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_staff_03a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_staff_03b.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_staff_03c.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_staff_03d.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_staff_03e.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_stoneblock_01a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "material"
+ },
+ {
+  "file": "sprites/items/kyrise_sword_01a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_sword_01b.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_sword_01c.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_sword_01d.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_sword_01e.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_sword_02a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_sword_02b.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_sword_02c.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_sword_02d.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_sword_02e.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_sword_03a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_sword_03b.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_sword_03c.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_sword_03d.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_sword_03e.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/kyrise_wood_01a.png",
+  "source": "Kyrise's 16x16 RPG Icon Pack (CC BY 4.0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "material"
+ },
+ {
+  "file": "sprites/items/food_01_dish.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_02_dish_2.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_03_dish_pile.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_04_bowl.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_05_apple_pie.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_06_apple_pie_dish.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_07_bread.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_08_bread_dish.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_09_baguette.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_100_taco_dish.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_101_waffle.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_102_waffle_dish.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_10_baguette_dish.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_11_bun.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_12_bun_dish.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_13_bacon.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_14_bacon_dish.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_15_burger.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_16_burger_dish.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_17_burger_napkin.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_18_burrito.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_19_burrito_dish.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_20_bagel.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_21_bagel_dish.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_22_cheesecake.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_23_cheesecake_dish.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_24_cheesepuff.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_25_cheesepuff_bowl.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_26_chocolate.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_27_chocolate_dish.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_28_cookies.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_29_cookies_dish.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_30_chocolatecake.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_31_chocolatecake_dish.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_32_curry.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_33_curry_dish.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_34_donut.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_35_donut_dish.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_36_dumplings.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_37_dumplings_dish.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_38_friedegg.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_39_friedegg_dish.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_40_eggsalad.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_41_eggsalad_bowl.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_42_eggtart.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_43_eggtart_dish.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_44_frenchfries.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_45_frenchfries_dish.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_46_fruitcake.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_47_fruitcake_dish.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_48_garlicbread.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_49_garlicbread_dish.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_50_giantgummybear.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_51_giantgummybear_dish.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_52_gingerbreadman.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_53_gingerbreadman_dish.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_54_hotdog.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_55_hotdog_sauce.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_56_hotdog_dish.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_57_icecream.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_58_icecream_bowl.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_59_jelly.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_60_jelly_dish.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_61_jam.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_62_jam_dish.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_63_lemonpie.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_64_lemonpie_dish.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_65_loafbread.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_66_loafbread_dish.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_67_macncheese.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_68_macncheese_dish.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_69_meatball.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_70_meatball_dish.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_71_nacho.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_72_nacho_dish.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_73_omlet.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_74_omlet_dish.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_75_pudding.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_76_pudding_dish.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_77_potatochips.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_78_potatochips_bowl.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_79_pancakes.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_80_pancakes_dish.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_81_pizza.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_82_pizza_dish.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_83_popcorn.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_84_popcorn_bowl.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_85_roastedchicken.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_86_roastedchicken_dish.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_87_ramen.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_88_salmon.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_89_salmon_dish.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_90_strawberrycake.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_91_strawberrycake_dish.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_92_sandwich.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_93_sandwich_dish.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_94_spaghetti.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_95_steak.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_96_steak_dish.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_97_sushi.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_98_sushi_dish.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/food_99_taco.png",
+  "source": "Ghostpixxells Free Pixel Food (CC0)",
+  "w": 32,
+  "h": 32,
+  "category_guess": "food"
+ },
+ {
+  "file": "sprites/items/td_chest_wood.png",
+  "source": "Kenney Tiny Dungeon #89 (CC0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "container"
+ },
+ {
+  "file": "sprites/items/td_chest_wood_b.png",
+  "source": "Kenney Tiny Dungeon #90 (CC0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "container"
+ },
+ {
+  "file": "sprites/items/td_chest_gold.png",
+  "source": "Kenney Tiny Dungeon #91 (CC0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "container"
+ },
+ {
+  "file": "sprites/items/td_chest_mimic.png",
+  "source": "Kenney Tiny Dungeon #92 (CC0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "container"
+ },
+ {
+  "file": "sprites/items/td_coin_bronze.png",
+  "source": "Kenney Tiny Dungeon #101 (CC0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "currency"
+ },
+ {
+  "file": "sprites/items/td_coin_silver.png",
+  "source": "Kenney Tiny Dungeon #102 (CC0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "currency"
+ },
+ {
+  "file": "sprites/items/td_dagger.png",
+  "source": "Kenney Tiny Dungeon #103 (CC0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/td_sword_short.png",
+  "source": "Kenney Tiny Dungeon #104 (CC0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/td_sword_broad.png",
+  "source": "Kenney Tiny Dungeon #105 (CC0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/td_sword_long.png",
+  "source": "Kenney Tiny Dungeon #106 (CC0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/td_sword_bronze.png",
+  "source": "Kenney Tiny Dungeon #107 (CC0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/td_potion_empty.png",
+  "source": "Kenney Tiny Dungeon #113 (CC0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/td_potion_green.png",
+  "source": "Kenney Tiny Dungeon #114 (CC0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/td_potion_red.png",
+  "source": "Kenney Tiny Dungeon #115 (CC0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/td_potion_blue.png",
+  "source": "Kenney Tiny Dungeon #116 (CC0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/td_hammer.png",
+  "source": "Kenney Tiny Dungeon #117 (CC0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/td_axe_double.png",
+  "source": "Kenney Tiny Dungeon #118 (CC0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/td_axe.png",
+  "source": "Kenney Tiny Dungeon #119 (CC0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/td_vial_empty.png",
+  "source": "Kenney Tiny Dungeon #125 (CC0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/td_vial_green.png",
+  "source": "Kenney Tiny Dungeon #126 (CC0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/td_vial_red.png",
+  "source": "Kenney Tiny Dungeon #127 (CC0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/td_vial_blue.png",
+  "source": "Kenney Tiny Dungeon #128 (CC0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "potion"
+ },
+ {
+  "file": "sprites/items/td_wand_purple.png",
+  "source": "Kenney Tiny Dungeon #129 (CC0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/td_staff_wood.png",
+  "source": "Kenney Tiny Dungeon #130 (CC0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/td_spear.png",
+  "source": "Kenney Tiny Dungeon #131 (CC0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "weapon_tool"
+ },
+ {
+  "file": "sprites/items/td_anvil_small.png",
+  "source": "Kenney Tiny Dungeon #64 (CC0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "household"
+ },
+ {
+  "file": "sprites/items/td_tombstone.png",
+  "source": "Kenney Tiny Dungeon #65 (CC0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "household"
+ },
+ {
+  "file": "sprites/items/td_sign_wood.png",
+  "source": "Kenney Tiny Dungeon #66 (CC0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "household"
+ },
+ {
+  "file": "sprites/items/td_stool.png",
+  "source": "Kenney Tiny Dungeon #73 (CC0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "household"
+ },
+ {
+  "file": "sprites/items/td_anvil.png",
+  "source": "Kenney Tiny Dungeon #74 (CC0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "household"
+ },
+ {
+  "file": "sprites/items/td_barrel.png",
+  "source": "Kenney Tiny Dungeon #82 (CC0)",
+  "w": 16,
+  "h": 16,
+  "category_guess": "container"
+ }
+]

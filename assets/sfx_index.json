@@ -1,0 +1,366 @@
+{
+ "click": {
+  "m4a": "sfx/click.m4a",
+  "mp3": "sfx/click.mp3",
+  "duration_s": 0.014,
+  "source": "Kenney interface-sounds/Audio/click_002.ogg",
+  "note": ""
+ },
+ "tap": {
+  "m4a": "sfx/tap.m4a",
+  "mp3": "sfx/tap.mp3",
+  "duration_s": 0.023,
+  "source": "Kenney interface-sounds/Audio/tick_002.ogg",
+  "note": ""
+ },
+ "select": {
+  "m4a": "sfx/select.m4a",
+  "mp3": "sfx/select.mp3",
+  "duration_s": 0.383,
+  "source": "Kenney interface-sounds/Audio/select_003.ogg",
+  "note": ""
+ },
+ "confirm": {
+  "m4a": "sfx/confirm.m4a",
+  "mp3": "sfx/confirm.mp3",
+  "duration_s": 0.29,
+  "source": "Kenney interface-sounds/Audio/confirmation_001.ogg",
+  "note": ""
+ },
+ "confirm_big": {
+  "m4a": "sfx/confirm_big.m4a",
+  "mp3": "sfx/confirm_big.mp3",
+  "duration_s": 0.49,
+  "source": "Kenney interface-sounds/Audio/confirmation_004.ogg",
+  "note": ""
+ },
+ "error": {
+  "m4a": "sfx/error.m4a",
+  "mp3": "sfx/error.mp3",
+  "duration_s": 0.5,
+  "source": "Kenney interface-sounds/Audio/error_006.ogg",
+  "note": ""
+ },
+ "back": {
+  "m4a": "sfx/back.m4a",
+  "mp3": "sfx/back.mp3",
+  "duration_s": 0.094,
+  "source": "Kenney interface-sounds/Audio/back_002.ogg",
+  "note": ""
+ },
+ "open": {
+  "m4a": "sfx/open.m4a",
+  "mp3": "sfx/open.mp3",
+  "duration_s": 0.314,
+  "source": "Kenney interface-sounds/Audio/open_002.ogg",
+  "note": ""
+ },
+ "close": {
+  "m4a": "sfx/close.m4a",
+  "mp3": "sfx/close.mp3",
+  "duration_s": 0.314,
+  "source": "Kenney interface-sounds/Audio/close_002.ogg",
+  "note": ""
+ },
+ "toggle": {
+  "m4a": "sfx/toggle.m4a",
+  "mp3": "sfx/toggle.mp3",
+  "duration_s": 0.139,
+  "source": "Kenney interface-sounds/Audio/toggle_002.ogg",
+  "note": ""
+ },
+ "scroll": {
+  "m4a": "sfx/scroll.m4a",
+  "mp3": "sfx/scroll.mp3",
+  "duration_s": 1.0,
+  "source": "Kenney interface-sounds/Audio/scroll_002.ogg",
+  "note": ""
+ },
+ "question": {
+  "m4a": "sfx/question.m4a",
+  "mp3": "sfx/question.mp3",
+  "duration_s": 0.49,
+  "source": "Kenney interface-sounds/Audio/question_001.ogg",
+  "note": ""
+ },
+ "glitch": {
+  "m4a": "sfx/glitch.m4a",
+  "mp3": "sfx/glitch.mp3",
+  "duration_s": 0.03,
+  "source": "Kenney interface-sounds/Audio/glitch_002.ogg",
+  "note": ""
+ },
+ "glitch_2": {
+  "m4a": "sfx/glitch_2.m4a",
+  "mp3": "sfx/glitch_2.mp3",
+  "duration_s": 0.023,
+  "source": "Kenney interface-sounds/Audio/glitch_004.ogg",
+  "note": ""
+ },
+ "drop": {
+  "m4a": "sfx/drop.m4a",
+  "mp3": "sfx/drop.mp3",
+  "duration_s": 0.191,
+  "source": "Kenney interface-sounds/Audio/drop_002.ogg",
+  "note": ""
+ },
+ "sticker_peel": {
+  "m4a": "sfx/sticker_peel.m4a",
+  "mp3": "sfx/sticker_peel.mp3",
+  "duration_s": 0.102,
+  "source": "Kenney interface-sounds/Audio/pluck_001.ogg",
+  "note": ""
+ },
+ "shiny": {
+  "m4a": "sfx/shiny.m4a",
+  "mp3": "sfx/shiny.mp3",
+  "duration_s": 0.125,
+  "source": "Kenney interface-sounds/Audio/glass_002.ogg",
+  "note": ""
+ },
+ "meow_sub": {
+  "m4a": "sfx/meow_sub.m4a",
+  "mp3": "sfx/meow_sub.mp3",
+  "duration_s": 0.332,
+  "source": "Kenney interface-sounds/Audio/question_002.ogg",
+  "note": "SUBSTITUTE: no meow in any pack (UI 'question' blip)"
+ },
+ "meow_sub_2": {
+  "m4a": "sfx/meow_sub_2.m4a",
+  "mp3": "sfx/meow_sub_2.mp3",
+  "duration_s": 0.164,
+  "source": "Kenney interface-sounds/Audio/pluck_002.ogg",
+  "note": "SUBSTITUTE: no meow (pluck)"
+ },
+ "lootbox_open_common": {
+  "m4a": "sfx/lootbox_open_common.m4a",
+  "mp3": "sfx/lootbox_open_common.mp3",
+  "duration_s": 0.147,
+  "source": "Kenney interface-sounds/Audio/open_001.ogg",
+  "note": ""
+ },
+ "coin": {
+  "m4a": "sfx/coin.m4a",
+  "mp3": "sfx/coin.mp3",
+  "duration_s": 0.845,
+  "source": "Kenney rpg-audio/Audio/handleCoins.ogg",
+  "note": ""
+ },
+ "coin_small": {
+  "m4a": "sfx/coin_small.m4a",
+  "mp3": "sfx/coin_small.mp3",
+  "duration_s": 0.338,
+  "source": "Kenney rpg-audio/Audio/handleCoins2.ogg",
+  "note": ""
+ },
+ "chest_open": {
+  "m4a": "sfx/chest_open.m4a",
+  "mp3": "sfx/chest_open.mp3",
+  "duration_s": 0.261,
+  "source": "Kenney rpg-audio/Audio/metalLatch.ogg",
+  "note": ""
+ },
+ "door_open": {
+  "m4a": "sfx/door_open.m4a",
+  "mp3": "sfx/door_open.mp3",
+  "duration_s": 0.919,
+  "source": "Kenney rpg-audio/Audio/doorOpen_1.ogg",
+  "note": ""
+ },
+ "door_close": {
+  "m4a": "sfx/door_close.m4a",
+  "mp3": "sfx/door_close.mp3",
+  "duration_s": 0.612,
+  "source": "Kenney rpg-audio/Audio/doorClose_2.ogg",
+  "note": ""
+ },
+ "creak": {
+  "m4a": "sfx/creak.m4a",
+  "mp3": "sfx/creak.mp3",
+  "duration_s": 0.661,
+  "source": "Kenney rpg-audio/Audio/creak1.ogg",
+  "note": ""
+ },
+ "page_flip": {
+  "m4a": "sfx/page_flip.m4a",
+  "mp3": "sfx/page_flip.mp3",
+  "duration_s": 0.768,
+  "source": "Kenney rpg-audio/Audio/bookFlip1.ogg",
+  "note": ""
+ },
+ "sticker_place": {
+  "m4a": "sfx/sticker_place.m4a",
+  "mp3": "sfx/sticker_place.mp3",
+  "duration_s": 0.277,
+  "source": "Kenney rpg-audio/Audio/bookPlace1.ogg",
+  "note": ""
+ },
+ "equip": {
+  "m4a": "sfx/equip.m4a",
+  "mp3": "sfx/equip.mp3",
+  "duration_s": 0.277,
+  "source": "Kenney rpg-audio/Audio/beltHandle1.ogg",
+  "note": ""
+ },
+ "miss": {
+  "m4a": "sfx/miss.m4a",
+  "mp3": "sfx/miss.mp3",
+  "duration_s": 0.661,
+  "source": "Kenney rpg-audio/Audio/cloth1.ogg",
+  "note": ""
+ },
+ "scratch": {
+  "m4a": "sfx/scratch.m4a",
+  "mp3": "sfx/scratch.mp3",
+  "duration_s": 0.599,
+  "source": "Kenney rpg-audio/Audio/knifeSlice.ogg",
+  "note": ""
+ },
+ "potion": {
+  "m4a": "sfx/potion.m4a",
+  "mp3": "sfx/potion.mp3",
+  "duration_s": 1.46,
+  "source": "Kenney rpg-audio/Audio/metalPot1.ogg",
+  "note": ""
+ },
+ "hit_soft": {
+  "m4a": "sfx/hit_soft.m4a",
+  "mp3": "sfx/hit_soft.mp3",
+  "duration_s": 0.183,
+  "source": "Kenney impact-sounds/Audio/impactSoft_medium_001.ogg",
+  "note": ""
+ },
+ "hit_medium": {
+  "m4a": "sfx/hit_medium.m4a",
+  "mp3": "sfx/hit_medium.mp3",
+  "duration_s": 0.541,
+  "source": "Kenney impact-sounds/Audio/impactPunch_medium_002.ogg",
+  "note": ""
+ },
+ "hit_hard": {
+  "m4a": "sfx/hit_hard.m4a",
+  "mp3": "sfx/hit_hard.mp3",
+  "duration_s": 0.536,
+  "source": "Kenney impact-sounds/Audio/impactPunch_heavy_001.ogg",
+  "note": ""
+ },
+ "squish": {
+  "m4a": "sfx/squish.m4a",
+  "mp3": "sfx/squish.mp3",
+  "duration_s": 0.572,
+  "source": "Kenney impact-sounds/Audio/impactSoft_heavy_001.ogg",
+  "note": ""
+ },
+ "lootbox_shake": {
+  "m4a": "sfx/lootbox_shake.m4a",
+  "mp3": "sfx/lootbox_shake.mp3",
+  "duration_s": 0.265,
+  "source": "Kenney impact-sounds/Audio/impactWood_light_002.ogg",
+  "note": ""
+ },
+ "shelf_place": {
+  "m4a": "sfx/shelf_place.m4a",
+  "mp3": "sfx/shelf_place.mp3",
+  "duration_s": 0.332,
+  "source": "Kenney impact-sounds/Audio/impactWood_medium_001.ogg",
+  "note": ""
+ },
+ "ambush": {
+  "m4a": "sfx/ambush.m4a",
+  "mp3": "sfx/ambush.mp3",
+  "duration_s": 1.741,
+  "source": "Kenney impact-sounds/Audio/impactBell_heavy_001.ogg",
+  "note": ""
+ },
+ "wash_sub": {
+  "m4a": "sfx/wash_sub.m4a",
+  "mp3": "sfx/wash_sub.mp3",
+  "duration_s": 0.374,
+  "source": "Kenney impact-sounds/Audio/footstep_snow_001.ogg",
+  "note": "SUBSTITUTE: no water/wash sound in packs (snow footstep = soft scrub)"
+ },
+ "step": {
+  "m4a": "sfx/step.m4a",
+  "mp3": "sfx/step.mp3",
+  "duration_s": 0.251,
+  "source": "Kenney impact-sounds/Audio/footstep_wood_001.ogg",
+  "note": ""
+ },
+ "jingle_win": {
+  "m4a": "sfx/jingle_win.m4a",
+  "mp3": "sfx/jingle_win.mp3",
+  "duration_s": 0.852,
+  "source": "Kenney music-jingles/Audio/8-Bit jingles/jingles_NES12.ogg",
+  "note": ""
+ },
+ "jingle_lose": {
+  "m4a": "sfx/jingle_lose.m4a",
+  "mp3": "sfx/jingle_lose.mp3",
+  "duration_s": 1.758,
+  "source": "Kenney music-jingles/Audio/8-Bit jingles/jingles_NES00.ogg",
+  "note": ""
+ },
+ "level_up": {
+  "m4a": "sfx/level_up.m4a",
+  "mp3": "sfx/level_up.mp3",
+  "duration_s": 0.621,
+  "source": "Kenney music-jingles/Audio/8-Bit jingles/jingles_NES08.ogg",
+  "note": ""
+ },
+ "album_page": {
+  "m4a": "sfx/album_page.m4a",
+  "mp3": "sfx/album_page.mp3",
+  "duration_s": 0.905,
+  "source": "Kenney music-jingles/Audio/8-Bit jingles/jingles_NES05.ogg",
+  "note": ""
+ },
+ "lootbox_open_rare": {
+  "m4a": "sfx/lootbox_open_rare.m4a",
+  "mp3": "sfx/lootbox_open_rare.mp3",
+  "duration_s": 0.603,
+  "source": "Kenney music-jingles/Audio/8-Bit jingles/jingles_NES03.ogg",
+  "note": ""
+ },
+ "daily_gift": {
+  "m4a": "sfx/daily_gift.m4a",
+  "mp3": "sfx/daily_gift.mp3",
+  "duration_s": 0.955,
+  "source": "Kenney music-jingles/Audio/Pizzicato jingles/jingles_PIZZI02.ogg",
+  "note": ""
+ },
+ "jingle_legendary": {
+  "m4a": "sfx/jingle_legendary.m4a",
+  "mp3": "sfx/jingle_legendary.mp3",
+  "duration_s": 0.811,
+  "source": "Kenney music-jingles/Audio/Pizzicato jingles/jingles_PIZZI15.ogg",
+  "note": ""
+ },
+ "fail_small": {
+  "m4a": "sfx/fail_small.m4a",
+  "mp3": "sfx/fail_small.mp3",
+  "duration_s": 1.324,
+  "source": "Kenney music-jingles/Audio/Pizzicato jingles/jingles_PIZZI07.ogg",
+  "note": ""
+ },
+ "lootbox_open_epic": {
+  "m4a": "sfx/lootbox_open_epic.m4a",
+  "mp3": "sfx/lootbox_open_epic.mp3",
+  "duration_s": 0.515,
+  "source": "Kenney music-jingles/Audio/Hit jingles/jingles_HIT06.ogg",
+  "note": ""
+ },
+ "lootbox_open_legendary": {
+  "m4a": "sfx/lootbox_open_legendary.m4a",
+  "mp3": "sfx/lootbox_open_legendary.mp3",
+  "duration_s": 1.163,
+  "source": "Kenney music-jingles/Audio/Hit jingles/jingles_HIT15.ogg",
+  "note": ""
+ },
+ "crit": {
+  "m4a": "sfx/crit.m4a",
+  "mp3": "sfx/crit.mp3",
+  "duration_s": 0.745,
+  "source": "Kenney music-jingles/Audio/Hit jingles/jingles_HIT03.ogg",
+  "note": ""
+ }
+}

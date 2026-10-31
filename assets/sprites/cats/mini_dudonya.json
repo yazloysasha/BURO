@@ -1,0 +1,32 @@
+{
+ "image": "mini_dudonya.png",
+ "frameW": 16,
+ "frameH": 16,
+ "facing": "right",
+ "animations": {
+  "idle": {
+   "row": 0,
+   "frames": 4,
+   "fps": 8,
+   "y": 0
+  },
+  "walk_jump": {
+   "row": 1,
+   "frames": 3,
+   "fps": 8,
+   "y": 16
+  },
+  "death": {
+   "row": 2,
+   "frames": 3,
+   "fps": 8,
+   "y": 32
+  },
+  "attack": {
+   "row": 3,
+   "frames": 6,
+   "fps": 8,
+   "y": 48
+  }
+ }
+}
