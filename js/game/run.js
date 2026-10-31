@@ -7,6 +7,9 @@ import { combatCtx } from './data.js';
 import * as meta from './meta.js';
 import { rollRunBlocks, settleRoomBlocks } from './blocks.js';
 import { addItem, grantSticker } from './collection.js';
+import { runHooks } from './hooks.js';
+import { comboStatBonus, activeCombos, checkRunCombos, roomSequenceCombos } from './combos.js';
+import { initAnomaly, initShelf, initWash, initEvent, initShop } from './rooms.js';
 
 export function withRunRng(run, fn) {
   const rng = new Rng(run.rng);
@@ -21,9 +24,6 @@ export function withMetaRng(save, fn) {
   save.meta.rng = rng.state();
   return r;
 }
-
-// Extension points for later systems (combos, stickers): combat hook factories and after-win listeners.
-export const runHooks = { combat: [], afterWin: [] };
 
 const DEFAULT_RARITY_W = { common: 60, uncommon: 25, rare: 10, epic: 4, legendary: 0.9, slop: 0.1 };
 
@@ -100,7 +100,19 @@ export function addToBackpack(save, data, run, itemId, mods = [], { noConvert = 
   }
   const entry = { uid: 'i' + run.nextUid++, id: itemId, mods: mods.slice(0, 2) };
   run.backpack.push(entry);
+  afterBackpackChange(save, data, run);
   return { added: true, entry };
+}
+
+let comboDepth = 0;
+function afterBackpackChange(save, data, run) {
+  if (comboDepth > 2) return;
+  comboDepth++;
+  try {
+    checkRunCombos(save, data, run, { addToBackpack: (id) => addToBackpack(save, data, run, id) });
+  } finally {
+    comboDepth--;
+  }
 }
 
 export function removeFromBackpack(run, uid) {
@@ -153,20 +165,24 @@ export function startCombat(save, data, run, kind) {
     const enemies = enc.map((e, i) =>
       makeEnemyUnit(e.def, 'e' + (i + 1), { floor: run.floorNo, tier: run.tier, elite: !!e.elite, eliteName: e.eliteName, balance: data.balance }),
     );
-    const gear = equipmentBonus(data, run);
+    const gear = equipmentBonus(save, data, run);
     const cats = CAT_KEYS.map((k) => {
       const b = meta.catBonus(save, data, k);
       for (const s of Object.keys(gear)) b[s] = (b[s] || 0) + gear[s];
       return makeCatUnit(k, data.cats[k], run.party[k], b);
     });
     const c = createCombat({ cats, enemies, kind });
+    for (const cb of activeCombos(save, data, run)) {
+      if (cb.effect.type !== 'combat_start_enemy_status') continue;
+      for (const e of c.enemies) e.statuses.push({ id: cb.effect.status, turns: cb.effect.turns });
+    }
     planIntents(c, rng, combatCtx(data, run));
     return c;
   });
 }
 
 // Equipment in the backpack (effect.type 'stat') boosts both cats for the whole run; crit is in percent points.
-export function equipmentBonus(data, run) {
+export function equipmentBonus(save, data, run) {
   const b = { atk: 0, def: 0, spd: 0, luck: 0, crit: 0 };
   for (const e of run.backpack) {
     const it = data.itemById[e.id];
@@ -176,6 +192,8 @@ export function equipmentBonus(data, run) {
     else if (b[it.effect.stat] !== undefined) b[it.effect.stat] += Math.floor(v);
     if (e.mods.includes('rainbow')) b.luck += 2;
   }
+  const combo = comboStatBonus(save, data, run);
+  for (const k of Object.keys(combo)) if (b[k] !== undefined) b[k] += combo[k];
   return b;
 }
 
@@ -185,6 +203,11 @@ export const roomHandlers = {
   elite: { init: (save, data, run, room) => (room.combat = startCombat(save, data, run, 'elite')) },
   boss: { init: (save, data, run, room) => (room.combat = startCombat(save, data, run, 'boss')) },
   rest: { init: (save, data, run, room) => (room.phase = 'choose') },
+  anomaly: { init: (...a) => initAnomaly(...a) },
+  shelf: { init: (...a) => initShelf(...a) },
+  wash: { init: (...a) => initWash(...a) },
+  event: { init: (...a) => initEvent(...a) },
+  shop: { init: (...a) => initShop(...a) },
   loot: {
     init: (save, data, run, room) => {
       const n = withRunRng(run, (rng) => {
@@ -207,8 +230,10 @@ export function enterNode(save, data, nodeId) {
   run.floorNo = node.f + 1;
   const room = { nodeId, type: node.type, phase: 'active' };
   run.room = room;
+  room.combos = roomSequenceCombos(save, data, run, node.type);
   const handler = roomHandlers[node.type] || roomHandlers.loot;
   handler.init(save, data, run, room);
+  afterBackpackChange(save, data, run);
   return room;
 }
 
@@ -271,7 +296,7 @@ export function playRound(save, data, actions) {
       return item && item.effect ? moddedEffect(item, entry) : null;
     },
   };
-  for (const f of runHooks.combat) Object.assign(hooks, f(save, data, run));
+  for (const f of runHooks.combat) Object.assign(hooks, f(save, data, run, actions));
   const ev = withRunRng(run, (rng) => resolveRound(c, actions, rng, ctx, hooks));
   syncParty(run, c);
   if (c.over === 'win') onCombatWin(save, data, run, room);
@@ -312,7 +337,8 @@ function onCombatWin(save, data, run, room) {
   const n = room.reward.blocksN;
   if (n) room.blocks = rollRunBlocks(save, data, run, n, c.kind === 'boss' ? { minRarity: 'rare' } : {});
   room.phase = 'reward';
-  for (const f of runHooks.afterWin) f(save, data, run, room);
+  const helpers = { rollBlocks: (n, opts) => rollRunBlocks(save, data, run, n, opts) };
+  for (const f of runHooks.afterWin) f(save, data, run, room, helpers);
 }
 
 export function combatReward(save, data, run, c, rng) {

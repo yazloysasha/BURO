@@ -180,6 +180,7 @@ export function resolveRound(c, actions, rng, ctx, hooks = {}) {
   const ev = [];
   if (c.over) return ev;
   const catDefs = ctx.cats;
+  if (hooks.onRoundStart) hooks.onRoundStart(c, ev);
 
   // priority: shields & defend intents happen before anyone moves
   for (const u of aliveCats(c)) {
@@ -262,6 +263,8 @@ function onDeath(c, u, ev) {
   if (u.side === 'enemy') {
     ev.push({ type: 'death', target: u.uid });
     c.kills.push(u.id);
+    // who landed the final blow (for kill combos)
+    if (c.cur) (c.killLog = c.killLog || []).push({ enemy: u.id, ...c.cur });
   } else {
     u.ko = true;
     u.statuses = [];
@@ -294,7 +297,10 @@ function catAct(c, u, a, rng, ctx, ev, hooks) {
     u.cooldown = ad.cooldown || 3;
   }
   const mult = hooks.damageMult ? hooks.damageMult(u.key, a.action, c) : 1;
-  ev.push({ type: 'act', actor: u.uid, action: a.action, combo: mult > 1 ? hooks.lastCombo || null : null });
+  c.actionNo = (c.actionNo || 0) + 1;
+  c.cur = { cat: u.key, action: a.action, n: c.actionNo, item: null };
+  ev.push({ type: 'act', actor: u.uid, action: a.action });
+  if (mult !== 1 && hooks.lastCombo) ev.push({ type: 'combo', id: hooks.lastCombo });
   switch (ad.type) {
     case 'attack': {
       const t = retarget(c, a.target);
@@ -336,12 +342,16 @@ function catAct(c, u, a, rng, ctx, ev, hooks) {
       break;
     case 'item': {
       const eff = hooks.useItem ? hooks.useItem(u.key, a.itemUid) : null;
-      if (eff) applyItemEffect(c, u, eff, a, rng, ctx, ev);
+      if (eff) {
+        c.cur.item = eff.itemId || null;
+        applyItemEffect(c, u, eff, a, rng, ctx, ev);
+      }
       break;
     }
     default:
       break;
   }
+  c.cur = null;
   recordAction(c, u.key, a.action, ev, hooks);
 }
 

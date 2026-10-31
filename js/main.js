@@ -15,6 +15,10 @@ import * as room from './ui/screens/room.js';
 import * as runEnd from './ui/screens/runend.js';
 import * as daily from './ui/screens/daily.js';
 import * as inventory from './ui/screens/inventory.js';
+import * as combos from './ui/screens/combos.js';
+import './ui/rooms.js';
+import { play } from './core/audio.js';
+import { onChange } from './game/state.js';
 import { hubMenu } from './ui/screens/hub.js';
 import { dailyAvailable, localDate } from './game/daily.js';
 import { DATA_FILES, indexData } from './game/data.js';
@@ -108,10 +112,23 @@ async function boot() {
   registerScreen('runEnd', runEnd);
   registerScreen('daily', daily);
   registerScreen('inventory', inventory);
+  registerScreen('combos', combos);
   hubMenu.push(
     { id: 'daily', label: () => t('hub.daily'), onClick: () => go('daily'), cls: 'yellow', badge: () => (dailyAvailable(game.save, localDate()) ? '!' : null) },
     { id: 'inventory', label: () => t('hub.inventory'), onClick: () => go('inventory'), cls: 'blue' },
+    { id: 'combos', label: () => t('hub.combos', { n: game.save.combos.discovered.length, total: game.data.combos.length }), onClick: () => go('combos'), cls: 'blue' },
   );
+  // announce newly discovered combos wherever they happen
+  onChange((save) => {
+    const recent = save.combos.recent || [];
+    if (!recent.length) return;
+    for (const id of recent) {
+      const c = game.data.comboById[id];
+      if (c) toast(t('combos.discovered', { name: c.name }), 3000);
+    }
+    play('level_up', { vol: 0.7 });
+    save.combos.recent = [];
+  });
 
   $('#boot').remove();
   $('#app').hidden = false;

@@ -2,6 +2,7 @@
 // Deterministic (hash-based), so re-running gives the same content. Usage: node tools/build_content.mjs
 import fs from 'node:fs';
 import path from 'node:path';
+import { decode } from './png.mjs';
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const index = JSON.parse(fs.readFileSync(path.join(ROOT, 'assets/items_index.json'), 'utf8'));
@@ -75,6 +76,7 @@ function add(file, { id, name, gender = 'm', category, rarity, effect = null, ta
   usedIds.add(id);
   usedNames.add(name);
   usedFiles.add(file);
+  if (/[Кк]ост/.test(name) && !tags.includes('bone')) tags = [...tags, 'bone'];
   const [pmin, pmax] = RARITY_PRICE[rarity];
   const price = pmin + (hash(id + ':p') % (pmax - pmin + 1));
   items.push({
@@ -89,8 +91,37 @@ function add(file, { id, name, gender = 'm', category, rarity, effect = null, ta
     price,
     tags,
     effect,
+    color: colorOf(e.file),
     flavor: flavor || makeFlavor(category, id),
   });
+}
+
+// Dominant colour family of an icon (for the "sort by colour" shelf rule): saturation-weighted hue.
+function colorOf(file) {
+  const img = decode(fs.readFileSync(path.join(ROOT, 'assets', file)));
+  let x = 0, y = 0, wsum = 0, grey = 0, n = 0;
+  for (let i = 0; i < img.data.length; i += 4) {
+    if (img.data[i + 3] < 128) continue;
+    const r = img.data[i] / 255, g = img.data[i + 1] / 255, b = img.data[i + 2] / 255;
+    const max = Math.max(r, g, b), min = Math.min(r, g, b);
+    const sat = max === 0 ? 0 : (max - min) / max;
+    n++;
+    if (sat < 0.25 || max < 0.2) { grey++; continue; }
+    let hue = 0;
+    if (max === r) hue = ((g - b) / (max - min) + 6) % 6;
+    else if (max === g) hue = (b - r) / (max - min) + 2;
+    else hue = (r - g) / (max - min) + 4;
+    const ang = (hue / 6) * Math.PI * 2;
+    x += Math.cos(ang) * sat; y += Math.sin(ang) * sat; wsum += sat;
+  }
+  if (!n || grey / n > 0.6 || wsum === 0) return 'grey';
+  const deg = ((Math.atan2(y, x) * 180) / Math.PI + 360) % 360;
+  if (deg < 20 || deg >= 330) return 'red';
+  if (deg < 50) return 'orange';
+  if (deg < 70) return 'yellow';
+  if (deg < 170) return 'green';
+  if (deg < 260) return 'blue';
+  return 'purple';
 }
 
 function makeFlavor(category, id) {

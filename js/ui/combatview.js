@@ -466,6 +466,15 @@ export function renderCombat(root, { onEnd }) {
         case 'revive':
           if (views[ev.target]) views[ev.target].sp.play('idle');
           break;
+        case 'combo': {
+          const cb = game.data.comboById[ev.id];
+          if (cb) {
+            log.textContent = t('combat.combo', { name: cb.name });
+            play('confirm_big', { vol: 0.8 });
+            await wait(350);
+          }
+          break;
+        }
         case 'win':
           play('jingle_win');
           log.textContent = t('combat.win');

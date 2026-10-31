@@ -12,7 +12,8 @@
     "coin": "assets/sprites/items/kyrise_coin_01d.png",
     "coins_pile": "assets/sprites/items/kyrise_coin_03d.png",
     "sparkle": "assets/sprites/items/kyrise_crystal_01f.png",
-    "moon_item": "assets/sprites/items/kyrise_pearl_01a.png"
+    "moon_item": "assets/sprites/items/kyrise_pearl_01a.png",
+    "heal": "assets/sprites/items/kyrise_potion_01a.png"
   },
   "sfxIndex": "assets/sfx_index.json",
   "hubShelf": [

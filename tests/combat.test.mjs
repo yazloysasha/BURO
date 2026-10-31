@@ -9,6 +9,7 @@ import { availableNodes, findNode } from '../js/game/map.js';
 import { runFee, runIsFree } from '../js/game/meta.js';
 import { loadData } from './helpers.mjs';
 import { openRunBlock, resolveFullBackpack } from '../js/game/blocks.js';
+import { chooseEvent, tapAnomaly, placeOnShelf } from '../js/game/rooms.js';
 
 const data = loadData();
 const ctx = combatCtx(data, { floorNo: 1, tier: 1 });
@@ -160,8 +161,21 @@ function autoplayRun(seed, strategy = 'smart') {
       playRound(save, data, actions);
       continue;
     }
-    if (room.phase === 'choose') {
+    if (room.type === 'rest' && room.phase === 'choose') {
       restChoice(save, data, 'sleep');
+      continue;
+    }
+    if (room.type === 'event' && room.phase === 'choose') {
+      if (!chooseEvent(save, data, 0)) chooseEvent(save, data, 1);
+      continue;
+    }
+    if (room.type === 'anomaly' && room.phase === 'play') {
+      tapAnomaly(save, data, room.anomaly.cells.findIndex((c) => !c.tapped));
+      continue;
+    }
+    if (room.type === 'shelf' && room.phase === 'play') {
+      const i = room.shelf.items.findIndex((x) => !x.placed);
+      placeOnShelf(save, data, i, room.shelf.items[i].target);
       continue;
     }
     if (room.phase === 'lost') break;

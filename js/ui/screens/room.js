@@ -22,9 +22,9 @@ export function leaveRoom() {
   go(game.save.run && game.save.run.result ? 'runEnd' : 'map');
 }
 
-export function rewardView(root, reward, { title = t('reward.title'), text = null } = {}) {
+export function rewardView(root, reward, { title = t('reward.title'), text = null, scroll = true } = {}) {
   const box = h('div.col.reward');
-  box.append(h('h1.center', { text: title }));
+  if (title) box.append(h('h1.center', { text: title }));
   if (text) box.append(h('p.center', { text }));
   if (reward && reward.coins) box.append(h('p.center.coins-line', { text: t('reward.coins', { n: reward.coins }) }));
   for (const r of (reward && reward.items) || []) {
@@ -41,15 +41,16 @@ export function rewardView(root, reward, { title = t('reward.title'), text = nul
   if (room && room.blocks && room.blocks.length) {
     const kind = room.type === 'boss' ? 'boss' : room.type === 'elite' ? 'elite' : 'run';
     const row = h('div.lucky-row');
-    room.blocks.forEach((b, i) => row.append(blockCard(b, { closedIcon: game.data.assets.blocks[kind], opener: () => openBlock(i) })));
+    room.blocks.forEach((b, i) => row.append(blockCard(b, { closedIcon: game.data.assets.blocks[kind], opener: () => openBlockAt(i) })));
     box.append(h('h2.center', { text: t('loot.blocksTitle') }), row, h('div.dim.center', { text: pityLine() }));
   }
+  for (const id of (reward && reward.combos) || []) box.append(h('div.accent.center', { text: t('reward.combo', { name: game.data.comboById[id].name }) }));
   box.append(button(t('common.continue'), leaveRoom, { cls: 'green big block', sound: 'confirm' }));
-  root.append(h('div.scroll', null, box));
+  root.append(scroll ? h('div.scroll', null, box) : box);
 }
 
 // Opens run block i; when the backpack is full the player picks what to drop (or sells the find).
-async function openBlock(i) {
+export async function openBlockAt(i) {
   const res = openRunBlock(game.save, game.data, i);
   if (!res) return null;
   if (res.needsSpace) {
