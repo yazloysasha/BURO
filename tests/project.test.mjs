@@ -112,7 +112,7 @@ test('credits screen data covers every author in CREDITS.md + Kyrise CC BY line'
 test('PWA: manifest, icons, meta tags', () => {
   const m = json('manifest.webmanifest');
   assert.equal(m.display, 'standalone');
-  assert.equal(m.orientation, 'portrait');
+  assert.ok(['any', 'portrait'].includes(m.orientation));
   assert.ok(m.name && m.short_name && m.theme_color && m.background_color);
   const sizes = m.icons.map((i) => i.sizes);
   assert.ok(sizes.includes('192x192') && sizes.includes('512x512'));

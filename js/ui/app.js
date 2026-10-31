@@ -7,6 +7,7 @@ import { game, onChange } from '../game/state.js';
 
 const screens = {};
 let current = null;
+let currentParams = {};
 let cleanup = null;
 
 export function registerScreen(name, mod) {
@@ -30,11 +31,19 @@ export function go(name, params = {}) {
   closeModal();
   clear(root);
   current = name;
+  currentParams = params;
   const mod = screens[name];
   if (!mod) throw new Error('no screen ' + name);
   const res = mod.render(root, params);
   if (typeof res === 'function') cleanup = res;
   renderTopbar();
+}
+
+// Rebuild the current screen (after rotation / window resize). Skipped while a dialog is open.
+export function rerender() {
+  if (!current || $('#overlay').classList.contains('show')) return false;
+  go(current, currentParams);
+  return true;
 }
 
 // ---------- top bar ----------

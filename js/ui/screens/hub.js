@@ -7,6 +7,7 @@ import { startRun } from '../../game/run.js';
 import { runFee, runIsFree } from '../../game/meta.js';
 import { button, go, pickLine, setTopbarTitle, confirm } from '../app.js';
 import { createHubScene } from '../hubscene.js';
+import { isWide } from '../layout.js';
 import { catLine } from '../../game/namegen.js';
 import { localDate } from '../../game/daily.js';
 
@@ -41,11 +42,13 @@ function lastRunNote() {
 
 export function render(root) {
   setTopbarTitle(t('hub.title') + ' · ' + t('hub.tier', { n: game.save.meta.tier }));
-  const wrap = h('div.col', { style: { flex: '1', minHeight: '0' } });
-  root.append(wrap);
-  const availW = root.clientWidth || window.innerWidth - 16;
-  const availH = Math.max(160, (root.clientHeight || window.innerHeight) * 0.4);
-  const scene = createHubScene(availW, availH);
+  const a = h('div.split-a');
+  const b = h('div.split-b');
+  root.append(h('div.split', null, a, b));
+  const wide = isWide();
+  const W = root.clientWidth || window.innerWidth - 16;
+  const H = root.clientHeight || window.innerHeight;
+  const scene = createHubScene(wide ? W * 0.52 : W, wide ? H - 40 : Math.max(160, H * 0.4));
   const note = h('div.hub-note', { text: lastRunNote() || pickLine('hub.greeting') });
   scene.onTapCat((who) => {
     taps++;
@@ -62,6 +65,7 @@ export function render(root) {
   }
   menu.append(button(t('hub.settings'), () => go('settings'), { cls: 'grey' }), button(t('hub.credits'), () => go('credits'), { cls: 'grey' }));
 
-  wrap.append(scene.stage.el, note, h('div.scroll', null, h('div.col', null, runButton(), menu)));
+  a.append(scene.stage.el, note);
+  b.append(h('div.scroll', null, h('div.col', null, runButton(), menu)));
   return () => scene.destroy();
 }

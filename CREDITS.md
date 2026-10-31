@@ -30,9 +30,9 @@
 | 16x16 Ant Enemies | ARoachIFoundOnMyPillow | https://opengameart.org/content/16x16-ant-enemies | враги ant_red, ant_grey |
 
 ## Шрифт (SIL OFL 1.1)
-- **Tiny5** — The Tiny5 Project Authors (https://github.com/Gissio/font_tiny5), SIL Open Font License 1.1.
-  Файл `fonts/Tiny5-Regular.ttf` — статический инстанс вариативного шрифта (оси по умолчанию) с подмножеством
-  глифов (латиница, кириллица, пунктуация); текст лицензии — `fonts/OFL-Tiny5.txt` и `LICENSES/OFL-Tiny5.txt`.
+- **Galmuri11** (Regular и Bold) — Lee Minseo (quiple), https://github.com/quiple/galmuri, SIL Open Font License 1.1.
+  Файлы `fonts/Galmuri11.ttf`, `fonts/Galmuri11-Bold.ttf` — подмножество глифов (латиница, кириллица, пунктуация)
+  без изменения рисунка; текст лицензии — `fonts/OFL-Galmuri.txt` и `LICENSES/OFL-Galmuri.txt`.
 
 ## Изменения (производные работы)
 - Перекраски: Пепося (Cat-1 → ярче/оранжевее), бантик Дудони (дорисован), mini_peposya/mini_dudonya (перекраска kotnaszynce),

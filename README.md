@@ -11,6 +11,7 @@ python3 -m http.server 8080      # открыть http://localhost:8080
 node --test                      # тесты (Node ≥ 18, без зависимостей)
 ```
 Никакой сборки не нужно: ванильный JS (ES-модули), всё работает «как есть» со статического хостинга.
+Играть можно на iPhone (вертикально и горизонтально), на планшете и на ПК — раскладка подстраивается сама.
 
 ## Деплой на GitHub Pages
 1. Settings → Pages → Source: **Deploy from a branch**, ветка `main`, папка `/ (root)`.
@@ -31,7 +32,7 @@ node --test                      # тест упадёт, если список 
 ```
 index.html, manifest.webmanifest, sw.js, precache-manifest.js, .nojekyll
 css/style.css                 стили (9-slice рамки, pixelated)
-fonts/Tiny5-Regular.ttf       пиксельный шрифт с кириллицей (OFL)
+fonts/Galmuri11*.ttf          пиксельный шрифт с кириллицей (OFL)
 icons/icon-{180,192,512}.png  иконки приложения (собраны из спрайтов котов)
 js/core/    rng, save (миграции), storage (localStorage + IndexedDB), audio, sprite, loop, i18n, assets, dom
 js/game/    map, combat, run, loot, blocks, daily, collection, rooms, combos, progress, meta, names, namegen
@@ -70,4 +71,4 @@ tools/prep/build_sfx.sh             RAW assets/sfx
 
 ## Лицензии
 Все ассеты CC0, кроме иконок Kyrise (`assets/sprites/items/kyrise_*.png`) — CC BY 4.0, атрибуция показана
-на экране «Авторы». Шрифт Tiny5 — SIL OFL 1.1. Подробно — `CREDITS.md`, тексты — `LICENSES/`.
+на экране «Авторы». Шрифт Galmuri11 — SIL OFL 1.1. Подробно — `CREDITS.md`, тексты — `LICENSES/`.

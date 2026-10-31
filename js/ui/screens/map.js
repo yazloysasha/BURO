@@ -8,6 +8,7 @@ import { availableNodes, findNode } from '../../game/map.js';
 import { enterNode } from '../../game/run.js';
 import { button, go, modal, setTopbarTitle } from '../app.js';
 import { partyBar, openBackpack } from '../runwidgets.js';
+import { effectiveDpr } from '../layout.js';
 
 const FLOOR_H = 76;
 const NODE = 52;
@@ -42,7 +43,7 @@ export function render(root) {
   const pos = (n) => ({ x: Math.round(24 + n.x * (width - 48)), y: Math.round(height - 12 - FLOOR_H / 2 - n.f * FLOOR_H) });
 
   // dotted pixel lines
-  const dpr = Math.max(1, Math.round(window.devicePixelRatio || 1));
+  const dpr = Math.max(1, Math.round(effectiveDpr()));
   const cv = document.createElement('canvas');
   cv.width = width * dpr;
   cv.height = height * dpr;

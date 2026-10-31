@@ -19,6 +19,6 @@
     { "name": "Free Pixel Food", "author": "Ghostpixxells", "license": "CC0", "url": "https://ghostpixxells.itch.io/pixelfood", "use": "items_food" },
     { "name": "Ambient Pixel Art Insects (cute bugs)", "author": "madameberry", "license": "CC0", "url": "https://opengameart.org/content/ambient-pixel-art-insects", "use": "bugs" },
     { "name": "16x16 Ant Enemies", "author": "ARoachIFoundOnMyPillow", "license": "CC0", "url": "https://opengameart.org/content/16x16-ant-enemies", "use": "ants" },
-    { "name": "Tiny5 (font)", "author": "The Tiny5 Project Authors (Gissio)", "license": "SIL OFL 1.1", "url": "https://github.com/Gissio/font_tiny5", "use": "font" }
+    { "name": "Galmuri (font)", "author": "Lee Minseo (quiple)", "license": "SIL OFL 1.1", "url": "https://github.com/quiple/galmuri", "use": "font" }
   ]
 }

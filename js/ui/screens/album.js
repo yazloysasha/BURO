@@ -10,6 +10,7 @@ import { pageState, placeSticker, slotFound, slotKey } from '../../game/progress
 import { button, modal, closeModal, screenHeader, setTopbarTitle } from '../app.js';
 import { passiveText } from '../runwidgets.js';
 import { burst } from '../particles.js';
+import { uiZoom } from '../layout.js';
 
 let pageIdx = 0;
 
@@ -125,7 +126,7 @@ export function render(root) {
     if (res.completed) {
       setTimeout(() => {
         play('album_page');
-        burst(document.body, window.innerWidth / 2, window.innerHeight / 2, { n: 40, colors: ['#ffcf4a', '#ff5edc', '#6fd36f', '#4aa3ff'] });
+        burst(document.body, window.innerWidth / 2 / uiZoom(), window.innerHeight / 2 / uiZoom(), { n: 40, colors: ['#ffcf4a', '#ff5edc', '#6fd36f', '#4aa3ff'] });
         modal(h('div.col.center', null, h('h1', { text: t('album.pageDone') }), h('p', { text: page.title }), h('p.accent', { text: rewardText(page.reward) }), h('p.dim', { text: t('album.sparkles') })), [
           { label: t('common.ok'), value: 1, cls: 'green' },
         ]).then(() => draw());

@@ -12,6 +12,7 @@ import { Stage } from './stage.js';
 import { button, modal, closeModal, shake, haptic } from './app.js';
 import { hpBar, itemRow, effectText } from './runwidgets.js';
 import { catSheetKey } from './widgets.js';
+import { isWide } from './layout.js';
 import { burstAt } from './particles.js';
 
 const W = 96;
@@ -29,8 +30,10 @@ export function renderCombat(root, { onEnd }) {
   const room = run.room;
   const c = room.combat;
   const ctx = combatCtx(game.data, run);
+  const wide = isWide();
   const availW = root.clientWidth || 360;
-  const stage = new Stage(W, H, availW, (root.clientHeight || 600) * 0.56);
+  const availH = root.clientHeight || 600;
+  const stage = new Stage(W, H, wide ? availW * 0.55 : availW, wide ? availH - 8 : availH * 0.56);
   const u = stage.unit;
   const views = {};
   let busy = false;
@@ -40,7 +43,7 @@ export function renderCombat(root, { onEnd }) {
   const log = h('div.combat-log', { text: room.type === 'boss' ? t('combat.bossIntro') : t('combat.start') });
   const panel = h('div.action-panel');
   const chips = h('div.party-row');
-  root.append(stage.el, log, chips, panel);
+  root.append(h('div.split', null, h('div.split-a', null, stage.el), h('div.split-b', null, log, chips, panel)));
 
   // ----- unit views -----
   function enemySlot(e, idx) {
@@ -156,7 +159,7 @@ export function renderCombat(root, { onEnd }) {
           'button.cat-chip' + (activeCat() === k ? '.active' : '') + (cat.ko ? '.ko' : ''),
           { type: 'button' },
           h('div', { text: game.data.cats[k].name }),
-          h('div.dim.small', { text: cat.ko ? t('combat.ko') : ad ? '✓ ' + ad.name : t('combat.choosing') }),
+          h('div.dim.small', { text: cat.ko ? t('combat.ko') : ad ? '» ' + ad.name : t('combat.choosing') }),
         );
         chip.addEventListener('click', () => {
           if (busy || !sel[k]) return;

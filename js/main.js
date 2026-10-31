@@ -5,7 +5,8 @@ import { loadJSON, loadSheet, loadImages } from './core/assets.js';
 import { configure as configureAudio, installUnlock } from './core/audio.js';
 import { loadSave, persist, requestPersistence, flush, writeBackup } from './core/storage.js';
 import { game, setPersist, commit } from './game/state.js';
-import { registerScreen, go, toast, button } from './ui/app.js';
+import { registerScreen, go, toast, button, rerender, closeModal } from './ui/app.js';
+import { watchLayout } from './ui/layout.js';
 import { applySettings } from './ui/screens/settings.js';
 import * as hub from './ui/screens/hub.js';
 import * as settings from './ui/screens/settings.js';
@@ -72,6 +73,7 @@ async function boot() {
   const data = await loadData();
   setStrings(data.strings);
   $('#boot').textContent = t('app.loading');
+  await document.fonts.load('16px Galmuri11').catch(() => {});
   game.data = data;
 
   const sfxIndex = await loadJSON('./' + data.assets.sfxIndex);
@@ -153,6 +155,11 @@ async function boot() {
 
   $('#boot').remove();
   $('#app').hidden = false;
+  watchLayout(() => rerender());
+  // desktop comfort: Esc closes dialogs
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && $('#overlay').classList.contains('show')) closeModal();
+  });
   go('hub');
   if (recovered) toast(t('app.saveRecovered'), 3500);
   if (corrupted) toast(t('app.saveCorrupted'), 4000);

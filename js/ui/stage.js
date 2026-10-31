@@ -1,9 +1,10 @@
 // A pixel stage: fixed logical resolution, scaled by an integer number of *device* pixels so every sprite pixel
 // maps to whole screen pixels. Child sprite canvases are positioned in logical pixels.
 import { h } from '../core/dom.js';
+import { effectiveDpr } from './layout.js';
 
 export function stageScale(logicalW, logicalH, availW, availH = Infinity) {
-  const dpr = Math.max(1, Math.round(window.devicePixelRatio || 1));
+  const dpr = Math.max(1, Math.round(effectiveDpr()));
   const k = Math.max(1, Math.floor(Math.min((availW * dpr) / logicalW, (availH * dpr) / logicalH)));
   return { k, dpr, css: k / dpr };
 }
