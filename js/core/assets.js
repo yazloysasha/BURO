@@ -2,16 +2,21 @@
 const images = new Map();
 const json = new Map();
 
-export function loadJSON(url) {
-  if (!json.has(url)) {
-    json.set(
-      url,
-      fetch(url).then((r) => {
-        if (!r.ok) throw new Error(url + ' ' + r.status);
-        return r.json();
-      }),
-    );
+async function fetchRetry(url, tries = 3) {
+  for (let i = 0; ; i++) {
+    try {
+      const r = await fetch(url);
+      if (!r.ok) throw new Error(url + ' ' + r.status);
+      return r;
+    } catch (e) {
+      if (i >= tries - 1) throw e;
+      await new Promise((res) => setTimeout(res, 300 * (i + 1)));
+    }
   }
+}
+
+export function loadJSON(url) {
+  if (!json.has(url)) json.set(url, fetchRetry(url).then((r) => r.json()));
   return json.get(url);
 }
 

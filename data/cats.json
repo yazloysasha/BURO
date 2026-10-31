@@ -1,0 +1,30 @@
+{
+  "peposya": {
+    "name": "Пепося",
+    "role": "Танк и урон",
+    "sheet": "peposya",
+    "mini": "mini_peposya",
+    "stats": { "hp": 36, "atk": 7, "def": 2, "spd": 5, "luck": 1, "crit": 0.1 },
+    "actions": {
+      "bite": { "name": "Цап", "desc": "Кусает врага.", "type": "attack", "power": 1.0, "target": "enemy", "icon": "assets/sprites/ui/skills/s_dagger04.png" },
+      "hiss": { "name": "Шипение", "desc": "Враг пугается: атака слабее на 2 хода.", "type": "debuff", "status": "scared", "turns": 2, "target": "enemy", "icon": "assets/sprites/ui/skills/s_wind03.png" },
+      "purr": { "name": "Мур", "desc": "Пепося закрывается щитом и прикрывает Дудоню.", "type": "shield", "value": 6, "ally": 3, "target": "self", "priority": true, "icon": "assets/sprites/ui/skills/s_holy09.png" },
+      "item": { "name": "Предмет", "desc": "Использовать расходник из рюкзака.", "type": "item", "target": "item", "icon": "assets/sprites/items/kyrise_potion_01a.png" },
+      "special": { "name": "Кусь-торнадо", "desc": "Крутится и кусает всех врагов.", "type": "attack_all", "power": 0.8, "cooldown": 3, "target": "none", "icon": "assets/sprites/ui/skills/s_physic01.png" }
+    }
+  },
+  "dudonya": {
+    "name": "Дудоня",
+    "role": "Поддержка и удача",
+    "sheet": "dudonya",
+    "mini": "mini_dudonya",
+    "stats": { "hp": 28, "atk": 5, "def": 1, "spd": 7, "luck": 4, "crit": 0.08 },
+    "actions": {
+      "bite": { "name": "Цап", "desc": "Аккуратно, но больно кусает врага.", "type": "attack", "power": 1.0, "target": "enemy", "icon": "assets/sprites/ui/skills/s_dagger04.png" },
+      "hiss": { "name": "Шипение", "desc": "Пугает всех врагов на 1 ход.", "type": "debuff_all", "status": "scared", "turns": 1, "target": "none", "icon": "assets/sprites/ui/skills/s_wind03.png" },
+      "purr": { "name": "Мур", "desc": "Лечит самого уставшего кота.", "type": "heal", "value": 7, "target": "lowest", "icon": "assets/sprites/ui/skills/s_holy01.png" },
+      "item": { "name": "Предмет", "desc": "Использовать расходник из рюкзака.", "type": "item", "target": "item", "icon": "assets/sprites/items/kyrise_potion_01a.png" },
+      "special": { "name": "Бантик удачи", "desc": "Оба кота везучие 2 хода, плохие статусы снимаются.", "type": "buff_party", "status": "lucky", "turns": 2, "cleanse": true, "cooldown": 3, "target": "none", "icon": "assets/sprites/ui/skills/s_light01.png" }
+    }
+  }
+}

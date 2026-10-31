@@ -10,13 +10,16 @@ import { applySettings } from './ui/screens/settings.js';
 import * as hub from './ui/screens/hub.js';
 import * as settings from './ui/screens/settings.js';
 import * as credits from './ui/screens/credits.js';
-
-const DATA_FILES = ['strings.ru', 'assets', 'credits'];
+import * as map from './ui/screens/map.js';
+import * as room from './ui/screens/room.js';
+import * as runEnd from './ui/screens/runend.js';
+import { DATA_FILES, indexData } from './game/data.js';
+import { setModifierDefs } from './game/names.js';
 
 async function loadData() {
   const entries = await Promise.all(DATA_FILES.map(async (n) => [n, await loadJSON(`./data/${n}.json`)]));
-  const d = Object.fromEntries(entries);
-  d.strings = d['strings.ru'];
+  const d = indexData(Object.fromEntries(entries));
+  setModifierDefs(d.modifiers);
   return d;
 }
 
@@ -96,6 +99,9 @@ async function boot() {
   registerScreen('hub', hub);
   registerScreen('settings', settings);
   registerScreen('credits', credits);
+  registerScreen('map', map);
+  registerScreen('room', room);
+  registerScreen('runEnd', runEnd);
 
   $('#boot').remove();
   $('#app').hidden = false;

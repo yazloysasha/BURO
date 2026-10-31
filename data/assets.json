@@ -24,5 +24,15 @@
     "assets/sprites/items/kyrise_fish_01a.png",
     "assets/sprites/items/kyrise_ring_01b.png",
     "assets/sprites/items/kyrise_potion_01e.png"
-  ]
+  ],
+  "intents": {
+    "attack": "assets/sprites/items/kyrise_sword_01a.png",
+    "attack_all": "assets/sprites/items/kyrise_sword_03c.png",
+    "defend": "assets/sprites/items/kyrise_shield_01a.png",
+    "buff": "assets/sprites/items/kyrise_potion_02a.png",
+    "buff_all": "assets/sprites/items/kyrise_potion_02a.png",
+    "debuff": "assets/sprites/items/kyrise_skull_01b.png",
+    "summon": "assets/sprites/items/kyrise_scroll_01c.png",
+    "heal": "assets/sprites/items/kyrise_potion_01a.png"
+  }
 }

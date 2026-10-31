@@ -37,3 +37,10 @@ export function clear(el) {
 export function $(sel, root = document) {
   return root.querySelector(sel);
 }
+
+// Replace all children, skipping null/false entries (unlike Element.replaceChildren, which prints "null").
+export function setChildren(el, ...children) {
+  clear(el);
+  append(el, children);
+  return el;
+}

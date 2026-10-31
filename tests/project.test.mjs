@@ -73,6 +73,14 @@ test('every string key used in code exists in strings.ru.json', () => {
   assert.deepEqual(missing, []);
 });
 
+test('code never references asset files directly (they live in data/ so they get precached)', () => {
+  const offenders = [];
+  for (const f of walk('js', (p) => p.endsWith('.js'))) {
+    if (/['"`]assets\/[^'"`]*\.(png|m4a|mp3|json)/.test(read(f))) offenders.push(f);
+  }
+  assert.deepEqual(offenders, []);
+});
+
 test('no hardcoded Russian in code', () => {
   const offenders = [];
   for (const f of walk('js', (p) => p.endsWith('.js'))) {

@@ -1,0 +1,10 @@
+[
+  {"id": "sticky", "name": "Липкий", "kind": "debuff", "desc": "Медленнее и не уворачивается.", "spd": -3, "noEvade": true, "icon": "assets/sprites/items/kyrise_cotton_01a.png"},
+  {"id": "poisoned", "name": "Отравлен", "kind": "debuff", "desc": "Теряет 2 HP в конце хода.", "dot": 2, "icon": "assets/sprites/items/kyrise_potion_02c.png"},
+  {"id": "sleepy", "name": "Сонный", "kind": "debuff", "desc": "Пропускает ход.", "skipTurn": true, "icon": "assets/sprites/items/kyrise_candle_01b.png"},
+  {"id": "scared", "name": "Испуган", "kind": "debuff", "desc": "Атака слабее на 40%.", "atkMult": 0.6, "icon": "assets/sprites/items/kyrise_skull_01a.png"},
+  {"id": "strong", "name": "Злой", "kind": "buff", "desc": "Атака сильнее на 40%.", "atkMult": 1.4, "icon": "assets/sprites/items/kyrise_sword_01e.png"},
+  {"id": "lucky", "name": "Везучий", "kind": "buff", "desc": "+25% к криту и уклонению.", "critAdd": 0.25, "evadeAdd": 0.15, "icon": "assets/sprites/items/kyrise_gem_01b.png"},
+  {"id": "cozy", "name": "Уютно", "kind": "buff", "desc": "Восстанавливает 2 HP в конце хода.", "regen": 2, "icon": "assets/sprites/items/kyrise_cup_01b.png"},
+  {"id": "sharp", "name": "Наточенные когти", "kind": "buff", "desc": "Атака сильнее на 25%.", "atkMult": 1.25, "icon": "assets/sprites/items/kyrise_sword_01c.png"}
+]

@@ -1,0 +1,18 @@
+{
+  "fees": [0, 10, 25, 45, 70, 100],
+  "floorsByTier": { "1": [8, 9], "2": [9, 10], "3": [10, 11], "4": [11, 12], "5": [12, 12] },
+  "nodesPerFloor": [2, 4],
+  "enemyScale": { "perFloor": 0.07, "perTier": 0.22 },
+  "elite": { "hp": 1.6, "atk": 1.25, "coins": 2.0 },
+  "encounterBudget": { "base": 1.6, "perFloor": 0.35, "perTier": 0.6, "max": 3 },
+  "restHeal": 0.5,
+  "koReviveHp": 0.25,
+  "defeatCoinKeep": 0.5,
+  "backpackBase": 6,
+  "consumableDrop": { "combat": 0.3, "elite": 0.8 },
+  "bossConsumables": 2,
+  "critMult": 1.6,
+  "variance": [0.85, 1.15],
+  "luckCrit": 0.01,
+  "luckEvade": 0.005
+}
