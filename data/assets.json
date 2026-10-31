@@ -1,0 +1,28 @@
+{
+  "sheets": {
+    "peposya": "assets/sprites/cats/peposya.json",
+    "dudonya": "assets/sprites/cats/dudonya.json",
+    "mini_peposya": "assets/sprites/cats/mini_peposya.json",
+    "mini_dudonya": "assets/sprites/cats/mini_dudonya.json",
+    "meow_vfx": "assets/sprites/cats/meow_vfx.json",
+    "enemies": "assets/sprites/enemies/enemies.json",
+    "ui": "assets/sprites/ui/ui_sheet.json"
+  },
+  "icons": {
+    "coin": "assets/sprites/items/kyrise_coin_01d.png",
+    "coins_pile": "assets/sprites/items/kyrise_coin_03d.png",
+    "sparkle": "assets/sprites/items/kyrise_crystal_01f.png",
+    "moon_item": "assets/sprites/items/kyrise_pearl_01a.png"
+  },
+  "sfxIndex": "assets/sfx_index.json",
+  "hubShelf": [
+    "assets/sprites/items/kyrise_potion_01a.png",
+    "assets/sprites/items/kyrise_book_01a.png",
+    "assets/sprites/items/kyrise_candle_01a.png",
+    "assets/sprites/items/kyrise_gem_01c.png",
+    "assets/sprites/items/kyrise_cup_01a.png",
+    "assets/sprites/items/kyrise_fish_01a.png",
+    "assets/sprites/items/kyrise_ring_01b.png",
+    "assets/sprites/items/kyrise_potion_01e.png"
+  ]
+}

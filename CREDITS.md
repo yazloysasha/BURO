@@ -29,9 +29,15 @@
 | Ambient Pixel Art Insects (cute bugs) | madameberry | https://opengameart.org/content/ambient-pixel-art-insects | мелкие жуки-враги и животные `bug_*` |
 | 16x16 Ant Enemies | ARoachIFoundOnMyPillow | https://opengameart.org/content/16x16-ant-enemies | враги ant_red, ant_grey |
 
+## Шрифт (SIL OFL 1.1)
+- **Tiny5** — The Tiny5 Project Authors (https://github.com/Gissio/font_tiny5), SIL Open Font License 1.1.
+  Файл `fonts/Tiny5-Regular.ttf` — статический инстанс вариативного шрифта (оси по умолчанию) с подмножеством
+  глифов (латиница, кириллица, пунктуация); текст лицензии — `fonts/OFL-Tiny5.txt` и `LICENSES/OFL-Tiny5.txt`.
+
 ## Изменения (производные работы)
 - Перекраски: Пепося (Cat-1 → ярче/оранжевее), бантик Дудони (дорисован), mini_peposya/mini_dudonya (перекраска kotnaszynce),
   klobster / klobster_king (+корона) / klobster_toxic / klobster_glitch (перекраска Tiny Creatures #144),
   hamster (перекраска Tiny Dungeon #123), dog (перекраска Tiny Creatures #170), кадры `hurt` (тинт).
 - Обрезка кадров котов 50×50 → 32×32; упаковка в атласы; конвертация звуков OGG → M4A/MP3.
 - Kyrise-иконки не изменялись (только переименование файлов).
+- Иконки приложения `icons/icon-*.png` собраны из спрайтов Пепоси и Дудони (целочисленное увеличение, без сглаживания).

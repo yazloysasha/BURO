@@ -1,0 +1,24 @@
+{
+  "required": "Icons: \"Kyrise's Free 16x16 RPG Icon Pack\" by Kyrise (kyrise.itch.io), CC BY 4.0",
+  "requiredUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "packs": [
+    { "name": "Kyrise's Free 16x16 RPG Icon Pack (V1.3)", "author": "Kyrise", "license": "CC BY 4.0", "url": "https://kyrise.itch.io/kyrises-free-16x16-rpg-icon-pack", "use": "items_kyrise" },
+    { "name": "Tiny Dungeon", "author": "Kenney", "license": "CC0", "url": "https://kenney.nl/assets/tiny-dungeon", "use": "tiles_enemies_items" },
+    { "name": "Tiny Town", "author": "Kenney", "license": "CC0", "url": "https://kenney.nl/assets/tiny-town", "use": "tiles" },
+    { "name": "Roguelike Indoors", "author": "Kenney", "license": "CC0", "url": "https://kenney.nl/assets/roguelike-indoors", "use": "tiles" },
+    { "name": "1-Bit Pack", "author": "Kenney", "license": "CC0", "url": "https://kenney.nl/assets/1-bit-pack", "use": "tiles" },
+    { "name": "Pixel UI Pack", "author": "Kenney", "license": "CC0", "url": "https://kenney.nl/assets/pixel-ui-pack", "use": "ui" },
+    { "name": "Interface Sounds", "author": "Kenney", "license": "CC0", "url": "https://kenney.nl/assets/interface-sounds", "use": "sfx" },
+    { "name": "Impact Sounds", "author": "Kenney", "license": "CC0", "url": "https://kenney.nl/assets/impact-sounds", "use": "sfx" },
+    { "name": "RPG Audio", "author": "Kenney", "license": "CC0", "url": "https://kenney.nl/assets/rpg-audio", "use": "sfx" },
+    { "name": "Music Jingles", "author": "Kenney", "license": "CC0", "url": "https://kenney.nl/assets/music-jingles", "use": "sfx" },
+    { "name": "Tiny Creatures", "author": "Clint Bellanger", "license": "CC0", "url": "https://opengameart.org/content/tiny-creatures", "use": "animals_enemies" },
+    { "name": "Pet Cats Pack", "author": "LuizMelo", "license": "CC0", "url": "https://luizmelo.itch.io/pet-cat-pack", "use": "cats" },
+    { "name": "cute kitty animated set", "author": "kotnaszynce", "license": "CC0", "url": "https://opengameart.org/content/cute-kitty-animated-set", "use": "mini_cats" },
+    { "name": "496 pixel art icons for medieval/fantasy RPG", "author": "gnola14", "license": "CC0", "url": "https://opengameart.org/content/496-pixel-art-icons-for-medievalfantasy-rpg", "use": "items_rpg496" },
+    { "name": "Free Pixel Food", "author": "Ghostpixxells", "license": "CC0", "url": "https://ghostpixxells.itch.io/pixelfood", "use": "items_food" },
+    { "name": "Ambient Pixel Art Insects (cute bugs)", "author": "madameberry", "license": "CC0", "url": "https://opengameart.org/content/ambient-pixel-art-insects", "use": "bugs" },
+    { "name": "16x16 Ant Enemies", "author": "ARoachIFoundOnMyPillow", "license": "CC0", "url": "https://opengameart.org/content/16x16-ant-enemies", "use": "ants" },
+    { "name": "Tiny5 (font)", "author": "The Tiny5 Project Authors (Gissio)", "license": "SIL OFL 1.1", "url": "https://github.com/Gissio/font_tiny5", "use": "font" }
+  ]
+}
