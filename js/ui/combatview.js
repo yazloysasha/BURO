@@ -12,6 +12,7 @@ import { Stage } from './stage.js';
 import { button, modal, closeModal, shake, haptic } from './app.js';
 import { hpBar, itemRow, effectText } from './runwidgets.js';
 import { catSheetKey } from './widgets.js';
+import { burstAt } from './particles.js';
 
 const W = 96;
 const H = 100;
@@ -387,6 +388,7 @@ export function renderCombat(root, { onEnd }) {
           if (ev.crit) {
             play('crit');
             shake();
+            if (views[ev.target]) burstAt(views[ev.target].el, { n: 12, colors: ['#ffd84a', '#ffffff', '#ff6b6b'], speed: 140, life: 0.5 });
             haptic(30);
             float(ev.target, t('combat.crit', { n: ev.amount }), 'crit');
           } else {

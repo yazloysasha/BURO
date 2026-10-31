@@ -1,0 +1,28 @@
+[
+  { "id": "peposya", "name": "Пепося: бой", "nodes": [
+    { "id": "pep_claws", "name": "Острые когти", "desc": "+1 к атаке Пепоси за уровень.", "max": 3, "cost": [3, 6, 10], "effects": [ { "type": "stat", "cat": "peposya", "stat": "atk", "value": 1 } ] },
+    { "id": "pep_fur", "name": "Густая шерсть", "desc": "+5 к HP Пепоси за уровень.", "max": 3, "cost": [3, 6, 10], "requires": "pep_claws", "effects": [ { "type": "stat", "cat": "peposya", "stat": "hp", "value": 5 } ] },
+    { "id": "pep_guard", "name": "Большой щит", "desc": "Мур Пепоси даёт +2 к щиту за уровень.", "max": 2, "cost": [5, 9], "requires": "pep_fur", "effects": [ { "type": "action_value", "cat": "peposya", "action": "purr", "value": 2 } ] },
+    { "id": "pep_hide", "name": "Толстокожий", "desc": "+1 к защите Пепоси за уровень.", "max": 2, "cost": [6, 12], "requires": "pep_guard", "effects": [ { "type": "stat", "cat": "peposya", "stat": "def", "value": 1 } ] },
+    { "id": "pep_eye", "name": "Хищный глаз", "desc": "+4% к шансу крита Пепоси за уровень.", "max": 2, "cost": [6, 12], "requires": "pep_claws", "effects": [ { "type": "stat", "cat": "peposya", "stat": "crit", "value": 0.04 } ] },
+    { "id": "pep_tornado", "name": "Вихрь", "desc": "Кусь-торнадо сильнее на 15% за уровень.", "max": 2, "cost": [8, 14], "requires": "pep_eye", "effects": [ { "type": "action_power", "cat": "peposya", "action": "special", "value": 0.15 } ] },
+    { "id": "pep_tireless", "name": "Неутомимый", "desc": "Кусь-торнадо перезаряжается на ход быстрее.", "max": 1, "cost": [20], "requires": "pep_tornado", "effects": [ { "type": "action_cooldown", "cat": "peposya", "action": "special", "value": -1 } ] }
+  ] },
+  { "id": "dudonya", "name": "Дудоня: удача и забота", "nodes": [
+    { "id": "dud_luck", "name": "Счастливый бантик", "desc": "+1 к удаче Дудони за уровень (и к лаки-блокам).", "max": 3, "cost": [3, 6, 10], "effects": [ { "type": "stat", "cat": "dudonya", "stat": "luck", "value": 1 } ] },
+    { "id": "dud_purr", "name": "Тёплое мурчание", "desc": "Мур Дудони лечит на 3 больше за уровень.", "max": 2, "cost": [4, 8], "requires": "dud_luck", "effects": [ { "type": "action_value", "cat": "dudonya", "action": "purr", "value": 3 } ] },
+    { "id": "dud_paws", "name": "Лёгкие лапки", "desc": "+1 к скорости Дудони за уровень.", "max": 2, "cost": [5, 9], "requires": "dud_purr", "effects": [ { "type": "stat", "cat": "dudonya", "stat": "spd", "value": 1 } ] },
+    { "id": "dud_fluff", "name": "Пушистость", "desc": "+5 к HP Дудони за уровень.", "max": 2, "cost": [5, 9], "requires": "dud_luck", "effects": [ { "type": "stat", "cat": "dudonya", "stat": "hp", "value": 5 } ] },
+    { "id": "dud_sense", "name": "Чутьё на сокровища", "desc": "+2 к удаче в лаки-блоках за уровень.", "max": 2, "cost": [8, 14], "requires": "dud_fluff", "effects": [ { "type": "block_luck", "value": 2 } ] },
+    { "id": "dud_bow", "name": "Бантик подольше", "desc": "Бантик удачи действует на ход дольше.", "max": 1, "cost": [12], "requires": "dud_paws", "effects": [ { "type": "action_turns", "cat": "dudonya", "action": "special", "value": 1 } ] },
+    { "id": "dud_sharp", "name": "Меткий кусь", "desc": "+3% к шансу крита Дудони за уровень.", "max": 2, "cost": [6, 12], "requires": "dud_bow", "effects": [ { "type": "stat", "cat": "dudonya", "stat": "crit", "value": 0.03 } ] }
+  ] },
+  { "id": "lavka", "name": "Лавка: экономика", "nodes": [
+    { "id": "shop_thrift", "name": "Бережливость", "desc": "+5% монеток за забег за уровень.", "max": 3, "cost": [3, 6, 10], "effects": [ { "type": "coin_bonus", "value": 0.05 } ] },
+    { "id": "shop_charm", "name": "Обаятельные продавцы", "desc": "+5% к цене продажи за уровень.", "max": 3, "cost": [3, 6, 10], "requires": "shop_thrift", "effects": [ { "type": "sell_bonus", "value": 0.05 } ] },
+    { "id": "shop_guard", "name": "Знакомый охранник", "desc": "Взнос за Забег на 10% меньше за уровень.", "max": 2, "cost": [5, 10], "requires": "shop_charm", "effects": [ { "type": "fee_discount", "value": 0.1 } ] },
+    { "id": "shop_snacks", "name": "Запасы в дорогу", "desc": "+1 расходник в начале забега за уровень.", "max": 2, "cost": [6, 12], "requires": "shop_thrift", "effects": [ { "type": "start_consumable", "value": 1 } ] },
+    { "id": "shop_bag", "name": "Вместительный рюкзак", "desc": "+1 место в рюкзаке за уровень.", "max": 2, "cost": [8, 14], "requires": "shop_snacks", "effects": [ { "type": "backpack_slot", "value": 1 } ] },
+    { "id": "shop_guests", "name": "Гостевая комната", "desc": "+1 место для гостей Лавки.", "max": 1, "cost": [15], "requires": "shop_guard", "effects": [ { "type": "guest_slot", "value": 1 } ] }
+  ] }
+]

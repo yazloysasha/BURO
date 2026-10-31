@@ -68,7 +68,7 @@
   { "id": "mimic", "name": "Мимик", "sprite": "mimic", "hp": 26, "atk": 6, "def": 2, "spd": 4, "evasion": 0, "tier": 2, "minFloor": 4, "cost": 4, "eliteOnly": true, "loot": { "coins": [10, 18] },
     "moves": [ { "type": "attack", "power": 1.3, "w": 3 }, { "type": "defend", "block": 8, "w": 1 } ],
     "flavor": "Сундук с зубами. Внутри — тоже зубы." },
-  { "id": "klobster_king", "name": "Королевский клобстер", "sprite": "klobster_king", "hp": 84, "atk": 6, "def": 2, "spd": 5, "evasion": 0, "tier": 1, "minFloor": 99, "cost": 99, "boss": true, "loot": { "coins": [40, 60] },
+  { "id": "klobster_king", "name": "Королевский клобстер", "sprite": "klobster_king", "hp": 96, "atk": 7, "def": 2, "spd": 5, "evasion": 0, "tier": 1, "minFloor": 99, "cost": 99, "boss": true, "loot": { "coins": [40, 60] },
     "phases": [
       { "from": 1.0, "moves": [ { "type": "attack", "power": 1.0, "w": 3 }, { "type": "defend", "block": 8, "w": 1 }, { "type": "summon", "enemy": "klobster", "max": 2, "w": 2 } ] },
       { "from": 0.5, "enterStatus": "strong", "moves": [ { "type": "attack_all", "power": 0.7, "w": 2 }, { "type": "attack", "power": 1.2, "w": 2 }, { "type": "summon", "enemy": "klobster_toxic", "max": 2, "w": 1 }, { "type": "defend", "block": 6, "w": 1 } ] }

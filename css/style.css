@@ -898,3 +898,125 @@ textarea {
 .combo-row.known {
   border-left-color: var(--accent);
 }
+
+/* ---------- meta screens ---------- */
+.particle {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 80;
+  pointer-events: none;
+}
+.album-nav .btn.grow {
+  flex: 1;
+}
+.album-page {
+  background: #2b2140;
+  border: 3px solid #4a3d70;
+  padding: 6px;
+}
+.album-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
+  gap: 8px;
+  margin: 8px 0;
+}
+.sticker {
+  position: relative;
+  height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 3px dashed #4a3d70;
+  background: #1f1834;
+}
+.sticker.placed {
+  border: 3px solid #f6ead2;
+  background: #3a3060;
+  transform: rotate(var(--tilt));
+  box-shadow: 3px 3px 0 #120e22;
+}
+.sticker.new {
+  border-color: var(--accent);
+  animation: pulse 0.8s steps(2) infinite;
+}
+.sticker.new canvas {
+  opacity: 0.55;
+}
+.sticker-tag {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  font-size: 16px;
+  line-height: 16px;
+  color: var(--accent);
+  text-shadow: 1px 1px 0 #000;
+}
+.album-index {
+  display: flex;
+  font: inherit;
+  color: var(--ink);
+  background: var(--bg2);
+  border: 2px solid #3a3058;
+  padding: 6px 8px;
+  min-height: 44px;
+  align-items: center;
+}
+.album-index.done {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.talent {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 6px;
+  background: var(--bg2);
+  border: 2px solid #3a3058;
+}
+.talent.locked {
+  opacity: 0.55;
+}
+.dots {
+  display: flex;
+  gap: 4px;
+  margin-top: 2px;
+}
+.dot {
+  width: 10px;
+  height: 10px;
+  border: 2px solid #6c5a96;
+}
+.dot.on {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+.tier-box {
+  color: var(--ink);
+}
+.good {
+  color: var(--good);
+}
+.bad {
+  color: var(--bad);
+}
+.skin-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(104px, 1fr));
+  gap: 6px;
+}
+.skin-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 4px;
+  background: var(--bg2);
+  border: 2px solid #3a3058;
+  text-align: center;
+}
+.skin-card.worn {
+  border-color: var(--accent);
+}

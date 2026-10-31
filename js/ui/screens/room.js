@@ -11,6 +11,7 @@ import { blockCard, pityLine } from '../luckyblock.js';
 import { openRunBlock, resolveFullBackpack } from '../../game/blocks.js';
 import { enemyCanvas } from '../../core/sprite.js';
 import { createCatPair } from '../widgets.js';
+import { burstAt } from '../particles.js';
 
 // type -> (root, room) => cleanup?   Later milestones register more room types here.
 export const roomViews = {};
@@ -26,7 +27,11 @@ export function rewardView(root, reward, { title = t('reward.title'), text = nul
   const box = h('div.col.reward');
   if (title) box.append(h('h1.center', { text: title }));
   if (text) box.append(h('p.center', { text }));
-  if (reward && reward.coins) box.append(h('p.center.coins-line', { text: t('reward.coins', { n: reward.coins }) }));
+  if (reward && reward.coins) {
+    const line = h('p.center.coins-line', { text: t('reward.coins', { n: reward.coins }) });
+    box.append(line);
+    requestAnimationFrame(() => line.isConnected && burstAt(line, { n: 14, colors: ['#ffcf4a', '#fff4c0', '#c98a1a'] }));
+  }
   for (const r of (reward && reward.items) || []) {
     const item = game.data.itemById[r.entry ? r.entry.id : r.itemId];
     if (!item) continue;

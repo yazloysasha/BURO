@@ -3,11 +3,29 @@ importScripts('./precache-manifest.js');
 
 const CACHE = 'buro-v' + self.BURO_VERSION;
 
+async function cacheWithRetry(cache, url, tries = 3) {
+  for (let i = 0; ; i++) {
+    try {
+      const res = await fetch(new Request(url, { cache: 'reload' }));
+      if (!res.ok) throw new Error(url + ' ' + res.status);
+      await cache.put(url, res);
+      return;
+    } catch (e) {
+      if (i >= tries - 1) throw e; // install fails and is retried on the next launch
+      await new Promise((r) => setTimeout(r, 400 * (i + 1)));
+    }
+  }
+}
+
 self.addEventListener('install', (event) => {
   event.waitUntil(
     (async () => {
       const cache = await caches.open(CACHE);
-      await cache.addAll(self.BURO_PRECACHE.map((u) => new Request(u, { cache: 'reload' })));
+      // small batches with retries: gentle on slow connections and tiny dev servers
+      const list = self.BURO_PRECACHE;
+      for (let i = 0; i < list.length; i += 16) {
+        await Promise.all(list.slice(i, i + 16).map((u) => cacheWithRetry(cache, u)));
+      }
       // the very first install activates at once; later updates wait for the player's tap or the next launch
       if (!self.registration.active) await self.skipWaiting();
     })(),

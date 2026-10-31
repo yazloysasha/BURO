@@ -308,3 +308,46 @@ export function iconCanvas(src, { mods = [], target = 48, seed = '', w = 16, h =
   else loadImage(src).then(start);
   return c;
 }
+
+// ---------- recoloured cat sheets (recolour skins of our own cats) ----------
+function rgbToHsl(r, g, b) {
+  r /= 255; g /= 255; b /= 255;
+  const max = Math.max(r, g, b), min = Math.min(r, g, b);
+  const l = (max + min) / 2;
+  if (max === min) return [0, 0, l];
+  const d = max - min;
+  const s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+  let hh;
+  if (max === r) hh = (g - b) / d + (g < b ? 6 : 0);
+  else if (max === g) hh = (b - r) / d + 2;
+  else hh = (r - g) / d + 4;
+  return [hh / 6, s, l];
+}
+
+// rc: {hue (deg), sat (mult), colorize (set hue instead of shifting), light (mult)}
+export function recolorSheet(sheet, rc) {
+  const img = sheet.img;
+  const c = document.createElement('canvas');
+  c.width = img.naturalWidth || img.width;
+  c.height = img.naturalHeight || img.height;
+  const ctx = c.getContext('2d', { willReadFrequently: true });
+  ctx.drawImage(img, 0, 0);
+  const d = ctx.getImageData(0, 0, c.width, c.height);
+  const px = d.data;
+  for (let i = 0; i < px.length; i += 4) {
+    if (!px[i + 3]) continue;
+    let [hh, s, l] = rgbToHsl(px[i], px[i + 1], px[i + 2]);
+    if (rc.colorize) {
+      hh = rc.hue / 360;
+      s = Math.min(1, Math.max(s, 0.25) * (rc.sat || 1));
+    } else {
+      hh = (hh + rc.hue / 360) % 1;
+      s = Math.min(1, s * (rc.sat || 1));
+    }
+    l = Math.min(1, l * (rc.light || 1));
+    const [r, g, b] = hslToRgb(hh, s, l);
+    px[i] = r; px[i + 1] = g; px[i + 2] = b;
+  }
+  ctx.putImageData(d, 0, 0);
+  return { meta: sheet.meta, img: c, src: sheet.src + '#' + rc.hue };
+}

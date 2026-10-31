@@ -7,6 +7,10 @@ import { startRun } from '../../game/run.js';
 import { runFee, runIsFree } from '../../game/meta.js';
 import { button, go, pickLine, setTopbarTitle, confirm } from '../app.js';
 import { createHubScene } from '../hubscene.js';
+import { catLine } from '../../game/namegen.js';
+import { localDate } from '../../game/daily.js';
+
+let taps = 0;
 
 // Extra hub menu entries registered by feature modules: {id, label(), onClick, cls, badge()}
 export const hubMenu = [];
@@ -44,7 +48,8 @@ export function render(root) {
   const scene = createHubScene(availW, availH);
   const note = h('div.hub-note', { text: lastRunNote() || pickLine('hub.greeting') });
   scene.onTapCat((who) => {
-    note.textContent = t('cats.' + who) + ': ' + pickLine('hub.tapCat');
+    taps++;
+    note.textContent = t('cats.' + who) + ': ' + catLine(game.data, who, localDate() + ':' + who + ':' + taps);
   });
 
   const menu = h('div.menu-grid');

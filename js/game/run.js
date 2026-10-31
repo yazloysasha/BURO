@@ -10,6 +10,8 @@ import { addItem, grantSticker } from './collection.js';
 import { runHooks } from './hooks.js';
 import { comboStatBonus, activeCombos, checkRunCombos, roomSequenceCombos } from './combos.js';
 import { initAnomaly, initShelf, initWash, initEvent, initShop } from './rooms.js';
+import { actionMods } from './progress.js';
+import { eliteName } from './namegen.js';
 
 export function withRunRng(run, fn) {
   const rng = new Rng(run.rng);
@@ -76,6 +78,7 @@ export function startRun(save, data) {
     fee,
     stats: { kills: 0, rooms: 0, coinsFound: 0, blocks: 0 },
     flags: {},
+    actionMods: actionMods(save, data),
     result: null,
     startedAt: new Date().toISOString(),
   };
@@ -136,8 +139,7 @@ function buildEncounter(rng, data, run, kind) {
   if (kind === 'elite') {
     const pool = enemies.filter((e) => e.tier <= tier && e.minFloor <= floor + 1 && e.cost >= 2);
     const def = rng.pick(pool.length ? pool : enemies);
-    const titles = data.gen.elite.titles;
-    const list = [{ def, elite: true, eliteName: def.name + '-' + rng.pick(titles) }];
+    const list = [{ def, elite: true, eliteName: eliteName(data, def.name, 'elite:' + rng.seed()) }];
     if (floor >= 6) {
       const minions = enemies.filter((e) => !e.eliteOnly && e.tier <= tier && e.cost <= 1 && e.minFloor <= floor);
       if (minions.length) list.push({ def: rng.pick(minions) });
@@ -192,6 +194,9 @@ export function equipmentBonus(save, data, run) {
     else if (b[it.effect.stat] !== undefined) b[it.effect.stat] += Math.floor(v);
     if (e.mods.includes('rainbow')) b.luck += 2;
   }
+  // gear helps, but a backpack full of swords shouldn't trivialise the King
+  const cap = data.balance.gearCap;
+  for (const k of Object.keys(cap)) b[k] = Math.min(b[k], cap[k]);
   const combo = comboStatBonus(save, data, run);
   for (const k of Object.keys(combo)) if (b[k] !== undefined) b[k] += combo[k];
   return b;
@@ -386,9 +391,12 @@ export function finishRun(save, data, { keepUid = null } = {}) {
   save.stats.kills += run.stats.kills;
   if (win) save.stats.wins++;
   else save.stats.losses++;
+  const sparkles = win ? 3 : 1;
+  save.meta.sparkles += sparkles;
   const summary = {
     outcome: run.result.outcome,
     coins,
+    sparkles,
     items: kept.map((b) => b.id),
     stickers: run.stickers.slice(),
     rooms: run.stats.rooms,

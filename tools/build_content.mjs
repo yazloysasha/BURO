@@ -441,13 +441,55 @@ for (const a of animalsIndex) {
   animals.push({ id: a.id, name, sprite: 'assets/' + a.file, w: a.w, h: a.h, rarity, passive, album });
 }
 
+// ---------- album: 24 themed pages of animals, enemy stickers and items ----------
+const A = (...ids) => ids.map((id) => ({ kind: 'animal', id }));
+const E = (...ids) => ids.map((id) => ({ kind: 'enemy', id }));
+const I = (...ids) => ids.map((id) => ({ kind: 'item', id }));
+const perm = (type, value, extra = {}) => ({ type: 'perm_bonus', effect: { type, value, ...extra } });
+const skin = (id) => ({ type: 'skin', id });
+const ALBUM = [
+  ['farm', 'Ферма', A('chicken', 'cow', 'goat', 'sheep', 'rabbit', 'horse', 'hamster', 'dog'), skin('skin_ginger')],
+  ['forest', 'Лес', A('hedgehog', 'mole', 'boar', 'deer', 'elk', 'bear_brown', 'fox', 'squirrel', 'badger'), perm('stat', 3, { stat: 'hp' })],
+  ['savanna', 'Саванна', A('camel', 'emu', 'zebra', 'lion', 'elephant', 'giraffe', 'rhino', 'hippo', 'snake_sand', 'lion_cub'), perm('stat', 1, { stat: 'atk', cat: 'peposya' })],
+  ['jungle', 'Джунгли', A('tiger', 'gorilla_dark', 'gorilla', 'chimp', 'monkey', 'cat_beast_dark', 'parrot'), skin('skin_black')],
+  ['birds', 'Птицы', A('owlet', 'owl_brown', 'eagle', 'eagle_bald', 'crow', 'owl_grey'), perm('stat', 1, { stat: 'luck' })],
+  ['sea', 'Море', A('shark', 'orca', 'dolphin', 'fish_orange', 'crab', 'turtle'), perm('coin_bonus', 0.05)],
+  ['river', 'Река', A('fish_big_green', 'fish_big_pink', 'fish_big_grey', 'fish_big_gold', 'fish_big_orange', 'fish_green', 'fish_pink', 'fish_grey', 'fish_gold'), skin('pep_mint')],
+  ['swamp', 'Болото', [...A('lizard', 'frog', 'crocodile', 'otter', 'snake_green'), ...E('slime')], perm('stat', 1, { stat: 'def' })],
+  ['night', 'Ночные жители', A('bat_brown', 'flying_beast', 'raccoon', 'bat', 'rat_brown', 'rat_grey', 'cat_grey', 'cat_kitkus'), skin('skin_grey_tabby')],
+  ['north', 'Север', [...A('bear_polar', 'wolf_grey', 'bear_standing', 'owl_white'), ...I('a_shoes02', 'crystal_c')], perm('stat', 3, { stat: 'hp' })],
+  ['fantasy', 'Сказка', A('unicorn', 'pegasus', 'unicorn_dark', 'griffin', 'griffin_brown', 'bear_owl'), skin('skin_white_fluffy')],
+  ['dragons', 'Драконье логово', [...A('dragon_white', 'dragon_blue', 'dragon_grey', 'dragon_red', 'dragon_green'), ...I('i_diamond')], perm('backpack_slot', 1)],
+  ['garden', 'Сад', A('bug_bee', 'bug_beetle', 'bug_dragonfly', 'bug_firefly', 'bug_gnat', 'bug_moth'), skin('dud_peach')],
+  ['klobsters', 'Клобстеры', E('klobster', 'klobster_toxic', 'klobster_glitch', 'klobster_king', 'beetle', 'beetle_small'), perm('stat', 1, { stat: 'atk' })],
+  ['insects', 'Насекомые', E('ant_giant', 'ant_red', 'ant_grey', 'wasp', 'fly', 'moth', 'firefly', 'gnat', 'dragonfly', 'bee_small'), perm('stat', 0.03, { stat: 'crit' })],
+  ['cellar', 'Подвал', E('spider', 'scorpion', 'worm', 'rat', 'bat', 'ghost', 'mimic'), skin('skin_sphynx')],
+  ['sweets', 'Сладости', I('candy_01a', 'candy_01c', 'candy_02b', 'candy_02f', 'cookie', 'food_donut', 'food_icecream', 'food_chocolate', 'food_waffle', 'food_jelly'), perm('sell_bonus', 0.05)],
+  ['potions', 'Зелья', I('potion_1a', 'potion_1b', 'potion_1c', 'potion_1d', 'potion_1e', 'potion_1f', 'ninth_life', 'valerian', 'moon_water', 'fish_oil'), perm('start_consumable', 1)],
+  ['shiny', 'Блестяшки', I('gem_a', 'gem_b', 'gem_c', 'gem_d', 'gem_e', 'gem_f', 'gem_g', 'gem_h', 'gem_i', 'gem_j'), perm('block_luck', 1)],
+  ['armory', 'Арсенал', I('gold_axe', 'gold_bow', 'gold_dagger', 'gold_mace', 'gold_spear', 'gold_sword', 'sword_01e', 'slipper_justice'), perm('stat', 1, { stat: 'atk', cat: 'peposya' })],
+  ['library', 'Библиотека', I('book_01a', 'book_01c', 'book_01e', 'book_02a', 'book_02c', 'book_03a', 'book_03c', 'book_04c'), skin('pep_lavender')],
+  ['slop', 'Слоп', I('empty_box', 'confetti_cannon', 'marshmallow_knuckles', 'seagull_scream', 'offended_metal', 'knowing_rock', 'future_hotdog', 'cat_chest', 'meow_clock', 'lazy_boomerang', 'polite_tentacle', 'too_happy_pill'), skin('skin_siamese')],
+  ['cozy', 'Уют', I('milk_saucer', 'cardboard_box', 'lullaby_lamp', 'food_pancakes', 'food_pudding', 'cup_01b', 'i_mirror'), skin('dud_night')],
+  ['kitchen', 'Кухня', I('food_pizza', 'food_burger', 'food_ramen', 'food_steak', 'food_salmon', 'food_taco', 'food_hotdog', 'food_sandwich', 'pizza_suspicion'), perm('stat', 4, { stat: 'hp' })],
+];
+const album = ALBUM.map(([id, title, slots, reward]) => ({ id, title, slots, reward }));
+const itemIds = new Set(items.map((i) => i.id));
+const animalIds = new Set(animals.map((a) => a.id));
+for (const p of album) for (const s of p.slots) {
+  if (s.kind === 'item' && !itemIds.has(s.id)) throw new Error('album item ' + s.id);
+  if (s.kind === 'animal' && !animalIds.has(s.id)) throw new Error('album animal ' + s.id);
+}
+
 // ---------- write ----------
 const order = { common: 0, uncommon: 1, rare: 2, epic: 3, legendary: 4, slop: 5 };
 items.sort((a, b) => a.category.localeCompare(b.category) || order[a.rarity] - order[b.rarity] || a.id.localeCompare(b.id));
 const line = (o) => '  ' + JSON.stringify(o);
 fs.writeFileSync(path.join(ROOT, 'data/items.json'), '[\n' + items.map(line).join(',\n') + '\n]\n');
 fs.writeFileSync(path.join(ROOT, 'data/animals.json'), '[\n' + animals.map(line).join(',\n') + '\n]\n');
+fs.writeFileSync(path.join(ROOT, 'data/album.json'), '[\n' + album.map(line).join(',\n') + '\n]\n');
 const tally = (arr, k) => arr.reduce((m, x) => ((m[x[k]] = (m[x[k]] || 0) + 1), m), {});
 console.log('items', items.length, tally(items, 'rarity'), tally(items, 'category'));
 console.log('consumables', items.filter((i) => i.tags.includes('consumable')).length, 'equipment', items.filter((i) => i.effect && i.effect.type === 'stat').length);
 console.log('animals', animals.length, tally(animals, 'rarity'));
+console.log('album pages', album.length, 'slots', album.reduce((s, p) => s + p.slots.length, 0));

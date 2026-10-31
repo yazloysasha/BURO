@@ -1,7 +1,7 @@
 // Save format, migrations, validation, export/import. Pure: no browser APIs (storage lives in storage.js).
 import { seedState } from './rng.js';
 
-export const SAVE_VERSION = 3;
+export const SAVE_VERSION = 4;
 export const EXPORT_TAG = 'buro';
 
 export function defaultSettings() {
@@ -31,7 +31,7 @@ export function newSave(now = new Date(), seed = Date.now()) {
     combos: { discovered: [] },
     pity: { sinceEpic: 0, sinceLegendary: 0 },
     daily: { lastOpenDate: null, streak: 0, bestStreak: 0, claimedBonuses: [], lastGift: null },
-    album: { completed: [] },
+    album: { completed: [], placed: {} },
     run: null,
     lastRun: null,
     settings: defaultSettings(),
@@ -76,6 +76,15 @@ migrations[2] = (s) => {
   s.meta.showcase = s.meta.showcase || [];
   if (s.daily) s.daily.lastGift = s.daily.lastGift || null;
   s.version = 3;
+  return s;
+};
+
+// v4: album stickers are placed by hand (album.placed); runs snapshot talent action mods.
+migrations[3] = (s) => {
+  s.album = s.album || { completed: [] };
+  s.album.placed = s.album.placed || {};
+  if (s.run && !s.run.actionMods) s.run.actionMods = {};
+  s.version = 4;
   return s;
 };
 
@@ -127,6 +136,7 @@ export function normalizeSave(s) {
   if (!Array.isArray(s.album.completed)) s.album.completed = [];
   if (!Array.isArray(s.daily.claimedBonuses)) s.daily.claimedBonuses = [];
   if (!Array.isArray(s.meta.showcase)) s.meta.showcase = [];
+  if (!s.album.placed || typeof s.album.placed !== 'object') s.album.placed = {};
   return s;
 }
 

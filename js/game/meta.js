@@ -25,7 +25,7 @@ function upgradeEffects(save, data) {
 function albumEffects(save, data) {
   const out = [];
   for (const page of data.album || []) {
-    if (save.album.completed.includes(page.id) && page.reward && page.reward.type === 'perm_bonus') out.push(page.reward);
+    if (save.album.completed.includes(page.id) && page.reward && page.reward.type === 'perm_bonus') out.push(page.reward.effect);
   }
   return out;
 }
@@ -85,8 +85,9 @@ export function coinMult(save, data) {
   return 1 + effectSum(save, data, 'coin_bonus') + 0.1 * (save.meta.tier - 1);
 }
 
+// Luck for lucky blocks: talents/guests/album luck + one point per Lavka tier above the first.
 export function luckBonus(save, data) {
-  return effectSum(save, data, 'stat', { stat: 'luck' });
+  return effectSum(save, data, 'stat', { stat: 'luck' }) + (save.meta.tier - 1);
 }
 
 // Per-cat stat bonuses: {atk, def, spd, luck, crit, hp}

@@ -1,0 +1,12 @@
+[
+  {"id": "skin_ginger", "name": "Рыжик", "sheet": "assets/sprites/cats/skins/skin_ginger.json", "price": 40},
+  {"id": "skin_black", "name": "Уголёк", "sheet": "assets/sprites/cats/skins/skin_black.json", "price": 40},
+  {"id": "skin_siamese", "name": "Сиамский граф", "sheet": "assets/sprites/cats/skins/skin_siamese.json", "price": 80},
+  {"id": "skin_sphynx", "name": "Сфинкс в свитере", "sheet": "assets/sprites/cats/skins/skin_sphynx.json", "price": 60},
+  {"id": "skin_white_fluffy", "name": "Облачко", "sheet": "assets/sprites/cats/skins/skin_white_fluffy.json", "price": 60},
+  {"id": "skin_grey_tabby", "name": "Полосатик", "sheet": "assets/sprites/cats/skins/skin_grey_tabby.json", "price": 40},
+  {"id": "pep_lavender", "name": "Пепося-лаванда", "base": "peposya", "recolor": {"hue": 270, "sat": 0.45, "colorize": true, "light": 1.2}, "price": 50},
+  {"id": "pep_mint", "name": "Пепося-мята", "base": "peposya", "recolor": {"hue": 150, "sat": 0.45, "colorize": true, "light": 1.15}, "price": 50},
+  {"id": "dud_peach", "name": "Дудоня-персик", "base": "dudonya", "recolor": {"hue": 25, "sat": 0.6, "colorize": true}, "price": 50},
+  {"id": "dud_night", "name": "Дудоня-полночь", "base": "dudonya", "recolor": {"hue": 230, "sat": 0.5, "colorize": true, "light": 0.8}, "price": 50}
+]

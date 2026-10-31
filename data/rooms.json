@@ -4,8 +4,8 @@
   {"id": "loot", "name": "Находка", "desc": "Лаки-блоки и мешочки.", "icon": "assets/sprites/items/kyrise_gift_01a.png", "w": 10, "minFloor": 2, "tier": 1},
   {"id": "rest", "name": "Лежанка", "desc": "Коты спят. Лечение или бафф.", "icon": "assets/sprites/ui/skills/s_light03.png", "w": 7, "minFloor": 3, "tier": 1},
   {"id": "anomaly", "name": "Аномалия", "desc": "Найдите неправильный предмет.", "icon": "assets/sprites/items/rpg496_i_eye.png", "w": 8, "minFloor": 2, "tier": 1},
-  {"id": "shelf", "name": "Полка", "desc": "Разложите предметы по правилу.", "icon": "assets/sprites/items/kyrise_book_02c.png", "w": 7, "minFloor": 2, "tier": 1},
-  {"id": "wash", "name": "Мойка", "desc": "Помыть грязные находки.", "icon": "assets/sprites/ui/skills/s_water01.png", "w": 5, "minFloor": 2, "tier": 1},
+  {"id": "shelf", "name": "Полка", "desc": "Разложите предметы по правилу.", "icon": "assets/sprites/items/kyrise_book_02c.png", "w": 7, "minFloor": 2, "tier": 2},
+  {"id": "wash", "name": "Мойка", "desc": "Помыть грязные находки.", "icon": "assets/sprites/ui/skills/s_water01.png", "w": 5, "minFloor": 2, "tier": 2},
   {"id": "event", "name": "Событие", "desc": "Что-то происходит…", "icon": "assets/sprites/items/kyrise_scroll_01a.png", "w": 12, "minFloor": 2, "tier": 1},
   {"id": "shop", "name": "Ночной ларёк", "desc": "Купить расходники за монетки забега.", "icon": "assets/sprites/items/kyrise_coin_03d.png", "w": 6, "minFloor": 3, "tier": 1},
   {"id": "boss", "name": "Королевский клобстер", "desc": "Мини-босс. Две фазы и миньоны.", "icon": null, "enemySprite": "klobster_king", "w": 0, "minFloor": 99, "tier": 1}

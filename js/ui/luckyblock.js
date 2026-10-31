@@ -9,6 +9,7 @@ import { game } from '../game/state.js';
 import { pityLeft } from '../game/loot.js';
 import { displayName } from '../game/names.js';
 import { shake, haptic } from './app.js';
+import { burstAt } from './particles.js';
 
 export function contentIcon(block, target = 64) {
   if (block.kind === 'animal') {
@@ -93,7 +94,8 @@ export function blockCard(block, { closedIcon, opener, onRevealed } = {}) {
     if (['epic', 'legendary', 'slop'].includes(block.rarity)) {
       shake();
       haptic(40);
-    }
+      burstAt(card, { n: block.rarity === 'epic' ? 20 : 36, colors: [rar.color, '#ffffff', '#fff4c0'], speed: 200 });
+    } else if (block.rarity === 'rare') burstAt(card, { n: 10, colors: [rar.color, '#ffffff'] });
     const flash = h('div.lucky-flash', { style: { background: rar.color } });
     card.append(flash);
     tween(300 * k, (x) => (flash.style.opacity = String(1 - x))).then(() => flash.remove());

@@ -16,6 +16,13 @@ import * as runEnd from './ui/screens/runend.js';
 import * as daily from './ui/screens/daily.js';
 import * as inventory from './ui/screens/inventory.js';
 import * as combos from './ui/screens/combos.js';
+import * as album from './ui/screens/album.js';
+import * as talents from './ui/screens/talents.js';
+import * as upgrades from './ui/screens/upgrades.js';
+import * as skins from './ui/screens/skins.js';
+import { unplacedCount, talentStatus } from './game/progress.js';
+import { sheets } from './core/assets.js';
+import { recolorSheet } from './core/sprite.js';
 import './ui/rooms.js';
 import { play } from './core/audio.js';
 import { onChange } from './game/state.js';
@@ -73,6 +80,12 @@ async function boot() {
 
   await Promise.all(Object.entries(data.assets.sheets).map(([k, url]) => loadSheet(k, './' + url)));
   data.sheetsLoaded = Object.keys(data.assets.sheets);
+  // skins: other cats' sheets, and recolours of our own cats built once at boot
+  await Promise.all(data.skins.filter((s) => s.sheet).map((s) => loadSheet(s.id, './' + s.sheet)));
+  for (const s of data.skins) {
+    if (s.recolor && sheets[s.base]) sheets[s.id] = recolorSheet(sheets[s.base], s.recolor);
+    if (sheets[s.id]) data.sheetsLoaded.push(s.id);
+  }
   await loadImages(Object.values(data.assets.icons).map((p) => './' + p));
 
   const { save, recovered, corrupted } = await loadSave();
@@ -113,10 +126,18 @@ async function boot() {
   registerScreen('daily', daily);
   registerScreen('inventory', inventory);
   registerScreen('combos', combos);
+  registerScreen('album', album);
+  registerScreen('talents', talents);
+  registerScreen('upgrades', upgrades);
+  registerScreen('skins', skins);
   hubMenu.push(
     { id: 'daily', label: () => t('hub.daily'), onClick: () => go('daily'), cls: 'yellow', badge: () => (dailyAvailable(game.save, localDate()) ? '!' : null) },
     { id: 'inventory', label: () => t('hub.inventory'), onClick: () => go('inventory'), cls: 'blue' },
+    { id: 'album', label: () => t('hub.album'), onClick: () => go('album'), cls: 'blue', badge: () => unplacedCount(game.save, game.data) || null },
     { id: 'combos', label: () => t('hub.combos', { n: game.save.combos.discovered.length, total: game.data.combos.length }), onClick: () => go('combos'), cls: 'blue' },
+    { id: 'talents', label: () => t('hub.talents'), onClick: () => go('talents'), cls: 'blue', badge: () => (game.data.talents.some((b) => b.nodes.some((n) => talentStatus(game.save, game.data, n.id).affordable)) ? '!' : null) },
+    { id: 'upgrades', label: () => t('hub.upgrades'), onClick: () => go('upgrades'), cls: 'blue' },
+    { id: 'skins', label: () => t('hub.skins'), onClick: () => go('skins'), cls: 'blue' },
   );
   // announce newly discovered combos wherever they happen
   onChange((save) => {
