@@ -71,3 +71,17 @@ test('partially damaged save is repaired with defaults', () => {
   assert.equal(back.pity.sinceEpic, 0);
   assert.equal(typeof back.settings.sfx, 'number');
 });
+
+test('v2 save (M2 format with collection.mods) migrates to v3 keys + seen codex', () => {
+  const v2 = newSave(new Date(), 1);
+  v2.version = 2;
+  delete v2.collection.seen;
+  delete v2.meta.showcase;
+  v2.collection.items = { sardine: 3, valerian: 1 };
+  v2.collection.mods = { 'sardine|shiny': 1 };
+  const s = parseSave(JSON.stringify(v2));
+  assert.equal(s.version, SAVE_VERSION);
+  assert.deepEqual(s.collection.items, { sardine: 2, valerian: 1, 'sardine|shiny': 1 });
+  assert.ok(s.collection.seen.sardine && s.collection.seen.valerian);
+  assert.equal(s.collection.mods, undefined);
+});

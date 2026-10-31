@@ -354,6 +354,12 @@ function heal(t, amount, ev) {
 // Consumable effects: {type:'heal'|'heal_all'|'damage'|'damage_all'|'status_enemy'|'buff'|'cleanse'|'revive'|'block', value, status, turns}
 export function applyItemEffect(c, u, eff, a, rng, ctx, ev) {
   ev.push({ type: 'item', actor: u.uid, item: eff.itemId || null });
+  if (eff.selfDamage && u.hp > 0) {
+    // cursed items bite back, but never knock a cat out
+    const dmg = Math.min(eff.selfDamage, u.hp - 1);
+    u.hp -= dmg;
+    if (dmg > 0) ev.push({ type: 'damage', actor: u.uid, target: u.uid, amount: dmg, crit: false, blocked: 0, hp: u.hp, cursed: true });
+  }
   const ally = () => (a.allyTarget ? catByKey(c, a.allyTarget) : null);
   switch (eff.type) {
     case 'heal': {

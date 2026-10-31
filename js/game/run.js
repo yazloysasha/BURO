@@ -5,6 +5,8 @@ import { generateMap, availableNodes, findNode } from './map.js';
 import { createCombat, makeCatUnit, makeEnemyUnit, planIntents, resolveRound, CAT_KEYS } from './combat.js';
 import { combatCtx } from './data.js';
 import * as meta from './meta.js';
+import { rollRunBlocks, settleRoomBlocks } from './blocks.js';
+import { addItem, grantSticker } from './collection.js';
 
 export function withRunRng(run, fn) {
   const rng = new Rng(run.rng);
@@ -86,10 +88,11 @@ export function startRun(save, data) {
 }
 
 // ---------- backpack ----------
-export function addToBackpack(save, data, run, itemId, mods = []) {
+export function addToBackpack(save, data, run, itemId, mods = [], { noConvert = false } = {}) {
   const item = data.itemById[itemId];
   if (!item) return { added: false };
   if (run.backpack.length >= meta.backpackSize(save, data)) {
+    if (noConvert) return { added: false, full: true };
     const coins = Math.max(1, Math.floor(item.price / 2));
     run.coins += coins;
     run.stats.coinsFound += coins;
@@ -150,11 +153,30 @@ export function startCombat(save, data, run, kind) {
     const enemies = enc.map((e, i) =>
       makeEnemyUnit(e.def, 'e' + (i + 1), { floor: run.floorNo, tier: run.tier, elite: !!e.elite, eliteName: e.eliteName, balance: data.balance }),
     );
-    const cats = CAT_KEYS.map((k) => makeCatUnit(k, data.cats[k], run.party[k], meta.catBonus(save, data, k)));
+    const gear = equipmentBonus(data, run);
+    const cats = CAT_KEYS.map((k) => {
+      const b = meta.catBonus(save, data, k);
+      for (const s of Object.keys(gear)) b[s] = (b[s] || 0) + gear[s];
+      return makeCatUnit(k, data.cats[k], run.party[k], b);
+    });
     const c = createCombat({ cats, enemies, kind });
     planIntents(c, rng, combatCtx(data, run));
     return c;
   });
+}
+
+// Equipment in the backpack (effect.type 'stat') boosts both cats for the whole run; crit is in percent points.
+export function equipmentBonus(data, run) {
+  const b = { atk: 0, def: 0, spd: 0, luck: 0, crit: 0 };
+  for (const e of run.backpack) {
+    const it = data.itemById[e.id];
+    if (!it || !it.effect || it.effect.type !== 'stat') continue;
+    const v = it.effect.value * (e.mods.includes('cursed') ? 1.5 : 1);
+    if (it.effect.stat === 'crit') b.crit += v / 100;
+    else if (b[it.effect.stat] !== undefined) b[it.effect.stat] += Math.floor(v);
+    if (e.mods.includes('rainbow')) b.luck += 2;
+  }
+  return b;
 }
 
 // Room initializers for the room types implemented so far. Unknown types fall back to a small coin find.
@@ -165,13 +187,14 @@ export const roomHandlers = {
   rest: { init: (save, data, run, room) => (room.phase = 'choose') },
   loot: {
     init: (save, data, run, room) => {
-      room.reward = withRunRng(run, (rng) => {
-        const coins = Math.round(rng.int(6, 12 + run.floorNo) * meta.coinMult(save, data));
+      const n = withRunRng(run, (rng) => {
+        const coins = Math.round(rng.int(3, 6 + run.floorNo) * meta.coinMult(save, data));
         run.coins += coins;
         run.stats.coinsFound += coins;
-        const r = addToBackpack(save, data, run, pickConsumable(rng, data).id);
-        return { coins, items: [r] };
+        room.reward = { coins, items: [] };
+        return rng.weighted([[1, 50], [2, 35], [3, 15]])[0];
       });
+      room.blocks = rollRunBlocks(save, data, run, n);
       room.phase = 'reward';
     },
   },
@@ -218,6 +241,7 @@ export function completeRoom(save, data) {
   const run = save.run;
   const room = run.room;
   if (!room) return;
+  settleRoomBlocks(save, data);
   run.visited.push(room.nodeId);
   run.pos = room.nodeId;
   run.stats.rooms++;
@@ -244,7 +268,7 @@ export function playRound(save, data, actions) {
       const entry = removeFromBackpack(run, uid);
       if (!entry) return null;
       const item = data.itemById[entry.id];
-      return item && item.effect ? { ...item.effect, itemId: item.id } : null;
+      return item && item.effect ? moddedEffect(item, entry) : null;
     },
   };
   for (const f of runHooks.combat) Object.assign(hooks, f(save, data, run));
@@ -258,6 +282,24 @@ export function playRound(save, data, actions) {
   return ev;
 }
 
+// Modifiers change consumables: dirty weaker, cursed stronger but bites the user, glitchy swings either way.
+export function moddedEffect(item, entry) {
+  const eff = { ...item.effect, itemId: item.id };
+  let mult = 1;
+  if (entry.mods.includes('dirty')) mult *= 0.75;
+  if (entry.mods.includes('cursed')) {
+    mult *= 1.5;
+    eff.selfDamage = 3;
+  }
+  if (entry.mods.includes('glitchy')) {
+    let h = 0;
+    for (const ch of entry.uid) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
+    mult *= h % 2 ? 1.6 : 0.6;
+  }
+  if (typeof eff.value === 'number' && eff.type !== 'revive') eff.value = Math.max(1, Math.round(eff.value * mult));
+  return eff;
+}
+
 function onCombatWin(save, data, run, room) {
   const c = room.combat;
   run.stats.kills += c.kills.length;
@@ -267,6 +309,8 @@ function onCombatWin(save, data, run, room) {
     p.statuses = [];
   }
   room.reward = withRunRng(run, (rng) => combatReward(save, data, run, c, rng));
+  const n = room.reward.blocksN;
+  if (n) room.blocks = rollRunBlocks(save, data, run, n, c.kind === 'boss' ? { minRarity: 'rare' } : {});
   room.phase = 'reward';
   for (const f of runHooks.afterWin) f(save, data, run, room);
 }
@@ -290,7 +334,16 @@ export function combatReward(save, data, run, c, rng) {
   const kind = c.kind;
   const drops = kind === 'boss' ? bal.bossConsumables : rng.chance(bal.consumableDrop[kind] || 0) ? 1 : 0;
   for (let i = 0; i < drops; i++) items.push(addToBackpack(save, data, run, pickConsumable(rng, data).id));
-  return { coins, items };
+  // enemy stickers for the album: kept even if the run is lost
+  const stickers = [];
+  const stickerChance = { combat: 0.25, elite: 0.6, boss: 1 }[kind] || 0;
+  const killed = c.enemies.filter((e) => e.hp <= 0 && !e.summoned);
+  if (killed.length && rng.chance(stickerChance)) {
+    const id = rng.pick(killed).id;
+    run.stickers.push(id);
+    stickers.push(id);
+  }
+  return { coins, items, stickers, blocksN: kind === 'boss' ? 2 : kind === 'elite' ? 1 : rng.chance(0.12) ? 1 : 0 };
 }
 
 // ---------- end ----------
@@ -302,8 +355,8 @@ export function finishRun(save, data, { keepUid = null } = {}) {
   const kept = win ? run.backpack.slice() : run.backpack.filter((b) => b.uid === keepUid).slice(0, 1);
   save.meta.coins += coins;
   save.stats.coinsEarned += coins;
-  for (const b of kept) addToCollection(save, b.id, b.mods);
-  for (const s of run.stickers) save.collection.stickers[s] = (save.collection.stickers[s] || 0) + 1;
+  for (const b of kept) addItem(save, b.id, b.mods);
+  for (const s of run.stickers) grantSticker(save, data, s);
   save.stats.kills += run.stats.kills;
   if (win) save.stats.wins++;
   else save.stats.losses++;
@@ -319,16 +372,6 @@ export function finishRun(save, data, { keepUid = null } = {}) {
   save.lastRun = summary;
   save.run = null;
   return summary;
-}
-
-export function addToCollection(save, itemId, mods = []) {
-  const col = save.collection.items;
-  col[itemId] = (col[itemId] || 0) + 1;
-  if (mods && mods.length) {
-    save.collection.mods = save.collection.mods || {};
-    const key = itemId + '|' + mods.slice().sort().join('+');
-    save.collection.mods[key] = (save.collection.mods[key] || 0) + 1;
-  }
 }
 
 // Healing items can also be used on the map between rooms.

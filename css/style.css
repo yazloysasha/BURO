@@ -526,7 +526,7 @@ textarea {
   flex-wrap: wrap;
   max-width: 80px;
 }
-.block {
+.blk {
   color: #7fc8ff;
 }
 .badge-intent {
@@ -573,7 +573,7 @@ textarea {
 .float.heal {
   color: #7be07b;
 }
-.float.block {
+.float.blk {
   color: #7fc8ff;
 }
 .float.miss {
@@ -700,4 +700,119 @@ textarea {
   color: var(--accent);
   font-size: 24px;
   line-height: 32px;
+}
+
+/* ---------- lucky blocks ---------- */
+.lucky-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+.lucky {
+  position: relative;
+  overflow: hidden;
+  width: 112px;
+  min-height: 150px;
+  font: inherit;
+  color: var(--ink);
+  background: var(--bg2);
+  border: 3px solid #4a3d70;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 4px;
+  padding: 8px 4px;
+  cursor: pointer;
+}
+.lucky.opened {
+  border-color: var(--rc, #4a3d70);
+}
+.lucky:not(.opened) .lucky-icon {
+  animation: bob 1.2s steps(4) infinite;
+}
+.lucky.slop {
+  animation: slop-border 0.6s steps(6) infinite;
+}
+.lucky-icon {
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.lucky-label {
+  text-align: center;
+  line-height: 18px;
+}
+.lucky-flash {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+@keyframes bob {
+  50% {
+    transform: translateY(-3px);
+  }
+}
+.streak {
+  margin-top: 8px;
+}
+.streak-mark {
+  padding: 0 6px;
+  border: 2px solid #4a3d70;
+  color: var(--ink-dim);
+}
+.streak-mark.on {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ---------- inventory ---------- */
+.tabs {
+  margin: 4px 0;
+}
+.tabs .btn {
+  flex: 1;
+}
+.inv-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(64px, 1fr));
+  gap: 4px;
+}
+.inv-cell {
+  position: relative;
+  height: 64px;
+  background: #120e22;
+  border: 3px solid var(--rc, var(--r-common));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  cursor: pointer;
+}
+.inv-cell.r-slop {
+  animation: slop-border 0.6s steps(6) infinite;
+}
+.inv-cell.showcased::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 6px;
+  height: 6px;
+  background: var(--accent);
+}
+.inv-cell .count {
+  position: absolute;
+  right: 2px;
+  bottom: -2px;
+  font-size: 16px;
+  color: #fff;
+  text-shadow: 1px 1px 0 #000;
+}
+.item-icon.big {
+  width: 96px;
+  height: 96px;
 }

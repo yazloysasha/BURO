@@ -1,7 +1,7 @@
 // Save format, migrations, validation, export/import. Pure: no browser APIs (storage lives in storage.js).
 import { seedState } from './rng.js';
 
-export const SAVE_VERSION = 2;
+export const SAVE_VERSION = 3;
 export const EXPORT_TAG = 'buro';
 
 export function defaultSettings() {
@@ -23,13 +23,14 @@ export function newSave(now = new Date(), seed = Date.now()) {
       skins: { peposya: 'default', dudonya: 'default' },
       ownedSkins: [],
       guests: [],
+      showcase: [],
       rng: seedState('meta:' + seed),
       runsStarted: 0,
     },
-    collection: { items: {}, animals: {}, stickers: {} },
+    collection: { items: {}, animals: {}, stickers: {}, seen: {} },
     combos: { discovered: [] },
     pity: { sinceEpic: 0, sinceLegendary: 0 },
-    daily: { lastOpenDate: null, streak: 0, bestStreak: 0, claimedBonuses: [] },
+    daily: { lastOpenDate: null, streak: 0, bestStreak: 0, claimedBonuses: [], lastGift: null },
     album: { completed: [] },
     run: null,
     lastRun: null,
@@ -54,6 +55,28 @@ export const migrations = {
     s.version = 2;
     return s;
   },
+};
+
+// v3: collection items keyed by "id|mod+mod", a "seen" codex, showcase.
+migrations[2] = (s) => {
+  const col = s.collection || (s.collection = { items: {}, animals: {}, stickers: {} });
+  col.items = col.items || {};
+  if (col.mods) {
+    for (const [key, n] of Object.entries(col.mods)) {
+      const id = key.split('|')[0];
+      col.items[key] = (col.items[key] || 0) + n;
+      col.items[id] = Math.max(0, (col.items[id] || 0) - n);
+      if (!col.items[id]) delete col.items[id];
+    }
+    delete col.mods;
+  }
+  col.seen = col.seen || {};
+  for (const key of Object.keys(col.items)) col.seen[key.split('|')[0]] = true;
+  s.meta = s.meta || {};
+  s.meta.showcase = s.meta.showcase || [];
+  if (s.daily) s.daily.lastGift = s.daily.lastGift || null;
+  s.version = 3;
+  return s;
 };
 
 export function migrate(save) {
@@ -103,6 +126,7 @@ export function normalizeSave(s) {
   if (!Array.isArray(s.meta.guests)) s.meta.guests = [];
   if (!Array.isArray(s.album.completed)) s.album.completed = [];
   if (!Array.isArray(s.daily.claimedBonuses)) s.daily.claimedBonuses = [];
+  if (!Array.isArray(s.meta.showcase)) s.meta.showcase = [];
   return s;
 }
 

@@ -13,6 +13,10 @@ import * as credits from './ui/screens/credits.js';
 import * as map from './ui/screens/map.js';
 import * as room from './ui/screens/room.js';
 import * as runEnd from './ui/screens/runend.js';
+import * as daily from './ui/screens/daily.js';
+import * as inventory from './ui/screens/inventory.js';
+import { hubMenu } from './ui/screens/hub.js';
+import { dailyAvailable, localDate } from './game/daily.js';
 import { DATA_FILES, indexData } from './game/data.js';
 import { setModifierDefs } from './game/names.js';
 
@@ -102,6 +106,12 @@ async function boot() {
   registerScreen('map', map);
   registerScreen('room', room);
   registerScreen('runEnd', runEnd);
+  registerScreen('daily', daily);
+  registerScreen('inventory', inventory);
+  hubMenu.push(
+    { id: 'daily', label: () => t('hub.daily'), onClick: () => go('daily'), cls: 'yellow', badge: () => (dailyAvailable(game.save, localDate()) ? '!' : null) },
+    { id: 'inventory', label: () => t('hub.inventory'), onClick: () => go('inventory'), cls: 'blue' },
+  );
 
   $('#boot').remove();
   $('#app').hidden = false;

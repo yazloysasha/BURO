@@ -47,8 +47,15 @@ export function itemRow(item, { mods = [], extra = null, onClick = null, selecte
 
 export function effectText(eff) {
   if (!eff) return '';
+  if (eff.type === 'stat') return t('effects.stat_' + eff.stat, { v: eff.value });
   const st = eff.status && game.data.statusById[eff.status];
   return t('effects.' + eff.type, { v: eff.value, s: st ? st.name : '', n: eff.turns || 0, p: Math.round((eff.value || 0) * 100) });
+}
+
+export function passiveText(p) {
+  if (!p) return '';
+  const v = p.type === 'coin_bonus' || p.type === 'sell_bonus' || p.type === 'fee_discount' || p.stat === 'crit' ? Math.round(p.value * 100) : p.value;
+  return t('passive.' + (p.type === 'stat' ? 'stat_' + p.stat : p.type), { v });
 }
 
 export function openBackpack(onChange) {

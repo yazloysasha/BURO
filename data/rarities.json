@@ -1,0 +1,8 @@
+[
+  { "id": "common", "name": "Обычный", "color": "#a7a7b3", "w": 60, "sfx": "lootbox_open_common", "reveal": 500 },
+  { "id": "uncommon", "name": "Необычный", "color": "#5bd16a", "w": 25, "sfx": "lootbox_open_common", "reveal": 650 },
+  { "id": "rare", "name": "Редкий", "color": "#4aa3ff", "w": 10, "sfx": "lootbox_open_rare", "reveal": 900 },
+  { "id": "epic", "name": "Эпический", "color": "#b46cff", "w": 4, "sfx": "lootbox_open_epic", "reveal": 1200 },
+  { "id": "legendary", "name": "Легендарный", "color": "#ffc93c", "w": 0.9, "sfx": "lootbox_open_legendary", "reveal": 1600 },
+  { "id": "slop", "name": "Слоп", "color": "#ff5edc", "w": 0.1, "sfx": "jingle_legendary", "reveal": 2000 }
+]

@@ -4,9 +4,12 @@ import { t } from '../../core/i18n.js';
 import { play } from '../../core/audio.js';
 import { game, commit } from '../../game/state.js';
 import { completeRoom, restChoice } from '../../game/run.js';
-import { button, go, setTopbarTitle } from '../app.js';
+import { button, go, setTopbarTitle, modal, closeModal } from '../app.js';
 import { renderCombat } from '../combatview.js';
 import { itemRow, partyBar } from '../runwidgets.js';
+import { blockCard, pityLine } from '../luckyblock.js';
+import { openRunBlock, resolveFullBackpack } from '../../game/blocks.js';
+import { enemyCanvas } from '../../core/sprite.js';
 import { createCatPair } from '../widgets.js';
 
 // type -> (root, room) => cleanup?   Later milestones register more room types here.
@@ -29,9 +32,45 @@ export function rewardView(root, reward, { title = t('reward.title'), text = nul
     if (!item) continue;
     box.append(itemRow(item, { mods: r.entry ? r.entry.mods : [], extra: r.converted ? h('div.dim', { text: t('reward.converted', { n: r.coins }) }) : null }));
   }
+  for (const id of (reward && reward.stickers) || []) {
+    const e = game.data.enemyById[id];
+    box.append(h('div.item-row', null, h('div.item-icon', null, enemyCanvas(e.sprite, 3)), h('div', null, h('div', { text: t('reward.sticker') }), h('div.dim', { text: e.name }))));
+  }
   for (const extra of (reward && reward.extraRows) || []) box.append(extra);
+  const room = game.save.run.room;
+  if (room && room.blocks && room.blocks.length) {
+    const kind = room.type === 'boss' ? 'boss' : room.type === 'elite' ? 'elite' : 'run';
+    const row = h('div.lucky-row');
+    room.blocks.forEach((b, i) => row.append(blockCard(b, { closedIcon: game.data.assets.blocks[kind], opener: () => openBlock(i) })));
+    box.append(h('h2.center', { text: t('loot.blocksTitle') }), row, h('div.dim.center', { text: pityLine() }));
+  }
   box.append(button(t('common.continue'), leaveRoom, { cls: 'green big block', sound: 'confirm' }));
   root.append(h('div.scroll', null, box));
+}
+
+// Opens run block i; when the backpack is full the player picks what to drop (or sells the find).
+async function openBlock(i) {
+  const res = openRunBlock(game.save, game.data, i);
+  if (!res) return null;
+  if (res.needsSpace) {
+    const run = game.save.run;
+    const b = res.block;
+    const list = h('div.col');
+    let drop = null;
+    for (const e of run.backpack) {
+      const it = game.data.itemById[e.id];
+      list.append(itemRow(it, { mods: e.mods, onClick: () => { drop = e.uid; closeModal('drop'); } }));
+    }
+    const choice = await modal(h('div', null, h('h2', { text: t('loot.fullTitle') }), h('p', { text: t('loot.fullText') }), list), [
+      { label: t('loot.sellNew'), value: 'sell', cls: 'blue' },
+    ], { dismissable: false });
+    resolveFullBackpack(game.save, game.data, i, choice === 'drop' ? drop : null);
+    commit();
+    play('coin_small');
+    return { block: b };
+  }
+  commit();
+  return res;
 }
 
 function combatRoom(root, room) {

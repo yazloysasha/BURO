@@ -1,5 +1,5 @@
 // Content file list and lookup indexes. Shared by the browser boot and node tests.
-export const DATA_FILES = ['strings.ru', 'assets', 'credits', 'cats', 'enemies', 'statuses', 'rooms', 'balance', 'items', 'gen/elite'];
+export const DATA_FILES = ['strings.ru', 'assets', 'credits', 'cats', 'enemies', 'statuses', 'rooms', 'balance', 'items', 'animals', 'rarities', 'modifiers', 'gen/elite', 'gen/flavor'];
 
 const byId = (arr) => Object.fromEntries((arr || []).map((x) => [x.id, x]));
 
@@ -10,7 +10,8 @@ export function indexData(d) {
   d.roomById = byId(d.rooms);
   d.itemById = byId(d.items);
   d.animalById = byId(d.animals);
-  d.gen = { elite: d['gen/elite'] };
+  d.gen = { elite: d['gen/elite'], flavor: d['gen/flavor'] };
+  d.rarityById = byId(d.rarities);
   return d;
 }
 

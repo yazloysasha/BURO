@@ -65,8 +65,8 @@ test('every string key used in code exists in strings.ru.json', () => {
       .split('\n')
       .filter((l) => !l.trim().startsWith('//'))
       .join('\n');
-    for (const m of src.matchAll(/(?<![.\w])(?:t|tn|pickLine)\(\s*'([a-zA-Z0-9_.]+)'/g)) {
-      if (m[1].endsWith('.')) continue; // dynamic key prefix
+    for (const m of src.matchAll(/(?<![.\w])(?:t|tn|pickLine)\(\s*'([a-zA-Z0-9_.]+)'(\s*\+)?/g)) {
+      if (m[2]) continue; // dynamic key: literal prefix + expression
       if (get(m[1]) === undefined) missing.push(f + ': ' + m[1]);
     }
   }
@@ -150,4 +150,41 @@ test('repo size < 25 MB (excluding .git)', () => {
   };
   rec(ROOT);
   assert.ok(total < 25 * 1024 * 1024, (total / 1048576).toFixed(1) + ' MB');
+});
+
+test('content minimums and data integrity', async () => {
+  const { loadData } = await import('./helpers.mjs');
+  const d = loadData();
+  assert.ok(d.items.length >= 300, 'items ' + d.items.length);
+  assert.ok(d.animals.length >= 60, 'animals ' + d.animals.length);
+  assert.ok(d.enemies.filter((e) => !e.boss).length >= 8);
+  assert.ok(d.enemyById.klobster_king && d.enemyById.klobster_king.boss);
+  const enemySheet = JSON.parse(read('assets/sprites/enemies/enemies.json')).enemies;
+  for (const [name, list] of Object.entries({ items: d.items, animals: d.animals, enemies: d.enemies, statuses: d.statuses, rooms: d.rooms })) {
+    const ids = list.map((x) => x.id);
+    assert.equal(new Set(ids).size, ids.length, 'duplicate ids in ' + name);
+  }
+  const names = d.items.map((i) => i.name);
+  assert.equal(new Set(names).size, names.length, 'duplicate item names');
+  const rar = new Set(d.rarities.map((r) => r.id));
+  for (const i of d.items) {
+    assert.ok(rar.has(i.rarity), i.id);
+    assert.ok(['m', 'f', 'n', 'pl'].includes(i.gender), i.id);
+    assert.ok(i.price > 0 && i.name && i.flavor && i.category, i.id);
+    if (i.effect && i.effect.status) assert.ok(d.statusById[i.effect.status], i.id);
+  }
+  for (const a of d.animals) assert.ok(rar.has(a.rarity) && a.passive && a.album, a.id);
+  for (const e of d.enemies) {
+    assert.ok(enemySheet[e.sprite], 'enemy sprite ' + e.sprite);
+    for (const m of e.moves || e.phases.flatMap((p) => p.moves)) {
+      if (m.status) assert.ok(d.statusById[m.status], e.id + ' status ' + m.status);
+      if (m.enemy) assert.ok(d.enemyById[m.enemy], e.id + ' summons ' + m.enemy);
+    }
+  }
+  for (const r of ['common', 'uncommon', 'rare', 'epic', 'legendary', 'slop']) assert.ok(d.items.some((i) => i.rarity === r), 'no items of ' + r);
+  const mods = d.modifiers.map((m) => m.id).sort();
+  assert.deepEqual(mods, ['cursed', 'dirty', 'glitchy', 'golden', 'rainbow', 'shiny']);
+  for (const m of d.modifiers) for (const g of ['m', 'f', 'n', 'pl']) assert.ok(m.forms[g], m.id + ' ' + g);
+  const gorbodak = d.items.filter((i) => /Горбодак/.test(i.flavor)).length;
+  assert.ok(gorbodak / d.items.length < 0.03, 'Gorbodak must stay rare flavor');
 });

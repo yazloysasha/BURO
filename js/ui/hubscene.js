@@ -72,14 +72,14 @@ function paintBackground(ctx, shelfIcons) {
   });
 }
 
-// Pick up to 8 small icons to show on the shelves: the player's own finds first.
+// Up to 8 small icons for the shelves: the showcase first, then other finds, then default clutter.
 function shelfIconList() {
   const out = [];
   const items = game.data.itemById || {};
-  const owned = Object.keys(game.save.collection.items || {});
-  for (const id of owned) {
-    const it = items[id];
-    if (it && it.w === 16 && it.h === 16) out.push(it.icon);
+  const keys = [...(game.save.meta.showcase || []), ...Object.keys(game.save.collection.items || {})];
+  for (const key of keys) {
+    const it = items[key.split('|')[0]];
+    if (it && it.w === 16 && it.h === 16 && !out.includes(it.icon)) out.push(it.icon);
     if (out.length >= 8) break;
   }
   for (const src of game.data.assets.hubShelf || []) {
@@ -98,6 +98,14 @@ export function createHubScene(availW, availH) {
   };
   paint();
   Promise.all(icons.map(loadImage)).then(paint);
+  // invited animal guests wander on the floor
+  (game.save.meta.guests || []).forEach((id, i) => {
+    const a = game.data.animalById[id];
+    if (!a) return;
+    const c = pixelCanvas(16, 16, 1, 'guest');
+    loadImage(a.sprite).then((img) => img && c.getContext('2d').drawImage(img, Math.floor((16 - img.naturalWidth) / 2), 16 - img.naturalHeight));
+    stage.place(c, 48 + i * 18, 68, 6);
+  });
 
   const skins = game.save.meta.skins;
   const pepKey = skins.peposya !== 'default' && sheets[skins.peposya] ? skins.peposya : 'peposya';

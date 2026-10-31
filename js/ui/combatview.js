@@ -90,7 +90,7 @@ export function renderCombat(root, { onEnd }) {
     for (const cat of c.cats) {
       if (!views[cat.uid]) views[cat.uid] = makeCatView(cat);
       const v = views[cat.uid];
-      setChildren(v.bar, hpBar(cat.hp, cat.maxHp, 'small'), cat.block ? h('span.block', { text: '+' + cat.block }) : null);
+      setChildren(v.bar, hpBar(cat.hp, cat.maxHp, 'small'), cat.block ? h('span.blk', { text: '+' + cat.block }) : null);
       setChildren(v.st, ...statusIcons(cat));
       if (cat.ko && v.sp.name !== 'sleep1') v.sp.play('sleep1');
       if (!cat.ko && v.sp.name === 'sleep1') v.sp.play('idle');
@@ -110,7 +110,7 @@ export function renderCombat(root, { onEnd }) {
       }
       if (!views[e.uid]) views[e.uid] = makeEnemyView(e, idx);
       const v = views[e.uid];
-      setChildren(v.bar, hpBar(e.hp, e.maxHp, 'small'), e.block ? h('span.block', { text: '+' + e.block }) : null);
+      setChildren(v.bar, hpBar(e.hp, e.maxHp, 'small'), e.block ? h('span.blk', { text: '+' + e.block }) : null);
       setChildren(v.st, ...statusIcons(e));
       setChildren(v.intent, intentBadge(e));
       v.zone.classList.toggle('targetable', !!targeting);

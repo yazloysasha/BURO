@@ -8,6 +8,7 @@ import { startRun, enterNode, playRound, completeRoom, finishRun, restChoice, ca
 import { availableNodes, findNode } from '../js/game/map.js';
 import { runFee, runIsFree } from '../js/game/meta.js';
 import { loadData } from './helpers.mjs';
+import { openRunBlock, resolveFullBackpack } from '../js/game/blocks.js';
 
 const data = loadData();
 const ctx = combatCtx(data, { floorNo: 1, tier: 1 });
@@ -148,7 +149,7 @@ function autoplayRun(seed, strategy = 'smart') {
       const t = (alive.find((e) => e.summoned) || alive[0]).uid;
       const pep = c.cats[0], dud = c.cats[1];
       const low = c.cats.some((u) => !u.ko && u.hp / u.maxHp < 0.45);
-      const potion = run.backpack.find((b) => ['heal', 'heal_all', 'revive'].includes(data.itemById[b.id].effect.type));
+      const potion = run.backpack.find((b) => { const e = data.itemById[b.id].effect; return e && ['heal', 'heal_all', 'revive'].includes(e.type); });
       const actions = strategy === 'smart'
         ? {
             peposya: { action: pep.cooldown === 0 && alive.length > 1 ? 'special' : 'bite', target: t },
@@ -164,6 +165,7 @@ function autoplayRun(seed, strategy = 'smart') {
       continue;
     }
     if (room.phase === 'lost') break;
+    if (room.blocks) room.blocks.forEach((b, i) => { const r = openRunBlock(save, data, i); if (r && r.needsSpace) resolveFullBackpack(save, data, i, null); });
     completeRoom(save, data);
   }
   return save;

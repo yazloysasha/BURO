@@ -34,5 +34,12 @@
     "debuff": "assets/sprites/items/kyrise_skull_01b.png",
     "summon": "assets/sprites/items/kyrise_scroll_01c.png",
     "heal": "assets/sprites/items/kyrise_potion_01a.png"
+  },
+  "blocks": {
+    "run": "assets/sprites/items/kyrise_gift_01a.png",
+    "elite": "assets/sprites/items/kyrise_gift_01c.png",
+    "boss": "assets/sprites/items/kyrise_gift_01d.png",
+    "daily": "assets/sprites/items/kyrise_gift_01f.png",
+    "bonus": "assets/sprites/items/kyrise_gift_01e.png"
   }
 }
