@@ -20,7 +20,6 @@ export function onChange(fn) {
 
 // Persist synchronously and notify UI. Call after every state-changing action.
 export function commit() {
-  persistFn(game.save);
   for (const fn of listeners) {
     try {
       fn(game.save);
@@ -28,4 +27,5 @@ export function commit() {
       console.error(e);
     }
   }
+  persistFn(game.save);
 }

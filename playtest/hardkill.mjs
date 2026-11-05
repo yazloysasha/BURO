@@ -8,6 +8,7 @@ import { chromium } from 'playwright';
 import { serve } from './lib/harness.mjs';
 
 const ROUNDS = Number(process.argv[2] || 5);
+const KILL_DELAY = Number(process.argv[3] ?? 150); // ms between the last commit and the kill
 const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'buro-kill-'));
 const s = await serve();
 let port = 9400 + Math.floor(Math.random() * 400);
@@ -36,7 +37,7 @@ for (let round = 0; round < ROUNDS; round++) {
   const added = 7;
   for (let i = 0; i < added; i++) {
     await page.evaluate(() => import('/js/game/state.js').then(({ game, commit }) => { game.save.meta.coins += 1; commit(); }));
-    await page.waitForTimeout(150);
+    await page.waitForTimeout(KILL_DELAY);
   }
   const expected = before + added;
   process.kill(-proc.pid, 'SIGKILL');

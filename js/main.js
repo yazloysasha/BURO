@@ -107,16 +107,12 @@ async function boot() {
     /* offline without manifest: fine */
   }
 
+  // the last chance on every way out: home button, app switcher, closing the tab or window
   document.addEventListener('visibilitychange', () => {
-    if (document.visibilityState === 'hidden') {
-      persist(game.save);
-      flush();
-    }
+    if (document.visibilityState === 'hidden') flush(game.save);
   });
-  window.addEventListener('pagehide', () => {
-    persist(game.save);
-    flush();
-  });
+  window.addEventListener('pagehide', () => flush(game.save));
+  window.addEventListener('beforeunload', () => flush(game.save));
   // block pinch/double-tap zoom gestures in standalone mode
   document.addEventListener('gesturestart', (e) => e.preventDefault());
   document.addEventListener('dblclick', (e) => e.preventDefault(), { passive: false });

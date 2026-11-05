@@ -1,6 +1,8 @@
 // Browser persistence: localStorage (synchronous, primary) + IndexedDB mirror + rolling backup.
-// Every game action calls persist(); localStorage.setItem is synchronous, so a kill right after an action keeps it.
-import { parseSave, serializeSave, newSave } from './save.js';
+// Every game action calls persist(). Browsers buffer localStorage on its way to disk (Chromium rate-limits those
+// commits to about once a minute under load), so a hard kill can lose it; the IndexedDB mirror is written at once and
+// load takes whichever copy is newest. Every copy carries a checksum (see sealSave).
+import { parseSave, serializeSave, sealSave, unsealSave, newerSave, validateSave, newSave } from './save.js';
 
 const KEY = 'buro.save';
 const BAK = 'buro.save.bak';
@@ -9,7 +11,7 @@ const STORE = 'save';
 
 let dbPromise = null;
 let writeCount = 0;
-let idbTimer = null;
+let idbBusy = false;
 let pendingIdb = null;
 
 function openDb() {
@@ -44,12 +46,12 @@ async function idbGet(key) {
   });
 }
 
-async function idbPut(key, value) {
+async function idbPut(key, value, durability = 'relaxed') {
   const db = await openDb();
   if (!db) return;
   await new Promise((resolve) => {
     try {
-      const tx = db.transaction(STORE, 'readwrite');
+      const tx = db.transaction(STORE, 'readwrite', { durability });
       tx.objectStore(STORE).put(value, key);
       tx.oncomplete = tx.onerror = tx.onabort = () => resolve();
     } catch {
@@ -75,9 +77,11 @@ function lsSet(key, value) {
   }
 }
 
-function tryParse(text) {
-  if (!text) return null;
+function tryParse(stored) {
+  if (!stored) return null;
   try {
+    const text = unsealSave(stored);
+    if (text === null) throw new Error('checksum mismatch');
     return parseSave(text);
   } catch (e) {
     console.warn('save parse failed', e);
@@ -96,73 +100,90 @@ export async function requestPersistence() {
 
 // Load the newest valid save among localStorage, IndexedDB and the backup. Never throws.
 export async function loadSave() {
-  const candidates = [];
-  const primary = tryParse(lsGet(KEY));
-  if (primary) candidates.push(primary);
-  const mirror = tryParse(await idbGet(KEY));
-  if (mirror) candidates.push(mirror);
-  let recovered = false;
-  if (!candidates.length) {
-    const bak = tryParse(lsGet(BAK)) || tryParse(await idbGet(BAK));
-    if (bak) {
-      candidates.push(bak);
-      recovered = !!(lsGet(KEY) || (await idbGet(KEY)));
-    }
+  const lsRaw = lsGet(KEY);
+  const idbRaw = await idbGet(KEY);
+  const primary = tryParse(lsRaw);
+  const mirror = tryParse(idbRaw);
+  let damaged = (lsRaw && !primary) || (idbRaw && !mirror);
+  let best = primary && mirror ? newerSave(primary, mirror) : primary || mirror;
+  let recovered = !!(damaged && best);
+  if (!best) {
+    best = tryParse(lsGet(BAK)) || tryParse(await idbGet(BAK));
+    recovered = !!(best && damaged);
   }
-  if (!candidates.length) {
-    const raw = lsGet(KEY) || lsGet(BAK);
-    const hadData = !!raw;
+  if (!best) {
+    const raw = lsRaw || idbRaw || lsGet(BAK);
     // keep the unreadable save around so it can still be rescued by hand
-    if (hadData) lsSet('buro.save.corrupt', raw);
-    return { save: newSave(), fresh: !hadData, recovered: false, corrupted: hadData };
+    if (raw) lsSet('buro.save.corrupt', raw);
+    return { save: newSave(), fresh: !raw, recovered: false, corrupted: !!raw };
   }
-  candidates.sort((a, b) => String(b.updatedAt).localeCompare(String(a.updatedAt)));
-  return { save: candidates[0], fresh: false, recovered, corrupted: false };
+  return { save: best, fresh: false, recovered, corrupted: false };
 }
 
-export function persist(save) {
-  save.updatedAt = new Date().toISOString();
-  const text = serializeSave(save);
-  const ok = lsSet(KEY, text);
-  writeCount++;
-  if (writeCount % 10 === 1) {
-    lsSet(BAK, text);
-    idbPut(BAK, text);
-  }
-  // IndexedDB mirror is async; coalesce bursts of actions into one write
-  pendingIdb = text;
-  if (!idbTimer) {
-    idbTimer = setTimeout(() => {
-      idbTimer = null;
+// One write in flight at a time, always the latest state: nothing waits on a timer, bursts collapse naturally.
+function mirror(sealed) {
+  pendingIdb = sealed;
+  if (idbBusy) return;
+  idbBusy = true;
+  (async () => {
+    while (pendingIdb) {
       const t = pendingIdb;
       pendingIdb = null;
-      if (t) idbPut(KEY, t);
-    }, 150);
+      await idbPut(KEY, t);
+    }
+    idbBusy = false;
+  })();
+}
+
+// Synchronous for localStorage, immediate for IndexedDB. Returns false if nothing could be stored.
+export function persist(save) {
+  // a save that fails validation must never overwrite a good one
+  const problems = validateSave(save);
+  if (problems.length) {
+    console.error('refusing to store a broken save', problems);
+    return false;
   }
+  save.seq = (save.seq || 0) + 1;
+  save.updatedAt = new Date().toISOString();
+  const sealed = sealSave(serializeSave(save));
+  let ok = lsSet(KEY, sealed) && lsGet(KEY) === sealed;
+  if (!ok) {
+    // storage full: drop the rescue copy and try once more
+    try {
+      localStorage.removeItem('buro.save.corrupt');
+    } catch {
+      /* ignore */
+    }
+    ok = lsSet(KEY, sealed);
+  }
+  writeCount++;
+  if (writeCount % 10 === 1) {
+    lsSet(BAK, sealed);
+    idbPut(BAK, sealed);
+  }
+  mirror(sealed);
   return ok;
 }
 
-// Called when the page is hidden: flush the IDB mirror immediately.
-export function flush() {
-  if (pendingIdb) {
-    const t = pendingIdb;
-    pendingIdb = null;
-    clearTimeout(idbTimer);
-    idbTimer = null;
-    idbPut(KEY, t);
-  }
+// Page is going away: store everything once more and ask for a durable IndexedDB commit.
+export function flush(save) {
+  if (!save) return;
+  persist(save);
+  pendingIdb = null;
+  idbPut(KEY, lsGet(KEY) || sealSave(serializeSave(save)), 'strict');
 }
 
 export function writeBackup(save) {
-  const text = serializeSave(save);
-  lsSet(BAK, text);
-  idbPut(BAK, text);
+  const sealed = sealSave(serializeSave(save));
+  lsSet(BAK, sealed);
+  idbPut(BAK, sealed);
 }
 
 export async function wipe() {
   try {
     localStorage.removeItem(KEY);
     localStorage.removeItem(BAK);
+    localStorage.removeItem('buro.save.corrupt');
   } catch {
     /* ignore */
   }

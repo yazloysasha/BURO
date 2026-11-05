@@ -14,6 +14,7 @@ export function newSave(now = new Date(), seed = Date.now()) {
     version: SAVE_VERSION,
     createdAt: iso,
     updatedAt: iso,
+    seq: 0,
     meta: {
       coins: 0,
       sparkles: 0,
@@ -166,6 +167,40 @@ export function parseSave(text) {
 
 export function serializeSave(s) {
   return JSON.stringify(s);
+}
+
+// ---------- integrity ----------
+const SEAL = 'BURO1|';
+
+function crc32(str) {
+  let c = ~0;
+  for (let i = 0; i < str.length; i++) {
+    c ^= str.charCodeAt(i);
+    for (let k = 0; k < 8; k++) c = c & 1 ? (c >>> 1) ^ 0xedb88320 : c >>> 1;
+  }
+  return (~c >>> 0).toString(16);
+}
+
+// What actually goes to storage: "BURO1|<crc>|<json>", so a torn or damaged write is noticed on load.
+export function sealSave(text) {
+  return SEAL + crc32(text) + '|' + text;
+}
+
+// Returns the JSON text, or null if the seal doesn't match. Old unsealed saves pass through as they are.
+export function unsealSave(stored) {
+  if (typeof stored !== 'string' || !stored.startsWith(SEAL)) return stored;
+  const cut = stored.indexOf('|', SEAL.length);
+  if (cut < 0) return null;
+  const text = stored.slice(cut + 1);
+  return crc32(text) === stored.slice(SEAL.length, cut) ? text : null;
+}
+
+// Which of two valid saves is newer: the write counter first, the clock only as a tie-break.
+export function newerSave(a, b) {
+  const sa = a.seq || 0;
+  const sb = b.seq || 0;
+  if (sa !== sb) return sa > sb ? a : b;
+  return String(a.updatedAt) >= String(b.updatedAt) ? a : b;
 }
 
 export function exportSave(s) {

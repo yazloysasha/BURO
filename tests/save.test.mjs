@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { newSave, migrate, parseSave, exportSave, importSave, validateSave, SAVE_VERSION } from '../js/core/save.js';
+import { newSave, migrate, parseSave, exportSave, importSave, validateSave, serializeSave, sealSave, unsealSave, newerSave, SAVE_VERSION } from '../js/core/save.js';
 
 const fixture = (name) => fs.readFileSync(new URL('./fixtures/' + name, import.meta.url), 'utf8');
 
@@ -97,4 +97,26 @@ test('x2 animations are the default and old x1 saves move to it, other choices s
   assert.equal(m(1), 2);
   assert.equal(m(1.5), 1.5);
   assert.equal(m(3), 3);
+});
+
+test('sealed saves round-trip and any damage is detected', () => {
+  const text = serializeSave(newSave());
+  const sealed = sealSave(text);
+  assert.equal(unsealSave(sealed), text);
+  assert.equal(unsealSave(sealed.slice(0, -5)), null, 'torn write');
+  assert.equal(unsealSave(sealed.replace('"coins":0', '"coins":9')), null, 'edited write');
+  assert.equal(unsealSave(text), text, 'old unsealed saves still load');
+  assert.equal(parseSave(unsealSave(sealed)).version, SAVE_VERSION);
+});
+
+test('the write counter decides which copy is newer, even with a wrong clock', () => {
+  const a = { seq: 5, updatedAt: '2030-01-01' };
+  const b = { seq: 6, updatedAt: '2020-01-01' };
+  assert.equal(newerSave(a, b), b);
+  assert.equal(newerSave({ updatedAt: '2026-02-01' }, { updatedAt: '2026-01-01' }).updatedAt, '2026-02-01');
+});
+
+test('every player-facing code path commits after mutating the save', () => {
+  const files = ['album', 'daily', 'hub', 'inventory', 'map', 'room', 'runend', 'settings', 'skins', 'talents', 'upgrades'];
+  for (const f of files) assert.match(fs.readFileSync(new URL(`../js/ui/screens/${f}.js`, import.meta.url), 'utf8'), /commit\(\)/, f);
 });
