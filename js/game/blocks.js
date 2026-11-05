@@ -96,6 +96,11 @@ export function resolveFullBackpack(save, data, idx, dropUid = null) {
   return { coins };
 }
 
+// A room can't be left while a found block is still closed: the find is the whole point of the room.
+export function unopenedBlocks(room) {
+  return room && room.blocks ? room.blocks.filter((b) => !b.opened).length : 0;
+}
+
 // Leaving a room with unopened blocks opens them silently (selling what doesn't fit).
 export function settleRoomBlocks(save, data) {
   const room = save.run && save.run.room;

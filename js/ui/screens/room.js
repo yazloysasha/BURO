@@ -8,7 +8,7 @@ import { button, go, setTopbarTitle, modal, closeModal } from '../app.js';
 import { renderCombat } from '../combatview.js';
 import { itemRow, partyBar } from '../runwidgets.js';
 import { blockCard, pityLine } from '../luckyblock.js';
-import { openRunBlock, resolveFullBackpack } from '../../game/blocks.js';
+import { openRunBlock, resolveFullBackpack, unopenedBlocks } from '../../game/blocks.js';
 import { enemyCanvas } from '../../core/sprite.js';
 import { createCatPair } from '../widgets.js';
 import { burstAt } from '../particles.js';
@@ -17,10 +17,23 @@ import { burstAt } from '../particles.js';
 export const roomViews = {};
 
 export function leaveRoom() {
+  if (unopenedBlocks(game.save.run.room)) return;
   completeRoom(game.save, game.data);
   commit();
   play('door_close');
   go(game.save.run && game.save.run.result ? 'runEnd' : 'map');
+}
+
+// "Continue" that stays locked until every block in the room has been opened; refresh() re-checks.
+export function leaveButton(label = t('common.continue'), { cls = 'green big block', sound = 'confirm' } = {}) {
+  const wrap = h('div.leave-wrap');
+  const refresh = () => {
+    const left = unopenedBlocks(game.save.run.room);
+    wrap.replaceChildren(button(left ? t('loot.openFirst') : label, leaveRoom, { cls: left ? 'grey big block' : cls, sound, disabled: !!left }));
+  };
+  refresh();
+  wrap.refresh = refresh;
+  return wrap;
 }
 
 export function rewardView(root, reward, { title = t('reward.title'), text = null, scroll = true } = {}) {
@@ -43,14 +56,15 @@ export function rewardView(root, reward, { title = t('reward.title'), text = nul
   }
   for (const extra of (reward && reward.extraRows) || []) box.append(extra);
   const room = game.save.run.room;
+  const leave = leaveButton();
   if (room && room.blocks && room.blocks.length) {
     const kind = room.type === 'boss' ? 'boss' : room.type === 'elite' ? 'elite' : 'run';
     const row = h('div.lucky-row');
-    room.blocks.forEach((b, i) => row.append(blockCard(b, { closedIcon: game.data.assets.blocks[kind], opener: () => openBlockAt(i) })));
+    room.blocks.forEach((b, i) => row.append(blockCard(b, { closedIcon: game.data.assets.blocks[kind], opener: () => openBlockAt(i), onRevealed: () => leave.refresh() })));
     box.append(h('h2.center', { text: t('loot.blocksTitle') }), row, h('div.dim.center', { text: pityLine() }));
   }
   for (const id of (reward && reward.combos) || []) box.append(h('div.accent.center', { text: t('reward.combo', { name: game.data.comboById[id].name }) }));
-  box.append(button(t('common.continue'), leaveRoom, { cls: 'green big block', sound: 'confirm' }));
+  box.append(leave);
   root.append(scroll ? h('div.scroll', null, box) : box);
 }
 

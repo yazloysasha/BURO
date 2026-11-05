@@ -7,7 +7,7 @@ import { pixelCanvas, iconCanvas } from '../core/sprite.js';
 import { game, commit } from '../game/state.js';
 import { tapAnomaly, placeOnShelf, washItem, washCats, chooseEvent, canAfford, buyShop } from '../game/rooms.js';
 import { button, go, toast, shake, haptic } from './app.js';
-import { roomViews, rewardView, leaveRoom, openBlockAt } from './screens/room.js';
+import { roomViews, rewardView, leaveRoom, leaveButton, openBlockAt } from './screens/room.js';
 import { itemRow, itemIcon, effectText, partyBar } from './runwidgets.js';
 import { blockCard, pityLine } from './luckyblock.js';
 import { displayName } from '../game/names.js';
@@ -300,11 +300,13 @@ roomViews.shop = (root, room) => {
     setChildren(blocks);
     if (room.blocks && room.blocks.length) {
       const row = h('div.lucky-row');
-      room.blocks.forEach((b, i) => row.append(blockCard(b, { closedIcon: game.data.assets.blocks.run, opener: () => openBlockAt(i) })));
+      room.blocks.forEach((b, i) => row.append(blockCard(b, { closedIcon: game.data.assets.blocks.run, opener: () => openBlockAt(i), onRevealed: () => leave.refresh() })));
       blocks.append(row, h('div.dim.center', { text: pityLine() }));
     }
+    leave.refresh();
   };
+  const leave = leaveButton(t('shop.leave'), { cls: 'grey big block', sound: 'door_close' });
   draw();
-  box.append(h('h1.center', { text: t('shop.title') }), h('p.center', { text: room.shop.discount ? t('shop.discount', { p: Math.round(room.shop.discount * 100) }) : t('shop.text') }), coins, list, blocks, partyBar(run), button(t('shop.leave'), leaveRoom, { cls: 'grey big block', sound: 'door_close' }));
+  box.append(h('h1.center', { text: t('shop.title') }), h('p.center', { text: room.shop.discount ? t('shop.discount', { p: Math.round(room.shop.discount * 100) }) : t('shop.text') }), coins, list, blocks, partyBar(run), leave);
   root.append(h('div.scroll', null, box));
 };

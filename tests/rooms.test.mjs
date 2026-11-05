@@ -5,6 +5,7 @@ import { startRun, enterNode, playRound, addToBackpack, equipmentBonus } from '.
 import { tapAnomaly, placeOnShelf, washItem, chooseEvent, buyShop } from '../js/game/rooms.js';
 import { backpackMatch, activeCombos } from '../js/game/combos.js';
 import { aliveEnemies } from '../js/game/combat.js';
+import { unopenedBlocks } from '../js/game/blocks.js';
 import { loadData } from './helpers.mjs';
 
 const data = loadData();
@@ -210,4 +211,15 @@ test('combo: kill a klobster with the slipper = "Классика жанра"', 
   playRound(save, data, { peposya: { action: 'item', itemUid: r.entry.uid, target: c.enemies[0].uid }, dudonya: { action: 'purr' } });
   assert.equal(c.over, 'win');
   assert.ok(save.combos.discovered.includes('classic'));
+});
+
+test('a found block keeps the room locked until it is opened', () => {
+  const save = newSave(new Date('2026-11-01T10:00:00Z'), 'locked');
+  startRun(save, data);
+  const room = { type: 'loot', blocks: [{ opened: false }, { opened: true }] };
+  assert.equal(unopenedBlocks(room), 1);
+  room.blocks[0].opened = true;
+  assert.equal(unopenedBlocks(room), 0);
+  assert.equal(unopenedBlocks({ type: 'rest' }), 0);
+  assert.equal(unopenedBlocks(null), 0);
 });
