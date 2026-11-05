@@ -140,3 +140,21 @@ test('duplicate animals turn into sparkles', () => {
   assert.ok(r.dupe && r.sparkles > 0);
   assert.equal(s.meta.sparkles, r.sparkles);
 });
+
+test('item names match how their sprites look (reviewed on contact sheets)', () => {
+  const d = loadData();
+  const name = (id) => d.itemById[id].name;
+  assert.equal(name('ingot_01e'), 'Мифриловый слиток'); // light blue, was "Рубиновый"
+  assert.equal(name('potion_1d'), 'Серое зелье'); // grey, was "Белое"
+  assert.equal(name('key_01e'), 'Мифриловый ключ');
+  assert.match(name('shield_01a'), /круглый щит/); // round
+  assert.match(name('shield_02a'), /рыцарский щит/); // heater shield with a cross
+  assert.match(name('shield_03a'), /щит с черепушкой/);
+  assert.match(name('armor_01a'), /Кожаный/);
+  assert.match(name('armor_01c'), /Ледяной/); // blue
+  assert.equal(d.itemById.milk_saucer.icon.endsWith('food_04_bowl.png'), true);
+  const names = d.items.map((i) => i.name);
+  assert.equal(new Set(names).size, names.length);
+  for (const bad of ['Кольчуга', 'Берет', 'Цилиндр', 'Брёвнышко', 'Железная руда']) assert.ok(!names.includes(bad), bad);
+  assert.ok(!names.some((n) => /^Арбалет /.test(n)), 'the rpg496 bows are not crossbows');
+});

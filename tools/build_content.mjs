@@ -30,12 +30,17 @@ function adj(word, g) {
 const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
 const named = (adjWord, noun, g) => cap(adj(adjWord, g) + ' ' + noun);
 
-const TIER = { a: 'бронзовый', b: 'медный', c: 'стальной', d: 'позолоченный', e: 'рубиновый' };
+// Kyrise tier letters by look (checked on contact sheets, playtest/contact_items.mjs): the palette differs per series.
+const TIER = { a: 'бронзовый', b: 'серебряный', c: 'стальной', d: 'позолоченный', e: 'рубиновый' }; // a brown, b silver, c dark steel, d gold, e red
+const TIER_WEAR = { a: 'кожаный', b: 'серебряный', c: 'ледяной', d: 'позолоченный', e: 'рубиновый' }; // a leather, c blue
+const TIER_METAL = { a: 'бронзовый', b: 'медный', c: 'стальной', d: 'позолоченный', e: 'мифриловый' }; // ingots, keys: b orange, c white, e light blue
+const TIER_ROUND = { a: 'деревянный', b: 'серебряный', c: 'стальной', d: 'позолоченный', e: 'рубиновый' };
+const TIER_SKULL = { a: 'болотный', b: 'песочный', c: 'ледяной', d: 'огненный', e: 'рубиновый' };
 const TIER_RARITY = { a: 'common', b: 'common', c: 'uncommon', d: 'rare', e: 'epic' };
 const COLORS10 = { a: 'зелёный', b: 'жёлтый', c: 'синий', d: 'красный', e: 'белый', f: 'розовый', g: 'оранжевый', h: 'коричневый', i: 'чёрный', j: 'фиолетовый' };
-const POTION_COLORS = { a: 'красный', b: 'синий', c: 'зелёный', d: 'белый', e: 'фиолетовый', f: 'оранжевый', g: 'розовый', h: 'голубой' };
+const POTION_COLORS = { a: 'красный', b: 'синий', c: 'зелёный', d: 'серый', e: 'фиолетовый', f: 'оранжевый', g: 'розовый', h: 'голубой' };
 const PEARL_COLORS = { a: 'серый', b: 'синий', c: 'красный', d: 'зелёный', e: 'жёлтый' };
-const CANDY_FLAVORS = { a: 'клубничный', b: 'черничный', c: 'мятный', d: 'виноградный', e: 'апельсиновый', f: 'малиновый', g: 'лимонный' };
+const CANDY_FLAVORS = { a: 'клубничный', b: 'черничный', c: 'мятный', d: 'виноградный', e: 'апельсиновый', f: 'малиновый', g: 'арбузный' };
 
 const EPITHETS = [
   'ночной смены', 'сомнений', 'Пророчества', 'вечного сна', 'тёплых лап', 'громкого мурчания', 'забытых носков', 'лунного света',
@@ -138,7 +143,7 @@ const epithet = () => EPITHETS[epithetCursor++ % EPITHETS.length];
 const SPECIAL = [
   ['td_potion_green', { id: 'valerian', name: 'Валерьянка', gender: 'f', category: 'potion', rarity: 'common', tags: ['consumable', 'liquid'], effect: { type: 'heal', value: 12 }, flavor: 'Пахнет так, что оба кота сразу стали добрее.' }],
   ['kyrise_leaf_01a', { id: 'catnip', name: 'Кошачья мята', gender: 'f', category: 'food', rarity: 'uncommon', tags: ['consumable', 'plant'], effect: { type: 'buff', status: 'sharp', turns: 3 }, flavor: 'Когти сами собой точатся от одного запаха.' }],
-  ['kyrise_cup_01a', { id: 'milk_saucer', name: 'Блюдечко молока', gender: 'n', category: 'food', rarity: 'common', tags: ['consumable', 'liquid'], effect: { type: 'heal_all', value: 7 }, flavor: 'Одно блюдечко на двоих. Делят честно, по усам.' }],
+  ['food_04_bowl', { id: 'milk_saucer', name: 'Блюдечко молока', gender: 'n', category: 'food', rarity: 'common', tags: ['consumable', 'liquid'], effect: { type: 'heal_all', value: 7 }, flavor: 'Одно блюдечко на двоих. Делят честно, по усам.' }],
   ['kyrise_fish_01a', { id: 'sardine', name: 'Сардинка', gender: 'f', category: 'food', rarity: 'uncommon', tags: ['consumable', 'fish'], effect: { type: 'heal', value: 20 }, flavor: 'Маленькая рыбка — большое счастье.' }],
   ['kyrise_cotton_01a', { id: 'yarn_bomb', name: 'Клубок-бомба', gender: 'm', category: 'weapon_tool', rarity: 'uncommon', tags: ['consumable', 'soft'], effect: { type: 'damage_all', value: 8 }, flavor: 'Разматывается во все стороны сразу. Насекомые в нитках.' }],
   ['rpg496_a_shoes01', { id: 'slipper_justice', name: 'Тапок правосудия', gender: 'm', category: 'clothes', rarity: 'rare', tags: ['consumable', 'smelly'], effect: { type: 'damage', value: 22 }, flavor: 'Древнейшее оружие против клобстеров. Передаётся по наследству.' }],
@@ -146,7 +151,7 @@ const SPECIAL = [
   ['kyrise_candle_01a', { id: 'lullaby_lamp', name: 'Ночник-колыбельная', gender: 'm', category: 'household', rarity: 'uncommon', tags: ['consumable', 'light'], effect: { type: 'status_enemy', status: 'sleepy', turns: 1 }, flavor: 'Тихо мурлычет мелодию. Враг зевает.' }],
   ['td_vial_green', { id: 'fish_oil', name: 'Рыбий жир', gender: 'm', category: 'potion', rarity: 'common', tags: ['consumable', 'liquid', 'fish'], effect: { type: 'cleanse', value: 4 }, flavor: 'Невкусно, зато полезно. Так говорят все бабушки.' }],
   ['rpg496_i_feather01', { id: 'lucky_feather', name: 'Счастливое пёрышко', gender: 'n', category: 'material', rarity: 'uncommon', tags: ['consumable', 'soft'], effect: { type: 'buff', status: 'lucky', turns: 2, all: true }, flavor: 'Если пощекотать им нос, удача чихнёт в вашу сторону.' }],
-  ['td_chest_wood', { id: 'cardboard_box', name: 'Коробка-укрытие', gender: 'f', category: 'container', rarity: 'common', tags: ['consumable', 'container'], effect: { type: 'block', value: 8, all: true }, flavor: 'Если кот в коробке, его не существует. Удары проходят мимо.' }],
+  ['td_chest_wood', { id: 'cardboard_box', name: 'Ящик-укрытие', gender: 'm', category: 'container', rarity: 'common', tags: ['consumable', 'container'], effect: { type: 'block', value: 8, all: true }, flavor: 'Если кот в ящике, его не существует. Удары проходят мимо.' }],
   ['kyrise_potion_03a', { id: 'ninth_life', name: 'Девятая жизнь', gender: 'f', category: 'potion', rarity: 'rare', tags: ['consumable', 'magic'], effect: { type: 'revive', value: 0.5 }, flavor: 'У каждого кота их девять. Это — запасная.' }],
   // combo results & slop
   ['food_82_pizza_dish', { id: 'pizza_suspicion', name: 'Пицца-подозрение', gender: 'f', category: 'food', rarity: 'epic', tags: ['consumable', 'combo'], effect: { type: 'heal_all', value: 18 }, flavor: 'Рыба плюс сыр. Выглядит как пицца. Ведёт себя подозрительно.' }],
@@ -195,15 +200,15 @@ for (const [file] of files) {
 // a few plated dishes
 for (const [file, name, g, r] of [
   ['food_86_roastedchicken_dish', 'Курочка на блюде', 'f', 'epic'], ['food_91_strawberrycake_dish', 'Торт на праздничной тарелке', 'm', 'epic'],
-  ['food_98_sushi_dish', 'Сет суши «Ночной»', 'm', 'legendary'], ['food_51_giantgummybear_dish', 'Мишка на подносе', 'm', 'legendary'],
-  ['food_01_dish', 'Тарелка', 'f', 'common'], ['food_04_bowl', 'Миска', 'f', 'common'], ['food_58_icecream_bowl', 'Пломбир в вазочке', 'm', 'rare'],
+  ['food_98_sushi_dish', 'Сет суши «Ночной»', 'm', 'legendary'], ['food_51_giantgummybear_dish', 'Мишка на блюдечке', 'm', 'legendary'],
+  ['food_01_dish', 'Тарелка', 'f', 'common'], ['food_58_icecream_bowl', 'Пломбир в вазочке', 'm', 'rare'],
 ]) add(file, { name, gender: g, category: file.includes('_dish') && !/chicken|cake|sushi|bear/.test(file) || file.includes('bowl') && !file.includes('icecream') ? 'household' : 'food', rarity: r });
 
 // ---------- ingredients (rpg496 i_c_*) ----------
 const CROPS = {
-  banana: ['Банан', 'm'], bread: ['Каравай', 'm'], carrot: ['Морковка', 'f'], cheese: ['Сыр', 'm'], cherry: ['Вишенка', 'f'], fish: ['Рыбка', 'f'],
-  grapes: ['Виноград', 'm'], green_grapes: ['Зелёный виноград', 'm'], green_pepper: ['Зелёный перчик', 'm'], lemon: ['Лимон', 'm'], meat: ['Окорок', 'm'],
-  mulberry: ['Шелковица', 'f'], mushroom: ['Гриб', 'm'], nut: ['Орех', 'm'], orange: ['Апельсин', 'm'], pear: ['Груша', 'f'], pie: ['Пирожок', 'm'],
+  banana: ['Банан', 'm'], bread: ['Каравай', 'm'], carrot: ['Морковка', 'f'], cheese: ['Сыр', 'm'], cherry: ['Вишенка', 'f'], fish: ['Вяленая рыбка', 'f'],
+  grapes: ['Виноград', 'm'], green_grapes: ['Зелёный виноград', 'm'], green_pepper: ['Зелёный перчик', 'm'], lemon: ['Лимон', 'm'], meat: ['Горячий бифштекс', 'm'],
+  mulberry: ['Шелковица', 'f'], mushroom: ['Гриб', 'm'], nut: ['Жёлудь', 'm'], orange: ['Апельсин', 'm'], pear: ['Груша', 'f'], pie: ['Пирожок', 'm'],
   pineapple: ['Ананас', 'm'], radish: ['Редиска', 'f'], raw_fish: ['Свежая рыба', 'f'], raw_meat: ['Кусок мяса', 'm'], red_pepper: ['Красный перчик', 'm'],
   strawberry: ['Клубника', 'f'], watermellon: ['Арбуз', 'm'], yellow_pepper: ['Жёлтый перчик', 'm'],
 };
@@ -214,7 +219,7 @@ for (const [k, [name, g]] of Object.entries(CROPS)) {
 add('kyrise_fruit_01a', { id: 'apple', name: 'Яблоко', gender: 'n', category: 'food', rarity: 'common', tags: ['consumable', 'food'], effect: { type: 'heal', value: 6 } });
 add('kyrise_fruit_01b', { id: 'ripe_banana', name: 'Спелый банан', gender: 'm', category: 'food', rarity: 'common' });
 add('kyrise_cookie_01a', { id: 'cookie', name: 'Печенька', gender: 'f', category: 'food', rarity: 'common', tags: ['consumable', 'food'], effect: { type: 'heal', value: 6 } });
-for (const [l, name, g, r] of [['b', 'Карасик', 'm', 'common'], ['c', 'Жёлтый окунёк', 'm', 'uncommon'], ['d', 'Золотая рыбка', 'f', 'rare'], ['e', 'Синяя рыбка-фугу', 'f', 'epic']]) {
+for (const [l, name, g, r] of [['b', 'Карасик', 'm', 'common'], ['c', 'Жёлтый окунёк', 'm', 'uncommon'], ['d', 'Зелёный лещик', 'm', 'rare'], ['e', 'Синяя рыбка-фугу', 'f', 'epic']]) {
   add('kyrise_fish_01' + l, { name, gender: g, category: 'food', rarity: r, tags: ['food', 'fish'] });
 }
 for (const s of ['01', '02']) for (const [l, fl] of Object.entries(CANDY_FLAVORS)) {
@@ -239,7 +244,7 @@ for (let s = 0; s < 3; s++) for (const [l, col] of Object.entries(POTION_COLORS)
 }
 const MEDICINE = ['Микстура от икоты', 'Микстура от скуки', 'Микстура от понедельников', 'Микстура храбрости', 'Микстура от чихания', 'Микстура для блеска шерсти', 'Микстура от зевоты', 'Микстура хорошего аппетита'];
 MEDICINE.forEach((name, i) => add(`rpg496_p_medicine0${i + 1}`, { id: 'medicine_' + (i + 1), name, gender: 'f', category: 'potion', rarity: ['common', 'uncommon', 'rare'][i % 3], tags: ['consumable', 'liquid'], effect: { type: 'heal', value: 8 + (i % 3) * 5 } }));
-const VIAL_COLORS = { blue: 'синий', green: 'зелёный', orange: 'оранжевый', pink: 'розовый', red: 'красный', white: 'белый', yellow: 'жёлтый' };
+const VIAL_COLORS = { blue: 'синий', green: 'зелёный', orange: 'оранжевый', pink: 'розовый', red: 'красный', white: 'серебристый', yellow: 'жёлтый' };
 for (const [c, col] of Object.entries(VIAL_COLORS)) add(`rpg496_p_${c}01`, { id: 'flask_' + c, name: named(col, 'склянка', 'f'), gender: 'f', category: 'potion', rarity: hashRarity('flask' + c, { common: 3, uncommon: 2, rare: 1 }) });
 add('td_potion_blue', { id: 'moon_water', name: 'Бутылочка лунной воды', gender: 'f', category: 'potion', rarity: 'rare', tags: ['consumable', 'liquid'], effect: { type: 'heal_all', value: 12 } });
 add('td_potion_red', { id: 'berry_juice', name: 'Ягодный морс', gender: 'm', category: 'potion', rarity: 'common', tags: ['consumable', 'liquid'], effect: { type: 'heal', value: 9 } });
@@ -248,8 +253,8 @@ add('td_potion_empty', { id: 'empty_bottle', name: 'Пустая бутылка'
 add('td_vial_empty', { id: 'empty_tube', name: 'Пустая пробирка', gender: 'f', category: 'junk', rarity: 'common' });
 
 // ---------- weapons & tools ----------
-const tierSeries = (prefix, series, noun, g, category, stat) => {
-  for (const [l, a] of Object.entries(TIER)) {
+const tierSeries = (prefix, series, noun, g, category, stat, palette = TIER) => {
+  for (const [l, a] of Object.entries(palette)) {
     const file = `${prefix}_${series}${l}`;
     if (!files.has(file) || usedFiles.has(file)) continue;
     const rarity = TIER_RARITY[l];
@@ -262,20 +267,20 @@ tierSeries('kyrise_sword', '03', 'сабля', 'f', 'weapon_tool', 'atk');
 tierSeries('kyrise_bow', '01', 'лук', 'm', 'weapon_tool', 'crit');
 tierSeries('kyrise_staff', '01', 'посох', 'm', 'weapon_tool', 'luck');
 tierSeries('kyrise_staff', '02', 'жезл', 'm', 'weapon_tool', 'luck');
-tierSeries('kyrise_shield', '01', 'щит', 'm', 'clothes', 'def');
-tierSeries('kyrise_shield', '02', 'круглый щит', 'm', 'clothes', 'def');
-tierSeries('kyrise_shield', '03', 'рыцарский щит', 'm', 'clothes', 'def');
-tierSeries('kyrise_helmet', '01', 'шлем', 'm', 'clothes', 'def');
-tierSeries('kyrise_helmet', '02', 'шлем с забралом', 'm', 'clothes', 'def');
-tierSeries('kyrise_gloves', '01', 'перчатки', 'pl', 'clothes', 'atk');
-tierSeries('kyrise_boots', '01', 'сапоги', 'pl', 'clothes', 'spd');
-tierSeries('kyrise_armor', '01', 'доспех', 'm', 'clothes', 'def');
+tierSeries('kyrise_shield', '01', 'круглый щит', 'm', 'clothes', 'def', TIER_ROUND);
+tierSeries('kyrise_shield', '02', 'рыцарский щит', 'm', 'clothes', 'def');
+tierSeries('kyrise_shield', '03', 'щит с черепушкой', 'm', 'clothes', 'def', TIER_SKULL);
+tierSeries('kyrise_helmet', '01', 'шлем', 'm', 'clothes', 'def', TIER_WEAR);
+tierSeries('kyrise_helmet', '02', 'шлем с забралом', 'm', 'clothes', 'def', TIER_WEAR);
+tierSeries('kyrise_gloves', '01', 'перчатки', 'pl', 'clothes', 'atk', TIER_WEAR);
+tierSeries('kyrise_boots', '01', 'сапоги', 'pl', 'clothes', 'spd', TIER_WEAR);
+tierSeries('kyrise_armor', '01', 'доспех', 'm', 'clothes', 'def', TIER_WEAR);
 tierSeries('kyrise_necklace', '01', 'ожерелье', 'n', 'jewelry', 'luck');
 tierSeries('kyrise_necklace', '02', 'кулон', 'm', 'jewelry', 'luck');
 tierSeries('kyrise_ring', '01', 'кольцо', 'n', 'jewelry', 'luck');
 tierSeries('kyrise_ring', '02', 'перстень', 'm', 'jewelry', 'crit');
-tierSeries('kyrise_ingot', '01', 'слиток', 'm', 'material', null);
-tierSeries('kyrise_key', '01', 'ключ', 'm', 'key', null);
+tierSeries('kyrise_ingot', '01', 'слиток', 'm', 'material', null, TIER_METAL);
+tierSeries('kyrise_key', '01', 'ключ', 'm', 'key', null, TIER_METAL);
 
 const EPI_GROUPS = [
   ['rpg496_w_sword00', [1, 2, 3, 4, 5, 6, 7, 8], 'Клинок', 'm', 'atk'],
@@ -283,16 +288,18 @@ const EPI_GROUPS = [
   ['rpg496_w_dagger00', [1, 2, 3, 4, 5, 6], 'Кинжал', 'm', 'crit'],
   ['rpg496_w_mace00', [1, 2, 3, 4, 5], 'Булава', 'f', 'atk'],
   ['rpg496_w_spear00', [1, 2, 3, 4], 'Копьё', 'n', 'atk'],
-  ['rpg496_w_bow0', [1, 2, 3, 4], 'Арбалет', 'm', 'crit'],
+  ['rpg496_w_bow0', [1, 2, 3, 4], 'Лук', 'm', 'crit'],
   ['rpg496_w_staff0', [1, 2, 3, 4], 'Посох', 'm', 'luck'],
-  ['rpg496_w_fist00', [1, 2], 'Кастет', 'm', 'atk'],
+  ['rpg496_w_fist00', [1, 2], 'Боксёрская перчатка', 'f', 'atk'],
   ['rpg496_w_throw00', [1, 2, 3], 'Сюрикен', 'm', 'crit'],
 ];
+const SPRITE_NOUN = { rpg496_w_throw001: ['Метательный топорик', 'm'], rpg496_w_throw002: ['Метательный дротик', 'm'] };
 for (const [prefix, nums, noun, g, stat] of EPI_GROUPS) {
   for (const n of nums) {
     const file = prefix + n;
     const rarity = hashRarity(file);
-    add(file, { name: noun + ' ' + epithet(), gender: g, category: 'weapon_tool', rarity, effect: equip(stat, rarity) });
+    const over = SPRITE_NOUN[file] || [noun, g];
+    add(file, { name: over[0] + ' ' + epithet(), gender: over[1], category: 'weapon_tool', rarity, effect: equip(stat, rarity) });
   }
 }
 for (const [k, noun, g] of [['axe', 'Золотой топор', 'm'], ['bow', 'Золотой лук', 'm'], ['dagger', 'Золотой кинжал', 'm'], ['mace', 'Золотая булава', 'f'], ['spear', 'Золотое копьё', 'n'], ['sword', 'Золотой меч', 'm']]) {
@@ -310,13 +317,13 @@ for (let n = 1; n <= 7; n++) add('rpg496_w_book0' + n, { id: 'grimoire_' + n, na
 const HATS = { a: ['Шляпа путника', 'f'], b: ['Белый колпак', 'm'], c: ['Колпак звездочёта', 'm'], d: ['Соломенная шляпа', 'f'], e: ['Красный колпак', 'm'], f: ['Шляпа фокусника', 'f'] };
 for (const [l, [name, g]] of Object.entries(HATS)) add('kyrise_hat_01' + l, { name, gender: g, category: 'clothes', rarity: { a: 'common', b: 'common', c: 'rare', d: 'common', e: 'uncommon', f: 'epic' }[l], effect: l === 'c' || l === 'f' ? equip('luck', l === 'f' ? 'epic' : 'rare') : null });
 for (const [file, name, g, r, stat] of [
-  ['rpg496_a_armor04', 'Кольчуга', 'f', 'uncommon', 'def'], ['rpg496_a_armor05', 'Латы', 'pl', 'rare', 'def'], ['rpg496_a_armour01', 'Кожаный жилет', 'm', 'common', 'def'],
-  ['rpg496_a_armour02', 'Стёганая куртка', 'f', 'common', 'def'], ['rpg496_a_armour03', 'Нагрудник', 'm', 'uncommon', 'def'],
-  ['rpg496_a_clothing01', 'Плащ', 'm', 'common', null], ['rpg496_a_clothing02', 'Мантия', 'f', 'rare', 'luck'],
-  ['rpg496_a_shoes02', 'Валенки', 'pl', 'common', 'spd'], ['rpg496_a_shoes03', 'Кеды', 'pl', 'uncommon', 'spd'], ['rpg496_a_shoes04', 'Сапожки', 'pl', 'common', 'spd'],
-  ['rpg496_a_shoes05', 'Туфельки', 'pl', 'rare', 'spd'], ['rpg496_a_shoes06', 'Мокасины', 'pl', 'common', null], ['rpg496_a_shoes07', 'Ботфорты', 'pl', 'epic', 'spd'],
-  ['rpg496_c_elm01', 'Шлем-кастрюля', 'm', 'common', 'def'], ['rpg496_c_elm03', 'Крылатый шлем', 'm', 'rare', 'def'], ['rpg496_c_elm04', 'Шлем с рожками', 'm', 'uncommon', 'def'],
-  ['rpg496_c_hat01', 'Берет', 'm', 'common', null], ['rpg496_c_hat02', 'Цилиндр', 'm', 'rare', 'luck'],
+  ['rpg496_a_armor04', 'Белый панцирь', 'm', 'uncommon', 'def'], ['rpg496_a_armor05', 'Чешуйчатый доспех', 'm', 'rare', 'def'], ['rpg496_a_armour01', 'Кожаный жилет', 'm', 'common', 'def'],
+  ['rpg496_a_armour02', 'Белые латы', 'pl', 'common', 'def'], ['rpg496_a_armour03', 'Золочёный нагрудник', 'm', 'uncommon', 'def'],
+  ['rpg496_a_clothing01', 'Белая рубашка', 'f', 'common', null], ['rpg496_a_clothing02', 'Льняная туника', 'f', 'rare', 'luck'],
+  ['rpg496_a_shoes02', 'Зелёные сапожки', 'pl', 'common', 'spd'], ['rpg496_a_shoes03', 'Сандалии', 'pl', 'uncommon', 'spd'], ['rpg496_a_shoes04', 'Лиловые сапожки', 'pl', 'common', 'spd'],
+  ['rpg496_a_shoes05', 'Латные сапоги', 'pl', 'rare', 'spd'], ['rpg496_a_shoes06', 'Тёмные башмаки', 'pl', 'common', null], ['rpg496_a_shoes07', 'Ботфорты', 'pl', 'epic', 'spd'],
+  ['rpg496_c_elm01', 'Шлем-кастрюля', 'm', 'common', 'def'], ['rpg496_c_elm03', 'Греческий шлем', 'm', 'rare', 'def'], ['rpg496_c_elm04', 'Шлем-ведро', 'm', 'uncommon', 'def'],
+  ['rpg496_c_hat01', 'Лиловый колпак', 'm', 'common', null], ['rpg496_c_hat02', 'Ведьмина шляпа', 'f', 'rare', 'luck'],
 ]) add(file, { name, gender: g, category: 'clothes', rarity: r, effect: stat ? equip(stat, r) : null });
 
 // ---------- jewelry & gems ----------
@@ -335,8 +342,8 @@ for (const l of ['a', 'c', 'd', 'f', 'j']) add('kyrise_shard_01' + l, { id: 'sha
 for (const [file, name, r] of [
   ['rpg496_i_agate', 'Агат', 'uncommon'], ['rpg496_i_amethist', 'Аметист-великан', 'epic'], ['rpg496_i_diamond', 'Алмаз', 'legendary'], ['rpg496_i_jade', 'Нефрит', 'rare'],
   ['rpg496_i_opal', 'Опал', 'rare'], ['rpg496_i_ruby', 'Королевский рубин', 'legendary'], ['rpg496_i_sapphire', 'Звёздный сапфир', 'epic'],
-  ['rpg496_i_crystal01', 'Друза', 'uncommon'], ['rpg496_i_crystal02', 'Ледяная друза', 'rare'], ['rpg496_i_crystal03', 'Лунный камень', 'epic'],
-]) add(file, { name, gender: name === 'Друза' || name === 'Ледяная друза' ? 'f' : 'm', category: 'gem', rarity: r });
+  ['rpg496_i_crystal01', 'Синяя друза', 'uncommon'], ['rpg496_i_crystal02', 'Розовая друза', 'rare'], ['rpg496_i_crystal03', 'Лунная друза', 'epic'],
+]) add(file, { name, gender: name.endsWith('друза') ? 'f' : 'm', category: 'gem', rarity: r });
 
 // ---------- books & scrolls ----------
 const BOOKS = [
@@ -365,36 +372,38 @@ for (const [file, name, g, r] of [
   ['rpg496_i_bone', 'Большая кость', 'f', 'common'], ['rpg496_i_bronze_bar', 'Бронзовый брусок', 'm', 'common'], ['rpg496_i_coal', 'Уголёк', 'm', 'common'],
   ['rpg496_i_fabric', 'Отрез ткани', 'm', 'common'], ['rpg496_i_fang', 'Клык', 'm', 'uncommon'], ['rpg496_i_feather02', 'Перо', 'n', 'common'],
   ['rpg496_i_fish_tail', 'Рыбий хвост', 'm', 'common'], ['rpg496_i_fox_tail', 'Лисий хвост', 'm', 'rare'], ['rpg496_i_frog_leg', 'Лягушачья лапка', 'f', 'uncommon'],
-  ['rpg496_i_gold_bar', 'Золотой брусок', 'm', 'epic'], ['rpg496_i_iron_ball', 'Чугунное ядро', 'n', 'common'], ['rpg496_i_rabbit_paw', 'Кроличья лапка', 'f', 'rare'],
+  ['rpg496_i_gold_bar', 'Золотой брусок', 'm', 'epic'], ['rpg496_i_iron_ball', 'Ядро на цепочке', 'n', 'common'], ['rpg496_i_rabbit_paw', 'Кроличья лапка', 'f', 'rare'],
   ['rpg496_i_rock01', 'Камешек', 'm', 'common'], ['rpg496_i_rock02', 'Галька', 'f', 'common'], ['rpg496_i_scorpion_claw', 'Клешня скорпиона', 'f', 'uncommon'],
-  ['rpg496_i_silver_bar', 'Серебряный брусок', 'm', 'rare'], ['rpg496_i_snail_shell', 'Раковина улитки', 'f', 'common'], ['rpg496_i_solid_shell', 'Ракушка', 'f', 'uncommon'],
-  ['rpg496_i_wolf_fur', 'Волчья шерсть', 'f', 'uncommon'], ['rpg496_i_clover', 'Четырёхлистный клевер', 'm', 'epic'], ['rpg496_i_leaf', 'Кленовый лист', 'm', 'common'],
-  ['rpg496_e_bones02', 'Связка косточек', 'f', 'common'], ['rpg496_e_gold01', 'Золотой самородок', 'm', 'rare'], ['rpg496_e_gold02', 'Горсть золотого песка', 'f', 'epic'],
-  ['rpg496_e_metal01', 'Железная руда', 'f', 'common'], ['rpg496_e_metal02', 'Медная руда', 'f', 'common'], ['rpg496_e_metal03', 'Серебряная руда', 'f', 'uncommon'],
-  ['rpg496_e_wood01', 'Брёвнышко', 'n', 'common'], ['rpg496_e_wood02', 'Вязанка дров', 'f', 'common'],
+  ['rpg496_i_silver_bar', 'Серебряный брусок', 'm', 'rare'], ['rpg496_i_snail_shell', 'Раковина улитки', 'f', 'common'], ['rpg496_i_solid_shell', 'Рыжий панцирь', 'm', 'uncommon'],
+  ['rpg496_i_wolf_fur', 'Волчья шерсть', 'f', 'uncommon'], ['rpg496_i_clover', 'Четырёхлистный клевер', 'm', 'epic'], ['rpg496_i_leaf', 'Зелёный листик', 'm', 'common'],
+  ['rpg496_e_bones02', 'Рёбрышки скелета', 'pl', 'common'], ['rpg496_e_metal03', 'Стальная катушка', 'f', 'uncommon'],
 ]) add(file, { name, gender: g, category: 'material', rarity: r, effect: name === 'Четырёхлистный клевер' || name === 'Кроличья лапка' ? equip('luck', r) : null });
 
 // ---------- keys, containers, household, junk ----------
 for (const [n, name] of [[1, 'Ключ от холодильника'], [2, 'Ключ от всех дверей'], [3, 'Ключ от коробки'], [4, 'Ключ от лунного чердака']]) {
   add('rpg496_i_key0' + n, { id: 'key_epi_' + n, name, gender: 'm', category: 'key', rarity: ['uncommon', 'legendary', 'common', 'epic'][n - 1] });
 }
-const GIFT_COLORS = { b: 'зелёный', c: 'фиолетовый', d: 'жёлтый', e: 'синий', f: 'золотой' };
-for (const [l, col] of Object.entries(GIFT_COLORS)) add('kyrise_gift_01' + l, { id: 'gift_' + l, name: named(col, 'подарок', 'm'), gender: 'm', category: 'container', rarity: l === 'f' ? 'epic' : 'uncommon' });
+const GIFT_NAMES = { b: 'Зелёный подарок', c: 'Подарок с лиловым бантом', d: 'Подарок с жёлтым бантом', e: 'Синий подарок', f: 'Золотой подарок' };
+for (const [l, name] of Object.entries(GIFT_NAMES)) add('kyrise_gift_01' + l, { id: 'gift_' + l, name, gender: 'm', category: 'container', rarity: l === 'f' ? 'epic' : 'uncommon' });
 for (const [file, name, g, r, cat] of [
   ['kyrise_gift_01a', 'Красный подарок', 'm', 'common', 'container'],
   ['rpg496_i_chest01', 'Сундук', 'm', 'uncommon', 'container'], ['rpg496_i_chest02', 'Открытый сундук', 'm', 'common', 'container'],
-  ['td_chest_gold', 'Золотой сундучок', 'm', 'epic', 'container'], ['td_chest_wood_b', 'Ящик', 'm', 'common', 'container'], ['td_barrel', 'Бочка', 'f', 'common', 'container'],
-  ['rpg496_i_bottle01', 'Бутылка с письмом', 'f', 'rare', 'container'], ['rpg496_i_bottle02', 'Бутылка с корабликом', 'f', 'epic', 'container'],
+  ['td_chest_gold', 'Окованный сундучок', 'm', 'epic', 'container'], ['td_chest_wood_b', 'Открытый ящик', 'm', 'common', 'container'], ['td_barrel', 'Бочка', 'f', 'common', 'container'],
+  ['rpg496_i_bottle01', 'Пробирка с голубой жижей', 'f', 'rare', 'container'], ['rpg496_i_bottle02', 'Длинная колба', 'f', 'epic', 'container'],
   ['kyrise_candle_01b', 'Свеча', 'f', 'common', 'household'], ['kyrise_cup_01b', 'Стакан молока', 'm', 'common', 'household'],
   ['kyrise_cup_02a', 'Бокал', 'm', 'uncommon', 'household'], ['kyrise_cup_02b', 'Бокал морса', 'm', 'uncommon', 'household'],
   ['td_anvil', 'Наковальня', 'f', 'uncommon', 'household'], ['td_anvil_small', 'Наковаленка', 'f', 'common', 'household'],
   ['td_sign_wood', 'Табличка «Открыто»', 'f', 'common', 'household'], ['td_stool', 'Табуретка', 'f', 'common', 'household'],
   ['rpg496_i_mirror', 'Зеркальце', 'n', 'rare', 'household'], ['rpg496_i_telescope', 'Подзорная труба', 'f', 'epic', 'household'],
-  ['rpg496_i_torch01', 'Факел', 'm', 'common', 'household'], ['rpg496_i_water', 'Кувшин воды', 'm', 'common', 'household'],
+  ['rpg496_i_torch01', 'Факел', 'm', 'common', 'household'], ['rpg496_i_water', 'Бутылка воды', 'f', 'common', 'household'], ['kyrise_cup_01a', 'Пустой стакан', 'm', 'common', 'household'],
   ['rpg496_i_eye', 'Глаз-талисман', 'm', 'rare', 'household'],
-  ['rpg496_i_bronze_coin', 'Позеленевшая монетка', 'f', 'common', 'junk'], ['rpg496_i_silver_coin', 'Серебряная монетка', 'f', 'uncommon', 'junk'],
+  ['rpg496_i_bronze_coin', 'Потёртая монетка', 'f', 'common', 'junk'], ['rpg496_i_silver_coin', 'Серебряная монетка', 'f', 'uncommon', 'junk'],
   ['rpg496_i_gold_coin', 'Дублон', 'm', 'rare', 'junk'], ['td_coin_bronze', 'Медяк', 'm', 'common', 'junk'], ['td_coin_silver', 'Серебрушка', 'f', 'common', 'junk'],
-  ['rpg496_i_bottle04', 'Бутылочное горлышко', 'n', 'common', 'junk'], ['rpg496_i_rock04', 'Подозрительный булыжник', 'm', 'common', 'junk'],
+  ['rpg496_i_bottle04', 'Бутылочка из-под молока', 'f', 'common', 'junk'], ['rpg496_i_rock04', 'Подозрительный булыжник', 'm', 'common', 'junk'],
+  // rpg496 e_* look like ores by name, but these are round shields
+  ['rpg496_e_gold01', 'Золотой щиток', 'm', 'rare', 'clothes'], ['rpg496_e_gold02', 'Золотая бляха', 'f', 'epic', 'clothes'],
+  ['rpg496_e_metal01', 'Решётчатый щиток', 'm', 'common', 'clothes'], ['rpg496_e_metal02', 'Чёрный баклер', 'm', 'common', 'clothes'],
+  ['rpg496_e_wood01', 'Деревянный щит', 'm', 'common', 'clothes'], ['rpg496_e_wood02', 'Окованный щит', 'm', 'common', 'clothes'],
 ]) add(file, { name, gender: g, category: cat, rarity: r });
 
 // ---------- animals ----------
