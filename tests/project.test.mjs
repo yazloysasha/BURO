@@ -188,3 +188,8 @@ test('content minimums and data integrity', async () => {
   const gorbodak = d.items.filter((i) => /Горбодак/.test(i.flavor)).length;
   assert.ok(gorbodak / d.items.length < 0.03, 'Gorbodak must stay rare flavor');
 });
+
+test('long unbreakable strings wrap on the credits screen', () => {
+  const css = read('css/style.css');
+  assert.match(css, /\.credit,\s*\.required\s*\{\s*overflow-wrap:\s*anywhere/);
+});

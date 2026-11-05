@@ -431,7 +431,10 @@ textarea {
 }
 .credit .meta {
   color: var(--ink-dim);
-  word-break: break-word;
+}
+.credit,
+.required {
+  overflow-wrap: anywhere;
 }
 .required {
   border: 2px solid var(--accent);
