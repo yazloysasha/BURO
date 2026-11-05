@@ -34,7 +34,7 @@ export function render(root) {
     play('tap');
   });
 
-  const speeds = [1, 1.5, 2];
+  const speeds = [1, 1.5, 2, 3];
   const seg = h('div.seg');
   const drawSeg = () => {
     seg.replaceChildren(

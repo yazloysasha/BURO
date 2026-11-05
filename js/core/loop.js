@@ -52,17 +52,18 @@ export const ease = {
 };
 
 // Promise-based tween; dur in ms (scaled by animSpeed). onUpdate(k) gets eased progress 0..1.
-export function tween(dur, onUpdate, easing = ease.outQuad) {
+// token: { skipped: bool } jumps straight to the end.
+export function tween(dur, onUpdate, easing = ease.outQuad, token = null) {
   return new Promise((resolve) => {
     const total = dur / speed;
     let t = 0;
-    if (total <= 0) {
+    if (total <= 0 || (token && token.skipped)) {
       onUpdate(1);
       return resolve();
     }
     onFrame((dt) => {
       t += dt * 1000;
-      const k = Math.min(1, t / total);
+      const k = token && token.skipped ? 1 : Math.min(1, t / total);
       onUpdate(easing(k));
       if (k >= 1) {
         resolve();
@@ -76,6 +77,7 @@ export function tween(dur, onUpdate, easing = ease.outQuad) {
 // Wait that can be cut short by a skip token: { skipped: bool }
 export function wait(ms, token) {
   return new Promise((resolve) => {
+    if (token && token.skipped) return resolve();
     let t = 0;
     const total = ms / speed;
     onFrame((dt) => {

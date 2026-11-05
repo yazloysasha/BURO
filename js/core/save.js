@@ -1,11 +1,11 @@
 // Save format, migrations, validation, export/import. Pure: no browser APIs (storage lives in storage.js).
 import { seedState } from './rng.js';
 
-export const SAVE_VERSION = 4;
+export const SAVE_VERSION = 5;
 export const EXPORT_TAG = 'buro';
 
 export function defaultSettings() {
-  return { sfx: 0.8, shake: true, animSpeed: 1, vibration: true, ignoreMute: true };
+  return { sfx: 0.8, shake: true, animSpeed: 2, vibration: true, ignoreMute: true };
 }
 
 export function newSave(now = new Date(), seed = Date.now()) {
@@ -85,6 +85,13 @@ migrations[3] = (s) => {
   s.album.placed = s.album.placed || {};
   if (s.run && !s.run.actionMods) s.run.actionMods = {};
   s.version = 4;
+  return s;
+};
+
+// v5: x2 animations are the new default; x1 was the old default, so saves still on it move too (the setting stays).
+migrations[4] = (s) => {
+  if (s.settings && s.settings.animSpeed === 1) s.settings.animSpeed = 2;
+  s.version = 5;
   return s;
 };
 

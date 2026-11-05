@@ -1,7 +1,7 @@
 // Combat screen: pixel stage (cats left, enemies right), intents, HP, statuses, action panel, event animations.
 import { h, setChildren } from '../core/dom.js';
 import { t } from '../core/i18n.js';
-import { play } from '../core/audio.js';
+import { play as playSfx } from '../core/audio.js';
 import { tween, wait } from '../core/loop.js';
 import { CatSprite, enemyCanvas, iconCanvas } from '../core/sprite.js';
 import { game, commit } from '../game/state.js';
@@ -39,11 +39,20 @@ export function renderCombat(root, { onEnd }) {
   let busy = false;
   let sel = {};
   let targeting = null; // {cat, action, itemUid}
+  // Everything that animates a round can be skipped by tapping anywhere; skipped rounds also stay quiet.
+  let skip = { skipped: false };
+  const play = (...a) => (skip.skipped ? undefined : playSfx(...a));
+  const pause = (ms) => wait(ms, skip);
 
   const log = h('div.combat-log', { text: room.type === 'boss' ? t('combat.bossIntro') : t('combat.start') });
   const panel = h('div.action-panel');
   const chips = h('div.party-row');
   root.append(h('div.split', null, h('div.split-a', null, stage.el), h('div.split-b', null, log, chips, panel)));
+  // the tap that picked the last target also bubbles here: only taps made after the round started count
+  let startedAt = 0;
+  root.addEventListener('pointerdown', (e) => {
+    if (busy && e.timeStamp > startedAt) skip.skipped = true;
+  });
 
   // ----- unit views -----
   function enemySlot(e, idx) {
@@ -175,6 +184,7 @@ export function renderCombat(root, { onEnd }) {
 
   function drawPanel() {
     setChildren(panel);
+    if (busy) panel.append(h('div.dim.small.center.skip-hint', { text: t('common.tapToSkip') }));
     if (c.over || busy) return;
     const k = activeCat();
     if (!k) return;
@@ -309,6 +319,8 @@ export function renderCombat(root, { onEnd }) {
   // ----- resolution & animation -----
   async function resolve() {
     busy = true;
+    skip = { skipped: false };
+    startedAt = performance.now();
     sync();
     const actions = sel;
     sel = {};
@@ -318,7 +330,7 @@ export function renderCombat(root, { onEnd }) {
     busy = false;
     sync();
     if (c.over) {
-      await wait(400);
+      await pause(250);
       onEnd(c.over);
     } else log.textContent = t('combat.round', { n: c.round });
   }
@@ -338,8 +350,8 @@ export function renderCombat(root, { onEnd }) {
   async function lunge(uid, dir) {
     const v = views[uid];
     if (!v) return;
-    await tween(110, (k) => (v.el.style.transform = `translateX(${dir * k * 10 * u}px)`));
-    await tween(140, (k) => (v.el.style.transform = `translateX(${dir * (1 - k) * 10 * u}px)`));
+    await tween(80, (k) => (v.el.style.transform = `translateX(${dir * k * 10 * u}px)`), undefined, skip);
+    await tween(90, (k) => (v.el.style.transform = `translateX(${dir * (1 - k) * 10 * u}px)`), undefined, skip);
     v.el.style.transform = '';
   }
 
@@ -376,8 +388,8 @@ export function renderCombat(root, { onEnd }) {
               await lunge(ev.actor, 1);
             } else if (ev.action === 'hiss' || ev.action === 'purr') {
               v.sp.play('meow', { loop: false, then: 'idle' });
-              await wait(260);
-            } else await wait(200);
+              await pause(120);
+            } else await pause(80);
           } else {
             log.textContent = t('combat.logEnemy', { who: nameOf(ev.actor), what: t('intents.' + ev.action) });
             if (ev.action === 'summon') play('ambush');
@@ -400,73 +412,73 @@ export function renderCombat(root, { onEnd }) {
           }
           if (ev.blocked) float(ev.target, t('combat.blocked', { n: ev.blocked }), 'block');
           syncHp(ev.target, ev.hp);
-          await wait(260);
+          await pause(160);
           break;
         case 'dot':
           float(ev.target, '-' + ev.amount, 'dot');
           play('glitch_2');
           syncHp(ev.target, ev.hp);
-          await wait(220);
+          await pause(100);
           break;
         case 'miss':
           play('miss');
           float(ev.target, t('combat.miss'), 'miss');
-          await wait(240);
+          await pause(120);
           break;
         case 'block':
           play('equip');
           float(ev.target, '+' + ev.amount, 'block');
-          await wait(160);
+          await pause(70);
           break;
         case 'heal':
           if (ev.amount > 0) {
             play('potion', { vol: 0.6 });
             float(ev.target, '+' + ev.amount, 'heal');
             syncHp(ev.target, ev.hp);
-            await wait(220);
+            await pause(100);
           }
           break;
         case 'status': {
           const d = game.data.statusById[ev.status];
           play(d.kind === 'buff' ? 'shiny' : 'glitch');
           float(ev.target, d.name, d.kind);
-          await wait(220);
+          await pause(100);
           break;
         }
         case 'skip':
           float(ev.actor, t('combat.zzz'), 'miss');
           log.textContent = t('combat.logSleep', { who: nameOf(ev.actor) });
-          await wait(300);
+          await pause(180);
           break;
         case 'death': {
           const v = views[ev.target];
           play('squish');
-          if (v) await tween(260, (k) => {
+          if (v) await tween(160, (k) => {
             v.el.style.transform = `scale(${1 + k * 0.3}, ${1 - k})`;
             v.el.style.opacity = String(1 - k);
-          });
+          }, undefined, skip);
           break;
         }
         case 'ko':
           play('fail_small', { vol: 0.5 });
           log.textContent = t('combat.logKo.' + ev.target);
           if (views[ev.target]) views[ev.target].sp.play('sleep1');
-          await wait(400);
+          await pause(250);
           break;
         case 'summon':
           sync();
           float(ev.target, t('combat.summoned'), 'miss');
-          await wait(300);
+          await pause(160);
           break;
         case 'phase':
           play('ambush');
           shake();
           log.textContent = t('combat.bossPhase');
-          await wait(700);
+          await pause(500);
           break;
         case 'item':
           if (ev.item) float(ev.actor, game.data.itemById[ev.item].name, 'heal');
-          await wait(200);
+          await pause(120);
           break;
         case 'revive':
           if (views[ev.target]) views[ev.target].sp.play('idle');
@@ -476,7 +488,7 @@ export function renderCombat(root, { onEnd }) {
           if (cb) {
             log.textContent = t('combat.combo', { name: cb.name });
             play('confirm_big', { vol: 0.8 });
-            await wait(350);
+            await pause(260);
           }
           break;
         }

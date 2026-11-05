@@ -85,3 +85,16 @@ test('v2 save (M2 format with collection.mods) migrates to v3 keys + seen codex'
   assert.ok(s.collection.seen.sardine && s.collection.seen.valerian);
   assert.equal(s.collection.mods, undefined);
 });
+
+test('x2 animations are the default and old x1 saves move to it, other choices stay', () => {
+  assert.equal(newSave().settings.animSpeed, 2);
+  const m = (v) => {
+    const s = newSave();
+    s.version = 4;
+    s.settings.animSpeed = v;
+    return migrate(s).settings.animSpeed;
+  };
+  assert.equal(m(1), 2);
+  assert.equal(m(1.5), 1.5);
+  assert.equal(m(3), 3);
+});

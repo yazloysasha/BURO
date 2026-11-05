@@ -103,7 +103,7 @@ roomViews.anomaly = (root, room) => {
     }
     drawInfo();
     markAll(r.done);
-    if (r.done) setTimeout(() => go('room'), 900);
+    if (r.done) go('room'); // the reward screen shows the same grid with the answers revealed
   }
   box.append(info, grid);
   if (room.phase === 'reward') {
