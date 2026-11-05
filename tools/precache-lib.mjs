@@ -10,6 +10,7 @@ function walk(dir, filter) {
   if (!fs.existsSync(abs)) return [];
   const out = [];
   for (const e of fs.readdirSync(abs, { withFileTypes: true })) {
+    if (e.name.startsWith('.')) continue; // dotfiles: .DS_Store, macOS "._*" metadata (binary, would break JSON parsing)
     const rel = path.posix.join(dir, e.name);
     if (e.isDirectory()) out.push(...walk(rel, filter));
     else if (filter(rel)) out.push(rel);

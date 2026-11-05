@@ -11,6 +11,7 @@ const json = (p) => JSON.parse(read(p));
 
 function walk(dir, filter, out = []) {
   for (const e of fs.readdirSync(path.join(ROOT, dir), { withFileTypes: true })) {
+    if (e.name.startsWith('.')) continue;
     const rel = path.posix.join(dir, e.name);
     if (e.isDirectory()) walk(rel, filter, out);
     else if (filter(rel)) out.push(rel);
@@ -202,4 +203,17 @@ test('texts have no slash-gender stubs, cut-off words or broken genitives', () =
 test('flavour templates only use dictionary words that exist', () => {
   const flavor = json('data/gen/flavor.json');
   for (const list of Object.values(flavor.byCategory)) for (const line of list) for (const m of line.matchAll(/\{(\w+)\}/g)) assert.ok(flavor.fill[m[1]], m[1]);
+});
+
+test('macOS "._*" metadata files are ignored: not in git, not precached, and they do not break the build', () => {
+  const junk = path.join(ROOT, 'data', '._junk.json');
+  fs.writeFileSync(junk, Buffer.from([0, 5, 22, 7, 0, 2, 0, 0]));
+  try {
+    const list = computeList();
+    assert.ok(!list.some((f) => path.basename(f).startsWith('.')), 'dotfile in precache list');
+    assert.doesNotThrow(() => dataAssetRefs());
+  } finally {
+    fs.rmSync(junk);
+  }
+  assert.match(read('.gitignore'), /^\._\*$/m);
 });
