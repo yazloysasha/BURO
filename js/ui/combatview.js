@@ -159,7 +159,7 @@ export function renderCombat(root, { onEnd }) {
           'button.cat-chip' + (activeCat() === k ? '.active' : '') + (cat.ko ? '.ko' : ''),
           { type: 'button' },
           h('div', { text: game.data.cats[k].name }),
-          h('div.dim.small', { text: cat.ko ? t('combat.ko') : ad ? '» ' + ad.name : t('combat.choosing') }),
+          h('div.dim.small', { text: cat.ko ? t('combat.ko.' + k) : ad ? '» ' + ad.name : t('combat.choosing') }),
         );
         chip.addEventListener('click', () => {
           if (busy || !sel[k]) return;
@@ -449,7 +449,7 @@ export function renderCombat(root, { onEnd }) {
         }
         case 'ko':
           play('fail_small', { vol: 0.5 });
-          log.textContent = t('combat.logKo', { who: nameOf(ev.target) });
+          log.textContent = t('combat.logKo.' + ev.target);
           if (views[ev.target]) views[ev.target].sp.play('sleep1');
           await wait(400);
           break;

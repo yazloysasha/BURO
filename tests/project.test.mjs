@@ -193,3 +193,13 @@ test('long unbreakable strings wrap on the credits screen', () => {
   const css = read('css/style.css');
   assert.match(css, /\.credit,\s*\.required\s*\{\s*overflow-wrap:\s*anywhere/);
 });
+
+test('texts have no slash-gender stubs, cut-off words or broken genitives', () => {
+  const blob = ['data/strings.ru.json', 'data/events.json', 'data/combos.json', 'data/items.json', 'data/gen/flavor.json', 'data/gen/lines.json'].map(read).join('\n');
+  for (const bad of [/\(а\)/, /\(ла\)/, /неправильн\./, /[а-яё]+ого кусь/i, /Подозревают самой/, /Принадлежало самой/]) assert.doesNotMatch(blob, bad);
+});
+
+test('flavour templates only use dictionary words that exist', () => {
+  const flavor = json('data/gen/flavor.json');
+  for (const list of Object.values(flavor.byCategory)) for (const line of list) for (const m of line.matchAll(/\{(\w+)\}/g)) assert.ok(flavor.fill[m[1]], m[1]);
+});
