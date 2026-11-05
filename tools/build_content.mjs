@@ -432,13 +432,15 @@ const PASSIVES = {
   epic: [{ type: 'stat', stat: 'atk', value: 2 }, { type: 'stat', stat: 'luck', value: 3 }, { type: 'start_consumable', value: 1 }, { type: 'coin_bonus', value: 0.12 }],
   legendary: [{ type: 'backpack_slot', value: 2 }, { type: 'stat', stat: 'crit', value: 0.06 }, { type: 'coin_bonus', value: 0.2 }, { type: 'block_luck', value: 3 }],
 };
+// the gnat is a 3x2 speck inside its 8x8 cell: crop to it so it shows at a readable size
+const ANIMAL_ART = { bug_gnat: { x: 3, y: 3, w: 3, h: 2 } };
 const animals = [];
 for (const a of animalsIndex) {
   const spec = ANIMALS[a.id];
   if (!spec) continue;
   const [name, rarity, album] = spec;
   const passive = pickH(PASSIVES[rarity], a.id);
-  animals.push({ id: a.id, name, sprite: 'assets/' + a.file, w: a.w, h: a.h, rarity, passive, album });
+  animals.push({ id: a.id, name, sprite: 'assets/' + a.file, w: a.w, h: a.h, ...(ANIMAL_ART[a.id] ? { art: ANIMAL_ART[a.id] } : {}), rarity, passive, album });
 }
 
 // ---------- album: 24 themed pages of animals, enemy stickers and items ----------

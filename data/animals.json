@@ -85,7 +85,7 @@
   {"id":"bug_beetle","name":"Жучок-толстячок","sprite":"assets/sprites/animals/bug_beetle.png","w":8,"h":8,"rarity":"common","passive":{"type":"coin_bonus","value":0.03},"album":"garden"},
   {"id":"bug_dragonfly","name":"Стрекозка","sprite":"assets/sprites/animals/bug_dragonfly.png","w":8,"h":8,"rarity":"uncommon","passive":{"type":"stat","stat":"hp","value":4},"album":"garden"},
   {"id":"bug_firefly","name":"Светлячок-ночник","sprite":"assets/sprites/animals/bug_firefly.png","w":8,"h":8,"rarity":"uncommon","passive":{"type":"sell_bonus","value":0.08},"album":"garden"},
-  {"id":"bug_gnat","name":"Мошка Миша","sprite":"assets/sprites/animals/bug_gnat.png","w":8,"h":8,"rarity":"common","passive":{"type":"stat","stat":"hp","value":2},"album":"garden"},
+  {"id":"bug_gnat","name":"Мошка Миша","sprite":"assets/sprites/animals/bug_gnat.png","w":8,"h":8,"art":{"x":3,"y":3,"w":3,"h":2},"rarity":"common","passive":{"type":"stat","stat":"hp","value":2},"album":"garden"},
   {"id":"bug_moth","name":"Мотылёк","sprite":"assets/sprites/animals/bug_moth.png","w":8,"h":8,"rarity":"common","passive":{"type":"coin_bonus","value":0.03},"album":"garden"},
   {"id":"cat_kitkus","name":"Котёнок Киткус","sprite":"assets/sprites/animals/cat_kitkus.png","w":16,"h":16,"rarity":"legendary","passive":{"type":"stat","stat":"crit","value":0.06},"album":"night"}
 ]

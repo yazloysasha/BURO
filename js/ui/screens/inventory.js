@@ -2,7 +2,7 @@
 import { h, setChildren } from '../../core/dom.js';
 import { t } from '../../core/i18n.js';
 import { play } from '../../core/audio.js';
-import { iconCanvas } from '../../core/sprite.js';
+import { iconCanvas, animalCanvas } from '../../core/sprite.js';
 import { game, commit } from '../../game/state.js';
 import { parseKey, sellPrice, sellItem, toggleShowcase, toggleGuest, collectionStats, SHOWCASE_MAX } from '../../game/collection.js';
 import { guestSlots } from '../../game/meta.js';
@@ -147,12 +147,12 @@ function animalsTab(redraw) {
   const grid = h('div.inv-grid');
   for (const a of owned) {
     const guest = save.meta.guests.includes(a.id);
-    const cell = h('button.inv-cell.r-' + a.rarity + (guest ? '.showcased' : ''), { type: 'button' }, iconCanvas(a.sprite, { w: 16, h: 16, target: 44 }), save.collection.animals[a.id] > 1 ? h('span.count', { text: '×' + save.collection.animals[a.id] }) : null);
+    const cell = h('button.inv-cell.r-' + a.rarity + (guest ? '.showcased' : ''), { type: 'button' }, animalCanvas(a, 44), save.collection.animals[a.id] > 1 ? h('span.count', { text: '×' + save.collection.animals[a.id] }) : null);
     cell.addEventListener('click', () => {
       play('select');
       const rar = game.data.rarityById[a.rarity];
       modal(
-        h('div.col', null, h('div.row', null, h('div.item-icon.big.r-' + a.rarity, null, iconCanvas(a.sprite, { w: 16, h: 16, target: 80 })), h('div', null, h('h2', { text: a.name }), h('div', { text: rar.name, style: { color: rar.color } }))), h('p', { text: t('inv.passive') + ' ' + passiveText(a.passive) }), h('p.dim', { text: t('inv.guestHint') })),
+        h('div.col', null, h('div.row', null, h('div.item-icon.big.r-' + a.rarity, null, animalCanvas(a, 80)), h('div', null, h('h2', { text: a.name }), h('div', { text: rar.name, style: { color: rar.color } }))), h('p', { text: t('inv.passive') + ' ' + passiveText(a.passive) }), h('p.dim', { text: t('inv.guestHint') })),
         [{ label: t('common.close'), value: 0, cls: 'grey', sound: 'back' }],
       );
       document.querySelector('#overlay .actions').prepend(

@@ -17,7 +17,8 @@ let pageIdx = 0;
 function slotInfo(slot) {
   if (slot.kind === 'animal') {
     const a = game.data.animalById[slot.id];
-    return { name: a.name, src: a.sprite, w: 16, h: 16 };
+    const side = a.art ? Math.max(a.art.w, a.art.h) + 1 : Math.max(a.w || 16, a.h || 16);
+    return { name: a.name, src: a.sprite, w: side, h: side, art: a.art || null };
   }
   if (slot.kind === 'enemy') return { name: game.data.enemyById[slot.id].name, enemy: game.data.enemyById[slot.id].sprite };
   const it = game.data.itemById[slot.id];
@@ -26,7 +27,7 @@ function slotInfo(slot) {
 
 function stickerIcon(info, target) {
   if (info.enemy) return enemyCanvas(info.enemy, Math.max(2, Math.round(target / 18)), { flip: false });
-  return iconCanvas(info.src, { w: info.w, h: info.h, target });
+  return iconCanvas(info.src, { w: info.w, h: info.h, target, art: info.art });
 }
 
 // dark silhouette of an unfound sticker (keeps the pixel shape, hides the colours)
@@ -41,7 +42,8 @@ function silhouette(info, target) {
   loadImage(info.src).then((img) => {
     if (!img) return;
     const ctx = c.getContext('2d');
-    ctx.drawImage(img, Math.floor((info.w - img.naturalWidth) / 2), info.h - img.naturalHeight);
+    if (info.art) ctx.drawImage(img, info.art.x, info.art.y, info.art.w, info.art.h, Math.floor((info.w - info.art.w) / 2), info.h - info.art.h, info.art.w, info.art.h);
+    else ctx.drawImage(img, Math.floor((info.w - img.naturalWidth) / 2), info.h - img.naturalHeight);
     ctx.globalCompositeOperation = 'source-in';
     ctx.fillStyle = '#3a3058';
     ctx.fillRect(0, 0, info.w, info.h);

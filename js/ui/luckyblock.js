@@ -4,7 +4,7 @@ import { h, setChildren } from '../core/dom.js';
 import { t } from '../core/i18n.js';
 import { play } from '../core/audio.js';
 import { tween, wait, ease } from '../core/loop.js';
-import { iconCanvas } from '../core/sprite.js';
+import { iconCanvas, animalCanvas } from '../core/sprite.js';
 import { game } from '../game/state.js';
 import { pityLeft } from '../game/loot.js';
 import { displayName } from '../game/names.js';
@@ -13,8 +13,7 @@ import { burstAt } from './particles.js';
 
 export function contentIcon(block, target = 64) {
   if (block.kind === 'animal') {
-    const a = game.data.animalById[block.id];
-    return iconCanvas(a.sprite, { w: 16, h: 16, target });
+    return animalCanvas(game.data.animalById[block.id], target);
   }
   const it = game.data.itemById[block.id];
   return iconCanvas(it.icon, { w: it.w, h: it.h, target, mods: block.mods, seed: block.id });

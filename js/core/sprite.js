@@ -113,7 +113,7 @@ export class CatSprite {
 export function enemyFrame(id) {
   const s = sheets.enemies;
   const e = s.meta.enemies[id];
-  return e ? { img: s.img, y: e.y, frames: e.frames, w: s.meta.frameW, h: s.meta.frameH } : null;
+  return e ? { img: s.img, y: e.y, frames: e.frames, w: s.meta.frameW, h: s.meta.frameH, art: e.art || null } : null;
 }
 
 export function enemyCanvas(id, scale = 4, { flip = true, animate = true } = {}) {
@@ -130,7 +130,11 @@ export function enemyCanvas(id, scale = 4, { flip = true, animate = true } = {})
       ctx.translate(16, 0);
       ctx.scale(-1, 1);
     }
-    ctx.drawImage(f.img, i * 16, f.y, 16, 16, 0, 0, 16, 16);
+    if (f.art) {
+      // tiny 8x8 bugs: whole-number zoom of their art so they fill the cell like everyone else
+      const { x, y, w, h, zoom } = f.art;
+      ctx.drawImage(f.img, i * 16 + x, f.y + y, w, h, Math.floor((16 - w * zoom) / 2), 16 - h * zoom, w * zoom, h * zoom);
+    } else ctx.drawImage(f.img, i * 16, f.y, 16, 16, 0, 0, 16, 16);
     ctx.restore();
   };
   draw(0);
@@ -265,12 +269,17 @@ function baseData(img) {
 }
 
 // Returns a canvas element showing the icon (async load ok). opts: {mods:[], target:css px, seed}
-export function iconCanvas(src, { mods = [], target = 48, seed = '', w = 16, h = 16, cls = '' } = {}) {
+export function iconCanvas(src, { mods = [], target = 48, seed = '', w = 16, h = 16, cls = '', art = null } = {}) {
   const scale = iconScale(Math.max(w, h), target);
   const c = pixelCanvas(w + 2, h + 2, scale, 'icon ' + cls);
   const ctx = c.getContext('2d');
   const animated = mods.some((m) => ANIMATED_MODS.has(m)) || mods.includes('cursed');
   const render = (img, t) => {
+    if (art) {
+      ctx.clearRect(0, 0, c.width, c.height);
+      ctx.drawImage(img, art.x, art.y, art.w, art.h, 1 + Math.floor((w - art.w) / 2), 1 + (h - art.h), art.w, art.h);
+      return;
+    }
     if (!mods.length) {
       ctx.clearRect(0, 0, c.width, c.height);
       ctx.drawImage(img, 1 + Math.floor((w - img.naturalWidth) / 2), 1 + (h - img.naturalHeight), img.naturalWidth, img.naturalHeight);
@@ -307,6 +316,12 @@ export function iconCanvas(src, { mods = [], target = 48, seed = '', w = 16, h =
   if (ready) start(ready);
   else loadImage(src).then(start);
   return c;
+}
+
+// Animals have mixed native sizes (16x16, 8x8 bugs); an `art` box crops specks that would still be tiny.
+export function animalCanvas(a, target = 48) {
+  const side = a.art ? Math.max(a.art.w, a.art.h) + 1 : Math.max(a.w || 16, a.h || 16);
+  return iconCanvas(a.sprite, { w: side, h: side, target, art: a.art || null });
 }
 
 // ---------- recoloured cat sheets (recolour skins of our own cats) ----------
