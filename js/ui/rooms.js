@@ -73,7 +73,7 @@ roomViews.anomaly = (root, room) => {
         cv = pixelCanvas(16, 16, scale);
         if (img) paintVariant(cv, img, cell);
       }
-      const b = h('button.anomaly-cell', { type: 'button' }, cv);
+      const b = h('button.anomaly-cell', { type: 'button', 'aria-label': t('a11y.anomalyCell', { n: i + 1 }) }, cv);
       b.addEventListener('click', () => onTap(i));
       cells.push(b);
       grid.append(b);
@@ -135,7 +135,7 @@ roomViews.shelf = (root, room) => {
     s.items.forEach((it, i) => {
       if (it.placed) return;
       const item = game.data.itemById[it.id];
-      const b = h('button.shelf-item' + (selected === i ? '.sel' : ''), { type: 'button' }, itemIcon(item, { target: 40 }));
+      const b = h('button.shelf-item' + (selected === i ? '.sel' : ''), { type: 'button', 'aria-label': t('a11y.shelfItem', { name: item.name }) }, itemIcon(item, { target: 40 }));
       b.addEventListener('click', () => {
         if (room.phase !== 'play') return;
         selected = selected === i ? null : i;

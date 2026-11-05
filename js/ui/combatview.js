@@ -77,7 +77,7 @@ export function renderCombat(root, { onEnd }) {
     stage.place(sp.el, x, y, 5);
     const bar = overlay(x + 4, y + 31, 'bar');
     const st = overlay(x + 4, y + 2, 'statuses');
-    stage.zone(x + 4, y + 12, 24, 20, () => onCatTap(cat.key));
+    stage.zone(x + 4, y + 12, 24, 20, () => onCatTap(cat.key), game.data.cats[cat.key].name);
     return { sp, el: sp.el, x, y, bar, st, w: 32, h: 32 };
   }
 
@@ -95,7 +95,7 @@ export function renderCombat(root, { onEnd }) {
     const bar = overlay(x - 2, y + size, 'bar');
     const intent = overlay(x - 2, y - 9, 'intent');
     const st = overlay(x - 2, y + size + 4, 'statuses');
-    const zone = stage.zone(x - 2, y - 2, size + 4, size + 4, () => onEnemyTap(e.uid));
+    const zone = stage.zone(x - 2, y - 2, size + 4, size + 4, () => onEnemyTap(e.uid), e.name);
     return { el: cv, x, y, bar, intent, st, zone, w: size, h: size };
   }
 

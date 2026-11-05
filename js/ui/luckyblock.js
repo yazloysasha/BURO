@@ -31,7 +31,7 @@ export function pityLine() {
 
 // block: rolled contents; opener(): performs the state change (and commit), returns {block} or null to cancel.
 export function blockCard(block, { closedIcon, opener, onRevealed } = {}) {
-  const card = h('button.lucky' + (block.opened ? '.opened' : ''), { type: 'button' });
+  const card = h('button.lucky' + (block.opened ? '.opened' : ''), { type: 'button', 'aria-label': t('a11y.block') });
   const label = h('div.lucky-label');
   const holder = h('div.lucky-icon');
   card.append(holder, label);
@@ -41,6 +41,7 @@ export function blockCard(block, { closedIcon, opener, onRevealed } = {}) {
     const rar = R();
     card.classList.add('opened', 'r-' + block.rarity);
     card.style.setProperty('--rc', rar.color);
+    card.setAttribute('aria-label', contentName(block) + ', ' + rar.name);
     setChildren(holder, contentIcon(block));
     setChildren(
       label,

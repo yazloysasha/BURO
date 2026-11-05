@@ -502,6 +502,19 @@ textarea {
   padding: 0;
   cursor: pointer;
 }
+.map-label {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 1px;
+  font-size: var(--fs-s);
+  line-height: 1.1;
+  white-space: nowrap;
+  color: var(--ink);
+  text-shadow: 1px 1px 0 #15112a;
+  pointer-events: none;
+}
 .map-node.visited {
   opacity: 0.45;
 }

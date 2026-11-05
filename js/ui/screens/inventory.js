@@ -52,7 +52,7 @@ function itemsTab(redraw) {
     const showcased = (save.meta.showcase || []).includes(e.key);
     const cell = h(
       'button.inv-cell.r-' + item.rarity + (showcased ? '.showcased' : ''),
-      { type: 'button' },
+      { type: 'button', 'aria-label': displayName(item, e.mods) },
       iconCanvas(item.icon, { w: item.w, h: item.h, target: 44, mods: e.mods, seed: e.key }),
       e.n > 1 ? h('span.count', { text: '×' + e.n }) : null,
     );
@@ -147,7 +147,7 @@ function animalsTab(redraw) {
   const grid = h('div.inv-grid');
   for (const a of owned) {
     const guest = save.meta.guests.includes(a.id);
-    const cell = h('button.inv-cell.r-' + a.rarity + (guest ? '.showcased' : ''), { type: 'button' }, animalCanvas(a, 44), save.collection.animals[a.id] > 1 ? h('span.count', { text: '×' + save.collection.animals[a.id] }) : null);
+    const cell = h('button.inv-cell.r-' + a.rarity + (guest ? '.showcased' : ''), { type: 'button', 'aria-label': a.name }, animalCanvas(a, 44), save.collection.animals[a.id] > 1 ? h('span.count', { text: '×' + save.collection.animals[a.id] }) : null);
     cell.addEventListener('click', () => {
       play('select');
       const rar = game.data.rarityById[a.rarity];

@@ -45,8 +45,10 @@ export class Stage {
     canvas.style.top = Math.round(y) * this.unit + 'px';
   }
 
-  zone(x, y, w, hh, onTap) {
+  zone(x, y, w, hh, onTap, label = null) {
     const z = h('div.tap-zone', {
+      role: 'button',
+      'aria-label': label,
       style: { left: x * this.unit + 'px', top: y * this.unit + 'px', width: w * this.unit + 'px', height: hh * this.unit + 'px', zIndex: 20 },
     });
     z.addEventListener('pointerdown', (e) => {

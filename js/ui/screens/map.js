@@ -10,7 +10,7 @@ import { button, go, modal, setTopbarTitle } from '../app.js';
 import { partyBar, openBackpack } from '../runwidgets.js';
 import { effectiveDpr } from '../layout.js';
 
-const FLOOR_H = 76;
+const FLOOR_H = 84;
 const NODE = 52;
 
 export function roomIcon(type, target = 34) {
@@ -75,10 +75,12 @@ export function render(root) {
     for (const n of row) {
       const p = pos(n);
       const isAvail = avail.has(n.id);
+      const r = game.data.roomById[n.type];
       const el = h(
         'button.map-node' + (isAvail ? '.avail' : '') + (visited.has(n.id) ? '.visited' : '') + (n.type === 'boss' ? '.boss' : ''),
-        { type: 'button', style: { left: p.x - NODE / 2 + 'px', top: p.y - NODE / 2 + 'px' } },
+        { type: 'button', 'aria-label': t(isAvail ? 'map.nodeAvail' : visited.has(n.id) ? 'map.nodeVisited' : 'map.nodeLocked', { room: r.name }), style: { left: p.x - NODE / 2 + 'px', top: p.y - NODE / 2 + 'px' } },
         roomIcon(n.type),
+        h('span.map-label', { text: r.short || r.name }),
       );
       el.addEventListener('click', () => onNode(n, isAvail));
       area.append(el);

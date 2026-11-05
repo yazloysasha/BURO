@@ -1,3 +1,4 @@
+import fs from 'node:fs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { Rng } from '../js/core/rng.js';
@@ -81,4 +82,12 @@ test('availableNodes: start = floor 0, then only up-links', () => {
   assert.deepEqual(availableNodes(map, null), map.floors[0].map((n) => n.id));
   const n = map.floors[0][0];
   assert.deepEqual(availableNodes(map, n.id), n.up);
+});
+
+test('every room type has a short map label and the map node renders it with an aria-label', () => {
+  const rooms = JSON.parse(fs.readFileSync(new URL('../data/rooms.json', import.meta.url), 'utf8'));
+  for (const r of rooms) assert.ok(r.short && r.short.length <= 9, r.id);
+  const src = fs.readFileSync(new URL('../js/ui/screens/map.js', import.meta.url), 'utf8');
+  assert.match(src, /'aria-label'/);
+  assert.match(src, /map-label/);
 });
