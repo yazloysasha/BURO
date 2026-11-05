@@ -61,9 +61,11 @@ function registerSW() {
       });
     })
     .catch((e) => console.warn('sw', e));
+  // the very first install claims this page too: nothing changed, so don't yank the player back to the hub
+  const hadController = !!navigator.serviceWorker.controller;
   let reloading = false;
   navigator.serviceWorker.addEventListener('controllerchange', () => {
-    if (reloading) return;
+    if (reloading || !hadController) return;
     reloading = true;
     location.reload();
   });
