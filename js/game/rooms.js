@@ -1,8 +1,9 @@
-// Non-combat rooms: anomaly hunt, shelf sorting, wash, events, night shop. Pure; randomness via run.rng.
+// Non-combat rooms: backroom anomalies, shelf sorting, wash, events, night shop. Pure; randomness via run.rng.
 import { withRunRng, addToBackpack, giveItem, pickConsumable } from './run.js';
 import { rollRunBlocks, blockLuck } from './blocks.js';
 import { roomModCombo } from './combos.js';
 import { coinMult } from './meta.js';
+import { newBackroom, rollLoop, callLoop, backroomGrade } from './backroom.js';
 
 const coins = (save, data, n) => Math.max(1, Math.round(n * coinMult(save, data)));
 
@@ -12,71 +13,34 @@ function giveCoins(run, n) {
   return n;
 }
 
-// ---------- anomaly: spot the odd icons, limited taps, no timer ----------
-export const ANOMALY_KINDS = ['mirror', 'recolor', 'pixel', 'glitch'];
-
-export function initAnomaly(save, data, run, room) {
-  withRunRng(run, (rng) => {
-    const big = run.floorNo >= 5;
-    const size = big ? 4 : 3;
-    const total = big ? 2 : 1;
-    const pool = data.items.filter((i) => i.w === 16 && i.h === 16 && !(i.tags || []).includes('slop'));
-    const item = rng.pick(pool);
-    const cells = Array.from({ length: size * size }, () => ({ kind: 'normal', tapped: false }));
-    // only tricks that can be seen on this icon (see anomalyFit in tools/build_content.mjs)
-    const kinds = rng.shuffle(ANOMALY_KINDS.filter((k) => (k !== 'mirror' || item.mirrorOk) && (k !== 'recolor' || item.recolorOk)));
-    const spots = rng.shuffle([...cells.keys()]).slice(0, total);
-    spots.forEach((s, i) => {
-      cells[s] = { kind: kinds[i], tapped: false, px: rng.int(2, 13), py: rng.int(2, 13), seed: rng.int(0, 9999) };
-    });
-    room.anomaly = { size, icon: item.id, cells, total, found: 0, misses: 0, tapsLeft: total + 2 + (run.flags.anomalyTap || 0) };
-    run.flags.anomalyTap = 0;
-  });
+// ---------- backroom: the familiar room in loops (see backroom.js) ----------
+export function initBackroom(save, data, run, room) {
+  const firstVisit = !save.meta.backroomVisited;
+  save.meta.backroomVisited = true;
+  const state = newBackroom({ loops: run.floorNo >= 6 ? 4 : 3, maxLevel: run.floorNo >= 5 ? 3 : 2, firstVisit, hints: run.flags.anomalyHint || 0 });
+  run.flags.anomalyHint = 0;
+  withRunRng(run, (rng) => rollLoop(state, rng, data, save));
+  room.backroom = state;
   room.phase = 'play';
 }
 
-export function tapAnomaly(save, data, idx) {
+export function backroomCall(save, data, choice) {
   const run = save.run;
   const room = run.room;
-  const a = room && room.anomaly;
-  if (!a || room.phase !== 'play') return null;
-  const cell = a.cells[idx];
-  if (!cell || cell.tapped) return null;
-  cell.tapped = true;
-  a.tapsLeft--;
-  const hit = cell.kind !== 'normal';
-  if (hit) a.found++;
-  else a.misses++;
-  const done = a.found === a.total || a.tapsLeft <= 0;
-  if (done) finishAnomaly(save, data, run, room);
-  return { hit, done, kind: cell.kind };
+  if (!room || !room.backroom || room.phase !== 'play') return null;
+  const r = withRunRng(run, (rng) => callLoop(room.backroom, save, choice, rng, data));
+  if (r && r.done) finishBackroom(save, data, run, room);
+  return r;
 }
 
-function finishAnomaly(save, data, run, room) {
-  const a = room.anomaly;
+function finishBackroom(save, data, run, room) {
   const f = run.floorNo;
-  let c = 0;
-  let blocks = 0;
-  let min = null;
-  if (a.found === a.total && a.misses === 0) {
-    c = coins(save, data, 10 + f * 2);
-    blocks = 1;
-    min = 'uncommon';
-    room.grade = 'perfect';
-  } else if (a.found === a.total) {
-    c = coins(save, data, 8 + f);
-    blocks = 1;
-    room.grade = 'good';
-  } else if (a.found > 0) {
-    c = coins(save, data, 5 * a.found + f);
-    room.grade = 'partial';
-  } else {
-    c = coins(save, data, 3);
-    room.grade = 'miss';
-  }
+  const grade = (room.grade = backroomGrade(room.backroom));
+  const c = coins(save, data, { perfect: 12 + f * 2, good: 9 + f, rough: 5 + f, lost: 3 }[grade]);
   giveCoins(run, c);
   room.reward = { coins: c, items: [] };
-  if (blocks) room.blocks = rollRunBlocks(save, data, run, blocks, min ? { minRarity: min } : {});
+  if (grade === 'perfect') room.blocks = rollRunBlocks(save, data, run, 1, { minRarity: 'uncommon' });
+  else if (grade === 'good') room.blocks = rollRunBlocks(save, data, run, 1);
   room.phase = 'reward';
 }
 

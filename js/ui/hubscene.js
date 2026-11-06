@@ -1,5 +1,5 @@
 // The Lavka interior, painted procedurally in pixels (logical 128x88), with both cats living in it.
-import { CatSprite, pixelCanvas } from '../core/sprite.js';
+import { CatSprite, pixelCanvas, enemyFrame } from '../core/sprite.js';
 import { getImage, loadImage, sheets } from '../core/assets.js';
 import { play } from '../core/audio.js';
 import { Stage } from './stage.js';
@@ -13,7 +13,7 @@ function rect(ctx, x, y, w, hh, c) {
   ctx.fillRect(x, y, w, hh);
 }
 
-function paintBackground(ctx, shelfIcons) {
+function paintBackground(ctx, shelfIcons, anomaly = null) {
   // wall
   rect(ctx, 0, 0, HUB_W, HUB_H, '#2b2140');
   for (let x = 0; x < HUB_W; x += 8) rect(ctx, x, 0, 1, 66, '#241b37');
@@ -24,11 +24,13 @@ function paintBackground(ctx, shelfIcons) {
   const stars = [[11, 13], [20, 12], [33, 15], [14, 24], [27, 21], [35, 29], [10, 30]];
   for (const [x, y] of stars) rect(ctx, x, y, 1, 1, '#d8d0ff');
   // moon
-  rect(ctx, 25, 13, 6, 6, '#f6e7b0');
-  rect(ctx, 24, 14, 8, 4, '#f6e7b0');
-  rect(ctx, 26, 12, 4, 8, '#f6e7b0');
+  const moon = anomaly === 'hub_moon_red' ? '#e04848' : '#f6e7b0';
+  rect(ctx, 25, 13, 6, 6, moon);
+  rect(ctx, 24, 14, 8, 4, moon);
+  rect(ctx, 26, 12, 4, 8, moon);
   rect(ctx, 28, 14, 2, 1, '#e3cf8e');
   rect(ctx, 26, 17, 1, 1, '#e3cf8e');
+  if (anomaly === 'hub_window_eyes') for (const x of [11, 13, 17, 19]) rect(ctx, x, 27, 1, 1, '#ffe14a');
   rect(ctx, 22, 10, 1, 24, '#4a3a2a');
   rect(ctx, 8, 21, 30, 1, '#4a3a2a');
   rect(ctx, 5, 36, 36, 2, '#5c4733');
@@ -51,6 +53,17 @@ function paintBackground(ctx, shelfIcons) {
   rect(ctx, lx, 0, 1, 10, '#18121f');
   rect(ctx, lx - 3, 10, 7, 3, '#8a5a2a');
   rect(ctx, lx - 1, 13, 3, 2, '#ffe28a');
+  // a klobster creeping down from the ceiling, half of it still up there
+  if (anomaly === 'hub_ceiling') {
+    const f = enemyFrame('klobster');
+    if (f) {
+      ctx.save();
+      ctx.translate(27, 9);
+      ctx.scale(1, -1);
+      ctx.drawImage(f.img, 0, f.y, 16, 16, 0, 0, 16, 16);
+      ctx.restore();
+    }
+  }
   // floor
   rect(ctx, 0, 66, HUB_W, 22, '#5a3a2a');
   for (let y = 66; y < HUB_H; y += 5) rect(ctx, 0, y, HUB_W, 1, '#4a2e20');
@@ -89,13 +102,28 @@ function shelfIconList() {
   return out;
 }
 
-export function createHubScene(availW, availH) {
+// where each hub anomaly sits, for its tap zone
+const HUB_ANOMALY_ZONE = { hub_moon_red: [18, 6, 20, 18], hub_window_eyes: [4, 20, 24, 16], hub_ceiling: [22, 0, 24, 16] };
+
+export function createHubScene(availW, availH, { anomaly = null, onAnomaly = null } = {}) {
   const stage = new Stage(HUB_W, HUB_H, availW, availH);
   const icons = shelfIconList();
+  let shown = anomaly;
   const paint = () => {
     stage.ctx.clearRect(0, 0, HUB_W, HUB_H);
-    paintBackground(stage.ctx, icons);
+    paintBackground(stage.ctx, icons, shown);
   };
+  if (shown && HUB_ANOMALY_ZONE[shown]) {
+    const [x, y, w, hh] = HUB_ANOMALY_ZONE[shown];
+    const zone = stage.zone(x, y, w, hh, () => {
+      if (!shown) return;
+      const id = shown;
+      shown = null;
+      zone.remove();
+      paint();
+      onAnomaly && onAnomaly(id);
+    });
+  }
   paint();
   Promise.all(icons.map(loadImage)).then(paint);
   // invited animal guests wander on the floor

@@ -95,5 +95,11 @@
     "hp": 3,
     "atkEvery": 2,
     "max": 6
+  },
+  "hubAnomalyPct": 7,
+  "nightShift": {
+    "loops": 5,
+    "coins": 30,
+    "sparkles": 3
   }
 }

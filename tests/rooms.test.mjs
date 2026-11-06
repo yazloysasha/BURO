@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { newSave } from '../js/core/save.js';
 import { startRun, enterNode, playRound, addToBackpack, equipmentBonus } from '../js/game/run.js';
-import { tapAnomaly, placeOnShelf, washItem, chooseEvent, buyShop } from '../js/game/rooms.js';
+import { backroomCall, placeOnShelf, washItem, chooseEvent, buyShop } from '../js/game/rooms.js';
 import { backpackMatch, activeCombos, nearCombos, guestCombos } from '../js/game/combos.js';
 import { aliveEnemies } from '../js/game/combat.js';
 import { unopenedBlocks } from '../js/game/blocks.js';
@@ -21,37 +21,6 @@ function runInRoom(type, seed = type) {
 
 test('every room type of SPEC §2 exists in data', () => {
   for (const id of ['combat', 'elite', 'loot', 'anomaly', 'shelf', 'wash', 'rest', 'event', 'shop', 'boss']) assert.ok(data.roomById[id], id);
-});
-
-test('anomaly: 3x3 early with 1 odd icon, limited taps, reward by accuracy', () => {
-  const save = runInRoom('anomaly');
-  const a = save.run.room.anomaly;
-  assert.equal(a.size, 3);
-  assert.equal(a.cells.filter((c) => c.kind !== 'normal').length, 1);
-  assert.equal(a.tapsLeft, 3);
-  const odd = a.cells.findIndex((c) => c.kind !== 'normal');
-  const r = tapAnomaly(save, data, odd);
-  assert.ok(r.hit && r.done);
-  assert.equal(save.run.room.grade, 'perfect');
-  assert.equal(save.run.room.blocks.length, 1);
-});
-
-test('anomaly: 4x4 with 2 odd icons on later floors; running out of taps ends it', () => {
-  const save = newSave(new Date(), 'a4');
-  startRun(save, data);
-  save.run.floorNo = 6;
-  const node = save.run.map.floors[5][0];
-  node.type = 'anomaly';
-  save.run.pos = save.run.map.floors[4].find((n) => n.up.includes(node.id)).id;
-  enterNode(save, data, node.id);
-  const a = save.run.room.anomaly;
-  assert.equal(a.size, 4);
-  assert.equal(a.total, 2);
-  const normals = a.cells.map((c, i) => (c.kind === 'normal' ? i : -1)).filter((i) => i >= 0);
-  let last;
-  for (let i = 0; i < a.tapsLeft + 5 && save.run.room.phase === 'play'; i++) last = tapAnomaly(save, data, normals[i]);
-  assert.ok(last.done);
-  assert.equal(save.run.room.grade, 'miss');
 });
 
 test('shelf: correct placements stick, wrong ones cost moves', () => {
@@ -224,18 +193,6 @@ test('a found block keeps the room locked until it is opened', () => {
   assert.equal(unopenedBlocks(null), 0);
 });
 
-test('anomalies only use tricks that can be seen on the chosen icon', () => {
-  for (let s = 0; s < 200; s++) {
-    const save = runInRoom('anomaly', 'fair' + s);
-    const a = save.run.room.anomaly;
-    const it = data.itemById[a.icon];
-    for (const c of a.cells) {
-      if (c.kind === 'mirror') assert.ok(it.mirrorOk, it.id + ' is symmetric');
-      if (c.kind === 'recolor') assert.ok(it.recolorOk, it.id + ' is grey');
-    }
-    assert.equal(a.cells.filter((c) => c.kind !== 'normal').length, a.total);
-  }
-});
 
 test('near-combo hint appears one item before a backpack set, not after it', () => {
   const save = runInRoom('rest', 'near');

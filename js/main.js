@@ -22,6 +22,7 @@ import * as album from './ui/screens/album.js';
 import * as talents from './ui/screens/talents.js';
 import * as upgrades from './ui/screens/upgrades.js';
 import * as skins from './ui/screens/skins.js';
+import * as nightshift from './ui/screens/nightshift.js';
 import { unplacedCount, talentStatus } from './game/progress.js';
 import { sheets } from './core/assets.js';
 import { recolorSheet } from './core/sprite.js';
@@ -131,11 +132,13 @@ async function boot() {
   registerScreen('talents', talents);
   registerScreen('upgrades', upgrades);
   registerScreen('skins', skins);
+  registerScreen('nightshift', nightshift);
   hubMenu.push(
     { id: 'daily', label: () => t('hub.daily'), onClick: () => go('daily'), cls: 'yellow', badge: () => (dailyAvailable(game.save, localDate()) ? '!' : null) },
     { id: 'inventory', label: () => t('hub.inventory'), onClick: () => go('inventory'), cls: 'blue' },
     { id: 'album', label: () => t('hub.album'), onClick: () => go('album'), cls: 'blue', badge: () => unplacedCount(game.save, game.data) || null },
-    { id: 'combos', label: () => t('hub.combos', { n: game.save.combos.discovered.length, total: game.data.combos.length }), onClick: () => go('combos'), cls: 'blue' },
+    { id: 'combos', label: () => t('hub.combos'), onClick: () => go('combos'), cls: 'blue' },
+    { id: 'night', label: () => t('night.title'), onClick: () => go('nightshift'), cls: 'blue', badge: () => (game.save.meta.nightPaidDate !== localDate() && game.save.meta.backroomVisited ? '!' : null) },
     { id: 'talents', label: () => t('hub.talents'), onClick: () => go('talents'), cls: 'blue', badge: () => (game.data.talents.some((b) => b.nodes.some((n) => talentStatus(game.save, game.data, n.id).affordable)) ? '!' : null) },
     { id: 'upgrades', label: () => t('hub.upgrades'), onClick: () => go('upgrades'), cls: 'blue' },
     { id: 'skins', label: () => t('hub.skins'), onClick: () => go('skins'), cls: 'blue' },

@@ -9,7 +9,7 @@ import { availableNodes, findNode } from '../js/game/map.js';
 import { runFee, runIsFree } from '../js/game/meta.js';
 import { loadData } from './helpers.mjs';
 import { openRunBlock, resolveFullBackpack } from '../js/game/blocks.js';
-import { chooseEvent, tapAnomaly, placeOnShelf } from '../js/game/rooms.js';
+import { chooseEvent, backroomCall, placeOnShelf } from '../js/game/rooms.js';
 
 const data = loadData();
 const ctx = combatCtx(data, { floorNo: 1, tier: 1 });
@@ -175,7 +175,7 @@ function autoplayRun(seed, strategy = 'smart') {
       continue;
     }
     if (room.type === 'anomaly' && room.phase === 'play') {
-      tapAnomaly(save, data, room.anomaly.cells.findIndex((c) => !c.tapped));
+      backroomCall(save, data, room.backroom.cur ? 'back' : 'forward');
       continue;
     }
     if (room.type === 'shelf' && room.phase === 'play') {

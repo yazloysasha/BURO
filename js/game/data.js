@@ -1,7 +1,7 @@
 import { applyActionMods } from './progress.js';
 
 // Content file list and lookup indexes. Shared by the browser boot and node tests.
-export const DATA_FILES = ['strings.ru', 'assets', 'credits', 'cats', 'enemies', 'statuses', 'rooms', 'balance', 'items', 'animals', 'rarities', 'modifiers', 'events', 'combos', 'album', 'talents', 'upgrades', 'tiers', 'skins', 'gen/elite', 'gen/flavor', 'gen/lines'];
+export const DATA_FILES = ['strings.ru', 'assets', 'credits', 'cats', 'enemies', 'statuses', 'rooms', 'balance', 'items', 'animals', 'rarities', 'modifiers', 'events', 'combos', 'album', 'talents', 'upgrades', 'tiers', 'skins', 'backroom', 'anomalies', 'gen/elite', 'gen/flavor', 'gen/lines'];
 
 const byId = (arr) => Object.fromEntries((arr || []).map((x) => [x.id, x]));
 

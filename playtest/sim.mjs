@@ -4,8 +4,9 @@
 import { Rng } from '../js/core/rng.js';
 import { newSave } from '../js/core/save.js';
 import { startRun, enterNode, playRound, completeRoom, finishRun, restChoice, runPayout } from '../js/game/run.js';
-import { tapAnomaly, placeOnShelf, washItem, washCats, chooseEvent, buyShop } from '../js/game/rooms.js';
+import { backroomCall, placeOnShelf, washItem, washCats, chooseEvent, buyShop } from '../js/game/rooms.js';
 import { openRunBlock, resolveFullBackpack, openDailyGift } from '../js/game/blocks.js';
+import { startNightShift, nightShiftCall } from '../js/game/nightshift.js';
 import { placeSticker, buyUpgrade, learnTalent, tierUp } from '../js/game/progress.js';
 import { sellItem, toggleGuest, collectionStats } from '../js/game/collection.js';
 import { guestSlots, runFee, runIsFree } from '../js/game/meta.js';
@@ -14,7 +15,7 @@ import { loadData } from '../tests/helpers.mjs';
 import { makeStrategy, STRATEGIES } from './lib/strategy.mjs';
 
 // Rough human pacing used for minutes estimates (seconds): measured animation times at x2 + reading/thinking.
-export const PACE = { round: 1.2 + 4.5, room: 3, event: 9, puzzleMove: 1.6, block: 2.2, shopVisit: 8, runEnd: 8, hub: 12, reward: 2 };
+export const PACE = { loop: 6, round: 1.2 + 4.5, room: 3, event: 9, puzzleMove: 1.6, block: 2.2, shopVisit: 8, runEnd: 8, hub: 12, reward: 2 };
 
 function openAllBlocks(save, data, strat, tally) {
   const blocks = save.run.room.blocks || [];
@@ -62,8 +63,8 @@ export function playRun(save, data, strat) {
       tally.decisions++;
     } else if (type === 'anomaly') {
       while (room.phase === 'play') {
-        tapAnomaly(save, data, strat.anomalyPick(room));
-        tally.time += PACE.puzzleMove;
+        backroomCall(save, data, strat.backroomChoice(room.backroom, data));
+        tally.time += PACE.loop;
       }
     } else if (type === 'shelf') {
       while (room.phase === 'play') {
@@ -161,7 +162,14 @@ export function playCareer(data, name, seed, nRuns, runsPerDay = 3) {
   };
   const day = (n) => `2026-${String(11 + Math.floor(n / 30)).padStart(2, '0')}-${String(1 + (n % 30)).padStart(2, '0')}`;
   for (let i = 0; i < nRuns; i++) {
-    if (i % runsPerDay === 0) openDailyGift(save, data, day(i / runsPerDay));
+    if (i % runsPerDay === 0) {
+      const today = day(i / runsPerDay);
+      openDailyGift(save, data, today);
+      // one night shift a day, like the daily gift
+      startNightShift(save, data, today);
+      for (let k = 0; k < 40 && !save.meta.nightShift.state.done; k++) nightShiftCall(save, data, strat.backroomChoice(save.meta.nightShift.state, data), today);
+      clock += (save.meta.nightShift.state.calls * PACE.loop) / 60;
+    }
     const r = playRun(save, data, strat);
     clock += r.minutes;
     runs.push(r);

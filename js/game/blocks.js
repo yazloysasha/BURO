@@ -41,7 +41,7 @@ export function blockLuck(save, data, run = null) {
 }
 
 // Apply one block's contents to the collection (outside runs).
-function applyToCollection(save, data, block) {
+export function applyToCollection(save, data, block) {
   if (block.kind === 'animal') Object.assign(block, grantAnimal(save, data, block.id));
   else addItem(save, block.id, block.mods);
   block.opened = true;

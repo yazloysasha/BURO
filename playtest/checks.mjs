@@ -240,6 +240,37 @@ await withStorage({ 'buro.save': sealSave(serializeSave(almost)) }, async (page,
   check('album: a full page pays its reward through the UI', save.album.completed.includes('garden') && save.meta.ownedSkins.includes('dud_peach') && !errors.length, text.replace(/\s+/g, ' ').slice(0, 70));
 });
 
+// ---------- night shift through the UI ----------
+await withStorage({}, async (page, errors) => {
+  await page.locator('.menu-grid .btn', { hasText: 'Ночная смена' }).click();
+  await page.locator('.btn.big.green').click();
+  await page.waitForSelector('.br-actions');
+  const intro = await page.locator('.br-msg').innerText();
+  const plaque0 = await page.locator('.br-plaque').innerText();
+  check('night shift: no objective on screen, only the room and two doors', /Запомни/.test(intro) && plaque0 === '0' && (await page.locator('.br-actions .btn').count()) === 2, intro.slice(0, 50));
+  let calls = 0;
+  let wrongOnce = false;
+  for (; calls < 40 && (await page.$('.br-actions')); calls++) {
+    const st = await readSaveText(page).then((s) => s.meta.nightShift.state);
+    // one deliberate mistake on a normal loop to see the reset
+    const choice = !wrongOnce && !st.cur && calls > 0 ? 'back' : st.cur ? 'back' : 'forward';
+    if (choice === 'back' && !st.cur) wrongOnce = true;
+    await page.locator(choice === 'back' ? '.br-back' : '.br-forward').click();
+    await page.waitForTimeout(400);
+    if (wrongOnce && choice === 'back' && !st.cur) {
+      const msg = await page.locator('.br-msg').innerText();
+      check('night shift: a false alarm resets the counter and says so, softly', /как обычно/.test(msg) && (await page.locator('.br-plaque').innerText()) === '0', msg);
+    }
+  }
+  const save = await readSaveText(page);
+  check('night shift: finishes with a reward once a day', save.meta.nightShift.state.done && save.meta.nightShift.result.paid && save.meta.coins > 0, `${calls} calls, ${save.meta.coins} coins, grade ${save.meta.nightShift.result.grade}`);
+  check('night shift: caught anomalies land in the journal', Object.keys(save.collection.anomalies || {}).length >= 1, Object.keys(save.collection.anomalies || {}).join(', '));
+  await page.locator('.btn', { hasText: 'В Лавку' }).click();
+  await page.locator('.menu-grid .btn', { hasText: 'Журнал' }).click();
+  await page.locator('.seg.tabs .btn').nth(1).click();
+  check('journal: the anomaly tab lists what was found', (await page.locator('.combo-row.known').count()) >= 1 && !errors.length, errors.join(' | '));
+});
+
 // ---------- update ----------
 {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'buro-update-'));

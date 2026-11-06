@@ -1,0 +1,219 @@
+{
+ "w": 128,
+ "h": 88,
+ "objects": [
+  {
+   "id": "wall",
+   "kind": "wall"
+  },
+  {
+   "id": "floor",
+   "kind": "floor",
+   "seamMissing": null
+  },
+  {
+   "id": "door",
+   "kind": "door",
+   "x": 4,
+   "y": 32,
+   "open": false,
+   "knob": "right"
+  },
+  {
+   "id": "window",
+   "kind": "window",
+   "x": 28,
+   "y": 8,
+   "w": 30,
+   "h": 24,
+   "sky": "#151030",
+   "barV": true,
+   "barH": true,
+   "rain": null
+  },
+  {
+   "id": "stars",
+   "kind": "stars",
+   "points": [
+    [
+     31,
+     11
+    ],
+    [
+     40,
+     13
+    ],
+    [
+     55,
+     11
+    ],
+    [
+     33,
+     24
+    ],
+    [
+     47,
+     22
+    ],
+    [
+     55,
+     28
+    ],
+    [
+     37,
+     29
+    ]
+   ],
+   "hidden": false
+  },
+  {
+   "id": "moon",
+   "kind": "moon",
+   "x": 44,
+   "y": 11,
+   "color": "#f6e7b0",
+   "phase": "full"
+  },
+  {
+   "id": "clock",
+   "kind": "clock",
+   "x": 70,
+   "y": 13,
+   "hands": true,
+   "hour": 10,
+   "minute": 10
+  },
+  {
+   "id": "poster",
+   "kind": "poster",
+   "x": 62,
+   "y": 24,
+   "enemy": "klobster",
+   "rot180": false,
+   "iconFlip": false
+  },
+  {
+   "id": "lamp",
+   "kind": "lamp",
+   "x": 86,
+   "on": true,
+   "anim": null
+  },
+  {
+   "id": "shelf_top",
+   "kind": "shelf",
+   "x": 94,
+   "y": 26,
+   "w": 32
+  },
+  {
+   "id": "shelf_low",
+   "kind": "shelf",
+   "x": 94,
+   "y": 46,
+   "w": 32
+  },
+  {
+   "id": "jar_red",
+   "kind": "icon",
+   "src": "assets/sprites/items/kyrise_potion_01a.png",
+   "x": 92,
+   "y": 10
+  },
+  {
+   "id": "jar_blue",
+   "kind": "icon",
+   "src": "assets/sprites/items/kyrise_potion_01b.png",
+   "x": 100,
+   "y": 10
+  },
+  {
+   "id": "jar_green",
+   "kind": "icon",
+   "src": "assets/sprites/items/kyrise_potion_01c.png",
+   "x": 108,
+   "y": 10
+  },
+  {
+   "id": "book_brown",
+   "kind": "icon",
+   "src": "assets/sprites/items/kyrise_book_01a.png",
+   "x": 92,
+   "y": 30
+  },
+  {
+   "id": "book_green",
+   "kind": "icon",
+   "src": "assets/sprites/items/kyrise_book_02a.png",
+   "x": 100,
+   "y": 30
+  },
+  {
+   "id": "candle",
+   "kind": "icon",
+   "src": "assets/sprites/items/kyrise_candle_01a.png",
+   "x": 108,
+   "y": 30,
+   "flame": false
+  },
+  {
+   "id": "mousehole",
+   "kind": "hole",
+   "x": 118,
+   "y": 58,
+   "light": false
+  },
+  {
+   "id": "bed",
+   "kind": "bed",
+   "x": 24,
+   "y": 62
+  },
+  {
+   "id": "underbed",
+   "kind": "underbed",
+   "x": 26,
+   "y": 74,
+   "eyes": false
+  },
+  {
+   "id": "rug",
+   "kind": "rug",
+   "x": 56,
+   "y": 77,
+   "w": 40,
+   "color": "#8a2f3a"
+  },
+  {
+   "id": "box",
+   "kind": "box",
+   "x": 104,
+   "y": 68
+  },
+  {
+   "id": "shadow_pep",
+   "kind": "shadow",
+   "x": 70,
+   "y": 85,
+   "side": "left"
+  },
+  {
+   "id": "dudonya",
+   "kind": "cat",
+   "cat": "dudonya",
+   "x": 24,
+   "y": 34,
+   "anim": "sit",
+   "flip": true
+  },
+  {
+   "id": "peposya",
+   "kind": "cat",
+   "cat": "peposya",
+   "x": 66,
+   "y": 54,
+   "anim": "idle",
+   "flip": false
+  }
+ ]
+}

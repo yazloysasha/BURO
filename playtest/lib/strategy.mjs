@@ -227,12 +227,14 @@ export function makeStrategy(name, rng) {
   }
 
   // --- puzzle rooms -------------------------------------------------------------
-  function anomalyPick(room) {
-    const a = room.anomaly;
-    const open = a.cells.map((cell, i) => ({ cell, i })).filter((x) => !x.cell.tapped);
-    const real = open.filter((x) => x.cell.kind !== 'normal');
-    if (real.length && rng.next() < skill) return real[0].i;
-    return rng.pick(open).i;
+  // The backroom: how likely this player notices an anomaly of each subtlety, and how often they see ghosts.
+  const notice = { random: [0.5, 0.5, 0.5], greedy: [0.85, 0.6, 0.35], cautious: [0.9, 0.75, 0.55], smart: [0.97, 0.88, 0.7] }[name];
+  const falseAlarm = { random: 0.5, greedy: 0.05, cautious: 0.15, smart: 0.05 }[name];
+  function backroomChoice(state, data) {
+    if (!state.cur) return rng.next() < falseAlarm ? 'back' : 'forward';
+    const a = data.anomalies.find((x) => x.id === state.cur);
+    const p = Math.min(0.99, notice[a.level - 1] + (state.hints ? 0.25 : 0));
+    return rng.next() < p ? 'back' : 'forward';
   }
 
   function shelfPick(room) {
@@ -364,5 +366,5 @@ export function makeStrategy(name, rng) {
     return null;
   }
 
-  return { name, chooseLeader, chooseNode, combatActions, anomalyPick, shelfPick, eventChoice, restChoice, washCats, shopNext, fullBackpack, sellPlan, keepOne, metaNext };
+  return { name, chooseLeader, chooseNode, combatActions, backroomChoice, shelfPick, eventChoice, restChoice, washCats, shopNext, fullBackpack, sellPlan, keepOne, metaNext };
 }

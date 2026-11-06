@@ -4,21 +4,21 @@
  "sim": {
   "random": {
    "careers": 200,
-   "winAll": "62%",
+   "winAll": "63%",
    "win1to5": "17%",
-   "win6to15": "44%",
+   "win6to15": "46%",
    "firstWinRun": 5,
    "firstWinGot": 200,
    "reachedBoss": "98%",
-   "firstRunMinutes": 5.8,
-   "avgRunMinutes": 5.8,
-   "avgPayout": 161,
+   "firstRunMinutes": 6.4,
+   "avgRunMinutes": 6.4,
+   "avgPayout": 164,
    "freeRuns": "0%",
    "feePaidOffRun": 2,
    "firstUpgradeRun": 2,
-   "firstTalentRun": 3,
+   "firstTalentRun": 2,
    "firstPageRun": 10,
-   "firstPageGot": 195,
+   "firstPageGot": 189,
    "firstTierRun": null,
    "firstTierGot": 0,
    "halfItemsRun": null,
@@ -26,32 +26,32 @@
    "combosAfter10": 0,
    "combosEnd": 28,
    "itemsEnd": 95,
-   "animalsEnd": 42,
-   "pagesEnd": 3.1,
+   "animalsEnd": 41,
+   "pagesEnd": 2.8,
    "tierEnd": 1,
    "deaths": {
     "combat": "2%",
     "elite": "0%",
-    "boss": "36%"
+    "boss": "35%"
    },
-   "meanRounds": 43,
+   "meanRounds": 44,
    "meanDecisions": 14
   },
   "greedy": {
    "careers": 200,
-   "winAll": "22%",
-   "win1to5": "24%",
+   "winAll": "24%",
+   "win1to5": "25%",
    "win6to15": "18%",
    "firstWinRun": 3,
    "firstWinGot": 200,
-   "reachedBoss": "82%",
-   "firstRunMinutes": 4.4,
-   "avgRunMinutes": 4.6,
-   "avgPayout": 86,
+   "reachedBoss": "81%",
+   "firstRunMinutes": 4.8,
+   "avgRunMinutes": 5,
+   "avgPayout": 92,
    "freeRuns": "1%",
    "feePaidOffRun": 2,
-   "firstUpgradeRun": 2,
-   "firstTalentRun": 2,
+   "firstUpgradeRun": 1,
+   "firstTalentRun": 1,
    "firstPageRun": 9,
    "firstPageGot": 200,
    "firstTierRun": 4,
@@ -60,69 +60,69 @@
    "halfItemsGot": 0,
    "combosAfter10": 0,
    "combosEnd": 16,
-   "itemsEnd": 67,
-   "animalsEnd": 44,
-   "pagesEnd": 4.7,
+   "itemsEnd": 73,
+   "animalsEnd": 46,
+   "pagesEnd": 5.2,
    "tierEnd": 3.1,
    "deaths": {
     "combat": "13%",
-    "elite": "5%",
-    "boss": "60%"
+    "elite": "6%",
+    "boss": "57%"
    },
    "meanRounds": 30,
    "meanDecisions": 14
   },
   "cautious": {
    "careers": 200,
-   "winAll": "25%",
-   "win1to5": "18%",
-   "win6to15": "34%",
-   "firstWinRun": 5,
+   "winAll": "28%",
+   "win1to5": "22%",
+   "win6to15": "33%",
+   "firstWinRun": 4,
    "firstWinGot": 200,
    "reachedBoss": "99%",
-   "firstRunMinutes": 5.8,
-   "avgRunMinutes": 6,
-   "avgPayout": 70,
+   "firstRunMinutes": 6.2,
+   "avgRunMinutes": 6.3,
+   "avgPayout": 76,
    "freeRuns": "0%",
    "feePaidOffRun": 2,
-   "firstUpgradeRun": 2,
-   "firstTalentRun": 2,
-   "firstPageRun": 9,
-   "firstPageGot": 200,
-   "firstTierRun": 13,
+   "firstUpgradeRun": 1,
+   "firstTalentRun": 1,
+   "firstPageRun": 8,
+   "firstPageGot": 198,
+   "firstTierRun": 12,
    "firstTierGot": 200,
    "halfItemsRun": null,
    "halfItemsGot": 0,
    "combosAfter10": 0,
    "combosEnd": 17,
-   "itemsEnd": 72,
-   "animalsEnd": 43,
-   "pagesEnd": 4,
-   "tierEnd": 2.3,
+   "itemsEnd": 79,
+   "animalsEnd": 44,
+   "pagesEnd": 4.3,
+   "tierEnd": 2.6,
    "deaths": {
-    "combat": "1%",
+    "combat": "0%",
     "elite": "1%",
-    "boss": "73%"
+    "boss": "70%"
    },
    "meanRounds": 44,
    "meanDecisions": 14
   },
   "smart": {
    "careers": 200,
-   "winAll": "59%",
-   "win1to5": "48%",
-   "win6to15": "53%",
+   "winAll": "61%",
+   "win1to5": "49%",
+   "win6to15": "55%",
    "firstWinRun": 2,
    "firstWinGot": 200,
    "reachedBoss": "99%",
-   "firstRunMinutes": 5.2,
-   "avgRunMinutes": 5.5,
-   "avgPayout": 146,
+   "firstRunMinutes": 5.4,
+   "avgRunMinutes": 5.8,
+   "avgPayout": 155,
    "freeRuns": "1%",
    "feePaidOffRun": 2,
-   "firstUpgradeRun": 2,
+   "firstUpgradeRun": 1,
    "firstTalentRun": 1,
-   "firstPageRun": 8,
+   "firstPageRun": 7,
    "firstPageGot": 200,
    "firstTierRun": 3,
    "firstTierGot": 200,
@@ -130,14 +130,14 @@
    "halfItemsGot": 0,
    "combosAfter10": 0,
    "combosEnd": 24,
-   "itemsEnd": 107,
-   "animalsEnd": 49,
-   "pagesEnd": 5.5,
-   "tierEnd": 3.6,
+   "itemsEnd": 115,
+   "animalsEnd": 52,
+   "pagesEnd": 6.3,
+   "tierEnd": 3.9,
    "deaths": {
     "combat": "1%",
     "elite": "1%",
-    "boss": "40%"
+    "boss": "38%"
    },
    "meanRounds": 38,
    "meanDecisions": 15
@@ -145,65 +145,65 @@
  },
  "winBySegment": {
   "random": {
-   "run 1": "4%",
-   "runs 2-5": "20%",
-   "runs 6-10": "34%",
-   "runs 11-20": "66%",
-   "runs 21-30": "95%"
+   "run 1": "3%",
+   "runs 2-5": "21%",
+   "runs 6-10": "35%",
+   "runs 11-20": "68%",
+   "runs 21-30": "94%"
   },
   "greedy": {
-   "run 1": "3%",
+   "run 1": "5%",
    "runs 2-5": "30%",
-   "runs 6-10": "15%",
+   "runs 6-10": "16%",
    "runs 11-20": "22%",
-   "runs 21-30": "24%"
+   "runs 21-30": "28%"
   },
   "cautious": {
-   "run 1": "2%",
-   "runs 2-5": "21%",
-   "runs 6-10": "36%",
-   "runs 11-20": "26%",
-   "runs 21-30": "23%"
+   "run 1": "3%",
+   "runs 2-5": "26%",
+   "runs 6-10": "37%",
+   "runs 11-20": "25%",
+   "runs 21-30": "31%"
   },
   "smart": {
-   "run 1": "39%",
-   "runs 2-5": "50%",
-   "runs 6-10": "45%",
-   "runs 11-20": "60%",
-   "runs 21-30": "70%"
+   "run 1": "38%",
+   "runs 2-5": "52%",
+   "runs 6-10": "49%",
+   "runs 11-20": "62%",
+   "runs 21-30": "72%"
   }
  },
  "milestones": {
   "random": {
    "win": {
     "medianRun": 6,
-    "medianMinutes": 29,
+    "medianMinutes": 36,
     "reached": "100%",
-    "within30min": "56%"
+    "within30min": "28%"
    },
    "upgrade": {
     "medianRun": 3,
-    "medianMinutes": 13,
+    "medianMinutes": 16,
     "reached": "100%",
-    "within30min": "99%"
+    "within30min": "93%"
    },
    "talent": {
-    "medianRun": 4,
-    "medianMinutes": 15,
+    "medianRun": 3,
+    "medianMinutes": 14,
     "reached": "100%",
-    "within30min": "100%"
+    "within30min": "94%"
    },
    "guest": {
     "medianRun": 2,
-    "medianMinutes": 6,
+    "medianMinutes": 9,
     "reached": "100%",
     "within30min": "100%"
    },
    "page": {
     "medianRun": 11,
-    "medianMinutes": 61,
-    "reached": "98%",
-    "within30min": "4%"
+    "medianMinutes": 75,
+    "reached": "95%",
+    "within30min": "1%"
    },
    "tier": {
     "medianRun": null,
@@ -221,63 +221,19 @@
   "greedy": {
    "win": {
     "medianRun": 4,
-    "medianMinutes": 15,
+    "medianMinutes": 16,
     "reached": "100%",
-    "within30min": "100%"
+    "within30min": "99%"
    },
    "upgrade": {
-    "medianRun": 3,
-    "medianMinutes": 8,
-    "reached": "100%",
-    "within30min": "100%"
-   },
-   "talent": {
-    "medianRun": 3,
-    "medianMinutes": 10,
-    "reached": "100%",
-    "within30min": "100%"
-   },
-   "guest": {
     "medianRun": 2,
-    "medianMinutes": 4,
-    "reached": "100%",
-    "within30min": "100%"
-   },
-   "page": {
-    "medianRun": 10,
-    "medianMinutes": 37,
-    "reached": "100%",
-    "within30min": "31%"
-   },
-   "tier": {
-    "medianRun": 5,
-    "medianMinutes": 19,
-    "reached": "100%",
-    "within30min": "90%"
-   },
-   "half": {
-    "medianRun": null,
-    "medianMinutes": null,
-    "reached": "0%",
-    "within30min": "0%"
-   }
-  },
-  "cautious": {
-   "win": {
-    "medianRun": 6,
-    "medianMinutes": 27,
-    "reached": "100%",
-    "within30min": "68%"
-   },
-   "upgrade": {
-    "medianRun": 3,
-    "medianMinutes": 12,
+    "medianMinutes": 6,
     "reached": "100%",
     "within30min": "100%"
    },
    "talent": {
-    "medianRun": 3,
-    "medianMinutes": 13,
+    "medianRun": 2,
+    "medianMinutes": 6,
     "reached": "100%",
     "within30min": "100%"
    },
@@ -289,13 +245,57 @@
    },
    "page": {
     "medianRun": 10,
-    "medianMinutes": 49,
+    "medianMinutes": 44,
     "reached": "100%",
-    "within30min": "11%"
+    "within30min": "17%"
    },
    "tier": {
-    "medianRun": 14,
-    "medianMinutes": 73,
+    "medianRun": 5,
+    "medianMinutes": 20,
+    "reached": "100%",
+    "within30min": "89%"
+   },
+   "half": {
+    "medianRun": null,
+    "medianMinutes": null,
+    "reached": "0%",
+    "within30min": "0%"
+   }
+  },
+  "cautious": {
+   "win": {
+    "medianRun": 5,
+    "medianMinutes": 25,
+    "reached": "100%",
+    "within30min": "70%"
+   },
+   "upgrade": {
+    "medianRun": 2,
+    "medianMinutes": 8,
+    "reached": "100%",
+    "within30min": "100%"
+   },
+   "talent": {
+    "medianRun": 2,
+    "medianMinutes": 7,
+    "reached": "100%",
+    "within30min": "100%"
+   },
+   "guest": {
+    "medianRun": 2,
+    "medianMinutes": 7,
+    "reached": "100%",
+    "within30min": "100%"
+   },
+   "page": {
+    "medianRun": 9,
+    "medianMinutes": 49,
+    "reached": "99%",
+    "within30min": "8%"
+   },
+   "tier": {
+    "medianRun": 13,
+    "medianMinutes": 74,
     "reached": "100%",
     "within30min": "1%"
    },
@@ -314,10 +314,10 @@
     "within30min": "100%"
    },
    "upgrade": {
-    "medianRun": 3,
-    "medianMinutes": 8,
+    "medianRun": 2,
+    "medianMinutes": 6,
     "reached": "100%",
-    "within30min": "99%"
+    "within30min": "100%"
    },
    "talent": {
     "medianRun": 2,
@@ -327,21 +327,21 @@
    },
    "guest": {
     "medianRun": 2,
-    "medianMinutes": 5,
+    "medianMinutes": 6,
     "reached": "100%",
     "within30min": "100%"
    },
    "page": {
-    "medianRun": 9,
-    "medianMinutes": 41,
+    "medianRun": 8,
+    "medianMinutes": 42,
     "reached": "100%",
     "within30min": "25%"
    },
    "tier": {
     "medianRun": 4,
-    "medianMinutes": 16,
+    "medianMinutes": 17,
     "reached": "100%",
-    "within30min": "95%"
+    "within30min": "98%"
    },
    "half": {
     "medianRun": null,
@@ -353,68 +353,68 @@
  },
  "roomsPer30Runs": {
   "random": {
-   "combat": 111.6,
-   "shop": 7.2,
-   "elite": 17.2,
-   "loot": 43.8,
-   "anomaly": 16.4,
-   "event": 24.6,
-   "rest": 37.8,
+   "combat": 112.3,
+   "event": 24.5,
+   "rest": 37.6,
+   "loot": 44,
+   "wash": 10.4,
    "boss": 29.4,
-   "shelf": 15.1,
-   "wash": 10.3
+   "anomaly": 16.5,
+   "shelf": 14.5,
+   "elite": 16.9,
+   "shop": 7.1
   },
   "greedy": {
-   "combat": 101.4,
-   "event": 29.4,
+   "combat": 102.8,
+   "elite": 20.3,
+   "loot": 48.9,
+   "event": 29.1,
    "wash": 7.5,
-   "shelf": 15.3,
-   "elite": 19.5,
-   "loot": 48.8,
-   "rest": 32.2,
-   "boss": 24.5,
-   "shop": 9.3,
-   "anomaly": 19.2
+   "rest": 31.4,
+   "boss": 24.3,
+   "anomaly": 19.5,
+   "shop": 9.5,
+   "shelf": 15.8
   },
   "cautious": {
-   "combat": 100.6,
-   "anomaly": 18.4,
-   "loot": 49.4,
+   "combat": 100.7,
+   "anomaly": 18.1,
+   "wash": 11.5,
+   "loot": 49.3,
+   "event": 30.5,
    "rest": 39.9,
-   "boss": 29.6,
-   "elite": 11.5,
-   "event": 30,
-   "wash": 11.4,
-   "shelf": 15.9,
-   "shop": 8.7
+   "boss": 29.7,
+   "shelf": 16.3,
+   "shop": 9,
+   "elite": 11.6
   },
   "smart": {
-   "combat": 104.4,
-   "event": 32.6,
-   "loot": 50.9,
-   "shop": 8.3,
-   "anomaly": 22.4,
+   "combat": 104.5,
+   "shelf": 17.2,
    "rest": 37,
+   "elite": 20.2,
+   "loot": 51.5,
    "boss": 29.6,
-   "shelf": 17.1,
+   "shop": 8.7,
+   "anomaly": 21.6,
    "wash": 8.4,
-   "elite": 19.7
+   "event": 34
   }
  },
  "combosAfter10Runs": {
   "random": {
-   "avg": 23.5,
-   "max": 28,
+   "avg": 23.6,
+   "max": 27,
    "careers": 200
   },
   "greedy": {
-   "avg": 12.5,
-   "max": 18,
+   "avg": 12.1,
+   "max": 16,
    "careers": 200
   },
   "cautious": {
-   "avg": 13.7,
-   "max": 17,
+   "avg": 13.9,
+   "max": 18,
    "careers": 200
   },
   "smart": {
@@ -426,37 +426,37 @@
  "combosPctOfCareersBy30": {
   "dog_bone": 0,
   "hamster_stash": 0,
-  "fox_cheese": 0,
   "royal_slipper": 0,
+  "fox_cheese": 1,
   "classic": 1,
-  "fish_day": 2,
-  "pizza_suspicion": 3,
+  "fish_day": 3,
+  "pizza_suspicion": 4,
   "golden_touch": 4,
-  "sweet_tooth": 6,
-  "rainbow_glitch": 6,
-  "library": 10,
-  "dragon_gold": 10,
+  "rainbow_glitch": 7,
+  "sweet_tooth": 8,
+  "library": 9,
+  "dragon_gold": 11,
   "double_curse": 14,
   "scary_tornado": 25,
   "good_cat_bad_cat": 25,
   "hiss_choir": 25,
-  "adventure_aroma": 25,
-  "wise_owl": 34,
+  "adventure_aroma": 27,
   "cover_me": 35,
-  "final_tornado": 47,
+  "wise_owl": 35,
+  "cat_tactics": 49,
+  "final_tornado": 49,
   "sudden_bite": 50,
-  "cat_tactics": 50,
   "tender_bow": 50,
   "bite_and_hop": 50,
   "lucky_tornado": 50,
   "bite_in_tornado": 50,
-  "treasury": 55,
-  "bargain": 58,
+  "treasury": 59,
+  "bargain": 60,
   "purr_duet": 75,
-  "shiny_wash": 77,
-  "hoarder": 92,
-  "power_nap": 93,
-  "treasure_hunters": 98,
+  "shiny_wash": 79,
+  "power_nap": 92,
+  "hoarder": 94,
+  "treasure_hunters": 99,
   "triple_bite": 100,
   "gentle_bite": 100,
   "lullaby": 100,
@@ -469,7 +469,7 @@
   "warm_up": 100
  },
  "combosNeverFound": [
-  "dog_bone"
+  "royal_slipper"
  ],
  "blocks1000": {
   "luck0": {
@@ -525,9 +525,9 @@
  },
  "events": {
   "total": 40,
-  "perCareer": 32.6,
-  "distinct": 30.2,
-  "maxRepeats": 1.7,
+  "perCareer": 34,
+  "distinct": 31.1,
+  "maxRepeats": 1.8,
   "minGap": 25
  }
 }

@@ -9,7 +9,7 @@ import { rollRunBlocks, settleRoomBlocks } from './blocks.js';
 import { addItem, sellItem, grantSticker } from './collection.js';
 import { runHooks } from './hooks.js';
 import { comboStatBonus, activeCombos, checkRunCombos, roomSequenceCombos } from './combos.js';
-import { initAnomaly, initShelf, initWash, initEvent, initShop } from './rooms.js';
+import { initBackroom, initShelf, initWash, initEvent, initShop } from './rooms.js';
 import { actionMods } from './progress.js';
 import { eliteName } from './namegen.js';
 
@@ -220,7 +220,7 @@ export const roomHandlers = {
   elite: { init: (save, data, run, room) => (room.combat = startCombat(save, data, run, 'elite')) },
   boss: { init: (save, data, run, room) => (room.combat = startCombat(save, data, run, 'boss')) },
   rest: { init: (save, data, run, room) => (room.phase = 'choose') },
-  anomaly: { init: (...a) => initAnomaly(...a) },
+  anomaly: { init: (...a) => initBackroom(...a) },
   shelf: { init: (...a) => initShelf(...a) },
   wash: { init: (...a) => initWash(...a) },
   event: { init: (...a) => initEvent(...a) },

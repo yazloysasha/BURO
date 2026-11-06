@@ -4,8 +4,8 @@ import { $ } from '../core/dom.js';
 import { closeModal } from './app.js';
 
 // What the number keys pick on a screen, in priority order: the first selector with anything visible wins.
-const CHOICES = ['.tap-zone.targetable', '.action-grid .btn:not(:disabled)', '.shelf.ready', '.shelf-item', '.anomaly-cell:not(:disabled)', '.lucky:not(.opened)', '.sell-row .sell-toggle', '.map-node.avail', '.event-choice:not(:disabled)'];
-const CONFIRM = ['.btn.big:not(:disabled)', '.btn.green:not(:disabled)', '.lucky:not(.opened)'];
+const CHOICES = ['.tap-zone.targetable', '.action-grid .btn:not(:disabled)', '.shelf.ready', '.shelf-item', '.br-actions .btn:not(:disabled)', '.lucky:not(.opened)', '.sell-row .sell-toggle', '.map-node.avail', '.event-choice:not(:disabled)'];
+const CONFIRM = ['.btn.big.green:not(:disabled)', '.btn.big:not(:disabled)', '.btn.green:not(:disabled)', '.lucky:not(.opened)'];
 
 const visible = (el) => el.getClientRects().length > 0;
 const all = (root, sel) => [...root.querySelectorAll(sel)].filter(visible);

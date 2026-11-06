@@ -124,11 +124,17 @@ export class Bot {
       if (!after.run || after.run.result) return;
       await this.page.waitForSelector('.reward', { timeout: 15000 });
     } else if (type === 'anomaly') {
-      for (let g = 0; g < 30; g++) {
+      for (let g = 0; g < 40; g++) {
         const s = await this.save();
         if (s.run.room.phase !== 'play') break;
-        await this.page.waitForSelector('.anomaly-cell');
-        await this.tapEl(this.page.locator('.anomaly-cell').nth(this.strat.anomalyPick(s.run.room)));
+        await this.page.waitForSelector('.br-actions .btn:not(:disabled)');
+        const choice = this.strat.backroomChoice(s.run.room.backroom, data);
+        await this.tapEl(this.page.locator(choice === 'back' ? '.br-back' : '.br-forward'));
+        await this.page.waitForFunction((n) => {
+          const raw = localStorage.getItem('buro.save');
+          const sv = JSON.parse(raw.slice(raw.indexOf('|', 6) + 1));
+          return !sv.run.room.backroom || sv.run.room.backroom.calls > n || sv.run.room.phase !== 'play';
+        }, s.run.room.backroom.calls, { timeout: 10000 });
       }
       await this.page.waitForSelector('.reward');
     } else if (type === 'shelf') {
@@ -256,6 +262,25 @@ export class Bot {
       await this.page.waitForTimeout(SKIP ? 100 : 900);
       await back();
       rec.daily = true;
+    }
+    if (s0.meta.nightPaidDate !== localDate()) {
+      await open('Ночная смена');
+      await this.tapSel('.btn.big.green');
+      for (let g = 0; g < 40; g++) {
+        if (!(await this.page.$('.br-actions'))) break;
+        await this.page.waitForSelector('.br-actions .btn:not(:disabled)');
+        const st = (await this.save()).meta.nightShift.state;
+        await this.tapEl(this.page.locator(this.strat.backroomChoice(st, data) === 'back' ? '.br-back' : '.br-forward'));
+        await this.page.waitForFunction((n) => {
+          const raw = localStorage.getItem('buro.save');
+          const sv = JSON.parse(raw.slice(raw.indexOf('|', 6) + 1));
+          return sv.meta.nightShift.state.calls > n;
+        }, st.calls, { timeout: 10000 });
+      }
+      await this.page.waitForSelector('.btn.back');
+      await this.tapEl(this.page.locator('.btn.back').last());
+      await this.page.waitForSelector('.menu-grid');
+      rec.nightShift = (await this.save()).meta.nightShift.result;
     }
     rec.bought = [];
     for (let guard = 0; guard < 120; guard++) {

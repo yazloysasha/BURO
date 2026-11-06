@@ -97,7 +97,6 @@ function add(file, { id, name, gender = 'm', category, rarity, effect = null, ta
     tags,
     effect,
     color: colorOf(e.file),
-    ...anomalyFit(e.file, e.w, e.h),
     flavor: flavor || makeFlavor(category, id),
   });
 }
@@ -128,23 +127,6 @@ function colorOf(file) {
   if (deg < 170) return 'green';
   if (deg < 260) return 'blue';
   return 'purple';
-}
-
-// Which anomaly tricks can actually be seen on this icon: mirroring a symmetric sprite or swapping colour channels of a
-// grey one changes nothing, and an anomaly nobody can spot is just unfair.
-function anomalyFit(file, w, h) {
-  if (w !== 16 || h !== 16) return {};
-  const img = decode(fs.readFileSync(path.join(ROOT, 'assets', file)));
-  const px = (x, y) => img.data.subarray((y * 16 + x) * 4, (y * 16 + x) * 4 + 4);
-  let mirrored = 0, tinted = 0, opaque = 0;
-  for (let y = 0; y < 16; y++) for (let x = 0; x < 16; x++) {
-    const a = px(x, y), b = px(15 - x, y);
-    if (a[3] >= 128 !== b[3] >= 128 || (a[3] >= 128 && Math.abs(a[0] - b[0]) + Math.abs(a[1] - b[1]) + Math.abs(a[2] - b[2]) > 60)) mirrored++;
-    if (a[3] < 128) continue;
-    opaque++;
-    if (Math.max(a[0], a[1], a[2]) - Math.min(a[0], a[1], a[2]) > 50) tinted++;
-  }
-  return { mirrorOk: mirrored >= 8, recolorOk: tinted / (opaque || 1) >= 0.25 };
 }
 
 function makeFlavor(category, id) {

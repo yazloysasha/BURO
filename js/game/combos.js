@@ -129,7 +129,7 @@ export function roomSequenceCombos(save, data, run, enteringType) {
     const e = c.effect;
     if (e.type === 'status_party') for (const p of Object.values(run.party)) p.statuses = [...(p.statuses || []).filter((s) => s.id !== e.status), { id: e.status, turns: e.turns }];
     if (e.type === 'shop_discount') run.flags.shopDiscount = e.value;
-    if (e.type === 'anomaly_tap') run.flags.anomalyTap = e.value;
+    if (e.type === 'anomaly_hint') run.flags.anomalyHint = e.value;
     out.push(c.id);
   }
   return out;

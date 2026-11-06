@@ -2,12 +2,12 @@
  {
   "name": "offline iphone: reload with no network boots the game",
   "ok": true,
-  "detail": "843 files in the cache"
+  "detail": "849 files in the cache"
  },
  {
   "name": "offline iphone: a full run with no network",
   "ok": true,
-  "detail": "lose on floor 11/11, 179 taps"
+  "detail": "lose on floor 10/10, 150 taps"
  },
  {
   "name": "offline iphone: no external requests, no page errors",
@@ -22,12 +22,12 @@
  {
   "name": "offline desktop: reload with no network boots the game",
   "ok": true,
-  "detail": "843 files in the cache"
+  "detail": "849 files in the cache"
  },
  {
   "name": "offline desktop: a full run with no network",
   "ok": true,
-  "detail": "win on floor 10/10, 131 taps"
+  "detail": "win on floor 11/11, 163 taps"
  },
  {
   "name": "offline desktop: no external requests, no page errors",
@@ -72,7 +72,7 @@
  {
   "name": "export: Windows-style file download",
   "ok": true,
-  "detail": "pepsya-dudonya-2026-11-05.json"
+  "detail": "pepsya-dudonya-2026-11-06.json"
  },
  {
   "name": "export: the same text is available to copy",
@@ -97,7 +97,7 @@
  {
   "name": "export: iPhone share sheet gets the save file",
   "ok": true,
-  "detail": "pepsya-dudonya-2026-11-05.json"
+  "detail": "pepsya-dudonya-2026-11-06.json"
  },
  {
   "name": "keyboard: Enter presses the main button",
@@ -160,6 +160,31 @@
   "detail": "Страница собрана! Сад скин «Дудоня-персик» +5 блёсток за старание. Хор"
  },
  {
+  "name": "night shift: no objective on screen, only the room and two doors",
+  "ok": true,
+  "detail": "Дудоня: «Запомни, как тут всё стоит. Если что-то б"
+ },
+ {
+  "name": "night shift: a false alarm resets the counter and says so, softly",
+  "ok": true,
+  "detail": "Нет… Здесь всё было как обычно."
+ },
+ {
+  "name": "night shift: finishes with a reward once a day",
+  "ok": true,
+  "detail": "9 calls, 15 coins, grade good"
+ },
+ {
+  "name": "night shift: caught anomalies land in the journal",
+  "ok": true,
+  "detail": "second_hole, rain_one_pane, mousehole_light, clock_no_hands, window_bar"
+ },
+ {
+  "name": "journal: the anomaly tab lists what was found",
+  "ok": true,
+  "detail": ""
+ },
+ {
   "name": "update: a new version offers \"Обновить\"",
   "ok": true,
   "detail": "Готово обновление Лавки! \nОбновить"
@@ -167,6 +192,6 @@
  {
   "name": "update: new cache replaces the old one, save intact",
   "ok": true,
-  "detail": "buro-v42 -> buro-v43"
+  "detail": "buro-v48 -> buro-v49"
  }
 ]

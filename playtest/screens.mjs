@@ -204,16 +204,60 @@ const SCREENS = {
       await page.waitForTimeout(900);
     }
   },
-  anomaly_3x3: async () => enterRoom('anomaly', 2),
-  anomaly_4x4: async () => enterRoom('anomaly', 6),
-  anomaly_done: async () => {
+  backroom: async () => {
+    await setup((env) => (env.game.save.meta.backroomVisited = false));
     await enterRoom('anomaly', 2);
-    const n = await page.locator('.anomaly-cell').count();
-    for (let i = 0; i < n; i++) {
-      const left = page.locator('.anomaly-cell:not(:disabled)');
-      if (!(await page.$('.anomaly-grid')) || (await page.$('.reward'))) break;
-      await left.first().click({ timeout: 2000 }).catch(() => {});
+  },
+  backroom_anomaly: async () => {
+    await enterRoom('anomaly', 6);
+    await setup((env) => {
+      const st = env.game.save.run.room.backroom;
+      st.cur = 'eyes_under_bed';
+      st.last = { correct: true, anomaly: 'moon_red', missed: false, falseAlarm: false };
+      st.at = 1;
+      env.app.go('room');
+    });
+  },
+  backroom_missed: async () => {
+    await setup((env) => {
+      const st = env.game.save.run.room.backroom;
+      st.cur = null;
+      st.at = 0;
+      st.last = { correct: false, anomaly: null, missed: true, falseAlarm: false };
+      env.app.go('room');
+    });
+  },
+  backroom_done: async () => {
+    await enterRoom('anomaly', 3);
+    for (let i = 0; i < 20; i++) {
+      if (await page.$('.reward')) break;
+      const cur = await page.evaluate(() => import('/js/game/state.js').then(({ game }) => game.save.run.room.backroom.cur));
+      await page.locator(cur ? '.br-back' : '.br-forward').click();
+      await page.waitForTimeout(450);
     }
+  },
+  night_start: async () => setup((env) => { env.game.save.run = null; env.game.save.meta.nightShift = null; env.app.go('nightshift'); }),
+  night_walk: async () => {
+    await tap('.btn.big.green');
+    await page.waitForSelector('.br-actions');
+  },
+  night_result: async () => {
+    for (let i = 0; i < 30; i++) {
+      if (!(await page.$('.br-actions'))) break;
+      const cur = await page.evaluate(() => import('/js/game/state.js').then(({ game }) => game.save.meta.nightShift.state.cur));
+      await page.locator(cur ? '.br-back' : '.br-forward').click();
+      await page.waitForTimeout(450);
+    }
+  },
+  hub_anomaly: async () => {
+    await setup((env) => {
+      const { game } = env;
+      game.save.run = null;
+      game.save.meta.runsStarted = 3;
+      game.data.balance.hubAnomalyPct = 100;
+      game.save.meta.hubAnomalyDay = {};
+      env.app.go('hub');
+    });
   },
   shelf: async () => enterRoom('shelf', 8),
   shelf_selected: async () => {
@@ -258,6 +302,7 @@ const SCREENS = {
   hub_rich: async () => {
     await setup((env) => {
       env.game.save.run = null;
+      env.game.data.balance.hubAnomalyPct = 7;
       window.__richMeta(env);
       env.game.save.lastRun = { outcome: 'win', coins: 120 };
       env.app.go('hub');
@@ -274,7 +319,15 @@ const SCREENS = {
   inventory_animal: async () => tap('.inv-cell'),
   album: async () => setup((env) => { env.app.closeModal(); env.app.go('album'); }),
   album_index: async () => tap('.album-nav .btn.blue'),
-  combos: async () => setup((env) => { env.app.closeModal(); env.app.go('combos'); }),
+  combos: async () => setup((env) => { env.game.data.balance.hubAnomalyPct = 7; env.app.closeModal(); env.app.go('combos'); }),
+  journal_anomalies: async () => {
+    await setup((env) => {
+      const col = (env.game.save.collection.anomalies = env.game.save.collection.anomalies || {});
+      for (const id of ['moon_red', 'clock_no_hands', 'door_open', 'jar_creep', 'hub_ceiling']) col[id] = 1;
+      env.app.go('combos');
+    });
+    await page.locator('.seg.tabs .btn').nth(1).click();
+  },
   talents: async () => setup((env) => env.app.go('talents')),
   upgrades: async () => setup((env) => env.app.go('upgrades')),
   skins: async () => setup((env) => env.app.go('skins')),
@@ -287,7 +340,7 @@ const SCREENS = {
   credits: async () => setup((env) => { env.app.closeModal(); env.app.go('credits'); }),
 };
 
-const needRich = ['inventory', 'album', 'combos', 'talents', 'upgrades', 'skins'];
+const needRich = ['inventory', 'album', 'combos', 'journal', 'talents', 'upgrades', 'skins'];
 for (const [name, fn] of Object.entries(SCREENS)) {
   if (only && !only.includes(name)) continue;
   current = name;

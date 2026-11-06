@@ -5,12 +5,14 @@ import { play } from '../../core/audio.js';
 import { game, commit } from '../../game/state.js';
 import { startRun } from '../../game/run.js';
 import { runFee, runIsFree, gritBonus } from '../../game/meta.js';
-import { button, go, pickLine, setTopbarTitle, modal, closeModal } from '../app.js';
+import { button, go, pickLine, setTopbarTitle, modal, closeModal, toast } from '../app.js';
 import { nextGoal } from '../../game/progress.js';
 import { createHubScene } from '../hubscene.js';
 import { isWide } from '../layout.js';
 import { catLine } from '../../game/namegen.js';
 import { localDate } from '../../game/daily.js';
+import { hubAnomaly, catchHubAnomaly } from '../../game/backroom.js';
+import { hashString } from '../../core/rng.js';
 
 let taps = 0;
 
@@ -58,7 +60,17 @@ export function render(root) {
   const wide = isWide();
   const W = root.clientWidth || window.innerWidth - 16;
   const H = root.clientHeight || window.innerHeight;
-  const scene = createHubScene(wide ? W * 0.52 : W, wide ? H - 40 : Math.max(160, H * 0.4));
+  const anomaly = hubAnomaly(game.save, game.data, localDate(), hashString);
+  const scene = createHubScene(wide ? W * 0.52 : W, wide ? H - 40 : Math.max(160, H * 0.4), {
+    anomaly: anomaly && anomaly.id,
+    onAnomaly: (id) => {
+      const r = catchHubAnomaly(game.save, game.data, id, localDate());
+      commit();
+      if (!r) return;
+      play('glitch');
+      toast(t(r.first ? 'hubAnomaly.caught' : 'hubAnomaly.again'), 3000);
+    },
+  });
   const note = h('div.hub-note', { text: lastRunNote() || pickLine('hub.greeting') });
   scene.onTapCat((who) => {
     taps++;
