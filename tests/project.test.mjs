@@ -217,3 +217,54 @@ test('macOS "._*" metadata files are ignored: not in git, not precached, and the
   }
   assert.match(read('.gitignore'), /^\._\*$/m);
 });
+
+// Reads the Unicode characters a TrueType font covers (cmap format 4 + 12).
+function fontChars(file) {
+  const b = fs.readFileSync(path.join(ROOT, file));
+  const n = b.readUInt16BE(4);
+  let cmap = 0;
+  for (let i = 0; i < n; i++) if (b.toString('latin1', 12 + i * 16, 16 + i * 16) === 'cmap') cmap = b.readUInt32BE(12 + i * 16 + 8);
+  const chars = new Set();
+  const tables = b.readUInt16BE(cmap + 2);
+  for (let i = 0; i < tables; i++) {
+    const off = cmap + b.readUInt32BE(cmap + 4 + i * 8 + 4);
+    const fmt = b.readUInt16BE(off);
+    if (fmt === 4) {
+      const seg = b.readUInt16BE(off + 6) / 2;
+      for (let s = 0; s < seg; s++) {
+        const end = b.readUInt16BE(off + 14 + s * 2);
+        const start = b.readUInt16BE(off + 16 + seg * 2 + s * 2);
+        if (start === 0xffff) continue;
+        for (let c = start; c <= end; c++) chars.add(c);
+      }
+    } else if (fmt === 12) {
+      const groups = b.readUInt32BE(off + 12);
+      for (let g = 0; g < groups; g++) {
+        const start = b.readUInt32BE(off + 16 + g * 12);
+        const end = b.readUInt32BE(off + 20 + g * 12);
+        for (let c = start; c <= end; c++) chars.add(c);
+      }
+    }
+  }
+  return chars;
+}
+
+test('the bundled font covers every character the game shows (no fallback fonts, no tofu)', () => {
+  const faces = [...read('css/style.css').matchAll(/url\('\.\.\/(fonts\/[^']+\.ttf)'\)/g)].map((m) => m[1]);
+  assert.ok(faces.length >= 1);
+  const texts = ['data/strings.ru.json', 'data/events.json', 'data/combos.json', 'data/items.json', 'data/animals.json', 'data/enemies.json', 'data/album.json', 'data/talents.json', 'data/upgrades.json', 'data/tiers.json', 'data/skins.json', 'data/rooms.json', 'data/rarities.json', 'data/modifiers.json', 'data/statuses.json', 'data/cats.json', 'data/gen/flavor.json', 'data/gen/lines.json'];
+  const used = new Set();
+  const collect = (v) => {
+    if (typeof v === 'string') {
+      if (v.startsWith('assets/') || v.startsWith('#')) return;
+      for (const ch of v) used.add(ch.codePointAt(0));
+    } else if (v && typeof v === 'object') Object.values(v).forEach(collect);
+  };
+  for (const f of texts) collect(json(f));
+  for (const f of walk('js', (p) => p.endsWith('.js'))) for (const m of read(f).matchAll(/'([◀▶×·→…]+)'/g)) for (const ch of m[1]) used.add(ch.codePointAt(0));
+  for (const face of faces) {
+    const chars = fontChars(face);
+    const missing = [...used].filter((c) => c > 32 && !chars.has(c)).map((c) => String.fromCodePoint(c));
+    assert.deepEqual(missing, [], face + ' lacks these characters');
+  }
+});

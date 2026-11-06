@@ -6,7 +6,7 @@ import { createCombat, makeCatUnit, makeEnemyUnit, planIntents, resolveRound, CA
 import { combatCtx } from './data.js';
 import * as meta from './meta.js';
 import { rollRunBlocks, settleRoomBlocks } from './blocks.js';
-import { addItem, grantSticker } from './collection.js';
+import { addItem, sellItem, grantSticker } from './collection.js';
 import { runHooks } from './hooks.js';
 import { comboStatBonus, activeCombos, checkRunCombos, roomSequenceCombos } from './combos.js';
 import { initAnomaly, initShelf, initWash, initEvent, initShop } from './rooms.js';
@@ -46,7 +46,7 @@ export function pickConsumable(rng, data, { maxRarity = 'rare' } = {}) {
 }
 
 // ---------- start ----------
-export function startRun(save, data) {
+export function startRun(save, data, { leader = 'peposya' } = {}) {
   if (save.run) throw new Error('run already active');
   const free = meta.runIsFree(save, data);
   const fee = free ? 0 : meta.runFee(save, data);
@@ -77,6 +77,7 @@ export function startRun(save, data) {
     nextUid: 1,
     fee,
     stats: { kills: 0, rooms: 0, coinsFound: 0, blocks: 0 },
+    leader,
     flags: {},
     actionMods: actionMods(save, data),
     result: null,
@@ -121,6 +122,15 @@ function afterBackpackChange(save, data, run) {
 export function removeFromBackpack(run, uid) {
   const i = run.backpack.findIndex((b) => b.uid === uid);
   return i >= 0 ? run.backpack.splice(i, 1)[0] : null;
+}
+
+// A found item that doesn't fit stays closed in the room: opening it asks what to do, nothing is sold behind the player's back.
+export function giveItem(save, data, run, itemId, mods = []) {
+  const r = addToBackpack(save, data, run, itemId, mods, { noConvert: true });
+  if (!r.full) return r;
+  const room = run.room;
+  room.blocks = [...(room.blocks || []), { rarity: data.itemById[itemId].rarity, forced: null, kind: 'item', id: itemId, mods, opened: false }];
+  return { pending: true, itemId };
 }
 
 // ---------- rooms ----------
@@ -199,6 +209,8 @@ export function equipmentBonus(save, data, run) {
   for (const k of Object.keys(cap)) b[k] = Math.min(b[k], cap[k]);
   const combo = comboStatBonus(save, data, run);
   for (const k of Object.keys(combo)) if (b[k] !== undefined) b[k] += combo[k];
+  const lead = data.balance.leader[run.leader];
+  if (lead) for (const k of Object.keys(lead.stats || {})) b[k] += lead.stats[k];
   return b;
 }
 
@@ -340,7 +352,7 @@ function onCombatWin(save, data, run, room) {
   }
   room.reward = withRunRng(run, (rng) => combatReward(save, data, run, c, rng));
   const n = room.reward.blocksN;
-  if (n) room.blocks = rollRunBlocks(save, data, run, n, c.kind === 'boss' ? { minRarity: 'rare' } : {});
+  if (n) room.blocks = [...(room.blocks || []), ...rollRunBlocks(save, data, run, n, c.kind === 'boss' ? { minRarity: 'rare' } : {})];
   room.phase = 'reward';
   const helpers = { rollBlocks: (n, opts) => rollRunBlocks(save, data, run, n, opts) };
   for (const f of runHooks.afterWin) f(save, data, run, room, helpers);
@@ -364,13 +376,15 @@ export function combatReward(save, data, run, c, rng) {
   const items = [];
   const kind = c.kind;
   const drops = kind === 'boss' ? bal.bossConsumables : rng.chance(bal.consumableDrop[kind] || 0) ? 1 : 0;
-  for (let i = 0; i < drops; i++) items.push(addToBackpack(save, data, run, pickConsumable(rng, data).id));
+  for (let i = 0; i < drops; i++) items.push(giveItem(save, data, run, pickConsumable(rng, data).id));
   // enemy stickers for the album: kept even if the run is lost
   const stickers = [];
   const stickerChance = { combat: 0.25, elite: 0.6, boss: 1 }[kind] || 0;
   const killed = c.enemies.filter((e) => e.hp <= 0 && !e.summoned);
   if (killed.length && rng.chance(stickerChance)) {
-    const id = rng.pick(killed).id;
+    // a sticker the album still needs, if this fight offers one
+    const fresh = killed.filter((e) => !save.collection.stickers[e.id] && !run.stickers.includes(e.id));
+    const id = rng.pick(fresh.length ? fresh : killed).id;
     run.stickers.push(id);
     stickers.push(id);
   }
@@ -378,24 +392,44 @@ export function combatReward(save, data, run, c, rng) {
 }
 
 // ---------- end ----------
-export function finishRun(save, data, { keepUid = null } = {}) {
+// The coins a finished run brings home, before any selling.
+export function runPayout(run, data) {
+  const win = run.result.outcome === 'win';
+  const lead = data.balance.leader[run.leader];
+  const base = win ? run.coins : Math.floor(run.coins * data.balance.defeatCoinKeep);
+  return Math.round(base * (1 + ((lead && lead.coinBonus) || 0)));
+}
+
+// keepUid: the one item saved from a defeat. sellUids: finds the player chose to sell at the Lavka's price (the sticker
+// still counts as found, so selling never costs album progress).
+export function finishRun(save, data, { keepUid = null, sellUids = [] } = {}) {
   const run = save.run;
   if (!run || !run.result) return null;
   const win = run.result.outcome === 'win';
-  const coins = win ? run.coins : Math.floor(run.coins * data.balance.defeatCoinKeep);
+  const coins = runPayout(run, data);
   const kept = win ? run.backpack.slice() : run.backpack.filter((b) => b.uid === keepUid).slice(0, 1);
   save.meta.coins += coins;
   save.stats.coinsEarned += coins;
-  for (const b of kept) addItem(save, b.id, b.mods);
+  let soldFor = 0;
+  for (const b of kept) {
+    const key = addItem(save, b.id, b.mods);
+    if (sellUids.includes(b.uid)) soldFor += sellItem(save, data, key, 1);
+  }
   for (const s of run.stickers) grantSticker(save, data, s);
   save.stats.kills += run.stats.kills;
-  if (win) save.stats.wins++;
-  else save.stats.losses++;
+  if (win) {
+    save.stats.wins++;
+    save.meta.grit = 0;
+  } else {
+    save.stats.losses++;
+    save.meta.grit = (save.meta.grit || 0) + 1;
+  }
   const sparkles = win ? 3 : 1;
   save.meta.sparkles += sparkles;
   const summary = {
     outcome: run.result.outcome,
     coins,
+    soldFor,
     sparkles,
     items: kept.map((b) => b.id),
     stickers: run.stickers.slice(),

@@ -1,14 +1,36 @@
 // Opening lucky blocks in the Lavka (daily gift) and during runs. Contents are rolled before any animation and
 // stored in the save, so closing the app mid-reveal can never reroll them.
 import { rollBlock } from './loot.js';
-import { addItem, grantAnimal } from './collection.js';
+import { addItem, grantAnimal, modMultiplier } from './collection.js';
 import { claimDaily } from './daily.js';
 import { effectSum, luckBonus } from './meta.js';
+import { pageState, slotFound } from './progress.js';
 import { withMetaRng, withRunRng, addToBackpack, removeFromBackpack } from './run.js';
+
+// Unfound stickers of the album pages closest to completion: blocks favour these, so a page gets finished in reasonable
+// time without any page being handed out for free (the rarity roll stays untouched).
+export function wantedStickers(save, data) {
+  const pages = data.album
+    .map((p) => ({ p, ...pageState(save, p) }))
+    .filter((x) => x.found < x.total)
+    .sort((a, b) => b.found / b.total - a.found / a.total || a.total - b.total)
+    .slice(0, 3);
+  const out = [];
+  for (const { p } of pages) {
+    for (const s of p.slots) {
+      if (slotFound(save, s) || s.kind === 'enemy') continue;
+      const def = s.kind === 'animal' ? data.animalById[s.id] : data.itemById[s.id];
+      if (def) out.push({ kind: s.kind, id: s.id, rarity: def.rarity });
+    }
+  }
+  return out;
+}
 
 export function blockLuck(save, data, run = null) {
   let luck = luckBonus(save, data) + effectSum(save, data, 'block_luck');
   if (run) {
+    const lead = data.balance.leader[run.leader];
+    if (lead) luck += lead.blockLuck || 0;
     for (const b of run.backpack) {
       if (b.mods.includes('rainbow')) luck += 2;
       const it = data.itemById[b.id];
@@ -30,9 +52,10 @@ export function openDailyGift(save, data, today) {
   const claim = claimDaily(save, today);
   if (!claim) return null;
   const luck = blockLuck(save, data);
+  const wanted = wantedStickers(save, data);
   const gift = { date: today, streak: claim.streak, bonuses: claim.bonuses, blocks: [], coins: 0, sparkles: 0 };
   withMetaRng(save, (rng) => {
-    gift.blocks.push(rollBlock(rng, data, save.pity, { luck }));
+    gift.blocks.push(rollBlock(rng, data, save.pity, { luck, wanted }));
     for (const b of claim.bonuses) {
       if (b === 3) gift.coins += 30;
       if (b === 7) gift.blocks.push(rollBlock(rng, data, save.pity, { luck, minRarity: 'rare' }));
@@ -53,7 +76,8 @@ export function openDailyGift(save, data, today) {
 // ---------- in-run blocks ----------
 export function rollRunBlocks(save, data, run, n, opts = {}) {
   const luck = blockLuck(save, data, run);
-  return withRunRng(run, (rng) => Array.from({ length: n }, () => ({ ...rollBlock(rng, data, save.pity, { luck, ...opts }), opened: false })));
+  const wanted = wantedStickers(save, data);
+  return withRunRng(run, (rng) => Array.from({ length: n }, () => ({ ...rollBlock(rng, data, save.pity, { luck, wanted, ...opts }), opened: false })));
 }
 
 // Reveal block idx of the current room. Returns {needsSpace} when the backpack is full (player decides).
@@ -74,12 +98,17 @@ export function openRunBlock(save, data, idx) {
   return { block: b };
 }
 
+// What the backpack's "sell on the spot" pays: half the Lavka price (modifiers count).
+export function runSellPrice(data, id, mods = []) {
+  return Math.max(1, Math.floor((data.itemById[id].price * modMultiplier(data, mods)) / 2));
+}
+
 // Backpack full: drop (sell) an old item to make room, or sell the new find. Both give half price in run coins.
 export function resolveFullBackpack(save, data, idx, dropUid = null) {
   const run = save.run;
   const b = run.room.blocks[idx];
   if (!b || b.opened) return null;
-  const half = (id, mods) => Math.max(1, Math.floor((data.itemById[id].price * (mods.includes('golden') ? 5 : mods.includes('rainbow') ? 10 : 1)) / 2));
+  const half = (id, mods) => runSellPrice(data, id, mods);
   let coins = 0;
   if (dropUid) {
     const old = removeFromBackpack(run, dropUid);

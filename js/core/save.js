@@ -27,6 +27,8 @@ export function newSave(now = new Date(), seed = Date.now()) {
       showcase: [],
       rng: seedState('meta:' + seed),
       runsStarted: 0,
+      grit: 0,
+      recentEvents: [],
     },
     collection: { items: {}, animals: {}, stickers: {}, seen: {} },
     combos: { discovered: [] },

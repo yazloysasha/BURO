@@ -7,6 +7,7 @@ import { game, commit } from '../../game/state.js';
 import { parseKey, sellPrice, sellItem, toggleShowcase, toggleGuest, collectionStats, SHOWCASE_MAX } from '../../game/collection.js';
 import { guestSlots } from '../../game/meta.js';
 import { rank } from '../../game/loot.js';
+import { guestCombos } from '../../game/combos.js';
 import { displayName } from '../../game/names.js';
 import { button, modal, closeModal, screenHeader, setTopbarTitle, confirm, toast } from '../app.js';
 import { effectText, passiveText } from '../runwidgets.js';
@@ -103,7 +104,7 @@ function itemDetails(key, redraw) {
   );
   modal(content, [{ label: t('common.close'), value: 0, cls: 'grey', sound: 'back' }]);
   const acts = document.querySelector('#overlay .actions');
-  acts.prepend(
+  const extra = [
     button(t('inv.sell', { n: price }), () => {
       const c = sellItem(save, game.data, key, 1);
       commit();
@@ -130,7 +131,8 @@ function itemDetails(key, redraw) {
       closeModal();
       redraw();
     }, { cls: 'blue', sound: null }),
-  );
+  ];
+  acts.prepend(...extra.filter(Boolean));
 }
 
 function animalsTab(redraw) {
@@ -152,7 +154,7 @@ function animalsTab(redraw) {
       play('select');
       const rar = game.data.rarityById[a.rarity];
       modal(
-        h('div.col', null, h('div.row', null, h('div.item-icon.big.r-' + a.rarity, null, animalCanvas(a, 80)), h('div', null, h('h2', { text: a.name }), h('div', { text: rar.name, style: { color: rar.color } }))), h('p', { text: t('inv.passive') + ' ' + passiveText(a.passive) }), h('p.dim', { text: t('inv.guestHint') })),
+        h('div.col', null, h('div.row', null, h('div.item-icon.big.r-' + a.rarity, null, animalCanvas(a, 80)), h('div', null, h('h2', { text: a.name }), h('div', { text: rar.name, style: { color: rar.color } }))), h('p', { text: t('inv.passive') + ' ' + passiveText(a.passive) }), ...guestCombos(game.data, a.id).map((c) => h('div.goal-line', { text: t('combos.hint', { hint: c.hint }) })), h('p.dim', { text: t('inv.guestHint') })),
         [{ label: t('common.close'), value: 0, cls: 'grey', sound: 'back' }],
       );
       document.querySelector('#overlay .actions').prepend(

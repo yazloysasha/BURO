@@ -11,6 +11,7 @@ import { roomViews, rewardView, leaveRoom, leaveButton, openBlockAt } from './sc
 import { itemRow, itemIcon, effectText, partyBar } from './runwidgets.js';
 import { blockCard, pityLine } from './luckyblock.js';
 import { displayName } from '../game/names.js';
+import { createCatPair } from './widgets.js';
 
 // ---------- anomaly ----------
 function paintVariant(canvas, img, cell) {
@@ -56,13 +57,13 @@ function paintVariant(canvas, img, cell) {
 roomViews.anomaly = (root, room) => {
   const a = room.anomaly;
   const item = game.data.itemById[a.icon];
-  const box = h('div.col');
+  const box = h('div.col.room-center');
   const info = h('div.center');
   const drawInfo = () => setChildren(info, h('div', { text: t('anomaly.task', { n: a.total }) }), h('div.accent', { text: t('anomaly.taps', { n: a.tapsLeft, f: a.found, total: a.total }) }));
   drawInfo();
   const availW = Math.min(root.clientWidth || 360, 480);
   const cellCss = Math.floor((availW - (a.size - 1) * 6) / a.size);
-  const scale = Math.max(1, Math.floor((cellCss - 12) / 16));
+  const scale = Math.max(1, Math.floor((cellCss - 20) / 18));
   const grid = h('div.anomaly-grid', { style: { gridTemplateColumns: `repeat(${a.size}, 1fr)` } });
   const cells = [];
   loadImage(item.icon).then((img) => {
@@ -125,7 +126,7 @@ function shelfLabel(rule, key) {
 roomViews.shelf = (root, room) => {
   const s = room.shelf;
   let selected = null;
-  const box = h('div.col');
+  const box = h('div.col.room-center');
   const head = h('div.center');
   const pool = h('div.shelf-pool');
   const shelves = h('div.col');
@@ -183,7 +184,7 @@ roomViews.shelf = (root, room) => {
 // ---------- wash ----------
 roomViews.wash = (root, room) => {
   const run = game.save.run;
-  const box = h('div.col');
+  const box = h('div.col.room-center');
   const list = h('div.col');
   const draw = () => {
     const dirty = run.backpack.filter((b) => b.mods.includes('dirty'));
@@ -230,8 +231,8 @@ roomViews.wash = (root, room) => {
 roomViews.event = (root, room) => {
   const ev = game.data.eventById[room.event.id];
   const run = game.save.run;
-  const box = h('div.col');
-  box.append(h('h1.center', { text: ev.title }), h('p', { text: ev.text }));
+  const box = h('div.col.room-center');
+  box.append(createCatPair('sit', 'sit', 3), h('h1.center', { text: ev.title }), h('p', { text: ev.text }));
   if (room.phase === 'choose') {
     ev.choices.forEach((ch, i) => {
       const ok = canAfford(game.save, run, ch.cost);
@@ -242,7 +243,7 @@ roomViews.event = (root, room) => {
           commit();
           play(r.outcome.good ? 'confirm_big' : 'question');
           go('room');
-        }, { cls: 'blue block', disabled: !ok, sub: ch.cost ? (ok ? t('event.cost', costParams(ch.cost)) : t('event.cantAfford', costParams(ch.cost))) : null }),
+        }, { cls: 'blue block event-choice', disabled: !ok, sub: ch.cost ? (ok ? t('event.cost', costParams(ch.cost)) : t('event.cantAfford', costParams(ch.cost))) : null }),
       );
     });
     box.append(h('div.dim.center', { text: t('map.runCoins', { n: run.coins }) }));

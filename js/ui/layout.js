@@ -11,7 +11,7 @@ function gridSize(targetCss, dpr, minCss) {
 // Big screens get an integer UI zoom (the whole page scales like a large landscape phone), so pixel art and
 // the pixel font stay crisp and nothing becomes tiny on a desktop monitor.
 export function uiZoom() {
-  return Math.max(1, Math.floor(Math.min(window.innerWidth / 640, window.innerHeight / 360)));
+  return Math.max(1, Math.floor(Math.min(window.innerWidth / 640, window.innerHeight / 540)));
 }
 
 // Device pixels per CSS px of the (zoomed) layout. Everything that sizes pixel art must use this.

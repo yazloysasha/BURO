@@ -53,8 +53,14 @@ export function lootPool(data, rarity) {
 }
 
 // Contents of one block. animalChance: share of blocks that hold an animal sticker instead of an item.
-export function rollBlock(rng, data, pity, { luck = 0, minRarity = null, animalChance = 0.18 } = {}) {
+// wanted: album stickers the player is close to (see wantedStickers); a share of blocks of the right rarity holds one.
+export function rollBlock(rng, data, pity, { luck = 0, minRarity = null, animalChance = data.balance.animalChance, wanted = [] } = {}) {
   const { rarity, forced } = rollRarity(rng, data, pity, { luck, minRarity });
+  const want = wanted.filter((w) => w.rarity === rarity);
+  if (want.length && rng.next() < data.balance.wantedChance) {
+    const w = rng.pick(want);
+    return { rarity, forced, kind: w.kind, id: w.id, mods: w.kind === 'item' && rarity !== 'slop' ? rollMods(rng, data) : [] };
+  }
   const animals = (data.animals || []).filter((a) => a.rarity === rarity);
   if (rarity !== 'slop' && animals.length && rng.next() < animalChance) {
     return { rarity, forced, kind: 'animal', id: rng.pick(animals).id, mods: [] };

@@ -4,8 +4,9 @@ import { t } from '../../core/i18n.js';
 import { play } from '../../core/audio.js';
 import { game, commit } from '../../game/state.js';
 import { startRun } from '../../game/run.js';
-import { runFee, runIsFree } from '../../game/meta.js';
-import { button, go, pickLine, setTopbarTitle, confirm } from '../app.js';
+import { runFee, runIsFree, gritBonus } from '../../game/meta.js';
+import { button, go, pickLine, setTopbarTitle, modal, closeModal } from '../app.js';
+import { nextGoal } from '../../game/progress.js';
 import { createHubScene } from '../hubscene.js';
 import { isWide } from '../layout.js';
 import { catLine } from '../../game/namegen.js';
@@ -26,12 +27,21 @@ function runButton() {
   const sub = free ? t('hub.runFree') : t('hub.runFee', { n: fee });
   return button(t('hub.startRun'), async () => {
     const text = free ? (save.meta.runsStarted === 0 ? t('hub.firstRunText') : t('hub.freeRunText')) : t('hub.feeText', { n: fee });
-    if (!(await confirm(text, t('hub.go'), t('common.cancel')))) return;
-    startRun(save, game.data);
+    const leader = await chooseLeader(text);
+    if (!leader) return;
+    startRun(save, game.data, { leader });
     commit();
     play('door_open');
     go('map');
   }, { cls: 'green big block', sub, sound: 'select' });
+}
+
+// The first decision of every run: who leads changes both the fights and the haul.
+function chooseLeader(text) {
+  const pick = (key, sub) => button(t(key), () => closeModal(sub), { cls: 'blue block leader-pick', sub: t(key + 'Sub'), sound: 'confirm' });
+  return modal(h('div.col', null, h('p', { text }), h('h2', { text: t('hub.chooseLeader') }), pick('hub.leaderPeposya', 'peposya'), pick('hub.leaderDudonya', 'dudonya')), [
+    { label: t('common.cancel'), value: null, cls: 'grey', sound: 'back' },
+  ]);
 }
 
 function lastRunNote() {
@@ -66,6 +76,8 @@ export function render(root) {
   menu.append(button(t('hub.settings'), () => go('settings'), { cls: 'grey' }), button(t('hub.credits'), () => go('credits'), { cls: 'grey' }));
 
   a.append(scene.stage.el, note);
-  b.append(h('div.scroll', null, h('div.col', null, runButton(), menu)));
+  const goal = nextGoal(game.save, game.data);
+  const grit = gritBonus(game.save, game.data);
+  b.append(h('div.scroll', null, h('div.col', null, h('div.goal-line', { text: t(goal.key, goal.params) }), grit.n ? h('div.center.dim', { text: t(grit.atk ? 'runEnd.gritAtk' : 'runEnd.grit', { hp: grit.hp, atk: grit.atk }) }) : null, runButton(), menu)));
   return () => scene.destroy();
 }

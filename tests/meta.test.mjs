@@ -109,22 +109,15 @@ test('tiers 1-5: tier-up needs coins and boss wins; raises fee and luck', () => 
   assert.equal(luckBonus(s, data), luck1 + 1);
 });
 
-test('higher tiers unlock room types (shelf/wash from tier 2)', () => {
+test('every room type can appear from the very first tier', () => {
   const s = newSave(new Date(), 1);
   const types = new Set();
-  for (let i = 0; i < 40; i++) {
+  for (let i = 0; i < 60; i++) {
     s.run = null;
     startRun(s, data);
     for (const row of s.run.map.floors) for (const n of row) types.add(n.type);
   }
-  assert.ok(!types.has('shelf') && !types.has('wash'));
-  s.meta.tier = 2;
-  for (let i = 0; i < 40; i++) {
-    s.run = null;
-    startRun(s, data);
-    for (const row of s.run.map.floors) for (const n of row) types.add(n.type);
-  }
-  assert.ok(types.has('shelf') && types.has('wash'));
+  for (const r of data.rooms) assert.ok(types.has(r.id), r.id);
 });
 
 test('skins: 6 sheets + recolors; buying with sparkles', () => {

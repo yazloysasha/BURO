@@ -38,9 +38,9 @@ export function render(root) {
   const avail = new Set(availableNodes(run.map, run.pos));
   const floors = run.map.floors;
   const width = Math.min(root.clientWidth || 360, 520);
-  const height = floors.length * FLOOR_H + 24;
+  const height = floors.length * FLOOR_H + 44;
   const area = h('div.map-area', { style: { height: height + 'px', width: width + 'px' } });
-  const pos = (n) => ({ x: Math.round(24 + n.x * (width - 48)), y: Math.round(height - 12 - FLOOR_H / 2 - n.f * FLOOR_H) });
+  const pos = (n) => ({ x: Math.round(24 + n.x * (width - 48)), y: Math.round(height - 32 - FLOOR_H / 2 - n.f * FLOOR_H) });
 
   // dotted pixel lines
   const dpr = Math.max(1, Math.round(effectiveDpr()));
@@ -103,7 +103,7 @@ export function render(root) {
     'div.row.wrap',
     { style: { justifyContent: 'space-between' } },
     partyBar(run),
-    h('div.row', null, button(t('map.backpack', { n: run.backpack.length }), () => openBackpack(() => go('map')), { cls: 'blue small' })),
+    h('div.row', null, button(t('map.toHub'), () => go('hub'), { cls: 'grey small back', sound: 'back' }), button(t('map.backpack', { n: run.backpack.length }), () => openBackpack(() => go('map')), { cls: 'blue small' })),
   );
   const coins = h('div.dim', { text: t('map.runCoins', { n: run.coins }) });
   root.append(top, coins, scroller, h('div.hub-note', { text: t('map.hint') }));

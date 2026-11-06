@@ -92,7 +92,7 @@ export function button(label, onClick, { cls = '', sound = 'click', disabled = f
 }
 
 export function backButton(to = 'hub', params) {
-  return button(t('common.back'), () => go(to, params), { cls: 'grey small', sound: 'back' });
+  return button(t('common.back'), () => go(to, params), { cls: 'grey small back', sound: 'back' });
 }
 
 export function screenHeader(title, backTo = 'hub') {
@@ -117,6 +117,7 @@ export function modal(content, actions = [], { cls = '', dismissable = true } = 
     }
     const box = h('div.modal.panel' + (cls ? '.' + cls : ''), null, h('div.body', null, content), actions.length ? acts : null);
     ov.append(box);
+    ov.dataset.locked = dismissable ? '0' : '1';
     ov.classList.add('show');
     ov.onclick = (e) => {
       if (dismissable && e.target === ov) closeModal(undefined);

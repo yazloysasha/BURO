@@ -62,6 +62,6 @@ export function render(root) {
     note.textContent = t('daily.alreadyOpened');
     if (gift && gift.date === today) for (const b of gift.blocks) cards.append(blockCard({ ...b, opened: true }, {}));
   }
-  box.append(h('h1', { text: t('daily.title') }), cards, note, pity, streak);
+  box.append(cards, note, pity, streak);
   root.append(screenHeader(t('daily.title')), h('div.scroll', null, box));
 }

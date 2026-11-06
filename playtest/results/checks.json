@@ -1,0 +1,172 @@
+[
+ {
+  "name": "offline iphone: reload with no network boots the game",
+  "ok": true,
+  "detail": "843 files in the cache"
+ },
+ {
+  "name": "offline iphone: a full run with no network",
+  "ok": true,
+  "detail": "lose on floor 11/11, 179 taps"
+ },
+ {
+  "name": "offline iphone: no external requests, no page errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "name": "offline iphone: progress survives closing the page while offline",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "name": "offline desktop: reload with no network boots the game",
+  "ok": true,
+  "detail": "843 files in the cache"
+ },
+ {
+  "name": "offline desktop: a full run with no network",
+  "ok": true,
+  "detail": "win on floor 10/10, 131 taps"
+ },
+ {
+  "name": "offline desktop: no external requests, no page errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "name": "offline desktop: progress survives closing the page while offline",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "name": "save v1 migrates on a real page",
+  "ok": true,
+  "detail": "now v5, coins 340"
+ },
+ {
+  "name": "save v2 migrates on a real page",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "name": "a corrupted save does not break the game: starts fresh and says so",
+  "ok": true,
+  "detail": "Сохранение повредилось, и коты начали заново. Простите!"
+ },
+ {
+  "name": "the unreadable save is kept for rescue",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "name": "a torn save falls back to the backup",
+  "ok": true,
+  "detail": "coins 321"
+ },
+ {
+  "name": "an edited save fails its checksum and is not trusted",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "name": "export: Windows-style file download",
+  "ok": true,
+  "detail": "pepsya-dudonya-2026-11-05.json"
+ },
+ {
+  "name": "export: the same text is available to copy",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "name": "import: from a file on a clean device",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "name": "import: from pasted text",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "name": "import: garbage is refused, progress untouched",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "name": "export: iPhone share sheet gets the save file",
+  "ok": true,
+  "detail": "pepsya-dudonya-2026-11-05.json"
+ },
+ {
+  "name": "keyboard: Enter presses the main button",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "name": "keyboard: Esc closes a dialog",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "name": "keyboard: Space and number keys start a run",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "name": "keyboard: Esc goes back from the map to the Lavka",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "name": "keyboard: numbers pick a map node, Enter goes in",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "name": "keyboard: numbers pick combat actions and targets",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "name": "keyboard: Space skips the round animation",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "name": "keyboard: no errors along the way",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "name": "find room: the way out is locked while a block is closed",
+  "ok": true,
+  "detail": "Сначала откройте находки"
+ },
+ {
+  "name": "find room: opening the blocks unlocks it",
+  "ok": true,
+  "detail": "Дальше"
+ },
+ {
+  "name": "find room: no errors",
+  "ok": true,
+  "detail": ""
+ },
+ {
+  "name": "album: a full page pays its reward through the UI",
+  "ok": true,
+  "detail": "Страница собрана! Сад скин «Дудоня-персик» +5 блёсток за старание. Хор"
+ },
+ {
+  "name": "update: a new version offers \"Обновить\"",
+  "ok": true,
+  "detail": "Готово обновление Лавки! \nОбновить"
+ },
+ {
+  "name": "update: new cache replaces the old one, save intact",
+  "ok": true,
+  "detail": "buro-v42 -> buro-v43"
+ }
+]

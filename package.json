@@ -8,5 +8,8 @@
     "test": "node --test",
     "build": "node tools/gen_icons.mjs && node tools/gen_precache.mjs",
     "serve": "python3 -m http.server 8080"
+  },
+  "devDependencies": {
+    "playwright": "^1.64.1"
   }
 }

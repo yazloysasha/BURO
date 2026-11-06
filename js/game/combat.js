@@ -95,7 +95,7 @@ export function makeEnemyUnit(def, uid, { floor = 1, tier = 1, elite = false, el
   const sc = balance.enemyScale;
   const mult = def.boss ? 1 + sc.perTier * (tier - 1) : 1 + sc.perFloor * (floor - 1) + sc.perTier * (tier - 1);
   const hpMult = mult * (elite ? balance.elite.hp : 1);
-  const atkMult = (def.boss ? 1 + 0.12 * (tier - 1) : 1 + (sc.perFloor * (floor - 1)) / 2 + (sc.perTier * (tier - 1)) / 2) * (elite ? balance.elite.atk : 1);
+  const atkMult = (def.boss ? 1 + sc.bossAtkPerTier * (tier - 1) : 1 + (sc.perFloor * (floor - 1)) / 2 + (sc.perTier * (tier - 1)) / 2) * (elite ? balance.elite.atk : 1);
   const hp = Math.round(def.hp * hpMult);
   return {
     side: 'enemy',
@@ -520,6 +520,16 @@ function checkOver(c, ev) {
   }
 }
 
+// Long fights heat up, so turtling behind shields and heals can't stall forever (and every fight is sure to end).
+function enrage(c, ctx, ev) {
+  const r = ctx.balance.enrage;
+  if (!r) return;
+  const from = r.round + (c.kind === 'boss' ? r.bossLater || 0 : 0);
+  if (c.round < from || (c.round - from) % r.every) return;
+  for (const e of aliveEnemies(c)) e.atk += Math.max(1, Math.round(e.atk * r.atkAdd));
+  ev.push({ type: 'enrage' });
+}
+
 function endOfRound(c, rng, ctx, ev) {
   for (const u of [...aliveCats(c), ...aliveEnemies(c)]) {
     for (const s of u.statuses) {
@@ -538,6 +548,7 @@ function endOfRound(c, rng, ctx, ev) {
   checkOver(c, ev);
   for (const e of c.enemies) e.intent = null;
   c.round++;
+  if (!c.over) enrage(c, ctx, ev);
   if (!c.over) {
     planIntents(c, rng, ctx);
     ev.push({ type: 'round', round: c.round });

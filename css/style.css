@@ -4,12 +4,6 @@
   font-weight: normal;
   font-display: block;
 }
-@font-face {
-  font-family: 'Galmuri11';
-  src: url('../fonts/Galmuri11-Bold.ttf') format('truetype');
-  font-weight: bold;
-  font-display: block;
-}
 
 :root {
   /* font sizes sit on the 12px pixel grid of Galmuri11; js/ui/layout.js tunes them to the device pixel ratio */
@@ -139,7 +133,6 @@ h3 {
   margin: 8px 0;
 }
 h1 {
-  font-weight: bold;
   font-size: var(--fs-h);
   line-height: 1.3;
   color: var(--accent);
@@ -377,13 +370,13 @@ textarea {
   flex-wrap: wrap;
 }
 .modal .actions .btn {
-  flex: 1;
+  flex: 1 1 auto;
 }
 
 #toast {
   position: fixed;
   left: 50%;
-  bottom: calc(var(--safe-b) + 16px);
+  top: calc(var(--safe-t) + 44px);
   transform: translateX(-50%);
   z-index: 60;
   pointer-events: none;
@@ -454,7 +447,7 @@ textarea {
 }
 .hpbar {
   position: relative;
-  width: 72px;
+  width: calc(var(--fs-s) * 5.4);
   height: calc(var(--fs-s) + 4px);
   background: #3a1f2a;
   border: 2px solid #120e22;
@@ -473,7 +466,7 @@ textarea {
   color: #fff;
 }
 .hpbar.small {
-  width: 64px;
+  width: calc(var(--fs-s) * 5);
 }
 .hpbar.small span {
   line-height: 1;
@@ -501,6 +494,73 @@ textarea {
   border: 3px solid #3a3058;
   padding: 0;
   cursor: pointer;
+}
+input[type='range'] {
+  min-height: 44px;
+}
+.room-center {
+  min-height: 100%;
+  justify-content: center;
+}
+.goal-line {
+  padding: 4px 6px;
+  text-align: center;
+  color: var(--accent);
+  border: 2px dashed #3a3058;
+}
+.sell-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px;
+  background: var(--bg2);
+  border: 2px solid #3a3058;
+}
+.sell-toggle {
+  flex: none;
+  min-width: 96px;
+}
+.sell-tags {
+  gap: 4px;
+  flex-wrap: wrap;
+}
+.tag {
+  font-size: var(--fs-s);
+  padding: 0 4px;
+  border: 1px solid var(--ink-dim);
+  color: var(--ink-dim);
+}
+.tag.good {
+  color: #6fd36f;
+  border-color: #6fd36f;
+}
+.file-pick {
+  display: none;
+}
+.skip-hint {
+  padding: 16px 0;
+}
+.action-grid .btn .sub {
+  color: #1e4d2a;
+}
+
+/* number-key hints for mouse and keyboard players */
+body.kbd .action-grid,
+body.kbd .map-area {
+  counter-reset: key;
+}
+body.kbd .action-grid .btn:not(:disabled)::before,
+body.kbd .map-node.avail::before {
+  counter-increment: key;
+  content: counter(key);
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  font-size: var(--fs-s);
+  color: #2b2442;
+  background: #ffe9a8;
+  padding: 0 3px;
+  z-index: 3;
 }
 .map-label {
   position: absolute;
@@ -739,9 +799,12 @@ textarea {
 .lucky {
   position: relative;
   overflow: hidden;
-  width: 112px;
+  overflow-wrap: anywhere;
+  font-size: var(--fs-s);
+  line-height: 1.2;
+  width: 8.8em;
   min-height: 150px;
-  font: inherit;
+  font-family: inherit;
   color: var(--ink);
   background: var(--bg2);
   border: 3px solid #4a3d70;
@@ -847,6 +910,7 @@ textarea {
 /* ---------- rooms ---------- */
 .anomaly-grid {
   display: grid;
+  box-sizing: border-box;
   gap: 6px;
   margin: 8px auto;
   width: 100%;
@@ -854,6 +918,8 @@ textarea {
 }
 .anomaly-cell {
   aspect-ratio: 1;
+  min-width: 0;
+  overflow: hidden;
   background: #120e22;
   border: 3px solid #3a3058;
   display: flex;

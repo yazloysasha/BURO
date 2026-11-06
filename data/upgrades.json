@@ -1,7 +1,7 @@
 [
-  { "id": "backpack", "name": "Рюкзак побольше", "desc": "+1 место в рюкзаке забега.", "icon": "assets/sprites/items/rpg496_i_chest01.png", "max": 4, "cost": [60, 120, 220, 360], "effects": [ { "type": "backpack_slot", "value": 1 } ] },
-  { "id": "start_kit", "name": "Тормозок в дорогу", "desc": "+1 расходник в начале каждого забега.", "icon": "assets/sprites/items/food_92_sandwich.png", "max": 3, "cost": [80, 180, 320], "effects": [ { "type": "start_consumable", "value": 1 } ] },
+  { "id": "backpack", "name": "Рюкзак побольше", "desc": "+1 место в рюкзаке забега.", "icon": "assets/sprites/items/rpg496_i_chest01.png", "max": 4, "cost": [50, 120, 220, 360], "effects": [ { "type": "backpack_slot", "value": 1 } ] },
+  { "id": "start_kit", "name": "Тормозок в дорогу", "desc": "+1 расходник в начале каждого забега.", "icon": "assets/sprites/items/food_92_sandwich.png", "max": 3, "cost": [45, 150, 320], "effects": [ { "type": "start_consumable", "value": 1 } ] },
   { "id": "guest_room", "name": "Лежанки для гостей", "desc": "+1 место для зверей-гостей в Лавке.", "icon": "assets/sprites/items/kyrise_cup_01b.png", "max": 2, "cost": [150, 400], "effects": [ { "type": "guest_slot", "value": 1 } ] },
   { "id": "lucky_charm", "name": "Подкова над дверью", "desc": "+1 к удаче в лаки-блоках.", "icon": "assets/sprites/items/rpg496_i_clover.png", "max": 3, "cost": [100, 250, 500], "effects": [ { "type": "block_luck", "value": 1 } ] },
-  { "id": "first_aid", "name": "Аптечка с валерьянкой", "desc": "Коты начинают забег с +4 HP за уровень.", "icon": "assets/sprites/items/td_potion_green.png", "max": 3, "cost": [70, 160, 300], "effects": [ { "type": "stat", "stat": "hp", "value": 4 } ] }
+  { "id": "first_aid", "name": "Аптечка с валерьянкой", "desc": "Коты начинают забег с +4 HP за уровень.", "icon": "assets/sprites/items/td_potion_green.png", "max": 3, "cost": [30, 110, 260], "effects": [ { "type": "stat", "stat": "hp", "value": 4 } ] }
 ]

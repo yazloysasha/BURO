@@ -8,6 +8,7 @@ import { game, commit } from '../game/state.js';
 import { CAT_KEYS, aliveEnemies, aliveCats, catByKey, intentPreview } from '../game/combat.js';
 import { combatCtx } from '../game/data.js';
 import { playRound } from '../game/run.js';
+import { combosForChoice } from '../game/combos.js';
 import { Stage } from './stage.js';
 import { button, modal, closeModal, shake, haptic } from './app.js';
 import { hpBar, itemRow, effectText } from './runwidgets.js';
@@ -211,6 +212,9 @@ export function renderCombat(root, { onEnd }) {
         sub = t('combat.cooldown', { n: cat.cooldown });
       }
       if (id === 'item' && !usableItems().length) disabled = true;
+      const other = sel[k === 'peposya' ? 'dudonya' : 'peposya'];
+      const spark = disabled ? null : combosForChoice(game.data, k, id, c.seq[k], other && other.action)[0];
+      if (spark) sub = game.save.combos.discovered.includes(spark.id) ? t('combat.comboHint', { name: spark.name }) : t('combat.comboUnknown');
       const isSkill = ad.icon.includes('/skills/');
       const ic = iconCanvas(ad.icon, { w: isSkill ? 34 : 16, h: isSkill ? 34 : 16, target: 34 });
       const b = button(ad.name, () => chooseAction(k, id), { cls: (id === 'special' ? 'green' : '') + ' act', disabled, icon: ic, sub, sound: 'tap' });
@@ -226,7 +230,8 @@ export function renderCombat(root, { onEnd }) {
   function usableItems() {
     return run.backpack.filter((b) => {
       const it = game.data.itemById[b.id];
-      return it && it.effect && !Object.values(sel).some((a) => a.itemUid === b.uid);
+      // gear works from the backpack by itself and must not be burnt like a consumable
+      return it && it.effect && it.effect.type !== 'stat' && !Object.values(sel).some((a) => a.itemUid === b.uid);
     });
   }
 
@@ -475,6 +480,12 @@ export function renderCombat(root, { onEnd }) {
           shake();
           log.textContent = t('combat.bossPhase');
           await pause(500);
+          break;
+        case 'enrage':
+          play('ambush');
+          log.textContent = t('combat.enrage');
+          shake();
+          await pause(350);
           break;
         case 'item':
           if (ev.item) float(ev.actor, game.data.itemById[ev.item].name, 'heal');

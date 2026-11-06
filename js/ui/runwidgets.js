@@ -9,6 +9,7 @@ import { useItemOutside, MAP_USABLE } from '../game/run.js';
 import { backpackSize } from '../game/meta.js';
 import { modal, button, toast } from './app.js';
 import { displayName } from '../game/names.js';
+import { nearCombos } from '../game/combos.js';
 
 export function hpBar(hp, max, cls = '') {
   const pct = Math.max(0, Math.min(100, Math.round((hp / max) * 100)));
@@ -64,6 +65,7 @@ export function openBackpack(onChange) {
   const draw = () => {
     list.replaceChildren();
     if (!run.backpack.length) list.append(h('p.dim', { text: t('map.backpackEmpty') }));
+    for (const c of nearCombos(game.save, game.data, run)) list.append(h('div.goal-line', { text: t('map.nearCombo', { hint: c.hint }) }));
     for (const b of run.backpack) {
       const item = game.data.itemById[b.id];
       if (!item) continue;

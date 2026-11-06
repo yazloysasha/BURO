@@ -90,9 +90,19 @@ export function luckBonus(save, data) {
   return effectSum(save, data, 'stat', { stat: 'luck' }) + (save.meta.tier - 1);
 }
 
+// Stubbornness: every defeat in a row makes the cats a little tougher until they finally win. No dead ends for a newcomer.
+export function gritBonus(save, data) {
+  const g = data.balance.grit;
+  const n = Math.min(save.meta.grit || 0, g.max);
+  return { n, hp: n * g.hp, atk: Math.floor(n / g.atkEvery) };
+}
+
 // Per-cat stat bonuses: {atk, def, spd, luck, crit, hp}
 export function catBonus(save, data, cat) {
   const b = { atk: 0, def: 0, spd: 0, luck: 0, crit: 0, hp: 0 };
+  const grit = gritBonus(save, data);
+  b.hp += grit.hp;
+  b.atk += grit.atk;
   for (const e of allEffects(save, data)) {
     if (e.type !== 'stat') continue;
     if (e.cat && e.cat !== cat) continue;

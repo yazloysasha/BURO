@@ -83,6 +83,31 @@ async function copyText(text, ta) {
   }
 }
 
+function saveFileName() {
+  const d = new Date();
+  const p = (n) => String(n).padStart(2, '0');
+  return `pepsya-dudonya-${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}.json`;
+}
+
+function downloadFile(text) {
+  const url = URL.createObjectURL(new Blob([text], { type: 'application/json' }));
+  const a = h('a', { href: url, download: saveFileName() });
+  document.body.append(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 2000);
+}
+
+// iOS: the share sheet can save to Files, AirDrop or send to yourself. Falls back to copying the text.
+async function shareFile(text, ta) {
+  const file = new File([text], saveFileName(), { type: 'application/json' });
+  try {
+    await navigator.share(navigator.canShare && navigator.canShare({ files: [file] }) ? { files: [file] } : { text });
+  } catch (e) {
+    if (e.name !== 'AbortError') copyText(text, ta);
+  }
+}
+
 function doExport() {
   const text = exportSave(game.save);
   const ta = h('textarea', { readOnly: true, value: text });
@@ -91,33 +116,47 @@ function doExport() {
     [{ label: t('common.close'), value: false, cls: 'grey', sound: 'back' }],
   );
   const acts = document.querySelector('#overlay .actions');
-  acts.prepend(button(t('settings.copy'), () => copyText(text, ta), { cls: 'green' }));
+  acts.prepend(
+    button(t('settings.copy'), () => copyText(text, ta), { cls: 'green' }),
+    navigator.share ? button(t('settings.share'), () => shareFile(text, ta), { cls: 'green' }) : button(t('settings.download'), () => downloadFile(text), { cls: 'green' }),
+  );
+}
+
+function applyImport(text) {
+  try {
+    const s = importSave(text);
+    writeBackup(game.save); // keep the replaced progress as backup, just in case
+    game.save = s;
+    commit();
+    closeModal();
+    applySettings();
+    toast(t('settings.importOk'));
+    play('confirm_big');
+    go('hub');
+  } catch (e) {
+    play('error');
+    toast(String(e.message) === 'newer' ? t('settings.importNewer') : t('settings.importBad'), 3500);
+  }
 }
 
 function doImport() {
   const ta = h('textarea', { placeholder: '{"game":"buro", …}' });
-  modal(h('div', null, h('h2', { text: t('settings.import') }), h('p', { text: t('settings.importHint') }), ta), [
+  const file = h('input.file-pick', { type: 'file', accept: '.json,application/json,text/plain' });
+  file.addEventListener('change', async () => {
+    const f = file.files && file.files[0];
+    if (!f) return;
+    try {
+      applyImport(await f.text());
+    } catch {
+      toast(t('settings.fileReadError'), 3500);
+    }
+  });
+  modal(h('div', null, h('h2', { text: t('settings.import') }), h('p', { text: t('settings.importHint') }), ta, file), [
     { label: t('common.cancel'), value: false, cls: 'grey', sound: 'back' },
   ]);
   const acts = document.querySelector('#overlay .actions');
-  acts.append(
-    button(t('settings.importDo'), () => {
-      try {
-        const s = importSave(ta.value);
-        writeBackup(game.save); // keep the replaced progress as backup, just in case
-        game.save = s;
-        commit();
-        closeModal();
-        applySettings();
-        toast(t('settings.importOk'));
-        play('confirm_big');
-        go('hub');
-      } catch (e) {
-        play('error');
-        toast(String(e.message) === 'newer' ? t('settings.importNewer') : t('settings.importBad'), 3500);
-      }
-    }, { cls: 'green' }),
-  );
+  acts.prepend(button(t('settings.pickFile'), () => file.click(), { cls: 'blue' }));
+  acts.append(button(t('settings.importDo'), () => applyImport(ta.value), { cls: 'green' }));
 }
 
 async function doReset() {

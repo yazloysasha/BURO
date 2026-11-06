@@ -1,5 +1,5 @@
 // Non-combat rooms: anomaly hunt, shelf sorting, wash, events, night shop. Pure; randomness via run.rng.
-import { withRunRng, addToBackpack, pickConsumable } from './run.js';
+import { withRunRng, addToBackpack, giveItem, pickConsumable } from './run.js';
 import { rollRunBlocks, blockLuck } from './blocks.js';
 import { roomModCombo } from './combos.js';
 import { coinMult } from './meta.js';
@@ -23,7 +23,8 @@ export function initAnomaly(save, data, run, room) {
     const pool = data.items.filter((i) => i.w === 16 && i.h === 16 && !(i.tags || []).includes('slop'));
     const item = rng.pick(pool);
     const cells = Array.from({ length: size * size }, () => ({ kind: 'normal', tapped: false }));
-    const kinds = rng.shuffle(ANOMALY_KINDS);
+    // only tricks that can be seen on this icon (see anomalyFit in tools/build_content.mjs)
+    const kinds = rng.shuffle(ANOMALY_KINDS.filter((k) => (k !== 'mirror' || item.mirrorOk) && (k !== 'recolor' || item.recolorOk)));
     const spots = rng.shuffle([...cells.keys()]).slice(0, total);
     spots.forEach((s, i) => {
       cells[s] = { kind: kinds[i], tapped: false, px: rng.int(2, 13), py: rng.int(2, 13), seed: rng.int(0, 9999) };
@@ -171,11 +172,15 @@ export function washCats(save, data) {
 // ---------- events: data-driven scenes with choices and luck checks ----------
 export function initEvent(save, data, run, room) {
   withRunRng(run, (rng) => {
+    // never twice in a run, and not again soon after the last runs
     const seen = run.flags.events || [];
-    let pool = data.events.filter((e) => !seen.includes(e.id));
+    const recent = save.meta.recentEvents || [];
+    let pool = data.events.filter((e) => !seen.includes(e.id) && !recent.includes(e.id));
+    if (!pool.length) pool = data.events.filter((e) => !seen.includes(e.id));
     if (!pool.length) pool = data.events;
     const ev = rng.pick(pool);
     run.flags.events = [...seen, ev.id];
+    save.meta.recentEvents = [...recent, ev.id].slice(-Math.floor(data.events.length * 0.6));
     room.event = { id: ev.id, choice: null, outcome: null, results: [] };
   });
   room.phase = 'choose';
@@ -246,7 +251,7 @@ export function applyEventEffects(save, data, run, room, effects) {
     }
     if (e.item || e.consumable) {
       const id = e.item || withRunRng(run, (rng) => pickConsumable(rng, data).id);
-      reward.items.push(addToBackpack(save, data, run, id));
+      reward.items.push(giveItem(save, data, run, id));
     }
     if (e.block) blocks.push(e.block);
     if (e.sparkles) {

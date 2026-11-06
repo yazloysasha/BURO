@@ -22,7 +22,7 @@ export function render(root) {
       const owned = skinOwned(save, s.id);
       const worn = (save.meta.skins[cat] || 'default') === s.id;
       const sp = new CatSprite(s.sheetKey, { anim: worn ? 'idle' : 'sit', scale: 2, flip: cat === 'dudonya' });
-      if (!owned) sp.el.style.filter = 'brightness(0.25)';
+      if (!owned) sp.el.style.filter = 'brightness(0.55)';
       const page = game.data.album.find((p) => p.reward.type === 'skin' && p.reward.id === s.id);
       const action = worn
         ? h('div.accent.small', { text: t('skins.worn') })

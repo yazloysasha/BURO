@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { newSave } from '../js/core/save.js';
 import { startRun, enterNode, playRound, addToBackpack, equipmentBonus } from '../js/game/run.js';
 import { tapAnomaly, placeOnShelf, washItem, chooseEvent, buyShop } from '../js/game/rooms.js';
-import { backpackMatch, activeCombos } from '../js/game/combos.js';
+import { backpackMatch, activeCombos, nearCombos, guestCombos } from '../js/game/combos.js';
 import { aliveEnemies } from '../js/game/combat.js';
 import { unopenedBlocks } from '../js/game/blocks.js';
 import { loadData } from './helpers.mjs';
@@ -222,4 +222,34 @@ test('a found block keeps the room locked until it is opened', () => {
   assert.equal(unopenedBlocks(room), 0);
   assert.equal(unopenedBlocks({ type: 'rest' }), 0);
   assert.equal(unopenedBlocks(null), 0);
+});
+
+test('anomalies only use tricks that can be seen on the chosen icon', () => {
+  for (let s = 0; s < 200; s++) {
+    const save = runInRoom('anomaly', 'fair' + s);
+    const a = save.run.room.anomaly;
+    const it = data.itemById[a.icon];
+    for (const c of a.cells) {
+      if (c.kind === 'mirror') assert.ok(it.mirrorOk, it.id + ' is symmetric');
+      if (c.kind === 'recolor') assert.ok(it.recolorOk, it.id + ' is grey');
+    }
+    assert.equal(a.cells.filter((c) => c.kind !== 'normal').length, a.total);
+  }
+});
+
+test('near-combo hint appears one item before a backpack set, not after it', () => {
+  const save = runInRoom('rest', 'near');
+  const run = save.run;
+  const ids = () => nearCombos(save, data, run).map((c) => c.id);
+  assert.ok(!ids().includes('treasury'));
+  addToBackpack(save, data, run, 'gem_a');
+  assert.ok(ids().includes('treasury'), 'one gem of two');
+  addToBackpack(save, data, run, 'gem_b');
+  assert.ok(!ids().includes('treasury'), 'the set is complete');
+});
+
+test('guest combos can be found from the animal side', () => {
+  assert.deepEqual(guestCombos(data, 'owl_grey').map((c) => c.id), ['wise_owl']);
+  assert.ok(guestCombos(data, 'dragon_red').some((c) => c.id === 'dragon_gold'));
+  assert.deepEqual(guestCombos(data, 'cow'), []);
 });

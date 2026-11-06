@@ -30,8 +30,8 @@
 | 16x16 Ant Enemies | ARoachIFoundOnMyPillow | https://opengameart.org/content/16x16-ant-enemies | враги ant_red, ant_grey |
 
 ## Шрифт (SIL OFL 1.1)
-- **Galmuri11** (Regular и Bold) — Lee Minseo (quiple), https://github.com/quiple/galmuri, SIL Open Font License 1.1.
-  Файлы `fonts/Galmuri11.ttf`, `fonts/Galmuri11-Bold.ttf` — подмножество глифов (латиница, кириллица, пунктуация)
+- **Galmuri11** — Lee Minseo (quiple), https://github.com/quiple/galmuri, SIL Open Font License 1.1.
+  Файл `fonts/Galmuri11.ttf` — подмножество глифов (латиница, кириллица, пунктуация)
   без изменения рисунка; текст лицензии — `fonts/OFL-Galmuri.txt` и `LICENSES/OFL-Galmuri.txt`.
 
 ## Изменения (производные работы)
@@ -41,3 +41,6 @@
 - Обрезка кадров котов 50×50 → 32×32; упаковка в атласы; конвертация звуков OGG → M4A/MP3.
 - Kyrise-иконки не изменялись (только переименование файлов).
 - Иконки приложения `icons/icon-*.png` собраны из спрайтов Пепоси и Дудони (целочисленное увеличение, без сглаживания).
+
+## Инструменты разработки (в игру не входят)
+- [Playwright](https://playwright.dev) (Apache-2.0) — автоматический плейтест в браузере, только `devDependencies`.

@@ -8,7 +8,8 @@ import { button, go, setTopbarTitle, modal, closeModal } from '../app.js';
 import { renderCombat } from '../combatview.js';
 import { itemRow, partyBar } from '../runwidgets.js';
 import { blockCard, pityLine } from '../luckyblock.js';
-import { openRunBlock, resolveFullBackpack, unopenedBlocks } from '../../game/blocks.js';
+import { openRunBlock, resolveFullBackpack, unopenedBlocks, runSellPrice } from '../../game/blocks.js';
+import { displayName } from '../../game/names.js';
 import { enemyCanvas } from '../../core/sprite.js';
 import { createCatPair } from '../widgets.js';
 import { burstAt } from '../particles.js';
@@ -46,6 +47,7 @@ export function rewardView(root, reward, { title = t('reward.title'), text = nul
     requestAnimationFrame(() => line.isConnected && burstAt(line, { n: 14, colors: ['#ffcf4a', '#fff4c0', '#c98a1a'] }));
   }
   for (const r of (reward && reward.items) || []) {
+    if (r.pending) continue; // didn't fit: waits among the blocks below
     const item = game.data.itemById[r.entry ? r.entry.id : r.itemId];
     if (!item) continue;
     box.append(itemRow(item, { mods: r.entry ? r.entry.mods : [], extra: r.converted ? h('div.dim', { text: t('reward.converted', { n: r.coins }) }) : null }));
@@ -79,10 +81,11 @@ export async function openBlockAt(i) {
     let drop = null;
     for (const e of run.backpack) {
       const it = game.data.itemById[e.id];
-      list.append(itemRow(it, { mods: e.mods, onClick: () => { drop = e.uid; closeModal('drop'); } }));
+      list.append(itemRow(it, { mods: e.mods, extra: h('div.small.accent', { text: t('loot.sellFor', { n: runSellPrice(game.data, e.id, e.mods) }) }), onClick: () => { drop = e.uid; closeModal('drop'); } }));
     }
-    const choice = await modal(h('div', null, h('h2', { text: t('loot.fullTitle') }), h('p', { text: t('loot.fullText') }), list), [
-      { label: t('loot.sellNew'), value: 'sell', cls: 'blue' },
+    const found = game.data.itemById[b.id];
+    const choice = await modal(h('div', null, h('h2', { text: t('loot.fullTitle') }), h('div.accent', { text: t('loot.fullFind', { name: displayName(found, b.mods) }) }), itemRow(found, { mods: b.mods }), h('p', { text: t('loot.fullText') }), list), [
+      { label: t('loot.sellNew', { n: runSellPrice(game.data, b.id, b.mods) }), value: 'sell', cls: 'blue' },
     ], { dismissable: false });
     resolveFullBackpack(game.save, game.data, i, choice === 'drop' ? drop : null);
     commit();

@@ -66,6 +66,31 @@ export function comboValue(save, data, run, type) {
   return activeCombos(save, data, run).filter((c) => c.effect.type === type).reduce((s, c) => s + (c.effect.value || 0), 0);
 }
 
+// Backpack sets the player is one item away from, for a hint in the backpack (undiscovered ones stay a hint, not a recipe).
+export function nearCombos(save, data, run) {
+  const out = [];
+  for (const c of data.combos || []) {
+    if (c.trigger.type !== 'backpack' || backpackMatch(c.trigger, run.backpack, data)) continue;
+    const needs = [...(c.trigger.all || []), ...Object.entries(c.trigger.count || {}).flatMap(([m, n]) => Array(n).fill(m))];
+    const used = new Set();
+    let have = 0;
+    for (const m of needs) {
+      const e = run.backpack.find((b) => !used.has(b.uid) && matchItem(m, b, data));
+      if (e) {
+        used.add(e.uid);
+        have++;
+      }
+    }
+    if (have >= 1 && have === needs.length - 1) out.push(c);
+  }
+  return out;
+}
+
+// Guest combos of an animal: shown on its card, so the puzzle is findable from the animal's side too.
+export function guestCombos(data, animalId) {
+  return (data.combos || []).filter((c) => c.trigger.type === 'guest_item' && wild(c.trigger.animal, animalId));
+}
+
 // One-shot effects of set combos fire once per run; passive ones are just discovered. Returns fired ids.
 export function checkRunCombos(save, data, run, helpers) {
   const fired = [];
@@ -132,6 +157,18 @@ function seqCombos(data, catKey, seq) {
 function partyCombos(data, actions, c) {
   const alive = aliveCats(c).map((u) => u.key);
   return (data.combos || []).filter((cb) => cb.trigger.type === 'party_round' && alive.length === 2 && actions.peposya && actions.dudonya && actions.peposya.action === cb.trigger.peposya && actions.dudonya.action === cb.trigger.dudonya);
+}
+
+// Combos that picking `action` for this cat would complete right now, given its history and what the other cat chose.
+export function combosForChoice(data, catKey, action, seq, otherAction) {
+  const out = seqCombos(data, catKey, [...seq, action]);
+  for (const cb of data.combos || []) {
+    if (cb.trigger.type !== 'party_round' || !otherAction) continue;
+    const mine = cb.trigger[catKey];
+    const other = cb.trigger[catKey === 'peposya' ? 'dudonya' : 'peposya'];
+    if (mine === action && other === otherAction) out.push(cb);
+  }
+  return out;
 }
 
 function applyNonDamage(e, c, actor, ev) {

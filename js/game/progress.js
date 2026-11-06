@@ -167,3 +167,28 @@ export function equipSkin(save, cat, id) {
 export function sparkleIncome(save, data) {
   return effectSum(save, data, 'sparkle_bonus');
 }
+
+// ---------- what to do next (the "one more run" line) ----------
+// Returns {key, params}: the nearest unfinished thing, cheapest first, so there is always a concrete small goal in sight.
+export function nextGoal(save, data) {
+  const unplaced = unplacedCount(save, data);
+  if (unplaced) return { key: 'goal.stickers', params: { n: unplaced } };
+  const ups = (data.upgrades || []).map((u) => ({ u, st: upgradeStatus(save, u) })).filter((x) => !x.st.maxed).sort((a, b) => a.st.cost - b.st.cost);
+  if (ups.length && ups[0].st.affordable) return { key: 'goal.buy', params: { name: ups[0].u.name } };
+  const talent = (data.talents || []).flatMap((b) => b.nodes).find((n) => talentStatus(save, data, n.id).affordable);
+  if (talent) return { key: 'goal.talent', params: { name: talent.name } };
+  const tier = tierUpStatus(save, data);
+  if (tier && tier.coinsOk && tier.winsOk) return { key: 'goal.tierUp', params: { name: tier.tier.name } };
+  let page = null;
+  for (const p of data.album || []) {
+    const st = pageState(save, p);
+    if (st.completed || !st.placed) continue;
+    const left = st.total - st.placed;
+    if (!page || left < page.left) page = { title: p.title, left };
+  }
+  if (page && page.left <= 3) return { key: 'goal.page', params: { title: page.title, n: page.left } };
+  if (tier && !tier.winsOk) return { key: 'goal.wins', params: { n: tier.tier.wins - save.stats.wins, name: tier.tier.name } };
+  if (ups.length) return { key: 'goal.save', params: { n: ups[0].st.cost - save.meta.coins, name: ups[0].u.name } };
+  if (page) return { key: 'goal.page', params: { title: page.title, n: page.left } };
+  return { key: 'goal.combo', params: { n: data.combos.length - save.combos.discovered.length } };
+}

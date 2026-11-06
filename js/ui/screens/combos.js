@@ -9,6 +9,9 @@ export function render(root) {
   const found = new Set(game.save.combos.discovered);
   const list = h('div.col');
   list.append(h('div.accent', { text: t('combos.count', { n: found.size, total: game.data.combos.length }) }));
+  // the next easy one to try: combat combos are always within reach
+  const next = game.data.combos.find((c) => !found.has(c.id) && (c.trigger.type === 'action_sequence' || c.trigger.type === 'party_round'));
+  if (next) list.append(h('div.goal-line', { text: t('combos.tryNext', { hint: next.hint }) }));
   const groups = {};
   for (const c of game.data.combos) (groups[c.trigger.type] = groups[c.trigger.type] || []).push(c);
   for (const [type, combos] of Object.entries(groups)) {
