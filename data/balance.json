@@ -101,5 +101,77 @@
     "loops": 5,
     "coins": 30,
     "sparkles": 3
+  },
+  "eliteTraits": {
+    "web": {
+      "move": {
+        "type": "debuff",
+        "status": "webbed",
+        "turns": 1,
+        "power": 0.6,
+        "w": 3
+      }
+    },
+    "blind": {
+      "move": {
+        "type": "debuff",
+        "status": "blinded",
+        "turns": 2,
+        "power": 0.5,
+        "w": 3
+      }
+    },
+    "shell": {
+      "start": "shell"
+    },
+    "rage": {
+      "start": "strong"
+    }
+  },
+  "floorMods": {
+    "chance": 0.28,
+    "max": 2,
+    "fromFloor": 2,
+    "mods": {
+      "dark": {
+        "evasion": 0.12,
+        "coinMult": 1.4
+      },
+      "crumbs": {
+        "atkMult": 1.2,
+        "blockChance": 0.5
+      },
+      "draft": {
+        "spd": 3,
+        "coinMult": 1.25
+      }
+    }
+  },
+  "bosses": [
+    "klobster_king",
+    "moth_queen"
+  ],
+  "assist": {
+    "value": {
+      "common": 2,
+      "uncommon": 3,
+      "rare": 4,
+      "epic": 5,
+      "legendary": 7
+    },
+    "every": {
+      "common": 3,
+      "uncommon": 3,
+      "rare": 3,
+      "epic": 2,
+      "legendary": 2
+    }
+  },
+  "customers": {
+    "chance": 0.75,
+    "mult": [
+      1.6,
+      2.4
+    ]
   }
 }

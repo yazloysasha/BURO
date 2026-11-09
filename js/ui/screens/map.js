@@ -13,8 +13,9 @@ import { effectiveDpr } from '../layout.js';
 const FLOOR_H = 84;
 const NODE = 52;
 
-export function roomIcon(type, target = 34) {
+export function roomIcon(type, target = 34, run = null) {
   const r = game.data.roomById[type];
+  if (type === 'boss' && run && run.boss) return enemyCanvas(game.data.enemyById[run.boss].sprite, 3, { flip: true });
   if (r && r.enemySprite) return enemyCanvas(r.enemySprite, 3, { flip: true });
   const item = r && r.icon;
   const isSkill = item && item.includes('/skills/');
@@ -75,16 +76,22 @@ export function render(root) {
     for (const n of row) {
       const p = pos(n);
       const isAvail = avail.has(n.id);
-      const r = game.data.roomById[n.type];
+      const r = roomInfo(n.type, run);
       const el = h(
         'button.map-node' + (isAvail ? '.avail' : '') + (visited.has(n.id) ? '.visited' : '') + (n.type === 'boss' ? '.boss' : ''),
         { type: 'button', 'aria-label': t(isAvail ? 'map.nodeAvail' : visited.has(n.id) ? 'map.nodeVisited' : 'map.nodeLocked', { room: r.name }), style: { left: p.x - NODE / 2 + 'px', top: p.y - NODE / 2 + 'px' } },
-        roomIcon(n.type),
+        roomIcon(n.type, 34, run),
         h('span.map-label', { text: r.short || r.name }),
       );
       el.addEventListener('click', () => onNode(n, isAvail));
       area.append(el);
     }
+  }
+  // a floor with a mood is a tinted band behind its row; rooms stay tappable and their cards explain it
+  for (const [f, id] of Object.entries(run.map.floorMods || {})) {
+    const y = Math.round(height - 32 - FLOOR_H / 2 - Number(f) * FLOOR_H);
+    const band = h('div.floor-band.' + id, { style: { top: y - FLOOR_H / 2 + 'px', height: FLOOR_H - 2 + 'px' } }, h('span', { text: t('floorMods.' + id + '.name') }));
+    area.insertBefore(band, cv);
   }
   // the cats sit on the current node (or at the entrance)
   const mini = new CatSprite('mini_peposya', { anim: 'idle', scale: 2 });
@@ -113,9 +120,19 @@ export function render(root) {
   });
 }
 
+// Room name/description; the boss node shows whoever waits upstairs this time.
+function roomInfo(type, run) {
+  const r = game.data.roomById[type];
+  if (type !== 'boss' || !run.boss) return r;
+  const e = game.data.enemyById[run.boss];
+  return { ...r, name: e.name, short: t('bossShort.' + run.boss), desc: t('bossDesc.' + run.boss) };
+}
+
 function onNode(n, isAvail) {
-  const r = game.data.roomById[n.type];
-  const body = h('div.col', null, h('div.row', null, roomIcon(n.type), h('h2', { text: r.name })), h('p', { text: r.desc }));
+  const run = game.save.run;
+  const r = roomInfo(n.type, run);
+  const mod = run.map.floorMods && run.map.floorMods[n.f];
+  const body = h('div.col', null, h('div.row', null, roomIcon(n.type, 34, run), h('h2', { text: r.name })), h('p', { text: r.desc }), mod ? h('div.accent', { text: t('floorMods.' + mod + '.name') + ': ' + t('floorMods.' + mod + '.desc') }) : null);
   if (!isAvail) {
     play('tap');
     modal(body, [{ label: t('common.close'), value: false, cls: 'grey', sound: 'back' }]);

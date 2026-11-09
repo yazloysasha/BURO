@@ -19,7 +19,7 @@ export function render(root) {
   setTopbarTitle('');
   const box = h('div.col');
   box.append(h('h1.center', { text: win ? t('runEnd.winTitle') : t('runEnd.loseTitle') }), createCatPair(win ? 'victory' : 'sleep1', win ? 'victory' : 'sleep2', 4));
-  box.append(h('p.center', { text: win ? t('runEnd.winText') : t('runEnd.loseText') }));
+  box.append(h('p.center', { text: win ? t('runEnd.winText.' + (run.boss || 'klobster_king')) : t('runEnd.loseText') }));
   if (!win) {
     const next = gritBonus({ meta: { grit: (game.save.meta.grit || 0) + 1 } }, game.data);
     box.append(h('div.accent.center', { text: t(next.atk ? 'runEnd.gritAtk' : 'runEnd.grit', { hp: next.hp, atk: next.atk }) }));

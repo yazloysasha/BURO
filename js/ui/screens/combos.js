@@ -3,6 +3,11 @@ import { h, setChildren } from '../../core/dom.js';
 import { t } from '../../core/i18n.js';
 import { game } from '../../game/state.js';
 import { anomaliesFound } from '../../game/backroom.js';
+import { openMilestones, comboQuests, MILESTONE_STEP } from '../../game/combos.js';
+import { claimComboMilestone } from '../../game/blocks.js';
+import { play } from '../../core/audio.js';
+import { commit } from '../../game/state.js';
+import { blockCard } from '../luckyblock.js';
 import { button, screenHeader, setTopbarTitle } from '../app.js';
 
 let tab = 'combos';
@@ -14,6 +19,25 @@ function combosTab() {
   // the next easy one to try: combat combos are always within reach
   const next = game.data.combos.find((c) => !found.has(c.id) && (c.trigger.type === 'action_sequence' || c.trigger.type === 'party_round'));
   if (next) list.append(h('div.goal-line', { text: t('combos.tryNext', { hint: next.hint }) }));
+  for (const m of openMilestones(game.save)) {
+    const holder = h('div.lucky-row');
+    list.append(h('div.combo-row.known.milestone', null, h('div', { text: t('combos.milestone', { n: m }) }), holder));
+    holder.append(button(t('combos.claim'), () => {
+      const r = claimComboMilestone(game.save, game.data, m);
+      commit();
+      if (!r) return;
+      play('daily_gift');
+      const b = { ...r.block, opened: false };
+      setChildren(holder, blockCard(b, { closedIcon: game.data.assets.blocks.bonus, opener: async () => ({ block: b }) }), h('div.accent', { text: t('night.sparkles', { n: r.sparkles }) }));
+    }, { cls: 'green', sound: null }));
+  }
+  const quests = comboQuests(game.save, game.data);
+  if (quests.length) {
+    list.append(h('h2', { text: t('combos.quests') }));
+    for (const q of quests) list.append(h('div.combo-row.quest', null, h('div', { text: t('combos.quest.' + q.trigger.type) }), h('div.small', { text: q.hint })));
+  }
+  const nextM = Math.ceil((found.size + 1) / MILESTONE_STEP) * MILESTONE_STEP;
+  if (nextM <= game.data.combos.length) list.append(h('div.dim.small', { text: t('combos.nextMilestone', { n: nextM - found.size, m: nextM }) }));
   const groups = {};
   for (const c of game.data.combos) (groups[c.trigger.type] = groups[c.trigger.type] || []).push(c);
   for (const [type, combos] of Object.entries(groups)) {

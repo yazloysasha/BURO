@@ -583,6 +583,28 @@ body.kbd .map-node.avail::before {
   padding: 0 3px;
   z-index: 3;
 }
+.floor-band {
+  position: absolute;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+}
+.floor-band span {
+  display: block;
+  padding-left: 4px;
+  font-size: var(--fs-s);
+  line-height: 1;
+  color: var(--ink-dim);
+}
+.floor-band.dark {
+  background: rgba(6, 4, 16, 0.55);
+}
+.floor-band.crumbs {
+  background: rgba(110, 74, 46, 0.3);
+}
+.floor-band.draft {
+  background: rgba(47, 92, 110, 0.3);
+}
 .map-label {
   position: absolute;
   top: 100%;
@@ -905,6 +927,16 @@ body.kbd .map-node.avail::before {
 }
 .inv-cell.r-slop {
   animation: slop-border 0.6s steps(6) infinite;
+}
+.inv-cell.companion::before {
+  content: '';
+  position: absolute;
+  right: 2px;
+  bottom: 2px;
+  width: 8px;
+  height: 8px;
+  background: var(--accent);
+  border: 1px solid #2a1d14;
 }
 .inv-cell.showcased::after {
   content: '';

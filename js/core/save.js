@@ -28,6 +28,8 @@ export function newSave(now = new Date(), seed = Date.now()) {
       rng: seedState('meta:' + seed),
       runsStarted: 0,
       grit: 0,
+      companion: null,
+      customer: null,
       recentEvents: [],
       backroomVisited: false,
       nightShift: null,

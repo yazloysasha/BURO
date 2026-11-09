@@ -178,6 +178,50 @@ const SCREENS = {
       env.app.go('room');
     });
   },
+  combat_companion: async () => {
+    await setup((env) => {
+      env.game.save.collection.animals.dragon_red = 1;
+      env.game.save.meta.companion = 'dragon_red';
+    });
+    await enterRoom('combat', 4);
+  },
+  combat_shell: async () => {
+    await enterRoom('elite', 6);
+    await setup((env) => {
+      const c = env.game.save.run.room.combat;
+      const m = c.enemies[0];
+      m.trait = 'shell';
+      if (!m.statuses.some((x) => x.id === 'shell')) m.statuses.push({ id: 'shell', turns: 99 });
+      env.app.go('room');
+    });
+    await page.locator('.tap-zone').nth(3).dispatchEvent('pointerdown');
+    await page.waitForSelector('#overlay.show');
+  },
+  combat_queen: async () => {
+    await setup((env) => env.app.closeModal());
+    await enterRoom('boss', 9, (env) => {
+      const r = env.game.save.run;
+      r.boss = 'moth_queen';
+      r.room = null;
+      const node = r.map.floors[r.map.floors.length - 1][0];
+      r.pos = r.map.floors[r.map.floors.length - 2][0].id;
+      r.map.floors[r.map.floors.length - 2][0].up = [node.id];
+      env.run.enterNode(env.game.save, env.game.data, node.id);
+      env.app.go('room');
+    });
+  },
+  map_moods: async () => {
+    await setup((env) => {
+      const { game, run, app } = env;
+      game.save.run = null;
+      game.save.meta.runsStarted = 5;
+      run.startRun(game.save, game.data, { leader: 'peposya' });
+      const r = game.save.run;
+      r.boss = 'moth_queen';
+      r.map.floorMods = { 1: 'dark', 2: 'crumbs' };
+      app.go('map');
+    });
+  },
   reward_loot: async () => {
     await enterRoom('loot', 4);
   },
@@ -308,6 +352,23 @@ const SCREENS = {
       env.app.go('hub');
     });
   },
+  hub_tier3_customer: async () => {
+    await setup((env) => {
+      const s = env.game.save;
+      s.meta.tier = 3;
+      s.meta.customer = { animal: 'hedgehog', want: { kind: 'category', value: 'book' }, mult: 2 };
+      env.app.go('hub');
+    });
+  },
+  customer: async () => tap('.tap-zone[aria-label="Ёжик"]'),
+  hub_tier5: async () => {
+    await setup((env) => {
+      env.app.closeModal();
+      env.game.save.meta.tier = 5;
+      env.game.save.meta.customer = null;
+      env.app.go('hub');
+    });
+  },
   daily: async () => setup((env) => env.app.go('daily')),
   daily_opened: async () => {
     await tap('.lucky');
@@ -317,9 +378,24 @@ const SCREENS = {
   inventory_item: async () => tap('.inv-cell'),
   inventory_animals: async () => setup((env) => { env.app.closeModal(); env.app.go('inventory', { tab: 'animals' }); }),
   inventory_animal: async () => tap('.inv-cell'),
+  inventory_relic: async () => {
+    await setup((env) => {
+      env.app.closeModal();
+      env.collection.addItem(env.game.save, 'friend_bouquet');
+      env.app.go('inventory', { tab: 'items' });
+    });
+    await page.locator('.inv-cell[aria-label="Букет для зверька"]').click();
+  },
   album: async () => setup((env) => { env.app.closeModal(); env.app.go('album'); }),
   album_index: async () => tap('.album-nav .btn.blue'),
   combos: async () => setup((env) => { env.game.data.balance.hubAnomalyPct = 7; env.app.closeModal(); env.app.go('combos'); }),
+  journal_milestone: async () => {
+    await setup((env) => {
+      env.game.save.combos.discovered = env.game.data.combos.slice(0, 12).map((c) => c.id);
+      env.game.save.combos.milestones = [];
+      env.app.go('combos');
+    });
+  },
   journal_anomalies: async () => {
     await setup((env) => {
       const col = (env.game.save.collection.anomalies = env.game.save.collection.anomalies || {});

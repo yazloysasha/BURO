@@ -6,5 +6,8 @@
   {"id": "strong", "name": "Злой", "kind": "buff", "desc": "Атака сильнее на 40%.", "atkMult": 1.4, "icon": "assets/sprites/items/kyrise_sword_01e.png"},
   {"id": "lucky", "name": "Везучий", "kind": "buff", "desc": "+25% к криту и уклонению.", "critAdd": 0.25, "evadeAdd": 0.15, "icon": "assets/sprites/items/kyrise_gem_01b.png"},
   {"id": "cozy", "name": "Уютно", "kind": "buff", "desc": "Восстанавливает 2 HP в конце хода.", "regen": 2, "icon": "assets/sprites/items/kyrise_cup_01b.png"},
-  {"id": "sharp", "name": "Наточенные когти", "kind": "buff", "desc": "Атака сильнее на 25%.", "atkMult": 1.25, "icon": "assets/sprites/items/kyrise_sword_01c.png"}
+  {"id": "sharp", "name": "Наточенные когти", "kind": "buff", "desc": "Атака сильнее на 25%.", "atkMult": 1.25, "icon": "assets/sprites/items/kyrise_sword_01c.png"},
+  {"id": "shell", "name": "Панцирь", "kind": "buff", "desc": "Любой удар отнимает всего 1 HP. Пока его не напугать.", "icon": "assets/sprites/items/kyrise_shield_01c.png"},
+  {"id": "blinded", "name": "Пыльца в глазах", "kind": "debuff", "desc": "Промахивается гораздо чаще.", "missAdd": 0.4, "icon": "assets/sprites/items/kyrise_shard_01e.png"},
+  {"id": "webbed", "name": "Опутан", "kind": "debuff", "desc": "Запутался в паутине и пропускает ход.", "skipTurn": true, "icon": "assets/sprites/items/kyrise_cotton_01a.png"}
 ]

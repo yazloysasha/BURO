@@ -10,7 +10,8 @@ import { rank } from '../../game/loot.js';
 import { guestCombos } from '../../game/combos.js';
 import { displayName } from '../../game/names.js';
 import { button, modal, closeModal, screenHeader, setTopbarTitle, confirm, toast } from '../app.js';
-import { effectText, passiveText } from '../runwidgets.js';
+import { effectText, passiveText, assistText } from '../runwidgets.js';
+import { companionUnit } from '../../game/run.js';
 
 let tab = 'items';
 
@@ -149,14 +150,15 @@ function animalsTab(redraw) {
   const grid = h('div.inv-grid');
   for (const a of owned) {
     const guest = save.meta.guests.includes(a.id);
-    const cell = h('button.inv-cell.r-' + a.rarity + (guest ? '.showcased' : ''), { type: 'button', 'aria-label': a.name }, animalCanvas(a, 44), save.collection.animals[a.id] > 1 ? h('span.count', { text: '×' + save.collection.animals[a.id] }) : null);
+    const cell = h('button.inv-cell.r-' + a.rarity + (guest ? '.showcased' : '') + (save.meta.companion === a.id ? '.companion' : ''), { type: 'button', 'aria-label': a.name }, animalCanvas(a, 44), save.collection.animals[a.id] > 1 ? h('span.count', { text: '×' + save.collection.animals[a.id] }) : null);
     cell.addEventListener('click', () => {
       play('select');
       const rar = game.data.rarityById[a.rarity];
       modal(
-        h('div.col', null, h('div.row', null, h('div.item-icon.big.r-' + a.rarity, null, animalCanvas(a, 80)), h('div', null, h('h2', { text: a.name }), h('div', { text: rar.name, style: { color: rar.color } }))), h('p', { text: t('inv.passive') + ' ' + passiveText(a.passive) }), ...guestCombos(game.data, a.id).map((c) => h('div.goal-line', { text: t('combos.hint', { hint: c.hint }) })), h('p.dim', { text: t('inv.guestHint') })),
+        h('div.col', null, h('div.row', null, h('div.item-icon.big.r-' + a.rarity, null, animalCanvas(a, 80)), h('div', null, h('h2', { text: a.name }), h('div', { text: rar.name, style: { color: rar.color } }))), h('p', { text: t('inv.passive') + ' ' + passiveText(a.passive) }), h('p', { text: t('inv.inRuns') + ' ' + assistText(companionUnit(game.data, { companion: a.id, backpack: [] }).assist) }), ...guestCombos(game.data, a.id).map((c) => h('div.goal-line', { text: t('combos.hint', { hint: c.hint }) })), h('p.dim', { text: t('inv.guestHint') })),
         [{ label: t('common.close'), value: 0, cls: 'grey', sound: 'back' }],
       );
+      const along = save.meta.companion === a.id;
       document.querySelector('#overlay .actions').prepend(
         button(guest ? t('inv.unguest') : t('inv.guest'), () => {
           toggleGuest(save, game.data, a.id, slots);
@@ -165,6 +167,13 @@ function animalsTab(redraw) {
           closeModal();
           redraw();
         }, { cls: 'green', sound: null }),
+        button(along ? t('inv.stayHome') : t('inv.takeAlong'), () => {
+          save.meta.companion = along ? null : a.id;
+          commit();
+          play(along ? 'door_close' : 'confirm');
+          closeModal();
+          redraw();
+        }, { cls: 'blue companion-btn', sound: null }),
       );
     });
     grid.append(cell);

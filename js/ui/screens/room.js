@@ -97,7 +97,7 @@ export async function openBlockAt(i) {
 }
 
 function combatRoom(root, room) {
-  if (room.phase === 'reward') return rewardView(root, room.reward, { title: room.type === 'boss' ? t('reward.bossTitle') : t('reward.title') });
+  if (room.phase === 'reward') return rewardView(root, room.reward, { title: room.type === 'boss' ? t('reward.bossTitle.' + (game.save.run.boss || 'klobster_king')) : t('reward.title') });
   if (room.phase === 'lost') return go('runEnd');
   renderCombat(root, {
     onEnd: (outcome) => {
@@ -141,7 +141,7 @@ export function render(root) {
   if (!run.room) return go(run.result ? 'runEnd' : 'map');
   const room = run.room;
   const r = game.data.roomById[room.type];
-  setTopbarTitle(r ? r.name : '');
+  setTopbarTitle(room.type === 'boss' && run.boss ? game.data.enemyById[run.boss].name : r ? r.name : '');
   const view = roomViews[room.type] || roomViews.loot;
   return view(root, room);
 }

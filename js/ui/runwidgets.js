@@ -48,9 +48,14 @@ export function itemRow(item, { mods = [], extra = null, onClick = null, selecte
 
 export function effectText(eff) {
   if (!eff) return '';
-  if (eff.type === 'stat') return t('effects.stat_' + eff.stat, { v: eff.value });
+  if (eff.type === 'relic') return t('relics.' + eff.relic);
+  if (eff.type === 'stat') return t('effects.stat_' + eff.stat, { v: eff.value }) + (eff.quirk ? '. ' + t('quirks.' + eff.quirk) : '');
   const st = eff.status && game.data.statusById[eff.status];
   return t('effects.' + eff.type, { v: eff.value, s: st ? st.name : '', n: eff.turns || 0, p: Math.round((eff.value || 0) * 100) });
+}
+
+export function assistText(a) {
+  return t('assist.' + a.type, { v: a.value }) + ' ' + (a.every > 1 ? t('assist.every', { n: a.every }) : t('assist.everyRound'));
 }
 
 export function passiveText(p) {

@@ -282,6 +282,32 @@ export class Bot {
       await this.page.waitForSelector('.menu-grid');
       rec.nightShift = (await this.save()).meta.nightShift.result;
     }
+    // a companion for the next runs, through the animal's card
+    const s1 = await this.save();
+    const comp = this.strat.chooseCompanion(s1, data);
+    if (comp && s1.meta.companion !== comp) {
+      await open('Полки');
+      await this.tapEl(this.page.locator('.seg.tabs .btn').nth(1));
+      await this.tapEl(this.page.locator(`.inv-cell[aria-label="${data.animalById[comp].name}"]`));
+      await this.tapSel('#overlay.show .companion-btn');
+      await back();
+      rec.companion = comp;
+    }
+    // a customer at the counter
+    const s2 = await this.save();
+    if (s2.meta.customer) {
+      const c = s2.meta.customer;
+      const { wantMatches, customerOffer } = await import('../../js/game/customers.js');
+      const key = this.strat.customerSale(s2, data, (k) => customerOffer(s2, data, k), (k) => wantMatches(data, c.want, k));
+      await this.tapEl(this.page.locator(`.tap-zone[aria-label="${data.animalById[c.animal].name}"]`));
+      await this.page.waitForSelector('#overlay.show');
+      if (key) {
+        const fits = Object.keys(s2.collection.items).filter((k) => wantMatches(data, c.want, k)).sort((x, y) => customerOffer(s2, data, y) - customerOffer(s2, data, x));
+        await this.tapEl(this.page.locator('#overlay.show .item-row.clickable').nth(fits.indexOf(key)));
+        rec.customer = true;
+      } else await this.tapSel('#overlay.show .actions .btn.grey');
+      await this.page.waitForSelector('.menu-grid');
+    }
     rec.bought = [];
     for (let guard = 0; guard < 120; guard++) {
       const save = await this.save();

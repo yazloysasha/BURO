@@ -20,105 +20,105 @@ Bots don't learn and real players do, so the newcomer numbers below are a pessim
 
 | Профиль | Стратегия | Сид | Забег | Тир | Взнос | Дошёл до босса | Итог | Монет домой | из них продажа | Комнат | Тапов | Секунд бота |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
-| iPhone | greedy | 1 | 1 | 1 | 0 | да | король, этаж 10/10 | 37 | 0 | 10 | 147 | 40 |
-| iPhone | greedy | 1 | 2 | 1 | 10 | да | победа | 137 | 0 | 10 | 113 | 29 |
-| iPhone | greedy | 1 | 3 | 1 | 10 | да | король, этаж 10/10 | 38 | 0 | 10 | 106 | 31 |
-| iPhone | greedy | 1 | 4 | 1 | 10 | да | победа | 138 | 0 | 10 | 112 | 29 |
-| iPhone | greedy | 2 | 1 | 1 | 0 | да | король, этаж 11/11 | 7 | 0 | 11 | 114 | 36 |
-| iPhone | greedy | 2 | 2 | 1 | 10 | да | король, этаж 10/10 | 34 | 0 | 10 | 146 | 45 |
-| iPhone | greedy | 2 | 3 | 1 | 10 | да | король, этаж 11/11 | 28 | 0 | 11 | 128 | 38 |
-| iPhone | greedy | 2 | 4 | 1 | 10 | да | победа | 163 | 0 | 11 | 136 | 44 |
-| iPhone | greedy | 0 | 1 | 1 | 0 | да | король, этаж 10/10 | 41 | 0 | 10 | 114 | 36 |
-| iPhone | greedy | 0 | 2 | 1 | 10 | да | победа | 125 | 0 | 10 | 114 | 37 |
-| iPhone | greedy | 0 | 3 | 1 | 10 | да | король, этаж 10/10 | 58 | 0 | 10 | 144 | 47 |
-| iPhone | greedy | 0 | 4 | 1 | 10 | да | король, этаж 10/10 | 44 | 0 | 10 | 159 | 43 |
-| iPhone | random | 2 | 1 | 1 | 0 | нет | бой, этаж 9/11 | 32 | 0 | 9 | 116 | 37 |
-| iPhone | random | 2 | 2 | 1 | 10 | да | король, этаж 11/11 | 43 | 0 | 11 | 186 | 58 |
-| iPhone | random | 2 | 3 | 1 | 10 | да | король, этаж 11/11 | 26 | 0 | 11 | 186 | 61 |
-| iPhone | random | 2 | 4 | 1 | 10 | да | король, этаж 11/11 | 33 | 0 | 11 | 168 | 57 |
-| iPhone | random | 0 | 1 | 1 | 0 | да | король, этаж 10/10 | 15 | 0 | 10 | 90 | 28 |
-| iPhone | random | 0 | 2 | 1 | 10 | да | король, этаж 10/10 | 42 | 0 | 10 | 222 | 60 |
-| iPhone | random | 0 | 3 | 1 | 10 | да | победа | 197 | 36 | 11 | 168 | 51 |
-| iPhone | random | 0 | 4 | 1 | 10 | да | король, этаж 10/10 | 26 | 0 | 10 | 190 | 63 |
-| iPhone | random | 1 | 1 | 1 | 0 | да | король, этаж 11/11 | 34 | 0 | 11 | 213 | 64 |
-| iPhone | random | 1 | 2 | 1 | 10 | да | король, этаж 10/10 | 20 | 0 | 10 | 170 | 46 |
-| iPhone | random | 1 | 3 | 1 | 10 | да | король, этаж 11/11 | 35 | 0 | 11 | 222 | 82 |
-| iPhone | random | 1 | 4 | 1 | 10 | да | победа | 125 | 12 | 10 | 157 | 45 |
-| iPhone | cautious | 0 | 1 | 1 | 0 | да | король, этаж 10/10 | 46 | 0 | 10 | 198 | 59 |
-| iPhone | cautious | 0 | 2 | 1 | 10 | да | король, этаж 10/10 | 45 | 0 | 10 | 139 | 49 |
-| iPhone | cautious | 0 | 3 | 1 | 10 | да | король, этаж 11/11 | 42 | 0 | 11 | 169 | 52 |
-| iPhone | cautious | 0 | 4 | 1 | 10 | да | победа | 166 | 0 | 11 | 108 | 32 |
-| iPhone | cautious | 1 | 1 | 1 | 0 | да | король, этаж 10/10 | 33 | 0 | 10 | 180 | 60 |
-| iPhone | cautious | 1 | 2 | 1 | 10 | да | король, этаж 11/11 | 28 | 0 | 11 | 160 | 55 |
-| iPhone | cautious | 1 | 3 | 1 | 10 | да | король, этаж 10/10 | 34 | 0 | 10 | 141 | 50 |
-| iPhone | cautious | 1 | 4 | 1 | 10 | да | король, этаж 11/11 | 14 | 0 | 11 | 130 | 46 |
-| iPhone | smart | 1 | 1 | 1 | 0 | да | победа | 116 | 0 | 10 | 127 | 42 |
-| iPhone | smart | 1 | 2 | 1 | 10 | да | победа | 139 | 0 | 10 | 126 | 38 |
-| iPhone | smart | 1 | 3 | 2 | 25 | да | король, этаж 10/10 | 38 | 0 | 10 | 134 | 35 |
-| iPhone | smart | 1 | 4 | 2 | 25 | да | король, этаж 11/11 | 31 | 0 | 11 | 176 | 56 |
-| iPhone | cautious | 2 | 1 | 1 | 0 | да | король, этаж 11/11 | 16 | 0 | 11 | 201 | 57 |
-| iPhone | cautious | 2 | 2 | 1 | 10 | да | король, этаж 11/11 | 18 | 0 | 11 | 139 | 49 |
-| iPhone | cautious | 2 | 3 | 1 | 10 | да | король, этаж 10/10 | 34 | 0 | 10 | 146 | 49 |
-| iPhone | cautious | 2 | 4 | 1 | 10 | да | король, этаж 11/11 | 30 | 0 | 11 | 207 | 62 |
-| iPhone | smart | 2 | 1 | 1 | 0 | да | король, этаж 11/11 | 19 | 0 | 11 | 176 | 56 |
-| iPhone | smart | 2 | 2 | 1 | 10 | да | победа | 126 | 0 | 10 | 114 | 27 |
-| iPhone | smart | 2 | 3 | 1 | 10 | да | победа | 100 | 0 | 10 | 118 | 37 |
-| iPhone | smart | 2 | 4 | 1 | 10 | да | победа | 137 | 0 | 10 | 149 | 50 |
-| iPhone | smart | 0 | 1 | 1 | 0 | да | победа | 131 | 0 | 11 | 147 | 47 |
-| iPhone | smart | 0 | 2 | 2 | 25 | да | король, этаж 11/11 | 3 | 0 | 11 | 224 | 70 |
-| iPhone | smart | 0 | 3 | 2 | 0 | да | король, этаж 11/11 | 52 | 0 | 11 | 143 | 43 |
-| iPhone | smart | 0 | 4 | 2 | 25 | да | король, этаж 11/11 | 45 | 0 | 11 | 179 | 65 |
-| Windows | greedy | 0 | 1 | 1 | 0 | да | король, этаж 10/10 | 41 | 0 | 10 | 114 | 34 |
-| Windows | greedy | 0 | 2 | 1 | 10 | да | победа | 125 | 0 | 10 | 114 | 36 |
-| Windows | greedy | 0 | 3 | 1 | 10 | да | король, этаж 10/10 | 58 | 0 | 10 | 144 | 45 |
-| Windows | random | 0 | 1 | 1 | 0 | да | король, этаж 10/10 | 15 | 0 | 10 | 90 | 27 |
-| Windows | random | 0 | 2 | 1 | 10 | да | король, этаж 10/10 | 42 | 0 | 10 | 222 | 56 |
-| Windows | random | 0 | 3 | 1 | 10 | да | победа | 197 | 36 | 11 | 168 | 49 |
-| Windows | smart | 0 | 1 | 1 | 0 | да | победа | 131 | 0 | 11 | 147 | 47 |
-| Windows | smart | 0 | 2 | 2 | 25 | да | король, этаж 11/11 | 3 | 0 | 11 | 224 | 67 |
-| Windows | smart | 0 | 3 | 2 | 0 | да | король, этаж 11/11 | 52 | 0 | 11 | 143 | 41 |
-| Windows | cautious | 0 | 1 | 1 | 0 | да | король, этаж 10/10 | 46 | 0 | 10 | 198 | 57 |
-| Windows | cautious | 0 | 2 | 1 | 10 | да | король, этаж 10/10 | 45 | 0 | 10 | 139 | 46 |
-| Windows | cautious | 0 | 3 | 1 | 10 | да | король, этаж 11/11 | 42 | 0 | 11 | 169 | 50 |
+| iPhone | greedy | 1 | 1 | 1 | 0 | нет | гнездо, этаж 7/10 | 29 | 0 | 7 | 114 | 32 |
+| iPhone | greedy | 1 | 2 | 1 | 10 | да | король, этаж 11/11 | 42 | 0 | 11 | 128 | 42 |
+| iPhone | greedy | 1 | 3 | 1 | 10 | да | победа | 179 | 0 | 11 | 145 | 35 |
+| iPhone | greedy | 1 | 4 | 2 | 25 | нет | гнездо, этаж 8/10 | 22 | 0 | 8 | 118 | 35 |
+| iPhone | greedy | 0 | 1 | 1 | 0 | нет | гнездо, этаж 4/10 | 6 | 0 | 4 | 81 | 32 |
+| iPhone | greedy | 0 | 2 | 1 | 10 | да | король, этаж 10/10 | 41 | 0 | 10 | 192 | 47 |
+| iPhone | greedy | 0 | 3 | 1 | 10 | да | победа | 145 | 0 | 10 | 131 | 47 |
+| iPhone | greedy | 0 | 4 | 2 | 25 | да | король, этаж 10/10 | 71 | 0 | 10 | 140 | 40 |
+| iPhone | greedy | 2 | 1 | 1 | 0 | да | король, этаж 11/11 | 20 | 0 | 11 | 155 | 47 |
+| iPhone | greedy | 2 | 2 | 1 | 10 | да | король, этаж 11/11 | 34 | 0 | 11 | 162 | 48 |
+| iPhone | greedy | 2 | 3 | 1 | 10 | нет | гнездо, этаж 8/10 | 40 | 0 | 8 | 133 | 52 |
+| iPhone | greedy | 2 | 4 | 1 | 10 | да | победа | 239 | 0 | 11 | 160 | 39 |
+| iPhone | random | 0 | 1 | 1 | 0 | да | король, этаж 10/10 | 24 | 0 | 10 | 135 | 32 |
+| iPhone | random | 0 | 2 | 1 | 10 | да | победа | 156 | 4 | 11 | 175 | 58 |
+| iPhone | random | 0 | 3 | 1 | 10 | да | король, этаж 10/10 | 15 | 0 | 10 | 181 | 47 |
+| iPhone | random | 0 | 4 | 1 | 10 | да | король, этаж 11/11 | 18 | 0 | 11 | 174 | 66 |
+| iPhone | random | 2 | 1 | 1 | 0 | нет | бой, этаж 9/11 | 26 | 0 | 9 | 85 | 29 |
+| iPhone | random | 2 | 2 | 1 | 10 | да | король, этаж 10/10 | 21 | 0 | 10 | 171 | 58 |
+| iPhone | random | 2 | 3 | 1 | 10 | да | король, этаж 10/10 | 43 | 0 | 10 | 210 | 65 |
+| iPhone | random | 2 | 4 | 1 | 10 | да | король, этаж 11/11 | 30 | 0 | 11 | 202 | 67 |
+| iPhone | random | 1 | 1 | 1 | 0 | да | король, этаж 11/11 | 42 | 0 | 11 | 214 | 65 |
+| iPhone | random | 1 | 2 | 1 | 10 | да | король, этаж 10/10 | 20 | 0 | 10 | 121 | 38 |
+| iPhone | random | 1 | 3 | 1 | 10 | да | король, этаж 11/11 | 70 | 0 | 11 | 247 | 77 |
+| iPhone | random | 1 | 4 | 1 | 10 | да | победа | 166 | 43 | 11 | 181 | 44 |
+| iPhone | cautious | 0 | 1 | 1 | 0 | да | король, этаж 10/10 | 44 | 0 | 10 | 184 | 57 |
+| iPhone | cautious | 0 | 2 | 1 | 10 | да | король, этаж 10/10 | 22 | 0 | 10 | 122 | 53 |
+| iPhone | cautious | 0 | 3 | 1 | 10 | да | победа | 137 | 0 | 10 | 106 | 32 |
+| iPhone | cautious | 0 | 4 | 1 | 10 | да | победа | 86 | 0 | 10 | 96 | 29 |
+| iPhone | cautious | 1 | 1 | 1 | 0 | да | король, этаж 10/10 | 23 | 0 | 10 | 148 | 43 |
+| iPhone | cautious | 1 | 2 | 1 | 10 | да | король, этаж 10/10 | 19 | 0 | 10 | 147 | 59 |
+| iPhone | cautious | 1 | 3 | 1 | 10 | да | победа | 113 | 0 | 10 | 158 | 48 |
+| iPhone | cautious | 1 | 4 | 1 | 10 | да | король, этаж 10/10 | 15 | 0 | 10 | 145 | 52 |
+| iPhone | smart | 2 | 1 | 1 | 0 | да | победа | 93 | 0 | 11 | 140 | 42 |
+| iPhone | smart | 2 | 2 | 1 | 10 | да | победа | 138 | 0 | 10 | 103 | 30 |
+| iPhone | smart | 2 | 3 | 2 | 25 | да | король, этаж 10/10 | 28 | 0 | 10 | 115 | 40 |
+| iPhone | smart | 2 | 4 | 2 | 25 | да | победа | 135 | 0 | 11 | 129 | 41 |
+| iPhone | smart | 0 | 1 | 1 | 0 | да | победа | 122 | 0 | 11 | 141 | 47 |
+| iPhone | smart | 0 | 2 | 2 | 25 | да | король, этаж 11/11 | 63 | 0 | 11 | 190 | 50 |
+| iPhone | smart | 0 | 3 | 2 | 25 | да | победа | 132 | 0 | 10 | 113 | 38 |
+| iPhone | smart | 0 | 4 | 2 | 25 | да | победа | 137 | 0 | 11 | 171 | 49 |
+| iPhone | cautious | 2 | 1 | 1 | 0 | да | король, этаж 11/11 | 18 | 0 | 11 | 203 | 57 |
+| iPhone | cautious | 2 | 2 | 1 | 10 | да | король, этаж 10/10 | 26 | 0 | 10 | 131 | 47 |
+| iPhone | cautious | 2 | 3 | 1 | 10 | да | победа | 169 | 0 | 10 | 103 | 36 |
+| iPhone | cautious | 2 | 4 | 1 | 10 | да | король, этаж 11/11 | 30 | 0 | 11 | 175 | 65 |
+| iPhone | smart | 1 | 1 | 1 | 0 | да | король, этаж 10/10 | 28 | 0 | 10 | 135 | 48 |
+| iPhone | smart | 1 | 2 | 1 | 10 | да | победа | 163 | 0 | 11 | 183 | 63 |
+| iPhone | smart | 1 | 3 | 2 | 25 | да | король, этаж 10/10 | 25 | 0 | 10 | 144 | 40 |
+| iPhone | smart | 1 | 4 | 2 | 25 | да | король, этаж 10/10 | 26 | 0 | 10 | 165 | 58 |
+| Windows | greedy | 0 | 1 | 1 | 0 | нет | гнездо, этаж 4/10 | 6 | 0 | 4 | 81 | 31 |
+| Windows | greedy | 0 | 2 | 1 | 10 | да | король, этаж 10/10 | 41 | 0 | 10 | 192 | 43 |
+| Windows | greedy | 0 | 3 | 1 | 10 | да | победа | 145 | 0 | 10 | 131 | 44 |
+| Windows | smart | 0 | 1 | 1 | 0 | да | победа | 122 | 0 | 11 | 141 | 46 |
+| Windows | smart | 0 | 2 | 2 | 25 | да | король, этаж 11/11 | 63 | 0 | 11 | 190 | 47 |
+| Windows | smart | 0 | 3 | 2 | 25 | да | победа | 132 | 0 | 10 | 113 | 36 |
+| Windows | random | 0 | 1 | 1 | 0 | да | король, этаж 10/10 | 24 | 0 | 10 | 135 | 30 |
+| Windows | random | 0 | 2 | 1 | 10 | да | победа | 156 | 4 | 11 | 175 | 55 |
+| Windows | random | 0 | 3 | 1 | 10 | да | король, этаж 10/10 | 15 | 0 | 10 | 181 | 44 |
+| Windows | cautious | 0 | 1 | 1 | 0 | да | король, этаж 10/10 | 44 | 0 | 10 | 184 | 54 |
+| Windows | cautious | 0 | 2 | 1 | 10 | да | король, этаж 10/10 | 22 | 0 | 10 | 122 | 51 |
+| Windows | cautious | 0 | 3 | 1 | 10 | да | победа | 137 | 0 | 10 | 106 | 30 |
 
 ### Summary
 
 | Набор | Забегов | Побед | До босса | Монет домой | Тапов | Комнат | Секунд бота | Ошибок | Внешних запросов |
 |---|---|---|---|---|---|---|---|---|---|
 | до баланса, iPhone | 36 | 94% | 100% | 135 | 107 | 8.8 | 37 | 0 | 0 |
-| после, iPhone | 48 | 27% | 98% | 61 | 153 | 10.4 | 48 | 0 | 0 |
-| после, Windows | 12 | 25% | 100% | 66 | 156 | 10.4 | 46 | 0 | 0 |
-| после, random | 15 | 20% | 93% | 59 | 171 | 10.4 | 52 | 0 | 0 |
-| после, greedy | 15 | 33% | 100% | 72 | 127 | 10.2 | 38 | 0 | 0 |
-| после, cautious | 15 | 7% | 100% | 43 | 162 | 10.5 | 52 | 0 | 0 |
-| после, smart | 15 | 47% | 100% | 75 | 155 | 10.6 | 48 | 0 | 0 |
+| после, iPhone | 48 | 33% | 90% | 69 | 150 | 10.1 | 47 | 0 | 0 |
+| после, Windows | 12 | 42% | 92% | 76 | 146 | 9.8 | 42 | 0 | 0 |
+| после, random | 15 | 20% | 93% | 55 | 172 | 10.4 | 52 | 0 | 0 |
+| после, greedy | 15 | 27% | 67% | 71 | 138 | 9.1 | 41 | 0 | 0 |
+| после, cautious | 15 | 33% | 100% | 60 | 142 | 10.1 | 48 | 0 | 0 |
+| после, smart | 15 | 60% | 100% | 94 | 145 | 10.5 | 45 | 0 | 0 |
 
-- 0 page errors, 0 console errors, 0 bot crashes, 0 requests outside the local server, across all 96 UI runs (36 before tuning, 60 after). These 60 are the final ones, played after the backroom redesign below; every one of them also includes a night shift through the UI when the daily reward was still open (26 shifts).
+- 0 page errors, 0 console errors, 0 bot crashes, 0 requests outside the local server, across all 96 UI runs (36 before tuning, 60 after). These 60 are the final ones, played with everything in §4b and §4c switched on: 19 night shifts, 37 companion picks and 34 sales to customers, all through the UI.
 - Plus 2 runs in **WebKit** (iPhone profile, the closest to Safari that runs here): one win, one loss at the king, 0 errors.
 - "Seconds" is the bot's wall clock with real animations and no skipping. It is not human time; see §2.
 
 ### Where runs ended (UI, after)
-44 of 60 runs were lost: 43 at the king and 1 in an ordinary fight on floor 9 (random). Wins and losses by model are in the table above.
+39 of 60 runs were lost: 33 at a mini-boss, 5 in elite nests (all the greedy model, floors 4–8) and 1 in an ordinary fight on floor 9 (random). Wins and losses by model are in the table above.
 
 ## 2. Balance and economy: before / after (simulator, 200 careers × 30 runs per model)
 
 | Metric | Target | random before → after | greedy | cautious | smart |
 |---|---|---|---|---|---|
-| Win rate, all 30 runs | good player 40–60% | 99% → 63%¹ | 95% → **24%** | 100% → **28%** | 100% → **61%** |
-| Win rate, run 1 | low | 92%² → 4% | — → 5% | — → 3% | — → 38% |
-| Win rate, runs 2–5 / 6–10 | | — → 20% / 35% | — → 30% / 16% | — → 26% / 37% | — → **52% / 49%** |
-| Win rate, runs 11–20 / 21–30 | | — → 67% / 94% | — → 22% / 28% | — → 25% / 31% | — → 62% / 72% |
-| First win (median run #) | newcomer at 3–5 | 1 → 5 | 1 → **3** | 1 → **4** | 1 → 2 |
-| First run, minutes (estimate³) | 5–8 | 4.9 → 6.4 | 3.4 → 4.8 | 3.6 → 6.2 | 3.2 → 5.4 |
-| Coins home per run | | 227 → 164 | 280 → 92 | 218 → 76 | 242 → 155 |
+| Win rate, all 30 runs | good player 40–60% | 99% → 72%¹ | 95% → 26% | 100% → 35% | 100% → 61% |
+| Win rate, run 1 | low | —² → 2% | — → 6% | — → 1% | — → 42% |
+| Win rate, runs 2–5 / 6–10 |  | — → 31% / 51% | — → 33% / 25% | — → 53% / 46% | — → 60% / 60% |
+| Win rate, runs 11–20 / 21–30 |  | — → 82% / 96% | — → 23% / 29% | — → 32% / 29% | — → 64% / 62% |
+| First win (median run #) | newcomer at 3–5 | 1 → 4 | 1 → 3 | 1 → 3 | 1 → 2 |
+| First run, minutes (estimate³) | 5–8 | 4.9 → 6.4 | 3.4 → 4.7 | 3.6 → 6.1 | 3.2 → 5.4 |
+| Coins home per run |  | 227 → 182 | 280 → 96 | 218 → 95 | 242 → 171 |
 | Runs played for free (no coins for the fee) | never a dead end | 0% → 0% | 1% → 1% | 0% → 0% | 0% → 1% |
-| Fee pays off (net positive) from run # | | 2 → 2 | 2 → 2 | 2 → 2 | 2 → 2 |
-| First upgrade bought (median run #) | | 1 → 2 | 1 → 2 | 1 → 2 | 1 → 2 |
-| First album page (median run #) | | 28 → 10 | 23 → 9 | 22 → 8 | 23 → 7 |
-| Share of careers finishing a page in 30 runs | | 6% → 98% | 71% → 100% | 61% → 100% | 60% → 100% |
-| Album pages after 30 runs | | 0.1 → 3.1 | 1.0 → 4.7 | 0.8 → 4.0 | 0.8 → 5.5 |
-| Items seen after 30 runs (of 517) | 50% = 259 | 144 → 95 | 148 → 67 | 136 → 72 | 142 → 107 |
-| Deaths at the king / mid-run | | 1% / 0% → 35% / 2% | 4% / 1% → 57% / 19% | 0% / 0% → 70% / 1% | 0% / 0% → 38% / 2% |
+| Fee pays off (net positive) from run # |  | 2 → 2 | 2 → 2 | 2 → 2 | 2 → 2 |
+| First upgrade bought (median run #) |  | 1 → 2 | 1 → 1 | 1 → 1 | 1 → 1 |
+| First album page (median run #) |  | 28 → 10 | 23 → 9 | 22 → 8 | 23 → 7 |
+| Careers finishing a page in 30 runs |  | 6% → 98% | 71% → 100% | 61% → 100% | 60% → 100% |
+| Album pages after 30 runs |  | 0.1 → 3 | 1 → 4.6 | 0.8 → 4.9 | 0.8 → 6.3 |
+| Items seen after 30 runs (of 522) | 50% = 261 | 144 → 104 | 148 → 77 | 136 → 87 | 142 → 119 |
+| Deaths at the boss / mid-run | danger spread through the run | 1% / 0% → 26% / 1% | 4% / 1% → 38% / 37% | 0% / 0% → 51% / 13% | 0% / 0% → 35% / 3% |
 
 ¹ random never raises the Lavka tier, so at tier 1 with 30 runs of meta behind it, it ends up winning. Staying at tier 1 is a valid easy mode.
 ² Before tuning, every model won almost every run, including run 1.
@@ -143,19 +143,19 @@ Bots don't learn and real players do, so the newcomer numbers below are a pessim
 
 | Milestone | greedy | cautious | smart |
 |---|---|---|---|
-| first animal guest | 100% (run 2) | 100% (run 2) | 100% (run 2) |
+| first animal guest | 100% | 100% | 100% |
 | first upgrade | 100% | 100% | 100% |
 | first talent | 100% | 100% | 100% |
-| first king defeated | 99% | 70% | 100% |
-| Lavka tier 2 | 89% | 1% | 98% |
-| first full album page | 17% | 8% | 25% |
+| first mini-boss defeated | 98% | 94% | 100% |
+| Lavka tier 2 | 95% | 15% | 99% |
+| first full album page | 17% | 14% | 28% |
 
 Every model gets at least 3 different unlocks in the first 30 minutes (guest, upgrade, talent), and most also beat the king.
 
 ## 3. Room types
 
 Counted by the simulator, per career of 30 runs (smart model; the others are similar, see `after_sim.json` → `roomsPer30Runs`):
-combat 104, find 51, rest 37, event 34, king 30, backroom 22, elite 20, shelf 17, night shop 9, wash 8.
+combat 108, find 53, rest 37, event 35, mini-boss 29, backroom 23, elite 21, shelf 18, night shop 9, wash 9.
 
 In the UI runs every type was played through taps: see the table in §1. Every type also has a screenshot in both profiles in `playtest/screens/{iphone,desktop}/`:
 
@@ -191,10 +191,10 @@ Shelf and wash used to unlock only at tier 2, so a first session never saw them.
 6. Full-backpack trades.
 7. What to sell and what to keep.
 
-The difference between models shows these choices matter: smart wins 59%, greedy 22%, cautious 25%, with the same content.
+The difference between models shows these choices matter: smart wins 61%, greedy 26%, cautious 35%, with the same content.
 
 **Combos as puzzles (partly).**
-- Average discovered after 10 runs: smart 19.5, greedy 12.5, cautious 13.7, random 23.5 (button-mashing stumbles into action combos). By run 30, 23 of 43 combos are found in at least half of the careers.
+- Average discovered after 10 runs: smart 21.3, greedy 12.3, cautious 14, random 23.6 (button-mashing stumbles into action combos). By run 30, 24 of 43 combos are found in at least half of the careers.
 - Changes made:
   - Action buttons now show `* ???`, or `* name` once known, when pressing them would complete a combo. A combo becomes visible before you know it.
   - The journal suggests the next combat combo to try.
@@ -234,7 +234,7 @@ The difference between models shows these choices matter: smart wins 59%, greedy
 |---|---|
 | Combat round 3.1 s at ×1, no skipping | ~1.1 s at the new ×2 default, ~0.2 s with a tap (`measure_round.mjs`) |
 | Anomaly waited 0.9 s before the result | Removed |
-| Events: 33 in total, repeats only blocked within one run | Recently seen events are avoided across runs, and there are 7 new ones (40 total). In a 30-run career: 34 events, 31.1 distinct, an event shows up at most 1.8 times on average, and 25 events or more pass before one repeats. |
+| Events: 33 in total, repeats only blocked within one run | Recently seen events are avoided across runs, and there are 7 new ones (40 total). In a 30-run career: 34.9 events, 31.5 distinct, an event shows up at most 1.8 times on average, and 25 events or more pass before one repeats. |
 | Empty half-screens (event, wash, shelf, anomaly) | Content centred, cats added to events |
 | The old anomaly room was a spot-the-difference grid with the rules printed on top | Replaced by the backroom, see §4b |
 
@@ -267,12 +267,35 @@ The first «Аномалия» room was a 3×3 or 4×4 grid of identical icons w
 | random | 6 | 4 | 31 | 59 |
 
 - The models notice an anomaly depending on its level: smart 97/88/70%, cautious 90/75/55%, greedy 85/60/35%, random 50%. They also raise false alarms on normal loops (5–15%, random 50%).
-- UI runs: the bot played the backroom 49 times on the map and 26 night shifts, all through taps.
+- UI runs: the bot played the backroom 44 times on the map and 19 night shifts, all through taps.
 - Browser check: a night shift played through the UI. It confirms no objective on screen, the reset after a false alarm, the daily reward and the journal entry.
 
 **Bug found in testing.** After a loop, the new buttons ignored taps during the 160 ms fade-in, so a fast tap simply didn't count. They now answer at once.
 
 **Not verified.** How hard the subtle anomalies really are for a person. The detection rates above are guesses for the models; only a real player can say whether «Лишняя доска» is fair or invisible.
+
+## 4c. Everything else from the "what would make it cool" list
+
+| What | How it works now |
+|---|---|
+| **Animals come along** | One animal can be taken on runs from its card («Взять в забеги»). It sits beside the cats, enemies never target it, and it does one move on a schedule. The move depends on the animal's kind: birds peck, farm animals heal, forest and northern ones shield, big cats roar, fish splash everything, night animals steal coins, dragons and unicorns cast a big hit, swamp animals stick, bugs buzz luck. Strength follows rarity. |
+| **Gear with quirks** | Rare gear often has a quirk, epic usually, legendary always. Thorns prick back, a bite can heal or strike twice, a charm saves a knocked-out cat once per fight, enemies start sticky, or kills pay coins. Glitchy gear sometimes repeats a cat's move; cursed gear is stronger but costs 1 HP each fight. |
+| **5 legendary relics** | Букет для зверька (companion acts every round), Лупа подсобки (a hint on every odd loop), Ожерелье девяти жизней, Вечный факел (dark floors lose their penalty, nests give an extra block), Коробка с сюрпризом (coins for every room). |
+| **Nests have tricks** | Spiders and slimes web a cat (it loses a turn), moths and ghosts blind, beetles and mimics have a shell that takes 1 damage until scared (hiss!), giant ants start enraged. The enemy card explains it. |
+| **Floor moods** | Up to two floors per run are dark, full of crumbs or draughty: harder fights, better pay. Shown on the map in advance as a tinted band and on the room card. |
+| **Second mini-boss** | From run 3, either the King or Королева Моль waits upstairs. She blinds, summons moths and puts cats to sleep. The map shows who it is. |
+| **The Lavka grows** | Tier 2 adds a plant and a garland, tier 3 a sign and a coin on the counter, tier 4 a rug and more lamps, tier 5 gold trim. |
+| **Customers** | After most runs an animal comes to the counter wanting a category, a rarity or a modifier and pays ×1.6–2.4. It waits until you sell or send it away, so hoarding can now pay off. In the UI runs the bot sold to 34 of them. |
+| **Combo quests** | The journal lists up to 3 unfinished set, guest, kill and room puzzles as quests, and pays 10 sparkles plus a rare-or-better block for every 10 combos. |
+| **Haptics on iPhone** | iPhone Safari has no vibration API, so the game toggles a hidden switch, which ticks the Taptic Engine on recent iOS. Not verified, see §7. |
+
+**Balance after adding all of this.** Companions first made every model 15–25 points stronger, so I cut them to 2–7 power on a slower schedule. Nests now kill careless players: greedy dies mid-run in 37% of runs (it doesn't know to hiss), smart in 3%. The good-player model stays flat at 60–64% through its whole career, where it used to climb from 50% to 72%.
+
+**Bugs found while testing these:**
+- Dialogs opened by tap zones closed immediately, because the same tap's `click` landed on the dark backdrop. This also affected enemy and cat cards in combat, on a real phone and with a mouse. Fixed, with a browser check.
+- The first version of the floor tags covered a reachable room, so it couldn't be tapped. The bot got stuck there. Replaced by non-interactive bands.
+
+**Дудоня's bow** moved one pixel left in all frames of her sheet. The small map sprite (`mini_dudonya`) has its own tiny bow and was left as it is.
 
 ## 5. Screenshot review (both profiles, every screen)
 
@@ -283,7 +306,7 @@ The first «Аномалия» room was a 3×3 or 4×4 grid of identical icons w
 - controls under the home indicator (iPhone safe area simulated as 44/34 px)
 - fonts under 12 px
 
-Final run: 49 screens per profile, 0 issues in both. I looked at the screenshots myself, and these were wrong even though the audit passed:
+Final run: 58 screens per profile, 0 issues in both. I looked at the screenshots myself, and these were wrong even though the audit passed:
 
 | Problem | Fix |
 |---|---|
@@ -304,7 +327,7 @@ Final run: 49 screens per profile, 0 issues in both. I looked at the screenshots
 
 Contact sheets: `playtest/contact/items_*.png` show all 517 items as sprite + name, `enemies_animals.png` shows all enemies and animals, and `backroom_*.png` shows the normal backroom next to every one of its 31 anomalies, all rendered by the game's own code.
 
-## 6. Offline, saves, keyboard (`playtest/checks.mjs`, 39/39 pass, `results/checks.json`)
+## 6. Offline, saves, keyboard (`playtest/checks.mjs`, 42/42 pass, `results/checks.json`)
 
 - **Offline, both profiles:** first load, then the 843 files are in the cache. With the network off, a reload and a full run work, with no external requests and no errors. Progress survives closing the page offline.
 - **Saves:**
@@ -330,7 +353,8 @@ Contact sheets: `playtest/contact/items_*.png` show all 517 items as sprite + na
   - "Add to Home Screen", standalone mode and separate home-screen storage were not tested.
   - The real iOS share sheet and clipboard were not tested.
   - Installing the PWA from Chrome or Edge on Windows was not tested.
-- **Sound was not heard.** It's headless; only the existence of every sound name is tested.
+- **Sound was not heard.** It's headless; only the existence of every sound name is tested. The sound effects were originally chosen by filename and nobody has listened to them.
+- **iPhone haptics** rely on an unofficial Safari behaviour and were not tried on a device. Taps count as user gestures; vibration fired later in an animation may not work.
 - **The human time per run is a model.** It's calibrated on measured animation time and bot taps, not on a person.
 - **Fun numbers come from bot models, which don't learn.** A real newcomer probably wins earlier than greedy or cautious do. The good-player rate climbs to 60–70% after run 10 as meta accumulates.
 - **Desktop window sizes:** only 1366×768 was checked in the bot and screenshots. The layout code handles other sizes, but they were not screenshotted.

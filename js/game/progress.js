@@ -173,6 +173,7 @@ export function sparkleIncome(save, data) {
 export function nextGoal(save, data) {
   const unplaced = unplacedCount(save, data);
   if (unplaced) return { key: 'goal.stickers', params: { n: unplaced } };
+  if (save.meta.customer && data.animalById[save.meta.customer.animal]) return { key: 'goal.customer', params: { name: data.animalById[save.meta.customer.animal].name } };
   const ups = (data.upgrades || []).map((u) => ({ u, st: upgradeStatus(save, u) })).filter((x) => !x.st.maxed).sort((a, b) => a.st.cost - b.st.cost);
   if (ups.length && ups[0].st.affordable) return { key: 'goal.buy', params: { name: ups[0].u.name } };
   const talent = (data.talents || []).flatMap((b) => b.nodes).find((n) => talentStatus(save, data, n.id).affordable);

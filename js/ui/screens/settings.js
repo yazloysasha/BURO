@@ -6,7 +6,7 @@ import { setAnimSpeed } from '../../core/loop.js';
 import { exportSave, importSave, newSave } from '../../core/save.js';
 import { wipe, writeBackup } from '../../core/storage.js';
 import { game, commit } from '../../game/state.js';
-import { button, confirm, go, modal, screenHeader, setTopbarTitle, toast, closeModal } from '../app.js';
+import { button, confirm, go, modal, screenHeader, setTopbarTitle, toast, closeModal, hapticsSupported } from '../app.js';
 
 function toggle(key, label, hint) {
   const s = game.save.settings;
@@ -55,7 +55,7 @@ export function render(root) {
     null,
     h('div.setting', null, h('span', { text: t('settings.sound') }), vol),
     toggle('ignoreMute', t('settings.ignoreMute'), t('settings.ignoreMuteHint')),
-    'vibrate' in navigator ? toggle('vibration', t('settings.vibration')) : null,
+    hapticsSupported() ? toggle('vibration', t('settings.vibration')) : null,
     toggle('shake', t('settings.shake')),
     h('div.setting', null, h('span', { text: t('settings.animSpeed') }), seg),
     h('h2', { text: t('settings.saveTitle') }),

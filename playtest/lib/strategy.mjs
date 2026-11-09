@@ -187,7 +187,12 @@ export function makeStrategy(name, rng) {
         set('bite', target(c));
         continue;
       }
-      // smart: survive first, then the strongest attack available, with combos when they cost nothing
+      // smart: survive first, crack shells with a hiss, then the strongest attack, with combos when they cost nothing
+      const shelled = enemies.find((e) => e.statuses.some((s) => s.id === 'shell'));
+      if (shelled && !Object.values(actions).some((a) => a.action === 'hiss')) {
+        set('hiss', shelled);
+        continue;
+      }
       const danger = hit[lowestCat.key] >= lowestCat.hp;
       const bad = cat.statuses.some((s) => data.statusById[s.id].kind === 'debuff') || aliveCats(c).some((u) => u.statuses.some((s) => s.id === 'poisoned' || s.id === 'sleepy'));
       if (hpRatio(lowestCat) < 0.4 && useItem((e) => e.type === 'heal' || e.type === 'heal_all' || e.type === 'revive')) continue;
@@ -366,5 +371,25 @@ export function makeStrategy(name, rng) {
     return null;
   }
 
-  return { name, chooseLeader, chooseNode, combatActions, backroomChoice, shelfPick, eventChoice, restChoice, washCats, shopNext, fullBackpack, sellPlan, keepOne, metaNext };
+  // Who comes along on runs: the best fighter among the owned animals (random: whoever).
+  function chooseCompanion(save, data) {
+    const owned = data.animals.filter((a) => save.collection.animals[a.id]);
+    if (!owned.length) return null;
+    if (name === 'random') return rng.pick(owned).id;
+    const order = ['common', 'uncommon', 'rare', 'epic', 'legendary'];
+    const pref = { greedy: ['magic', 'splash', 'peck', 'sneak'], cautious: ['heal', 'shield', 'roar'], smart: ['magic', 'splash', 'heal', 'peck', 'roar'] }[name];
+    const score = (a) => order.indexOf(a.rarity) * 10 + (pref.includes(a.assist) ? 5 - pref.indexOf(a.assist) : 0);
+    return owned.slice().sort((x, y) => score(y) - score(x))[0].id;
+  }
+
+  // A customer at the counter: the key to sell them, or null.
+  function customerSale(save, data, offer, matches) {
+    const keys = Object.keys(save.collection.items).filter((k) => matches(k));
+    if (!keys.length) return null;
+    if (name === 'random') return rng.next() < 0.5 ? rng.pick(keys) : null;
+    // sell a duplicate or a plain one first: the sticker counts once seen anyway
+    return keys.sort((a, b) => offer(b) - offer(a))[0];
+  }
+
+  return { name, chooseCompanion, customerSale, chooseLeader, chooseNode, combatActions, backroomChoice, shelfPick, eventChoice, restChoice, washCats, shopNext, fullBackpack, sellPlan, keepOne, metaNext };
 }

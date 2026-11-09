@@ -276,3 +276,21 @@ function byMatch(by, k) {
   if (kind === 'action') return k.action === val;
   return false;
 }
+
+// ---------- journal milestones and quests ----------
+export const MILESTONE_STEP = 10;
+
+// Milestones reached but not claimed yet: 10, 20, 30, 40 discovered combos.
+export function openMilestones(save) {
+  const n = save.combos.discovered.length;
+  const got = save.combos.milestones || [];
+  const out = [];
+  for (let m = MILESTONE_STEP; m <= n; m += MILESTONE_STEP) if (!got.includes(m)) out.push(m);
+  return out;
+}
+
+// The puzzles worth chasing: up to three undiscovered set, guest and kill combos, as quests with their hint.
+export function comboQuests(save, data) {
+  const found = new Set(save.combos.discovered);
+  return (data.combos || []).filter((c) => !found.has(c.id) && ['backpack', 'guest_item', 'kill', 'room_sequence'].includes(c.trigger.type)).slice(0, 3);
+}

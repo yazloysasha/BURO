@@ -73,6 +73,17 @@ export function openDailyGift(save, data, today) {
   return gift;
 }
 
+// Claims a journal milestone: sparkles and a rare-or-better lucky block straight into the collection.
+export function claimComboMilestone(save, data, m) {
+  const got = (save.combos.milestones = save.combos.milestones || []);
+  if (got.includes(m) || save.combos.discovered.length < m) return null;
+  got.push(m);
+  const block = withMetaRng(save, (rng) => rollBlock(rng, data, save.pity, { luck: blockLuck(save, data), minRarity: 'rare', wanted: wantedStickers(save, data) }));
+  applyToCollection(save, data, block);
+  save.meta.sparkles += 10;
+  return { block, sparkles: 10 };
+}
+
 // ---------- in-run blocks ----------
 export function rollRunBlocks(save, data, run, n, opts = {}) {
   const luck = blockLuck(save, data, run);

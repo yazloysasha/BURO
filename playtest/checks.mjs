@@ -262,14 +262,58 @@ await withStorage({}, async (page, errors) => {
       check('night shift: a false alarm resets the counter and says so, softly', /как обычно/.test(msg) && (await page.locator('.br-plaque').innerText()) === '0', msg);
     }
   }
-  const save = await readSaveText(page);
-  check('night shift: finishes with a reward once a day', save.meta.nightShift.state.done && save.meta.nightShift.result.paid && save.meta.coins > 0, `${calls} calls, ${save.meta.coins} coins, grade ${save.meta.nightShift.result.grade}`);
+  let save = await readSaveText(page);
+  // a shift can be all normal loops: walk again (no daily reward then) until something odd shows up
+  for (let extra = 0; extra < 6 && !Object.keys(save.collection.anomalies || {}).length; extra++) {
+    await page.locator('.btn.big.green').click();
+    for (let k = 0; k < 40 && (await page.$('.br-actions')); k++) {
+      const st = (await readSaveText(page)).meta.nightShift.state;
+      await page.locator(st.cur ? '.br-back' : '.br-forward').click();
+      await page.waitForTimeout(300);
+    }
+    save = await readSaveText(page);
+  }
+  check('night shift: finishes with a reward once a day', save.meta.nightShift.state.done && save.meta.nightPaidDate && save.meta.coins > 0, `${calls} calls, ${save.meta.coins} coins, grade ${save.meta.nightShift.result.grade}`);
   check('night shift: caught anomalies land in the journal', Object.keys(save.collection.anomalies || {}).length >= 1, Object.keys(save.collection.anomalies || {}).join(', '));
   await page.locator('.btn', { hasText: 'В Лавку' }).click();
   await page.locator('.menu-grid .btn', { hasText: 'Журнал' }).click();
   await page.locator('.seg.tabs .btn').nth(1).click();
   check('journal: the anomaly tab lists what was found', (await page.locator('.combo-row.known').count()) >= 1 && !errors.length, errors.join(' | '));
 });
+
+// ---------- tap zones open dialogs that stay open (enemy info in combat, the customer at the counter) ----------
+{
+  const ctx = await newContext(browser, PROFILES.iphone);
+  const page = await ctx.newPage();
+  await page.goto(s.url);
+  await ready(page);
+  await page.evaluate(() => Promise.all([import('/js/game/state.js'), import('/js/ui/app.js'), import('/js/game/run.js')]).then(([{ game, commit }, app, run]) => {
+    run.startRun(game.save, game.data, { leader: 'peposya' });
+    run.enterNode(game.save, game.data, game.save.run.map.floors[0][0].id);
+    commit();
+    app.go('room');
+  }));
+  await page.locator('.tap-zone').nth(2).tap();
+  await page.waitForTimeout(500);
+  check('combat: tapping an enemy opens its card and it stays open', !!(await page.$('#overlay.show')));
+  await page.locator('#overlay .btn.green').tap();
+  await page.evaluate(() => Promise.all([import('/js/game/state.js'), import('/js/ui/app.js')]).then(([{ game, commit }, app]) => {
+    game.save.run = null;
+    game.save.collection.items['book_01a'] = 1;
+    game.save.meta.customer = { animal: 'hedgehog', want: { kind: 'category', value: 'book' }, mult: 2 };
+    commit();
+    app.go('hub');
+  }));
+  await page.locator('.tap-zone[aria-label="Ёжик"]').tap();
+  await page.waitForTimeout(500);
+  check('customer: tapping the visitor opens their wish', !!(await page.$('#overlay.show .item-row.clickable')));
+  const before = (await readSaveText(page)).meta.coins;
+  await page.locator('#overlay .item-row.clickable').first().tap();
+  await page.waitForTimeout(200);
+  const after = await readSaveText(page);
+  check('customer: selling pays a premium and the visitor leaves', after.meta.coins > before && !after.meta.customer, `+${after.meta.coins - before} coins`);
+  await ctx.close();
+}
 
 // ---------- update ----------
 {

@@ -12,6 +12,7 @@ import { comboStatBonus, activeCombos, checkRunCombos, roomSequenceCombos } from
 import { initBackroom, initShelf, initWash, initEvent, initShop } from './rooms.js';
 import { actionMods } from './progress.js';
 import { eliteName } from './namegen.js';
+import { rollCustomer } from './customers.js';
 
 export function withRunRng(run, fn) {
   const rng = new Rng(run.rng);
@@ -46,6 +47,42 @@ export function pickConsumable(rng, data, { maxRarity = 'rare' } = {}) {
 }
 
 // ---------- start ----------
+// Relics: legendaries in the backpack that change the rules of the run.
+export function hasRelic(run, data, relic) {
+  return !!run && run.backpack.some((b) => {
+    const it = data.itemById[b.id];
+    return it && it.effect && it.effect.type === 'relic' && it.effect.relic === relic;
+  });
+}
+
+// Gear quirks in the backpack, counted (two thorny shields prick twice as hard). Glitchy gear adds "mirror".
+export function gearQuirks(data, run) {
+  const q = {};
+  for (const b of run.backpack) {
+    const it = data.itemById[b.id];
+    if (!it || !it.effect || it.effect.type !== 'stat') continue;
+    if (it.effect.quirk) q[it.effect.quirk] = (q[it.effect.quirk] || 0) + 1;
+    if (b.mods.includes('glitchy')) q.mirror = (q.mirror || 0) + 1;
+  }
+  if (q.thorns) q.thorns *= 2;
+  if (hasRelic(run, data, 'ninelives')) q.guardian = (q.guardian || 0) + 1;
+  return q;
+}
+
+// The animal that comes along on runs (chosen on its card), as the combat engine wants it.
+export function companionUnit(data, run) {
+  const a = run.companion && data.animalById[run.companion];
+  if (!a) return null;
+  const bal = data.balance.assist;
+  const every = hasRelic(run, data, 'bouquet') ? 1 : bal.every[a.rarity] + (a.assist === 'magic' ? 1 : 0);
+  return { id: a.id, name: a.name, sprite: a.sprite, w: a.w, h: a.h, art: a.art || null, assist: { type: a.assist, value: bal.value[a.rarity], every }, cd: 0 };
+}
+
+export function floorMod(data, run) {
+  const id = run.map.floorMods && run.map.floorMods[run.floorNo - 1];
+  return id ? { id, ...data.balance.floorMods.mods[id] } : null;
+}
+
 export function startRun(save, data, { leader = 'peposya' } = {}) {
   if (save.run) throw new Error('run already active');
   const free = meta.runIsFree(save, data);
@@ -55,6 +92,8 @@ export function startRun(save, data, { leader = 'peposya' } = {}) {
   const rng = Rng.fromSeed('run:' + seed);
   const tier = save.meta.tier;
   const map = generateMap(rng, { tier, rooms: data.rooms, balance: data.balance });
+  // the first two runs always end at the King; then the night decides who waits upstairs
+  const boss = save.meta.runsStarted < 2 ? 'klobster_king' : rng.pick(data.balance.bosses);
   const party = {};
   for (const key of CAT_KEYS) {
     const b = meta.catBonus(save, data, key);
@@ -78,6 +117,8 @@ export function startRun(save, data, { leader = 'peposya' } = {}) {
     fee,
     stats: { kills: 0, rooms: 0, coinsFound: 0, blocks: 0 },
     leader,
+    boss,
+    companion: save.meta.companion && save.collection.animals[save.meta.companion] ? save.meta.companion : null,
     flags: {},
     actionMods: actionMods(save, data),
     result: null,
@@ -144,10 +185,11 @@ function buildEncounter(rng, data, run, kind) {
   const tier = run.tier;
   const enemies = data.enemies.filter((e) => !e.boss);
   if (kind === 'boss') {
-    return [{ def: data.enemyById.klobster_king }];
+    return [{ def: data.enemyById[run.boss] || data.enemyById.klobster_king }];
   }
   if (kind === 'elite') {
-    const pool = enemies.filter((e) => e.tier <= tier && e.minFloor <= floor + 1 && e.cost >= 2);
+    // nests are led by enemies with a trick of their own
+    const pool = enemies.filter((e) => e.tier <= tier && e.minFloor <= floor + 1 && e.eliteTrait);
     const def = rng.pick(pool.length ? pool : enemies);
     const list = [{ def, elite: true, eliteName: eliteName(data, def.name, 'elite:' + rng.seed()) }];
     if (floor >= 6) {
@@ -177,13 +219,33 @@ export function startCombat(save, data, run, kind) {
     const enemies = enc.map((e, i) =>
       makeEnemyUnit(e.def, 'e' + (i + 1), { floor: run.floorNo, tier: run.tier, elite: !!e.elite, eliteName: e.eliteName, balance: data.balance }),
     );
+    enc.forEach((e, i) => {
+      const tr = e.elite && e.def.eliteTrait && data.balance.eliteTraits[e.def.eliteTrait];
+      if (!tr) return;
+      enemies[i].trait = e.def.eliteTrait;
+      if (tr.start) enemies[i].statuses.push({ id: tr.start, turns: 99 });
+      if (tr.move) enemies[i].extraMoves = [tr.move];
+    });
+    const fm = floorMod(data, run);
+    if (fm && !(fm.id === 'dark' && hasRelic(run, data, 'torch'))) {
+      for (const e of enemies) {
+        if (fm.evasion) e.evasion = Math.min(0.6, e.evasion + fm.evasion);
+        if (fm.atkMult) e.atk = Math.max(1, Math.round(e.atk * fm.atkMult));
+        if (fm.spd) e.spd += fm.spd;
+      }
+    }
     const gear = equipmentBonus(save, data, run);
+    const quirks = gearQuirks(data, run);
+    // cursed gear is stronger but every fight costs the cats a little health
+    const cursed = run.backpack.filter((b) => b.mods.includes('cursed') && data.itemById[b.id] && data.itemById[b.id].effect && data.itemById[b.id].effect.type === 'stat').length;
+    if (cursed) for (const k of CAT_KEYS) if (run.party[k].hp > 1) run.party[k].hp = Math.max(1, run.party[k].hp - cursed);
     const cats = CAT_KEYS.map((k) => {
       const b = meta.catBonus(save, data, k);
       for (const s of Object.keys(gear)) b[s] = (b[s] || 0) + gear[s];
       return makeCatUnit(k, data.cats[k], run.party[k], b);
     });
-    const c = createCombat({ cats, enemies, kind });
+    const c = createCombat({ cats, enemies, kind, companion: companionUnit(data, run), quirks });
+    if (quirks.opener) for (const e of c.enemies) e.statuses.push({ id: 'sticky', turns: 1 });
     for (const cb of activeCombos(save, data, run)) {
       if (cb.effect.type !== 'combat_start_enemy_status') continue;
       for (const e of c.enemies) e.statuses.push({ id: cb.effect.status, turns: cb.effect.turns });
@@ -287,6 +349,10 @@ export function completeRoom(save, data) {
   run.visited.push(room.nodeId);
   run.pos = room.nodeId;
   run.stats.rooms++;
+  if (hasRelic(run, data, 'purse')) {
+    run.coins += 3;
+    run.stats.coinsFound += 3;
+  }
   const wasBoss = room.type === 'boss';
   run.room = null;
   if (wasBoss) run.result = { outcome: 'win' };
@@ -370,7 +436,10 @@ export function combatReward(save, data, run, c, rng) {
     if (e.summoned) v = Math.ceil(v / 2);
     coins += v;
   }
-  coins = Math.round(coins * meta.coinMult(save, data));
+  if (c.loot) coins += c.loot; // a sneaky companion's pickings
+  if (c.quirks && c.quirks.coinpaw) coins += c.kills.length * c.quirks.coinpaw;
+  const fm = floorMod(data, run);
+  coins = Math.round(coins * meta.coinMult(save, data) * (fm && fm.coinMult ? fm.coinMult : 1));
   run.coins += coins;
   run.stats.coinsFound += coins;
   const items = [];
@@ -388,7 +457,9 @@ export function combatReward(save, data, run, c, rng) {
     run.stickers.push(id);
     stickers.push(id);
   }
-  return { coins, items, stickers, blocksN: kind === 'boss' ? 2 : kind === 'elite' ? 1 : rng.chance(0.12) ? 1 : 0 };
+  const extraChance = fm && fm.blockChance ? fm.blockChance : 0.12;
+  const eliteBlocks = 1 + (hasRelic(run, data, 'torch') ? 1 : 0);
+  return { coins, items, stickers, blocksN: kind === 'boss' ? 2 : kind === 'elite' ? eliteBlocks : rng.chance(extraChance) ? 1 : 0 };
 }
 
 // ---------- end ----------
@@ -438,6 +509,8 @@ export function finishRun(save, data, { keepUid = null, sellUids = [] } = {}) {
     endedAt: new Date().toISOString(),
   };
   save.lastRun = summary;
+  // someone may drop by the Lavka while the cats unpack (only if nobody is already waiting)
+  if (!save.meta.customer) withMetaRng(save, (rng) => rollCustomer(save, data, rng));
   save.run = null;
   return summary;
 }

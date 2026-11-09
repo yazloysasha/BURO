@@ -135,7 +135,16 @@ function makeFlavor(category, id) {
   return tpl.replace(/\{(\w+)\}/g, (m, k) => pickH(flavorGen.fill[k] || [m], id + ':' + k));
 }
 
-const equip = (stat, rarity) => ({ type: 'stat', stat, value: EQUIP_VALUE[rarity] });
+// rare and better gear often carries a quirk that changes how a fight goes (see js/game/combat.js)
+const QUIRKS = ['thorns', 'vampire', 'echo', 'guardian', 'opener', 'coinpaw'];
+const QUIRK_CHANCE = { rare: 30, epic: 60, legendary: 100, slop: 100 };
+let equipSeq = 0;
+const equip = (stat, rarity) => {
+  const e = { type: 'stat', stat, value: EQUIP_VALUE[rarity] };
+  const n = equipSeq++;
+  if (hash('quirk' + n + stat + rarity) % 100 < (QUIRK_CHANCE[rarity] || 0)) e.quirk = QUIRKS[hash('q' + n + stat) % QUIRKS.length];
+  return e;
+};
 let epithetCursor = 0;
 const epithet = () => EPITHETS[epithetCursor++ % EPITHETS.length];
 
@@ -167,6 +176,12 @@ const SPECIAL = [
   ['rpg496_w_throw05', { id: 'lazy_boomerang', name: 'Бумеранг, который не возвращается', gender: 'm', category: 'weapon_tool', rarity: 'slop', tags: ['slop'], effect: { type: 'stat', stat: 'spd', value: 3 }, flavor: 'Улетел в 2019 году. Ждём.' }],
   ['rpg496_i_tentacle', { id: 'polite_tentacle', name: 'Щупальце вежливости', gender: 'n', category: 'material', rarity: 'slop', tags: ['slop'], effect: null, flavor: 'Здоровается со всеми. Даже с клобстерами.' }],
   ['rpg496_p_medicine09', { id: 'too_happy_pill', name: 'Таблетка от слишком хорошего настроения', gender: 'f', category: 'potion', rarity: 'slop', tags: ['slop', 'consumable'], effect: { type: 'buff', status: 'lucky', turns: 4, all: true }, flavor: 'Принимать не рекомендуется. Настроение должно быть хорошим.' }],
+  // relics: legendaries that change how a run plays (effect.type 'relic', handled in js/game/run.js)
+  ['kyrise_flower_01a', { id: 'friend_bouquet', name: 'Букет для зверька', gender: 'm', category: 'household', rarity: 'legendary', tags: ['relic'], effect: { type: 'relic', relic: 'bouquet' }, flavor: 'Зверёк так растроган, что помогает котам каждый ход.' }],
+  ['rpg496_i_key05', { id: 'backroom_loupe', name: 'Лупа подсобки', gender: 'f', category: 'household', rarity: 'legendary', tags: ['relic'], effect: { type: 'relic', relic: 'loupe' }, flavor: 'Через неё видно, где комната врёт.' }],
+  ['rpg496_ac_necklace06', { id: 'nine_lives_pearls', name: 'Ожерелье девяти жизней', gender: 'n', category: 'jewelry', rarity: 'legendary', tags: ['relic'], effect: { type: 'relic', relic: 'ninelives' }, flavor: 'Девять жемчужин, по одной на каждую жизнь. Одна уже тёплая.' }],
+  ['rpg496_i_torch02', { id: 'eternal_torch', name: 'Вечный факел', gender: 'm', category: 'household', rarity: 'legendary', tags: ['relic'], effect: { type: 'relic', relic: 'torch' }, flavor: 'Темнота его побаивается. Гнёзда — тоже.' }],
+  ['kyrise_giftopen_01b', { id: 'surprise_box', name: 'Коробка с сюрпризом', gender: 'f', category: 'container', rarity: 'legendary', tags: ['relic'], effect: { type: 'relic', relic: 'purse' }, flavor: 'Сколько ни заглядывай, внутри опять монетки.' }],
   ['food_17_burger_napkin', { id: 'invisible_burger', name: 'Бургер в салфетке-невидимке', gender: 'm', category: 'food', rarity: 'slop', tags: ['slop', 'consumable'], effect: { type: 'heal', value: 40 }, flavor: 'Салфетку не видно. Бургер, кстати, тоже — пока не откусишь.' }],
 ];
 for (const [file, spec] of SPECIAL) add(file, spec);
@@ -441,6 +456,8 @@ const PASSIVES = {
   epic: [{ type: 'stat', stat: 'atk', value: 2 }, { type: 'stat', stat: 'luck', value: 3 }, { type: 'start_consumable', value: 1 }, { type: 'coin_bonus', value: 0.12 }],
   legendary: [{ type: 'backpack_slot', value: 2 }, { type: 'stat', stat: 'crit', value: 0.06 }, { type: 'coin_bonus', value: 0.2 }, { type: 'block_luck', value: 3 }],
 };
+// what an animal does when it comes along on a run (strength by rarity, see balance.assist)
+const ASSIST_BY_ALBUM = { birds: 'peck', farm: 'heal', forest: 'shield', north: 'shield', savanna: 'roar', jungle: 'roar', sea: 'splash', river: 'splash', night: 'sneak', fantasy: 'magic', dragons: 'magic', swamp: 'sticky', garden: 'buzz' };
 // the gnat is a 3x2 speck inside its 8x8 cell: crop to it so it shows at a readable size
 const ANIMAL_ART = { bug_gnat: { x: 3, y: 3, w: 3, h: 2 } };
 const animals = [];
@@ -449,7 +466,8 @@ for (const a of animalsIndex) {
   if (!spec) continue;
   const [name, rarity, album] = spec;
   const passive = pickH(PASSIVES[rarity], a.id);
-  animals.push({ id: a.id, name, sprite: 'assets/' + a.file, w: a.w, h: a.h, ...(ANIMAL_ART[a.id] ? { art: ANIMAL_ART[a.id] } : {}), rarity, passive, album });
+  const assist = ASSIST_BY_ALBUM[album] || 'peck';
+  animals.push({ id: a.id, name, sprite: 'assets/' + a.file, assist, w: a.w, h: a.h, ...(ANIMAL_ART[a.id] ? { art: ANIMAL_ART[a.id] } : {}), rarity, passive, album });
 }
 
 // ---------- album: 24 themed pages of animals, enemy stickers and items ----------

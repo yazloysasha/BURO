@@ -1,5 +1,5 @@
 // The Lavka interior, painted procedurally in pixels (logical 128x88), with both cats living in it.
-import { CatSprite, pixelCanvas, enemyFrame } from '../core/sprite.js';
+import { CatSprite, pixelCanvas, enemyFrame, animateWhileAttached } from '../core/sprite.js';
 import { getImage, loadImage, sheets } from '../core/assets.js';
 import { play } from '../core/audio.js';
 import { Stage } from './stage.js';
@@ -13,7 +13,52 @@ function rect(ctx, x, y, w, hh, c) {
   ctx.fillRect(x, y, w, hh);
 }
 
-function paintBackground(ctx, shelfIcons, anomaly = null) {
+// The Lavka grows with its tier: a plant and lights, a sign, a rug and more lamps, gold trim.
+function paintDecor(ctx, tier, time) {
+  if (tier >= 2) {
+    // potted plant by the window
+    rect(ctx, 4, 60, 11, 6, '#a0522d');
+    rect(ctx, 3, 59, 13, 2, '#c06a3a');
+    for (const [x, y] of [[9, 50], [8, 52], [10, 52], [7, 54], [11, 54], [6, 56], [9, 55], [12, 56], [9, 57], [5, 58], [13, 58], [8, 58], [10, 58]]) rect(ctx, x, y, 1 + (x % 2), 1, '#4fa34a');
+    // string of lights under the ceiling
+    const cols = tier >= 5 ? ['#ffd24a', '#fff4c0'] : ['#ff6b8a', '#ffd24a', '#6fd3ff', '#8aff7a'];
+    for (let x = 2, i = 0; x < 128; x += 6, i++) {
+      rect(ctx, x, 3 + (i % 2), 1, 1, '#3b2c55');
+      const on = (Math.floor(time * 1.5) + i) % 3 !== 0;
+      rect(ctx, x, 4 + (i % 2), 2, 2, on ? cols[i % cols.length] : '#3b2c55');
+    }
+  }
+  if (tier >= 3) {
+    // a wooden sign on the counter with a coin on it
+    rect(ctx, 46, 46, 16, 8, '#c9a06a');
+    rect(ctx, 46, 46, 16, 1, '#e0bc84');
+    rect(ctx, 48, 49, 12, 1, '#6e4a2e');
+    rect(ctx, 48, 51, 8, 1, '#6e4a2e');
+    rect(ctx, 63, 61, 4, 4, '#ffcf4a');
+    rect(ctx, 64, 60, 2, 6, '#ffcf4a');
+    rect(ctx, 64, 62, 2, 2, '#c98a1a');
+  }
+  if (tier >= 4) {
+    // rug in front of the counter and two more lamps
+    rect(ctx, 38, 76, 52, 7, '#7a2f5a');
+    rect(ctx, 40, 78, 48, 1, '#c9a46a');
+    rect(ctx, 40, 80, 48, 1, '#c9a46a');
+    for (const lx of [100, 118]) {
+      rect(ctx, lx, 0, 1, 7, '#18121f');
+      rect(ctx, lx - 2, 7, 5, 2, '#8a5a2a');
+      rect(ctx, lx - 1, 9, 3, 1, '#ffe28a');
+    }
+  }
+  if (tier >= 5) {
+    // gold trim: the Night Auction
+    rect(ctx, 44, 54, 40, 1, '#ffd24a');
+    rect(ctx, 44, 72, 40, 1, '#c98a1a');
+    rect(ctx, 52, 21, 72, 1, '#ffd24a');
+    rect(ctx, 52, 41, 72, 1, '#ffd24a');
+  }
+}
+
+function paintBackground(ctx, shelfIcons, anomaly = null, tier = 1, time = 0) {
   // wall
   rect(ctx, 0, 0, HUB_W, HUB_H, '#2b2140');
   for (let x = 0; x < HUB_W; x += 8) rect(ctx, x, 0, 1, 66, '#241b37');
@@ -73,6 +118,7 @@ function paintBackground(ctx, shelfIcons, anomaly = null) {
   rect(ctx, 44, 58, 40, 14, '#7a5332');
   rect(ctx, 46, 60, 36, 1, '#5e3e25');
   rect(ctx, 44, 72, 40, 1, '#3d2616');
+  paintDecor(ctx, tier, time);
   // icons on shelves (16x16 sprites, drawn native)
   shelfIcons.forEach((src, i) => {
     const img = getImage(src);
@@ -105,14 +151,46 @@ function shelfIconList() {
 // where each hub anomaly sits, for its tap zone
 const HUB_ANOMALY_ZONE = { hub_moon_red: [18, 6, 20, 18], hub_window_eyes: [4, 20, 24, 16], hub_ceiling: [22, 0, 24, 16] };
 
-export function createHubScene(availW, availH, { anomaly = null, onAnomaly = null } = {}) {
+export function createHubScene(availW, availH, { anomaly = null, onAnomaly = null, customer = null, onCustomer = null } = {}) {
   const stage = new Stage(HUB_W, HUB_H, availW, availH);
   const icons = shelfIconList();
+  const tier = game.save.meta.tier;
   let shown = anomaly;
+  let t0 = performance.now();
   const paint = () => {
     stage.ctx.clearRect(0, 0, HUB_W, HUB_H);
-    paintBackground(stage.ctx, icons, shown);
+    paintBackground(stage.ctx, icons, shown, tier, (performance.now() - t0) / 1000);
   };
+  // the garland twinkles
+  if (tier >= 2) {
+    let acc = 0;
+    animateWhileAttached(stage.bg, (dt) => {
+      acc += dt;
+      if (acc < 0.25) return;
+      acc = 0;
+      paint();
+    });
+  }
+  // a customer at the counter with a wish
+  const visitor = customer && game.data.animalById[customer.animal];
+  if (visitor) {
+    const cv = pixelCanvas(16, 16, 1, 'customer');
+    loadImage(visitor.sprite).then((img) => img && cv.getContext('2d').drawImage(img, Math.floor((16 - img.naturalWidth) / 2), 16 - img.naturalHeight));
+    stage.place(cv, 66, 38, 4);
+    // a speech bubble with "!" over the visitor
+    const mark = pixelCanvas(7, 10, 1, 'bubble');
+    const m = mark.getContext('2d');
+    m.fillStyle = '#2a1d14';
+    m.fillRect(0, 0, 7, 8);
+    m.fillStyle = '#fff4dc';
+    m.fillRect(1, 1, 5, 6);
+    m.fillRect(2, 8, 2, 1);
+    m.fillStyle = '#e0485a';
+    m.fillRect(3, 2, 1, 3);
+    m.fillRect(3, 6, 1, 1);
+    stage.place(mark, 76, 28, 7);
+    stage.zone(60, 28, 26, 26, () => onCustomer && onCustomer(), visitor.name);
+  }
   if (shown && HUB_ANOMALY_ZONE[shown]) {
     const [x, y, w, hh] = HUB_ANOMALY_ZONE[shown];
     const zone = stage.zone(x, y, w, hh, () => {

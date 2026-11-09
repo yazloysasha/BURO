@@ -3,7 +3,8 @@ import { h, setChildren } from '../core/dom.js';
 import { t } from '../core/i18n.js';
 import { play as playSfx } from '../core/audio.js';
 import { tween, wait } from '../core/loop.js';
-import { CatSprite, enemyCanvas, iconCanvas } from '../core/sprite.js';
+import { CatSprite, enemyCanvas, iconCanvas, pixelCanvas } from '../core/sprite.js';
+import { loadImage } from '../core/assets.js';
 import { game, commit } from '../game/state.js';
 import { CAT_KEYS, aliveEnemies, aliveCats, catByKey, intentPreview } from '../game/combat.js';
 import { combatCtx } from '../game/data.js';
@@ -11,7 +12,7 @@ import { playRound } from '../game/run.js';
 import { combosForChoice } from '../game/combos.js';
 import { Stage } from './stage.js';
 import { button, modal, closeModal, shake, haptic } from './app.js';
-import { hpBar, itemRow, effectText } from './runwidgets.js';
+import { hpBar, itemRow, effectText, assistText } from './runwidgets.js';
 import { catSheetKey } from './widgets.js';
 import { isWide } from './layout.js';
 import { burstAt } from './particles.js';
@@ -45,7 +46,8 @@ export function renderCombat(root, { onEnd }) {
   const play = (...a) => (skip.skipped ? undefined : playSfx(...a));
   const pause = (ms) => wait(ms, skip);
 
-  const log = h('div.combat-log', { text: room.type === 'boss' ? t('combat.bossIntro') : t('combat.start') });
+  const bossId = run.boss || 'klobster_king';
+  const log = h('div.combat-log', { text: room.type === 'boss' ? t('combat.bossIntro.' + bossId) : t('combat.start') });
   const panel = h('div.action-panel');
   const chips = h('div.party-row');
   root.append(h('div.split', null, h('div.split-a', null, stage.el), h('div.split-b', null, log, chips, panel)));
@@ -100,7 +102,36 @@ export function renderCombat(root, { onEnd }) {
     return { el: cv, x, y, bar, intent, st, zone, w: size, h: size };
   }
 
+  // the animal friend sits in front of the cats; enemies never target it
+  function makeCompanionView() {
+    const comp = c.companion;
+    const side = comp.art ? Math.max(comp.art.w, comp.art.h) + 1 : Math.max(comp.w || 16, comp.h || 16);
+    const cv = pixelCanvas(side, side, 1, 'companion');
+    loadImage(comp.sprite).then((img) => {
+      if (!img) return;
+      const x = cv.getContext('2d');
+      if (comp.art) x.drawImage(img, comp.art.x, comp.art.y, comp.art.w, comp.art.h, Math.floor((side - comp.art.w) / 2), side - comp.art.h, comp.art.w, comp.art.h);
+      else x.drawImage(img, Math.floor((side - img.naturalWidth) / 2), side - img.naturalHeight);
+    });
+    const scale = Math.max(1, Math.floor(14 / side) + (side <= 8 ? 1 : 0));
+    const px = 36;
+    const py = 92 - side * scale;
+    stage.place(cv, px, py, 6);
+    cv.style.width = side * scale * u + 'px';
+    cv.style.height = side * scale * u + 'px';
+    stage.zone(px, py, side * scale, side * scale, () => onCompanionTap(), comp.name);
+    return { el: cv, x: px, y: py, w: side * scale, h: side * scale };
+  }
+
+  function onCompanionTap() {
+    if (busy) return;
+    const comp = c.companion;
+    play('select');
+    modal(h('div', null, h('h2', { text: comp.name }), h('p', { text: assistText(comp.assist) })), [{ label: t('common.ok'), value: 1, cls: 'green' }]);
+  }
+
   function sync() {
+    if (c.companion && !views.companion) views.companion = makeCompanionView();
     for (const cat of c.cats) {
       if (!views[cat.uid]) views[cat.uid] = makeCatView(cat);
       const v = views[cat.uid];
@@ -231,7 +262,7 @@ export function renderCombat(root, { onEnd }) {
     return run.backpack.filter((b) => {
       const it = game.data.itemById[b.id];
       // gear works from the backpack by itself and must not be burnt like a consumable
-      return it && it.effect && it.effect.type !== 'stat' && !Object.values(sel).some((a) => a.itemUid === b.uid);
+      return it && it.effect && it.effect.type !== 'stat' && it.effect.type !== 'relic' && !Object.values(sel).some((a) => a.itemUid === b.uid);
     });
   }
 
@@ -296,6 +327,7 @@ export function renderCombat(root, { onEnd }) {
         null,
         h('div.row', null, enemyCanvas(e.sprite, 4), h('div', null, h('h2', { text: e.name }), h('div.dim', { text: t('combat.stats', { hp: e.hp, max: e.maxHp, atk: e.atk, def: e.def, spd: e.spd }) }))),
         h('p', { text: def.flavor }),
+        e.trait ? h('p.accent', { text: t('eliteTrait.' + e.trait) }) : null,
         e.intent ? h('p', { text: t('combat.intentIs', { what: t('intents.' + e.intent.type) }) }) : null,
         ...e.statuses.map((s) => h('div.dim', { text: game.data.statusById[s.id].name + ' — ' + game.data.statusById[s.id].desc })),
       ),
@@ -478,8 +510,25 @@ export function renderCombat(root, { onEnd }) {
         case 'phase':
           play('ambush');
           shake();
-          log.textContent = t('combat.bossPhase');
+          log.textContent = t('combat.bossPhase.' + bossId);
           await pause(500);
+          break;
+        case 'assist': {
+          const comp = c.companion;
+          log.textContent = t('combat.logAssist', { who: comp.name, what: t('assistName.' + ev.kind) });
+          play(ev.kind === 'heal' || ev.kind === 'shield' ? 'potion' : 'step');
+          await lunge('companion', 1);
+          break;
+        }
+        case 'loot':
+          float('companion', '+' + ev.amount, 'heal');
+          play('coin_small');
+          await pause(120);
+          break;
+        case 'quirk':
+          float(ev.actor, t('quirkFloat.' + ev.quirk), 'heal');
+          play('shiny');
+          await pause(140);
           break;
         case 'enrage':
           play('ambush');

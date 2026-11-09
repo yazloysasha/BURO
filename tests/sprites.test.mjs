@@ -5,7 +5,7 @@ import { auditAll, tooSmall } from '../tools/audit_sprites.mjs';
 
 test('all enemies, animals and items render at a readable size', () => {
   const rows = auditAll();
-  assert.equal(rows.filter((r) => r.kind === 'enemy').length, 24);
+  assert.equal(rows.filter((r) => r.kind === 'enemy').length, 25);
   assert.equal(rows.filter((r) => r.kind === 'animal').length, 89);
   assert.deepEqual(rows.filter(tooSmall).map((r) => r.id), []);
 });

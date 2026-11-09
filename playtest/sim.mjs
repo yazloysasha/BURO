@@ -7,6 +7,7 @@ import { startRun, enterNode, playRound, completeRoom, finishRun, restChoice, ru
 import { backroomCall, placeOnShelf, washItem, washCats, chooseEvent, buyShop } from '../js/game/rooms.js';
 import { openRunBlock, resolveFullBackpack, openDailyGift } from '../js/game/blocks.js';
 import { startNightShift, nightShiftCall } from '../js/game/nightshift.js';
+import { customerOffer, sellToCustomer, wantMatches } from '../js/game/customers.js';
 import { placeSticker, buyUpgrade, learnTalent, tierUp } from '../js/game/progress.js';
 import { sellItem, toggleGuest, collectionStats } from '../js/game/collection.js';
 import { guestSlots, runFee, runIsFree } from '../js/game/meta.js';
@@ -124,6 +125,15 @@ export function playRun(save, data, strat) {
 
 export function metaPhase(save, data, strat) {
   const log = [];
+  const comp = strat.chooseCompanion(save, data);
+  if (comp && save.meta.companion !== comp) {
+    save.meta.companion = comp;
+    log.push('companion');
+  }
+  if (save.meta.customer) {
+    const key = strat.customerSale(save, data, (k) => customerOffer(save, data, k), (k) => wantMatches(data, save.meta.customer.want, k));
+    if (key && sellToCustomer(save, data, key)) log.push('customer');
+  }
   for (let guard = 0; guard < 200; guard++) {
     const m = strat.metaNext(save, data);
     if (!m) break;

@@ -7,6 +7,9 @@ import { startRun } from '../../game/run.js';
 import { runFee, runIsFree, gritBonus } from '../../game/meta.js';
 import { button, go, pickLine, setTopbarTitle, modal, closeModal, toast } from '../app.js';
 import { nextGoal } from '../../game/progress.js';
+import { wantMatches, customerOffer, sellToCustomer, dismissCustomer } from '../../game/customers.js';
+import { parseKey, sellPrice } from '../../game/collection.js';
+import { itemRow } from '../runwidgets.js';
 import { createHubScene } from '../hubscene.js';
 import { isWide } from '../layout.js';
 import { catLine } from '../../game/namegen.js';
@@ -41,9 +44,44 @@ function runButton() {
 // The first decision of every run: who leads changes both the fights and the haul.
 function chooseLeader(text) {
   const pick = (key, sub) => button(t(key), () => closeModal(sub), { cls: 'blue block leader-pick', sub: t(key + 'Sub'), sound: 'confirm' });
-  return modal(h('div.col', null, h('p', { text }), h('h2', { text: t('hub.chooseLeader') }), pick('hub.leaderPeposya', 'peposya'), pick('hub.leaderDudonya', 'dudonya')), [
+  const comp = game.save.meta.companion && game.data.animalById[game.save.meta.companion];
+  const along = comp && game.save.collection.animals[comp.id] ? h('div.goal-line', { text: t('hub.companion', { name: comp.name }) }) : h('div.dim.small', { text: t('hub.noCompanion') });
+  return modal(h('div.col', null, h('p', { text }), along, h('h2', { text: t('hub.chooseLeader') }), pick('hub.leaderPeposya', 'peposya'), pick('hub.leaderDudonya', 'dudonya')), [
     { label: t('common.cancel'), value: null, cls: 'grey', sound: 'back' },
   ]);
+}
+
+// A visitor with a wish: shows what on the shelves fits and what it would fetch, or lets them go.
+function openCustomer(after) {
+  const save = game.save;
+  const c = save.meta.customer;
+  if (!c) return;
+  const a = game.data.animalById[c.animal];
+  const fits = Object.keys(save.collection.items).filter((k) => wantMatches(game.data, c.want, k)).sort((x, y) => customerOffer(save, game.data, y) - customerOffer(save, game.data, x));
+  const list = h('div.col');
+  for (const key of fits) {
+    const { id, mods } = parseKey(key);
+    const it = game.data.itemById[id];
+    list.append(itemRow(it, { mods, extra: h('div.small.accent', { text: t('customer.offer', { n: customerOffer(save, game.data, key), base: sellPrice(save, game.data, key) }) }), onClick: () => {
+      const coins = sellToCustomer(save, game.data, key);
+      commit();
+      closeModal();
+      play('coin');
+      toast(t('customer.sold', { name: a.name, n: coins }), 3000);
+      after();
+    } }));
+  }
+  if (!fits.length) list.append(h('p.dim', { text: t('customer.nothing') }));
+  play('door_open');
+  modal(h('div.col', null, h('h2', { text: t('customer.title', { name: a.name }) }), h('p', { text: t('customer.wants', { what: t('customer.want.' + c.want.kind + '.' + c.want.value), x: c.mult }) }), list), [
+    { label: t('customer.later'), value: 0, cls: 'grey', sound: 'back' },
+    { label: t('customer.bye'), value: 'bye', cls: 'blue', sound: 'door_close' },
+  ]).then((v) => {
+    if (v !== 'bye') return;
+    dismissCustomer(save);
+    commit();
+    after();
+  });
 }
 
 function lastRunNote() {
@@ -62,6 +100,8 @@ export function render(root) {
   const H = root.clientHeight || window.innerHeight;
   const anomaly = hubAnomaly(game.save, game.data, localDate(), hashString);
   const scene = createHubScene(wide ? W * 0.52 : W, wide ? H - 40 : Math.max(160, H * 0.4), {
+    customer: game.save.meta.customer,
+    onCustomer: () => openCustomer(() => go('hub')),
     anomaly: anomaly && anomaly.id,
     onAnomaly: (id) => {
       const r = catchHubAnomaly(game.save, game.data, id, localDate());

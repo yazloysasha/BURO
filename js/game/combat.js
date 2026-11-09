@@ -39,7 +39,12 @@ export function hasStatus(u, id) {
   return u.statuses.some((s) => s.id === id);
 }
 
+// sleepy, webbed: the unit loses its next action
+const skipStatus = (u, ctx) => u.statuses.find((s) => statusDef(ctx, s.id).skipTurn);
+
 function addStatus(u, id, turns) {
+  // a fright cracks a shell: the trick against shelled elites
+  if (id === 'scared' && hasStatus(u, 'shell')) u.statuses = u.statuses.filter((s) => s.id !== 'shell');
   const cur = u.statuses.find((s) => s.id === id);
   // statuses applied this round don't tick down at its end, so "turns" counts full rounds after this one
   if (cur) {
@@ -52,13 +57,16 @@ function addStatus(u, id, turns) {
 // power: move multiplier; opts.critMult overrides; opts.noMiss skips evasion; opts.dmgMult extra multiplier
 export function computeDamage(att, target, power, rng, ctx, opts = {}) {
   const bal = ctx.balance;
-  if (!opts.noMiss && rng.next() < effEvade(target, ctx)) return { miss: true, dmg: 0, crit: false, blocked: 0 };
+  let missAdd = 0;
+  for (const s of att.statuses || []) missAdd += statusDef(ctx, s.id).missAdd || 0;
+  if (!opts.noMiss && rng.next() < effEvade(target, ctx) + missAdd) return { miss: true, dmg: 0, crit: false, blocked: 0 };
   const [vmin, vmax] = bal.variance;
   const variance = vmin + rng.next() * (vmax - vmin);
   let raw = effAtk(att, ctx) * power * variance * (opts.dmgMult || 1);
   const crit = rng.next() < effCrit(att, ctx) + (opts.critAdd || 0);
   if (crit) raw *= opts.critMult || bal.critMult;
   let dmg = Math.max(1, Math.round(raw) - (target.def || 0));
+  if (hasStatus(target, 'shell')) dmg = 1;
   const blocked = Math.min(target.block || 0, dmg);
   return { miss: false, dmg: dmg - blocked, crit, blocked, raw: dmg };
 }
@@ -121,8 +129,9 @@ export function makeEnemyUnit(def, uid, { floor = 1, tier = 1, elite = false, el
   };
 }
 
-export function createCombat({ cats, enemies, kind = 'combat' }) {
-  return { kind, round: 1, cats, enemies, nextUid: enemies.length + 1, over: null, seq: { peposya: [], dudonya: [] }, kills: [] };
+// companion: {id, name, sprite, assist:{type, value, every}, cd}; quirks: counts of gear quirks in the backpack.
+export function createCombat({ cats, enemies, kind = 'combat', companion = null, quirks = {} }) {
+  return { kind, round: 1, cats, enemies, nextUid: enemies.length + 1, over: null, seq: { peposya: [], dudonya: [] }, kills: [], companion, quirks, saved: 0 };
 }
 
 export const aliveEnemies = (c) => c.enemies.filter((e) => e.hp > 0);
@@ -133,7 +142,7 @@ export const catByKey = (c, key) => c.cats.find((u) => u.key === key);
 function movesOf(enemy, ctx) {
   const def = ctx.enemies[enemy.id];
   if (def.phases) return def.phases[enemy.phase].moves;
-  return def.moves;
+  return enemy.extraMoves ? [...def.moves, ...enemy.extraMoves] : def.moves;
 }
 
 function minionCount(c) {
@@ -186,7 +195,7 @@ export function resolveRound(c, actions, rng, ctx, hooks = {}) {
   for (const u of aliveCats(c)) {
     const a = actions[u.key];
     const ad = a && catDefs[u.key].actions[a.action];
-    if (ad && ad.priority && ad.type === 'shield' && !hasStatus(u, 'sleepy')) {
+    if (ad && ad.priority && ad.type === 'shield' && !skipStatus(u, ctx)) {
       u.block += ad.value;
       ev.push({ type: 'act', actor: u.uid, action: a.action });
       ev.push({ type: 'block', target: u.uid, amount: ad.value });
@@ -201,7 +210,7 @@ export function resolveRound(c, actions, rng, ctx, hooks = {}) {
     }
   }
   for (const e of aliveEnemies(c)) {
-    if (e.intent && e.intent.type === 'defend' && !hasStatus(e, 'sleepy')) {
+    if (e.intent && e.intent.type === 'defend' && !skipStatus(e, ctx)) {
       e.block += e.intent.block;
       ev.push({ type: 'block', target: e.uid, amount: e.intent.block });
       e.intent.done = true;
@@ -216,21 +225,29 @@ export function resolveRound(c, actions, rng, ctx, hooks = {}) {
   for (const u of order) {
     if (c.over) break;
     if (u.hp <= 0 || u.ko) continue;
-    if (hasStatus(u, 'sleepy')) {
-      u.statuses = u.statuses.filter((x) => x.id !== 'sleepy'); // sleeping through one action wakes you up
-      ev.push({ type: 'skip', actor: u.uid, reason: 'sleepy' });
+    const skip = skipStatus(u, ctx);
+    if (skip) {
+      u.statuses = u.statuses.filter((x) => x !== skip); // losing one action breaks it
+      ev.push({ type: 'skip', actor: u.uid, reason: skip.id });
       continue;
     }
     if (u.side === 'cat') {
       const a = actions[u.key];
       if (!a || a.done) continue;
       catAct(c, u, a, rng, ctx, ev, hooks);
+      // a glitchy trinket sometimes plays the same move twice
+      if (c.quirks.mirror && !c.over && a.action !== 'item' && rng.chance(0.1 * c.quirks.mirror)) {
+        ev.push({ type: 'quirk', quirk: 'mirror', actor: u.uid });
+        catAct(c, u, { ...a, mirrored: true }, rng, ctx, ev, hooks);
+      }
     } else if (u.intent && !u.intent.done) {
       enemyAct(c, u, rng, ctx, ev);
     }
     checkOver(c, ev);
   }
 
+  if (!c.over && c.companion) companionAct(c, rng, ctx, ev);
+  checkOver(c, ev);
   if (!c.over) endOfRound(c, rng, ctx, ev);
   return ev;
 }
@@ -254,9 +271,94 @@ function hit(c, att, target, power, rng, ctx, ev, opts = {}) {
   }
   applyDamage(target, res);
   ev.push({ type: 'damage', actor: att.uid, target: target.uid, amount: res.dmg, crit: res.crit, blocked: res.blocked, hp: target.hp });
+  const q = c.quirks || {};
+  if (target.side === 'cat' && target.hp <= 0 && (q.guardian || 0) > c.saved) {
+    // a guardian charm: once per fight per charm, a knock-out leaves the cat standing on 1 HP
+    c.saved++;
+    target.hp = 1;
+    ev.push({ type: 'quirk', quirk: 'guardian', actor: target.uid, hp: 1 });
+  }
   if (target.hp <= 0) onDeath(c, target, ev, ctx);
   else if (target.boss) checkPhase(target, ctx, ev);
+  if (att.side === 'enemy' && target.side === 'cat' && q.thorns && res.dmg > 0 && att.hp > 0) directDamage(c, null, att, q.thorns, ev, ctx, 'thorns');
+  if (att.side === 'cat' && target.side === 'enemy' && q.vampire && res.dmg > 0 && att.hp > 0) {
+    const before = att.hp;
+    att.hp = Math.min(att.maxHp, att.hp + q.vampire);
+    if (att.hp > before) ev.push({ type: 'heal', target: att.uid, amount: att.hp - before, hp: att.hp });
+  }
   return res;
+}
+
+// Damage that skips aim and crits (thorns, companions); defence still counts half.
+function directDamage(c, actor, target, amount, ev, ctx, source) {
+  let dmg = Math.max(1, amount - Math.floor((target.def || 0) / 2));
+  if (hasStatus(target, 'shell')) dmg = 1;
+  const blocked = Math.min(target.block || 0, dmg);
+  applyDamage(target, { dmg: dmg - blocked, blocked });
+  ev.push({ type: 'damage', actor: actor || 'companion', target: target.uid, amount: dmg - blocked, crit: false, blocked, hp: target.hp, source });
+  if (target.hp <= 0) onDeath(c, target, ev, ctx);
+  else if (target.boss) checkPhase(target, ctx, ev);
+}
+
+// The animal friend who came along: one simple move every few rounds, never targeted by the enemies.
+function companionAct(c, rng, ctx, ev) {
+  const comp = c.companion;
+  if (comp.cd > 0) {
+    comp.cd--;
+    return;
+  }
+  comp.cd = Math.max(0, (comp.assist.every || 1) - 1);
+  const v = comp.assist.value;
+  const foes = aliveEnemies(c);
+  if (!foes.length) return;
+  ev.push({ type: 'assist', actor: 'companion', kind: comp.assist.type });
+  const weakest = foes.slice().sort((a, b) => a.hp - b.hp)[0];
+  switch (comp.assist.type) {
+    case 'peck':
+      directDamage(c, 'companion', weakest, v, ev, ctx, 'companion');
+      break;
+    case 'magic':
+      directDamage(c, 'companion', foes.slice().sort((a, b) => b.hp - a.hp)[0], v * 2, ev, ctx, 'companion');
+      break;
+    case 'splash':
+      for (const t of foes) directDamage(c, 'companion', t, Math.max(1, Math.round(v * 0.6)), ev, ctx, 'companion');
+      break;
+    case 'sneak':
+      directDamage(c, 'companion', weakest, Math.max(1, Math.round(v / 2)), ev, ctx, 'companion');
+      c.loot = (c.loot || 0) + Math.max(1, Math.round(v / 2));
+      ev.push({ type: 'loot', amount: Math.max(1, Math.round(v / 2)) });
+      break;
+    case 'heal': {
+      const t = aliveCats(c).sort((x, y) => x.hp / x.maxHp - y.hp / y.maxHp)[0];
+      if (t) heal(t, v, ev);
+      break;
+    }
+    case 'shield':
+      for (const t of aliveCats(c)) {
+        t.block += Math.max(1, Math.round(v * 0.7));
+        ev.push({ type: 'block', target: t.uid, amount: Math.max(1, Math.round(v * 0.7)) });
+      }
+      break;
+    case 'roar':
+      for (const t of foes) {
+        addStatus(t, 'scared', 1);
+        ev.push({ type: 'status', target: t.uid, status: 'scared' });
+      }
+      break;
+    case 'sticky':
+      addStatus(weakest, 'sticky', 2);
+      ev.push({ type: 'status', target: weakest.uid, status: 'sticky' });
+      directDamage(c, 'companion', weakest, Math.max(1, Math.round(v / 2)), ev, ctx, 'companion');
+      break;
+    case 'buzz':
+      for (const t of aliveCats(c)) {
+        addStatus(t, 'lucky', 1);
+        ev.push({ type: 'status', target: t.uid, status: 'lucky' });
+      }
+      break;
+    default:
+      break;
+  }
 }
 
 function onDeath(c, u, ev) {
@@ -305,6 +407,11 @@ function catAct(c, u, a, rng, ctx, ev, hooks) {
     case 'attack': {
       const t = retarget(c, a.target);
       if (t) hit(c, u, t, ad.power, rng, ctx, ev, { dmgMult: mult });
+      const t2 = c.quirks && c.quirks.echo && !a.mirrored ? retarget(c, a.target) : null;
+      if (t2 && rng.chance(0.15 * c.quirks.echo)) {
+        ev.push({ type: 'quirk', quirk: 'echo', actor: u.uid });
+        hit(c, u, t2, ad.power * 0.5, rng, ctx, ev, { dmgMult: mult });
+      }
       break;
     }
     case 'attack_all':

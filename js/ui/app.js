@@ -119,8 +119,10 @@ export function modal(content, actions = [], { cls = '', dismissable = true } = 
     ov.append(box);
     ov.dataset.locked = dismissable ? '0' : '1';
     ov.classList.add('show');
+    // dialogs opened on pointerdown (tap zones) get the same tap's click a moment later: don't let it close them
+    const openedAt = performance.now();
     ov.onclick = (e) => {
-      if (dismissable && e.target === ov) closeModal(undefined);
+      if (dismissable && e.target === ov && performance.now() - openedAt > 400) closeModal(undefined);
     };
   });
 }
@@ -166,13 +168,35 @@ export function shake(el = $('#app')) {
   setTimeout(() => el.classList.remove('shake'), 320);
 }
 
+// iPhone Safari has no navigator.vibrate, but it ticks the Taptic Engine when an <input switch> toggles (17.4+).
+let switchLabel = null;
+function iosTick() {
+  if (!switchLabel) {
+    switchLabel = document.createElement('label');
+    switchLabel.setAttribute('aria-hidden', 'true');
+    switchLabel.style.cssText = 'position:fixed;left:-100px;top:0;width:1px;height:1px;overflow:hidden;opacity:0';
+    const input = document.createElement('input');
+    input.type = 'checkbox';
+    input.setAttribute('switch', '');
+    input.tabIndex = -1;
+    switchLabel.append(input);
+    document.body.append(switchLabel);
+  }
+  switchLabel.click();
+}
+
 export function haptic(ms = 15) {
   if (!game.save || !game.save.settings.vibration) return;
   try {
     if (navigator.vibrate) navigator.vibrate(ms);
+    else if (/iP(hone|ad|od)/.test(navigator.userAgent)) iosTick();
   } catch {
     /* unsupported */
   }
+}
+
+export function hapticsSupported() {
+  return 'vibrate' in navigator || /iP(hone|ad|od)/.test(navigator.userAgent);
 }
 
 export function coinsText(n) {

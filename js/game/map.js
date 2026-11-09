@@ -57,7 +57,21 @@ export function generateMap(rng, { tier = 1, rooms, balance }) {
   for (const node of floors[regular - 1]) node.up = ['boss'];
   floors.push([boss]);
   assignRooms(floors, rng, rooms, tier);
-  return { floors, total };
+  return { floors, total, floorMods: rollFloorMods(rng, regular, balance.floorMods) };
+}
+
+// A few floors get a mood that changes their fights (dark, crumbs, draft); shown on the map in advance.
+function rollFloorMods(rng, regular, cfg) {
+  const out = {};
+  if (!cfg) return out;
+  const ids = Object.keys(cfg.mods);
+  let n = 0;
+  for (let f = cfg.fromFloor; f < regular - 1 && n < cfg.max; f++) {
+    if (!rng.chance(cfg.chance)) continue;
+    out[f] = rng.pick(ids);
+    n++;
+  }
+  return out;
 }
 
 function assignRooms(floors, rng, rooms, tier) {
