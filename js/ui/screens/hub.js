@@ -99,23 +99,7 @@ export function render(root) {
   const W = root.clientWidth || window.innerWidth - 16;
   const H = root.clientHeight || window.innerHeight;
   const anomaly = hubAnomaly(game.save, game.data, localDate(), hashString);
-  const scene = createHubScene(wide ? W * 0.52 : W, wide ? H - 40 : Math.max(160, H * 0.4), {
-    customer: game.save.meta.customer,
-    onCustomer: () => openCustomer(() => go('hub')),
-    anomaly: anomaly && anomaly.id,
-    onAnomaly: (id) => {
-      const r = catchHubAnomaly(game.save, game.data, id, localDate());
-      commit();
-      if (!r) return;
-      play('glitch');
-      toast(t(r.first ? 'hubAnomaly.caught' : 'hubAnomaly.again'), 3000);
-    },
-  });
   const note = h('div.hub-note', { text: lastRunNote() || pickLine('hub.greeting') });
-  scene.onTapCat((who) => {
-    taps++;
-    note.textContent = t('cats.' + who) + ': ' + catLine(game.data, who, localDate() + ':' + who + ':' + taps);
-  });
 
   const menu = h('div.menu-grid');
   for (const m of hubMenu) {
@@ -127,9 +111,39 @@ export function render(root) {
   }
   menu.append(button(t('hub.settings'), () => go('settings'), { cls: 'grey' }), button(t('hub.credits'), () => go('credits'), { cls: 'grey' }));
 
-  a.append(scene.stage.el, note);
   const goal = nextGoal(game.save, game.data);
   const grit = gritBonus(game.save, game.data);
-  b.append(h('div.scroll', null, h('div.col', null, h('div.goal-line', { text: t(goal.key, goal.params) }), grit.n ? h('div.center.dim', { text: t(grit.atk ? 'runEnd.gritAtk' : 'runEnd.grit', { hp: grit.hp, atk: grit.atk }) }) : null, runButton(), menu)));
+  const scroll = h('div.scroll', null, h('div.col', null, h('div.goal-line', { text: t(goal.key, goal.params) }), grit.n ? h('div.center.dim', { text: t(grit.atk ? 'runEnd.gritAtk' : 'runEnd.grit', { hp: grit.hp, atk: grit.atk }) }) : null, runButton(), menu));
+  a.append(note);
+  b.append(scroll);
+
+  // Portrait: the menu is laid out first and the scene gets what is left (at most 40% of the screen), so every
+  // button, Settings and Credits included, stays above the home indicator without scrolling.
+  let sceneH = Math.max(160, H * 0.4);
+  if (!wide) {
+    const gap = parseFloat(getComputedStyle(root.firstChild).rowGap) || 0;
+    // the scroll area stretches to fill the column, so measure what is inside it, not the area itself
+    const st = getComputedStyle(scroll);
+    const need = scroll.firstChild.offsetHeight + parseFloat(st.paddingTop) + parseFloat(st.paddingBottom);
+    const left = H - need - note.offsetHeight - gap;
+    sceneH = Math.max(120, Math.min(H * 0.4, left));
+  }
+  const scene = createHubScene(wide ? W * 0.52 : W, wide ? H - 40 : sceneH, {
+    customer: game.save.meta.customer,
+    onCustomer: () => openCustomer(() => go('hub')),
+    anomaly: anomaly && anomaly.id,
+    onAnomaly: (id) => {
+      const r = catchHubAnomaly(game.save, game.data, id, localDate());
+      commit();
+      if (!r) return;
+      play('glitch');
+      toast(t(r.first ? 'hubAnomaly.caught' : 'hubAnomaly.again'), 3000);
+    },
+  });
+  a.prepend(scene.stage.el);
+  scene.onTapCat((who) => {
+    taps++;
+    note.textContent = t('cats.' + who) + ': ' + catLine(game.data, who, localDate() + ':' + who + ':' + taps);
+  });
   return () => scene.destroy();
 }

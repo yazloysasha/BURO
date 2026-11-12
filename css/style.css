@@ -287,6 +287,13 @@ p {
   text-align: center;
   color: var(--ink-dim);
 }
+/* portrait: room for a two-line cat remark, so tapping a cat never pushes the menu down */
+body:not(.wide) .hub-note {
+  min-height: 2.9em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 /* ---------- forms ---------- */
 .setting {
@@ -359,11 +366,16 @@ textarea {
   display: flex;
   flex-direction: column;
 }
+/* long content scrolls inside the dialog; the action buttons stay pinned below it */
 .modal .body {
+  flex: 0 1 auto;
+  min-height: 0;
   overflow-y: auto;
+  overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
 }
 .modal .actions {
+  flex: none;
   display: flex;
   gap: 6px;
   margin-top: 8px;
@@ -1119,7 +1131,8 @@ body.kbd .map-node.avail::before {
 }
 .skin-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(104px, 1fr));
+  /* columns follow the font size: at 1 device px per CSS px the small font is as big as body text */
+  grid-template-columns: repeat(auto-fill, minmax(max(104px, calc(var(--fs-s) * 8.5)), 1fr));
   gap: 6px;
 }
 .skin-card {
@@ -1128,9 +1141,18 @@ body.kbd .map-node.avail::before {
   align-items: center;
   gap: 2px;
   padding: 4px;
+  min-width: 0;
   background: var(--bg2);
   border: 2px solid #3a3058;
   text-align: center;
+  overflow-wrap: break-word;
+}
+.skin-card > * {
+  max-width: 100%;
+}
+.skin-card .btn {
+  width: 100%;
+  margin-top: auto;
 }
 .skin-card.worn {
   border-color: var(--accent);
@@ -1197,4 +1219,23 @@ body.short .btn.big {
 }
 body.short .lucky {
   min-height: 120px;
+}
+
+/* ---------- pinned screen footer ---------- */
+/* sits below a .scroll inside #screen; #app already pads for the home indicator */
+.screen-footer {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-top: 6px;
+  border-top: 2px solid #3a3058;
+}
+.pick-note:empty {
+  display: none;
+}
+body.wide #screen > .screen-footer {
+  width: 100%;
+  max-width: 860px;
+  margin: 0 auto;
 }

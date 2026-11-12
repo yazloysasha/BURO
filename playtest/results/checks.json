@@ -7,7 +7,7 @@
  {
   "name": "offline iphone: a full run with no network",
   "ok": true,
-  "detail": "win on floor 11/11, 165 taps"
+  "detail": "lose on floor 11/11, 184 taps"
  },
  {
   "name": "offline iphone: no external requests, no page errors",
@@ -27,7 +27,7 @@
  {
   "name": "offline desktop: a full run with no network",
   "ok": true,
-  "detail": "win on floor 10/10, 121 taps"
+  "detail": "win on floor 11/11, 163 taps"
  },
  {
   "name": "offline desktop: no external requests, no page errors",
@@ -72,7 +72,7 @@
  {
   "name": "export: Windows-style file download",
   "ok": true,
-  "detail": "pepsya-dudonya-2026-11-09.json"
+  "detail": "pepsya-dudonya-2026-11-12.json"
  },
  {
   "name": "export: the same text is available to copy",
@@ -97,7 +97,7 @@
  {
   "name": "export: iPhone share sheet gets the save file",
   "ok": true,
-  "detail": "pepsya-dudonya-2026-11-09.json"
+  "detail": "pepsya-dudonya-2026-11-12.json"
  },
  {
   "name": "keyboard: Enter presses the main button",
@@ -172,12 +172,12 @@
  {
   "name": "night shift: finishes with a reward once a day",
   "ok": true,
-  "detail": "8 calls, 15 coins, grade good"
+  "detail": "7 calls, 15 coins, grade good"
  },
  {
   "name": "night shift: caught anomalies land in the journal",
   "ok": true,
-  "detail": "clock_three, no_stars"
+  "detail": "eyes_under_bed, window_visitor"
  },
  {
   "name": "journal: the anomaly tab lists what was found",
@@ -207,6 +207,6 @@
  {
   "name": "update: new cache replaces the old one, save intact",
   "ok": true,
-  "detail": "buro-v54 -> buro-v55"
+  "detail": "buro-v55 -> buro-v56"
  }
 ]

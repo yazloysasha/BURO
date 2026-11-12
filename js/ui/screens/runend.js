@@ -29,11 +29,14 @@ export function render(root) {
   if (run.leader === 'dudonya') box.append(h('div.dim.center', { text: t('runEnd.leaderBonus') }));
   box.append(h('div.dim.center', { text: t('runEnd.stats', { rooms: run.stats.rooms, kills: run.stats.kills }) }));
 
-  let keepUid = null;
   const sell = new Set();
   const list = h('div.col');
   const total = h('div.center.accent');
   const priceOf = (b) => sellPrice(game.save, game.data, itemKey(b.id, b.mods));
+  // on defeat the most valuable find is picked in advance, so one tap on the back-to-shop button never loses it
+  const kept = run.backpack.filter((b) => game.data.itemById[b.id]);
+  let keepUid = win || !kept.length ? null : kept.reduce((best, b) => (priceOf(b) > priceOf(best) ? b : best)).uid;
+  const pickNote = h('div.center.small.pick-note');
   const inAlbum = (b) => game.data.album.some((p) => p.slots.some((s) => s.kind === 'item' && s.id === b.id));
 
   const modLines = (b) => b.mods.map((m) => {
@@ -90,7 +93,8 @@ export function render(root) {
             selected: keepUid === b.uid,
             extra: h('div', null, h('div.small', { text: t('inv.price', { n: priceOf(b) }) }), tags(b), ...modLines(b)),
             onClick: () => {
-              keepUid = keepUid === b.uid ? null : b.uid;
+              // exactly one find goes home, so rows act like radio buttons: a tap picks, never unpicks
+              keepUid = b.uid;
               play('select');
               drawList();
             },
@@ -99,16 +103,24 @@ export function render(root) {
       }
     }
     drawTotal();
+    const picked = keepUid && run.backpack.find((b) => b.uid === keepUid);
+    pickNote.classList.remove('bad');
+    pickNote.textContent = win || !kept.length ? '' : picked ? t('runEnd.keepPicked', { name: displayName(game.data.itemById[picked.id], picked.mods) }) : '';
   };
   drawList();
   box.append(list, total);
   const goal = nextGoal(game.save, game.data);
-  box.append(
+  // the button lives in a footer outside the scroll, so it stays above the home indicator however long the list is
+  const footer = h('div.screen-footer', null, pickNote);
+  footer.append(
     button(t('runEnd.toShop'), () => {
-      if (!win && run.backpack.length && !keepUid) {
+      if (!win && kept.length && !keepUid) {
         play('error');
-        list.classList.add('shake');
-        setTimeout(() => list.classList.remove('shake'), 320);
+        pickNote.textContent = t('runEnd.pickNeeded');
+        pickNote.classList.add('bad');
+        pickNote.classList.remove('shake');
+        void pickNote.offsetWidth;
+        pickNote.classList.add('shake');
         return;
       }
       finishRun(game.save, game.data, { keepUid, sellUids: [...sell] });
@@ -117,6 +129,6 @@ export function render(root) {
       go('hub');
     }, { cls: 'green big block', sound: null, sub: goal ? t(goal.key, goal.params) : null }),
   );
-  root.append(h('div.scroll', null, box));
+  root.append(h('div.scroll', null, box), footer);
   play(win ? 'level_up' : 'fail_small');
 }

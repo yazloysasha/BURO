@@ -27,7 +27,7 @@ export function serve(root = ROOT) {
 
 // The two target profiles. The iPhone safe areas can't be emulated, they are simulated with CSS in addSafeArea().
 export const PROFILES = {
-  iphone: { name: 'iphone', viewport: { width: 414, height: 896 }, deviceScaleFactor: 2, hasTouch: true, isMobile: true, safe: { top: 44, bottom: 34 } },
+  iphone: { name: 'iphone', viewport: { width: 414, height: 896 }, deviceScaleFactor: 2, hasTouch: true, isMobile: true, safe: { top: 48, bottom: 34 } },
   desktop: { name: 'desktop', viewport: { width: 1366, height: 768 }, deviceScaleFactor: 1, hasTouch: false, isMobile: false, safe: { top: 0, bottom: 0 } },
 };
 

@@ -299,14 +299,17 @@ The first «Аномалия» room was a 3×3 or 4×4 grid of identical icons w
 
 ## 5. Screenshot review (both profiles, every screen)
 
-`playtest/screens.mjs` takes 43 screens per profile and audits each one for:
-- text clipped or wider than its box
+`playtest/screens.mjs` takes 63 screens per profile and audits each one for:
+- text clipped or wider than its box, and cards or rows whose content spills into their neighbours
 - anything off-screen sideways
 - tap targets under 44 px
-- controls under the home indicator (iPhone safe area simulated as 44/34 px)
+- controls under the home indicator (iPhone 11 safe area simulated as 48 px top, 34 px bottom)
+- scroll areas, pinned footers and dialogs that end under the home indicator
+- dialog content running under its pinned buttons, or dialog buttons off-screen
+- hub menu buttons that need scrolling to be seen
 - fonts under 12 px
 
-Final run: 58 screens per profile, 0 issues in both. I looked at the screenshots myself, and these were wrong even though the audit passed:
+Final run (build buro-v55): 63 screens per profile, 0 issues in both. I looked at the screenshots myself, and these were wrong even though the audit passed:
 
 | Problem | Fix |
 |---|---|
@@ -325,11 +328,21 @@ Final run: 58 screens per profile, 0 issues in both. I looked at the screenshots
 | Bug found while writing the bot: «Предмет» offered gear and silently destroyed it | Fixed |
 | Bug found while writing the bot: the first service-worker install reloaded the page under a new player | Fixed |
 
-Contact sheets: `playtest/contact/items_*.png` show all 517 items as sprite + name, `enemies_animals.png` shows all enemies and animals, and `backroom_*.png` shows the normal backroom next to every one of its 31 anomalies, all rendered by the game's own code.
+**Final UI pass (buro-v55).** The old audit skipped anything inside a scroll area or dialog, so these got through. The new checks above catch them.
+
+| Problem | Fix |
+|---|---|
+| Defeat screen: «В Лавку» without a pick only shook, silently; with 2+ finds the button was below the fold | The most valuable find is picked in advance and named above the button («С собой: …»). Rows act like radio buttons, so tapping the picked find can't unpick it. If nothing is picked, a red line explains why. The button sits in a footer pinned above the home indicator; the list scrolls above it. Same footer on the victory screen. |
+| Hub after a run: «Настройки» and «Авторы» partly under the home indicator until scrolled | In portrait the menu is laid out first and the shop scene gets the height that is left (at most 40%, as before). The note under the scene keeps room for a two-line cat remark, so tapping a cat can't push the menu down. |
+| Customer dialog: with many matching finds the last offer hid under «Не сейчас» / «Проводить» | Every dialog's content now scrolls inside it and its buttons stay pinned (`min-height: 0` on the dialog body). This also covers the backpack, item, reward, export/import and leader dialogs. |
+| Combo journal: hints looked cut off («Сначала зашипи…») | It was the text itself, not the layout: 8 hints in `data/combos.json` ended on «…». Rewritten as whole sentences that still don't give the combo away. |
+| Desktop: skin cards 114 px wide with body-size text, so names and «Купить» buttons spilled into the next card | Column width follows the font size; buttons fit the card |
+
+Contact sheets: `playtest/contact/items_*.png` show all 522 items as sprite + name, `enemies_animals.png` shows all 25 enemies (23 kinds and 2 bosses, «Королевский клобстер» and «Королева Моль») and 89 animals, and `backroom_*.png` shows the normal backroom next to every one of its 34 anomalies, all rendered by the game's own code.
 
 ## 6. Offline, saves, keyboard (`playtest/checks.mjs`, 42/42 pass, `results/checks.json`)
 
-- **Offline, both profiles:** first load, then the 843 files are in the cache. With the network off, a reload and a full run work, with no external requests and no errors. Progress survives closing the page offline.
+- **Offline, both profiles:** first load, then the 856 files (2.47 MB) are in the cache. With the network off, a reload and a full run work, with no external requests and no errors. Progress survives closing the page offline.
 - **Saves:**
   - v1 and v2 saves migrate on a real page.
   - A corrupted save starts fresh with a message and keeps the broken copy for rescue.
@@ -343,13 +356,14 @@ Contact sheets: `playtest/contact/items_*.png` show all 517 items as sprite + na
   - iPhone: «Поделиться…» passes the file to the share sheet. The share sheet was stubbed; the real iOS sheet was not opened.
 - **Keyboard:** Enter/Space confirm or skip an animation, number keys pick map nodes, actions and targets, Esc closes a dialog or goes back from the map.
 - **Night shift:** played through the UI (see §4b).
-- **Others:** the find room is locked until its block is opened; a full album page pays its reward through the UI; a new version shows «Обновить» and swaps the cache (buro-v42 → v43 in the test) with the save intact.
+- **Others:** the find room is locked until its block is opened; a full album page pays its reward through the UI; a new version shows «Обновить» and swaps the cache (buro-v55 → v56 in the test) with the save intact.
 
 ## 7. Not verified
 
 - **No real iPhone or Windows machine.**
   - iPhone was emulated in Chromium and once in Playwright WebKit with touch, viewport and DPR 2.
   - The notch and home indicator are simulated with CSS variables, not real `env(safe-area-*)` values.
+  - The customer dialog hiding its last offer could not be reproduced here: with the old CSS its list already scrolled in both Chromium and Playwright WebKit. The fix (`min-height: 0` on every dialog body) is the standard cure for this in WebKit flex layouts, but it was not confirmed on a phone.
   - "Add to Home Screen", standalone mode and separate home-screen storage were not tested.
   - The real iOS share sheet and clipboard were not tested.
   - Installing the PWA from Chrome or Edge on Windows was not tested.

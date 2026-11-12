@@ -113,6 +113,40 @@ async function audit(name) {
         if (r.bottom > vh - safeBottom + 1 && !el.closest('.scroll, .map-scroll, .body, .modal, .split-b')) out.push({ kind: 'under-indicator', detail: desc(el), bottom: Math.round(r.bottom) });
       }
     }
+    // cards and rows whose content is wider than the box spill into their neighbours even with overflow visible
+    for (const root of scope) {
+      for (const el of root.querySelectorAll('.skin-card, .inv-cell, .item-row, .sell-row, .combo-row, .menu-grid .btn, .modal .actions .btn, .lucky, .event-choice, .setting')) {
+        if (!seen(el)) continue;
+        if (el.scrollWidth > el.clientWidth + 2) out.push({ kind: 'content-wider-than-box', detail: desc(el), size: [el.clientWidth, el.scrollWidth] });
+      }
+    }
+    // containers: a scroll area or dialog may scroll its content, but must itself end above the home indicator
+    const limit = vh - safeBottom + 1;
+    for (const el of document.querySelectorAll('#screen .scroll, #screen .split-b, #screen .screen-footer, #overlay.show .modal')) {
+      if (!seen(el)) continue;
+      const r = el.getBoundingClientRect();
+      if (r.bottom > limit) out.push({ kind: 'container-under-indicator', detail: desc(el).slice(0, 40), bottom: Math.round(r.bottom) });
+    }
+    // dialogs: content must not run under the pinned actions, and the actions must be fully on screen
+    const m = document.querySelector('#overlay.show .modal');
+    if (m) {
+      const body = m.querySelector('.body').getBoundingClientRect();
+      const acts = m.querySelector('.actions');
+      if (acts) {
+        const a = acts.getBoundingClientRect();
+        if (body.bottom > a.top + 1) out.push({ kind: 'modal-body-under-actions', detail: 'body ' + Math.round(body.bottom) + ' > actions ' + Math.round(a.top) });
+        if (a.bottom > limit) out.push({ kind: 'modal-actions-offscreen', detail: 'actions bottom ' + Math.round(a.bottom) });
+      }
+    }
+    // hub: every menu button visible without scrolling
+    const hubScroll = document.querySelector('#screen .split-b > .scroll');
+    if (hubScroll && document.querySelector('.menu-grid')) {
+      const sb = hubScroll.getBoundingClientRect();
+      for (const el of document.querySelectorAll('.menu-grid .btn')) {
+        const r = el.getBoundingClientRect();
+        if (r.bottom > Math.min(sb.bottom, limit) + 1) out.push({ kind: 'hub-btn-needs-scroll', detail: desc(el), bottom: Math.round(r.bottom) });
+      }
+    }
     return out;
   }, { safeBottom: profile.safe.bottom });
   const uniq = new Map();
@@ -343,6 +377,39 @@ const SCREENS = {
       env.app.go('runEnd');
     });
   },
+  run_lose_many: async () => {
+    await enterRoom('rest', 4, fill);
+    await setup((env) => {
+      const { game, run } = env;
+      const r = game.save.run;
+      for (const id of ['valerian', 'catnip', 'yarn_bomb']) run.addToBackpack(game.save, game.data, r, id, ['shiny']);
+      r.coins = 44;
+      r.room = null;
+      r.result = { outcome: 'lose' };
+      env.app.go('runEnd');
+    });
+  },
+  // tapping the preselected find keeps it picked; tapping another one moves the pick and the note follows
+  run_lose_pick: async () => {
+    await tap('.item-row.selected');
+    await tap('.item-row:not(.selected)');
+  },
+  // the hub right after a lost run: last-run note, grit line, a customer and an anomaly all at once
+  hub_after_lose: async () => {
+    await setup((env) => {
+      const { game } = env;
+      game.save.run = null;
+      window.__richMeta(env);
+      game.save.meta.grit = 2;
+      game.save.meta.tier = 3;
+      game.save.meta.runsStarted = 6;
+      game.save.meta.customer = { animal: 'hedgehog', want: { kind: 'category', value: 'book' }, mult: 2 };
+      game.data.balance.hubAnomalyPct = 100;
+      game.save.meta.hubAnomalyDay = {};
+      game.save.lastRun = { outcome: 'lose', coins: 44 };
+      env.app.go('hub');
+    });
+  },
   hub_rich: async () => {
     await setup((env) => {
       env.game.save.run = null;
@@ -361,6 +428,12 @@ const SCREENS = {
     });
   },
   customer: async () => tap('.tap-zone[aria-label="Ёжик"]'),
+  customer_end: async () => {
+    await page.evaluate(() => {
+      const b = document.querySelector('#overlay .modal .body');
+      b.scrollTop = b.scrollHeight;
+    });
+  },
   hub_tier5: async () => {
     await setup((env) => {
       env.app.closeModal();
@@ -389,6 +462,17 @@ const SCREENS = {
   album: async () => setup((env) => { env.app.closeModal(); env.app.go('album'); }),
   album_index: async () => tap('.album-nav .btn.blue'),
   combos: async () => setup((env) => { env.game.data.balance.hubAnomalyPct = 7; env.app.closeModal(); env.app.go('combos'); }),
+  journal_hints: async () => {
+    await setup((env) => {
+      env.game.save.combos.discovered = [];
+      env.game.save.combos.milestones = [];
+      env.app.go('combos');
+    });
+    await page.evaluate(() => {
+      const h = [...document.querySelectorAll('#screen h2')].find((x) => x.textContent.includes('одного кота'));
+      if (h) h.scrollIntoView();
+    });
+  },
   journal_milestone: async () => {
     await setup((env) => {
       env.game.save.combos.discovered = env.game.data.combos.slice(0, 12).map((c) => c.id);
@@ -416,7 +500,7 @@ const SCREENS = {
   credits: async () => setup((env) => { env.app.closeModal(); env.app.go('credits'); }),
 };
 
-const needRich = ['inventory', 'album', 'combos', 'journal', 'talents', 'upgrades', 'skins'];
+const needRich = ['inventory', 'album', 'combos', 'journal', 'talents', 'upgrades', 'skins', 'hub_tier3', 'hub_after'];
 for (const [name, fn] of Object.entries(SCREENS)) {
   if (only && !only.includes(name)) continue;
   current = name;
