@@ -2,12 +2,20 @@
 // Every game action calls persist(). Browsers buffer localStorage on its way to disk (Chromium rate-limits those
 // commits to about once a minute under load), so a hard kill can lose it; the IndexedDB mirror is written at once and
 // load takes whichever copy is newest. Every copy carries a checksum (see sealSave).
-import { parseSave, serializeSave, sealSave, unsealSave, newerSave, validateSave, newSave } from './save.js';
+import {
+  newSave,
+  sealSave,
+  newerSave,
+  parseSave,
+  unsealSave,
+  validateSave,
+  serializeSave,
+} from "./save.js";
 
-const KEY = 'buro.save';
-const BAK = 'buro.save.bak';
-const DB_NAME = 'buro';
-const STORE = 'save';
+const KEY = "buro.save";
+const BAK = "buro.save.bak";
+const DB_NAME = "buro";
+const STORE = "save";
 
 let dbPromise = null;
 let writeCount = 0;
@@ -18,7 +26,7 @@ function openDb() {
   if (dbPromise) return dbPromise;
   dbPromise = new Promise((resolve) => {
     try {
-      if (!('indexedDB' in self)) return resolve(null);
+      if (!("indexedDB" in self)) return resolve(null);
       const req = indexedDB.open(DB_NAME, 1);
       req.onupgradeneeded = () => req.result.createObjectStore(STORE);
       req.onsuccess = () => resolve(req.result);
@@ -36,7 +44,7 @@ async function idbGet(key) {
   if (!db) return null;
   return new Promise((resolve) => {
     try {
-      const tx = db.transaction(STORE, 'readonly');
+      const tx = db.transaction(STORE, "readonly");
       const r = tx.objectStore(STORE).get(key);
       r.onsuccess = () => resolve(r.result ?? null);
       r.onerror = () => resolve(null);
@@ -46,12 +54,12 @@ async function idbGet(key) {
   });
 }
 
-async function idbPut(key, value, durability = 'relaxed') {
+async function idbPut(key, value, durability = "relaxed") {
   const db = await openDb();
   if (!db) return;
   await new Promise((resolve) => {
     try {
-      const tx = db.transaction(STORE, 'readwrite', { durability });
+      const tx = db.transaction(STORE, "readwrite", { durability });
       tx.objectStore(STORE).put(value, key);
       tx.oncomplete = tx.onerror = tx.onabort = () => resolve();
     } catch {
@@ -81,17 +89,18 @@ function tryParse(stored) {
   if (!stored) return null;
   try {
     const text = unsealSave(stored);
-    if (text === null) throw new Error('checksum mismatch');
+    if (text === null) throw new Error("checksum mismatch");
     return parseSave(text);
   } catch (e) {
-    console.warn('save parse failed', e);
+    console.warn("save parse failed", e);
     return null;
   }
 }
 
 export async function requestPersistence() {
   try {
-    if (navigator.storage && navigator.storage.persist) return await navigator.storage.persist();
+    if (navigator.storage && navigator.storage.persist)
+      return await navigator.storage.persist();
   } catch {
     /* not supported */
   }
@@ -114,7 +123,7 @@ export async function loadSave() {
   if (!best) {
     const raw = lsRaw || idbRaw || lsGet(BAK);
     // keep the unreadable save around so it can still be rescued by hand
-    if (raw) lsSet('buro.save.corrupt', raw);
+    if (raw) lsSet("buro.save.corrupt", raw);
     return { save: newSave(), fresh: !raw, recovered: false, corrupted: !!raw };
   }
   return { save: best, fresh: false, recovered, corrupted: false };
@@ -140,7 +149,7 @@ export function persist(save) {
   // a save that fails validation must never overwrite a good one
   const problems = validateSave(save);
   if (problems.length) {
-    console.error('refusing to store a broken save', problems);
+    console.error("refusing to store a broken save", problems);
     return false;
   }
   save.seq = (save.seq || 0) + 1;
@@ -150,7 +159,7 @@ export function persist(save) {
   if (!ok) {
     // storage full: drop the rescue copy and try once more
     try {
-      localStorage.removeItem('buro.save.corrupt');
+      localStorage.removeItem("buro.save.corrupt");
     } catch {
       /* ignore */
     }
@@ -170,7 +179,7 @@ export function flush(save) {
   if (!save) return;
   persist(save);
   pendingIdb = null;
-  idbPut(KEY, lsGet(KEY) || sealSave(serializeSave(save)), 'strict');
+  idbPut(KEY, lsGet(KEY) || sealSave(serializeSave(save)), "strict");
 }
 
 export function writeBackup(save) {
@@ -183,7 +192,7 @@ export async function wipe() {
   try {
     localStorage.removeItem(KEY);
     localStorage.removeItem(BAK);
-    localStorage.removeItem('buro.save.corrupt');
+    localStorage.removeItem("buro.save.corrupt");
   } catch {
     /* ignore */
   }
@@ -191,7 +200,7 @@ export async function wipe() {
   if (!db) return;
   await new Promise((resolve) => {
     try {
-      const tx = db.transaction(STORE, 'readwrite');
+      const tx = db.transaction(STORE, "readwrite");
       tx.objectStore(STORE).clear();
       tx.oncomplete = tx.onerror = () => resolve();
     } catch {

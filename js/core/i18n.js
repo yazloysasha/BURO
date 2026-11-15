@@ -19,7 +19,9 @@ export function plural(n, forms) {
 }
 
 export function lookup(key) {
-  return key.split('.').reduce((o, k) => (o == null ? undefined : o[k]), strings);
+  return key
+    .split(".")
+    .reduce((o, k) => (o == null ? undefined : o[k]), strings);
 }
 
 export function has(key) {
@@ -38,10 +40,11 @@ export function t(key, params) {
   let v = lookup(key);
   if (v === undefined) return key;
   if (Array.isArray(v)) {
-    if (v.length === 3 && params && typeof params.n === 'number') v = plural(params.n, v);
-    else v = v.join('\n');
+    if (v.length === 3 && params && typeof params.n === "number")
+      v = plural(params.n, v);
+    else v = v.join("\n");
   }
-  if (typeof v !== 'string') return key;
+  if (typeof v !== "string") return key;
   return fill(v, params);
 }
 

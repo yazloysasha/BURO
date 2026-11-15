@@ -6,7 +6,7 @@ async function fetchRetry(url, tries = 3) {
   for (let i = 0; ; i++) {
     try {
       const r = await fetch(url);
-      if (!r.ok) throw new Error(url + ' ' + r.status);
+      if (!r.ok) throw new Error(url + " " + r.status);
       return r;
     } catch (e) {
       if (i >= tries - 1) throw e;
@@ -16,7 +16,11 @@ async function fetchRetry(url, tries = 3) {
 }
 
 export function loadJSON(url) {
-  if (!json.has(url)) json.set(url, fetchRetry(url).then((r) => r.json()));
+  if (!json.has(url))
+    json.set(
+      url,
+      fetchRetry(url).then((r) => r.json()),
+    );
   return json.get(url);
 }
 
@@ -31,11 +35,11 @@ export function loadImage(src) {
         resolve(img);
       };
       img.onerror = () => {
-        console.warn('image failed', src);
+        console.warn("image failed", src);
         resolve(null);
       };
     });
-    img.decoding = 'async';
+    img.decoding = "async";
     img.src = src;
     images.set(src, e);
   }
@@ -59,7 +63,7 @@ export const sheets = {};
 
 export async function loadSheet(key, jsonUrl) {
   const meta = await loadJSON(jsonUrl);
-  const base = jsonUrl.slice(0, jsonUrl.lastIndexOf('/') + 1);
+  const base = jsonUrl.slice(0, jsonUrl.lastIndexOf("/") + 1);
   const img = await loadImage(base + meta.image);
   sheets[key] = { meta, img, src: base + meta.image };
   return sheets[key];

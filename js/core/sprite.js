@@ -1,16 +1,16 @@
 // Pixel-art rendering helpers. Canvases keep native resolution; CSS scales them by an integer factor with
 // image-rendering: pixelated, so nothing is ever resampled smoothly.
-import { onFrame } from './loop.js';
-import { getImage, loadImage, sheets } from './assets.js';
+import { onFrame } from "./loop.js";
+import { sheets, getImage, loadImage } from "./assets.js";
 
-export function pixelCanvas(w, h, scale = 1, cls = '') {
-  const c = document.createElement('canvas');
+export function pixelCanvas(w, h, scale = 1, cls = "") {
+  const c = document.createElement("canvas");
   c.width = w;
   c.height = h;
-  c.className = 'px ' + cls;
-  c.style.width = w * scale + 'px';
-  c.style.height = h * scale + 'px';
-  const ctx = c.getContext('2d');
+  c.className = "px " + cls;
+  c.style.width = w * scale + "px";
+  c.style.height = h * scale + "px";
+  const ctx = c.getContext("2d");
   ctx.imageSmoothingEnabled = false;
   return c;
 }
@@ -33,12 +33,12 @@ export function animateWhileAttached(el, fn) {
 
 // ---------- Cats (32x32 sheets with named animation rows) ----------
 export class CatSprite {
-  constructor(sheetKey, { scale = 3, anim = 'idle', flip = false } = {}) {
+  constructor(sheetKey, { scale = 3, anim = "idle", flip = false } = {}) {
     this.sheet = sheets[sheetKey];
     this.meta = this.sheet.meta;
     this.flip = flip;
-    this.el = pixelCanvas(this.meta.frameW, this.meta.frameH, scale, 'cat');
-    this.ctx = this.el.getContext('2d');
+    this.el = pixelCanvas(this.meta.frameW, this.meta.frameH, scale, "cat");
+    this.ctx = this.el.getContext("2d");
     this.time = 0;
     this.speed = 1;
     this.play(anim);
@@ -54,7 +54,12 @@ export class CatSprite {
     const al = m.aliases && m.aliases[name];
     if (al) {
       const a = m.animations[al.use];
-      if (a) return { y: a.y, frames: al.frames || [...Array(a.frames).keys()], fps: a.fps };
+      if (a)
+        return {
+          y: a.y,
+          frames: al.frames || [...Array(a.frames).keys()],
+          fps: a.fps,
+        };
     }
     const idle = m.animations.idle;
     return { y: idle.y, frames: [...Array(idle.frames).keys()], fps: idle.fps };
@@ -113,13 +118,26 @@ export class CatSprite {
 export function enemyFrame(id) {
   const s = sheets.enemies;
   const e = s.meta.enemies[id];
-  return e ? { img: s.img, y: e.y, frames: e.frames, w: s.meta.frameW, h: s.meta.frameH, art: e.art || null } : null;
+  return e
+    ? {
+        img: s.img,
+        y: e.y,
+        frames: e.frames,
+        w: s.meta.frameW,
+        h: s.meta.frameH,
+        art: e.art || null,
+      }
+    : null;
 }
 
-export function enemyCanvas(id, scale = 4, { flip = true, animate = true } = {}) {
+export function enemyCanvas(
+  id,
+  scale = 4,
+  { flip = true, animate = true } = {},
+) {
   const f = enemyFrame(id);
-  const c = pixelCanvas(16, 16, scale, 'enemy');
-  const ctx = c.getContext('2d');
+  const c = pixelCanvas(16, 16, scale, "enemy");
+  const ctx = c.getContext("2d");
   let cur = -1;
   const draw = (i) => {
     if (i === cur || !f) return;
@@ -133,7 +151,17 @@ export function enemyCanvas(id, scale = 4, { flip = true, animate = true } = {})
     if (f.art) {
       // tiny 8x8 bugs: whole-number zoom of their art so they fill the cell like everyone else
       const { x, y, w, h, zoom } = f.art;
-      ctx.drawImage(f.img, i * 16 + x, f.y + y, w, h, Math.floor((16 - w * zoom) / 2), 16 - h * zoom, w * zoom, h * zoom);
+      ctx.drawImage(
+        f.img,
+        i * 16 + x,
+        f.y + y,
+        w,
+        h,
+        Math.floor((16 - w * zoom) / 2),
+        16 - h * zoom,
+        w * zoom,
+        h * zoom,
+      );
     } else ctx.drawImage(f.img, i * 16, f.y, 16, 16, 0, 0, 16, 16);
     ctx.restore();
   };
@@ -164,7 +192,8 @@ export function iconScale(native, target) {
 
 function hash32(str) {
   let h = 2166136261;
-  for (let i = 0; i < str.length; i++) h = Math.imul(h ^ str.charCodeAt(i), 16777619);
+  for (let i = 0; i < str.length; i++)
+    h = Math.imul(h ^ str.charCodeAt(i), 16777619);
   return h >>> 0;
 }
 
@@ -177,11 +206,12 @@ function hslToRgb(h, s, l) {
   return [f(0), f(8), f(4)];
 }
 
-const ANIMATED_MODS = new Set(['shiny', 'glitchy', 'rainbow']);
+const ANIMATED_MODS = new Set(["shiny", "glitchy", "rainbow"]);
 
 // Paint src image with modifiers into ImageData (size w+2 x h+2). t = seconds for animated mods.
 function paintModifiers(base, w, h, mods, seed, t) {
-  const W = w + 2, H = h + 2;
+  const W = w + 2,
+    H = h + 2;
   const out = new ImageData(W, H);
   const src = base.data;
   const o = out.data;
@@ -193,39 +223,70 @@ function paintModifiers(base, w, h, mods, seed, t) {
       const si = (y * w + x) * 4;
       const a = src[si + 3];
       if (!a) continue;
-      let r = src[si], g = src[si + 1], b = src[si + 2];
+      let r = src[si],
+        g = src[si + 1],
+        b = src[si + 2];
       const lum = (r * 0.3 + g * 0.59 + b * 0.11) / 255;
-      if (has('golden')) {
-        const gold = [[92, 54, 10], [176, 112, 20], [240, 180, 40], [255, 236, 140]];
+      if (has("golden")) {
+        const gold = [
+          [92, 54, 10],
+          [176, 112, 20],
+          [240, 180, 40],
+          [255, 236, 140],
+        ];
         const c = gold[Math.min(3, Math.floor(lum * 4))];
         [r, g, b] = c;
       }
-      if (has('rainbow')) {
-        const c = hslToRgb((t * 0.35 + (x + y) / 24) % 1, 0.85, 0.35 + lum * 0.4);
-        r = (r + c[0] * 2) / 3; g = (g + c[1] * 2) / 3; b = (b + c[2] * 2) / 3;
+      if (has("rainbow")) {
+        const c = hslToRgb(
+          (t * 0.35 + (x + y) / 24) % 1,
+          0.85,
+          0.35 + lum * 0.4,
+        );
+        r = (r + c[0] * 2) / 3;
+        g = (g + c[1] * 2) / 3;
+        b = (b + c[2] * 2) / 3;
       }
-      if (has('cursed')) {
-        r = r * 0.75 + 30; g = g * 0.6; b = b * 0.8 + 40;
+      if (has("cursed")) {
+        r = r * 0.75 + 30;
+        g = g * 0.6;
+        b = b * 0.8 + 40;
       }
-      if (has('dirty')) {
-        const n = hash32(seed + ':' + (x >> 1) + ',' + (y >> 1)) % 100;
-        if (n < 22) { r = r * 0.45 + 60; g = g * 0.4 + 40; b = b * 0.3 + 15; }
+      if (has("dirty")) {
+        const n = hash32(seed + ":" + (x >> 1) + "," + (y >> 1)) % 100;
+        if (n < 22) {
+          r = r * 0.45 + 60;
+          g = g * 0.4 + 40;
+          b = b * 0.3 + 15;
+        }
       }
-      if (has('shiny')) {
-        const band = ((x + y) - ((t * 24) % (w + h + 20)) + 10);
-        if (band > -1.5 && band < 1.5) { r = 255; g = 255; b = 255; }
+      if (has("shiny")) {
+        const band = x + y - ((t * 24) % (w + h + 20)) + 10;
+        if (band > -1.5 && band < 1.5) {
+          r = 255;
+          g = 255;
+          b = 255;
+        }
       }
       const d = at(x + 1, y + 1);
-      o[d] = r; o[d + 1] = g; o[d + 2] = b; o[d + 3] = a;
+      o[d] = r;
+      o[d + 1] = g;
+      o[d + 2] = b;
+      o[d + 3] = a;
     }
   }
-  if (has('glitchy')) {
+  if (has("glitchy")) {
     // channel split + occasional row jitter (stepped in time so it reads as "digital")
     const step = Math.floor(t * 6);
     const shift = (hash32(seed + step) % 3) - 1;
     const copy = new Uint8ClampedArray(o);
     for (let y = 0; y < H; y++) {
-      const jitter = hash32(seed + ':' + y + ':' + step) % 9 === 0 ? (hash32(seed + y) % 2 ? 1 : -1) : 0;
+      const jitter =
+        hash32(seed + ":" + y + ":" + step) % 9 === 0
+          ? hash32(seed + y) % 2
+            ? 1
+            : -1
+          : 0;
       for (let x = 0; x < W; x++) {
         const d = at(x, y);
         const rx = Math.min(W - 1, Math.max(0, x + 1 + jitter + shift));
@@ -234,21 +295,38 @@ function paintModifiers(base, w, h, mods, seed, t) {
         o[d] = copy[at(rx, y)];
         o[d + 2] = copy[at(bx, y) + 2];
         o[d + 1] = copy[at(ax, y) + 1];
-        o[d + 3] = Math.max(copy[at(rx, y) + 3], copy[at(bx, y) + 3], copy[at(ax, y) + 3]);
+        o[d + 3] = Math.max(
+          copy[at(rx, y) + 3],
+          copy[at(bx, y) + 3],
+          copy[at(ax, y) + 3],
+        );
       }
     }
   }
-  if (has('cursed') || has('golden')) {
+  if (has("cursed") || has("golden")) {
     // 1px outline aura
-    const col = has('cursed') ? [170, 60, 230] : [255, 220, 90];
-    const alpha = (x, y) => (x < 0 || y < 0 || x >= W || y >= H ? 0 : o[at(x, y) + 3]);
+    const col = has("cursed") ? [170, 60, 230] : [255, 220, 90];
+    const alpha = (x, y) =>
+      x < 0 || y < 0 || x >= W || y >= H ? 0 : o[at(x, y) + 3];
     const marks = [];
-    for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
-      if (alpha(x, y)) continue;
-      if (alpha(x - 1, y) > 128 || alpha(x + 1, y) > 128 || alpha(x, y - 1) > 128 || alpha(x, y + 1) > 128) marks.push(at(x, y));
+    for (let y = 0; y < H; y++)
+      for (let x = 0; x < W; x++) {
+        if (alpha(x, y)) continue;
+        if (
+          alpha(x - 1, y) > 128 ||
+          alpha(x + 1, y) > 128 ||
+          alpha(x, y - 1) > 128 ||
+          alpha(x, y + 1) > 128
+        )
+          marks.push(at(x, y));
+      }
+    const pulse = has("cursed") ? 140 + Math.floor(60 * Math.sin(t * 3)) : 120;
+    for (const d of marks) {
+      o[d] = col[0];
+      o[d + 1] = col[1];
+      o[d + 2] = col[2];
+      o[d + 3] = pulse;
     }
-    const pulse = has('cursed') ? 140 + Math.floor(60 * Math.sin(t * 3)) : 120;
-    for (const d of marks) { o[d] = col[0]; o[d + 1] = col[1]; o[d + 2] = col[2]; o[d + 3] = pulse; }
   }
   return out;
 }
@@ -257,10 +335,10 @@ const baseCache = new Map();
 function baseData(img) {
   let d = baseCache.get(img.src);
   if (!d) {
-    const c = document.createElement('canvas');
+    const c = document.createElement("canvas");
     c.width = img.naturalWidth;
     c.height = img.naturalHeight;
-    const ctx = c.getContext('2d', { willReadFrequently: true });
+    const ctx = c.getContext("2d", { willReadFrequently: true });
     ctx.drawImage(img, 0, 0);
     d = ctx.getImageData(0, 0, c.width, c.height);
     baseCache.set(img.src, d);
@@ -269,20 +347,48 @@ function baseData(img) {
 }
 
 // Returns a canvas element showing the icon (async load ok). opts: {mods:[], target:css px, seed}
-export function iconCanvas(src, { mods = [], target = 48, seed = '', w = 16, h = 16, cls = '', art = null } = {}) {
+export function iconCanvas(
+  src,
+  {
+    mods = [],
+    target = 48,
+    seed = "",
+    w = 16,
+    h = 16,
+    cls = "",
+    art = null,
+  } = {},
+) {
   const scale = iconScale(Math.max(w, h), target);
-  const c = pixelCanvas(w + 2, h + 2, scale, 'icon ' + cls);
-  const ctx = c.getContext('2d');
-  const animated = mods.some((m) => ANIMATED_MODS.has(m)) || mods.includes('cursed');
+  const c = pixelCanvas(w + 2, h + 2, scale, "icon " + cls);
+  const ctx = c.getContext("2d");
+  const animated =
+    mods.some((m) => ANIMATED_MODS.has(m)) || mods.includes("cursed");
   const render = (img, t) => {
     if (art) {
       ctx.clearRect(0, 0, c.width, c.height);
-      ctx.drawImage(img, art.x, art.y, art.w, art.h, 1 + Math.floor((w - art.w) / 2), 1 + (h - art.h), art.w, art.h);
+      ctx.drawImage(
+        img,
+        art.x,
+        art.y,
+        art.w,
+        art.h,
+        1 + Math.floor((w - art.w) / 2),
+        1 + (h - art.h),
+        art.w,
+        art.h,
+      );
       return;
     }
     if (!mods.length) {
       ctx.clearRect(0, 0, c.width, c.height);
-      ctx.drawImage(img, 1 + Math.floor((w - img.naturalWidth) / 2), 1 + (h - img.naturalHeight), img.naturalWidth, img.naturalHeight);
+      ctx.drawImage(
+        img,
+        1 + Math.floor((w - img.naturalWidth) / 2),
+        1 + (h - img.naturalHeight),
+        img.naturalWidth,
+        img.naturalHeight,
+      );
       return;
     }
     const bd = baseData(img);
@@ -290,11 +396,14 @@ export function iconCanvas(src, { mods = [], target = 48, seed = '', w = 16, h =
     let data = bd;
     if (bd.width !== w || bd.height !== h) {
       data = new ImageData(w, h);
-      const ox = Math.floor((w - bd.width) / 2), oy = h - bd.height;
-      for (let y = 0; y < bd.height; y++) for (let x = 0; x < bd.width; x++) {
-        const s = (y * bd.width + x) * 4, d = ((y + oy) * w + x + ox) * 4;
-        for (let k = 0; k < 4; k++) data.data[d + k] = bd.data[s + k];
-      }
+      const ox = Math.floor((w - bd.width) / 2),
+        oy = h - bd.height;
+      for (let y = 0; y < bd.height; y++)
+        for (let x = 0; x < bd.width; x++) {
+          const s = (y * bd.width + x) * 4,
+            d = ((y + oy) * w + x + ox) * 4;
+          for (let k = 0; k < 4; k++) data.data[d + k] = bd.data[s + k];
+        }
     }
     ctx.putImageData(paintModifiers(data, w, h, mods, seed || src, t), 0, 0);
   };
@@ -302,7 +411,8 @@ export function iconCanvas(src, { mods = [], target = 48, seed = '', w = 16, h =
     if (!img) return;
     render(img, 0);
     if (animated) {
-      let t = 0, acc = 0;
+      let t = 0,
+        acc = 0;
       animateWhileAttached(c, (dt) => {
         t += dt;
         acc += dt;
@@ -320,14 +430,19 @@ export function iconCanvas(src, { mods = [], target = 48, seed = '', w = 16, h =
 
 // Animals have mixed native sizes (16x16, 8x8 bugs); an `art` box crops specks that would still be tiny.
 export function animalCanvas(a, target = 48) {
-  const side = a.art ? Math.max(a.art.w, a.art.h) + 1 : Math.max(a.w || 16, a.h || 16);
+  const side = a.art
+    ? Math.max(a.art.w, a.art.h) + 1
+    : Math.max(a.w || 16, a.h || 16);
   return iconCanvas(a.sprite, { w: side, h: side, target, art: a.art || null });
 }
 
 // ---------- recoloured cat sheets (recolour skins of our own cats) ----------
 function rgbToHsl(r, g, b) {
-  r /= 255; g /= 255; b /= 255;
-  const max = Math.max(r, g, b), min = Math.min(r, g, b);
+  r /= 255;
+  g /= 255;
+  b /= 255;
+  const max = Math.max(r, g, b),
+    min = Math.min(r, g, b);
   const l = (max + min) / 2;
   if (max === min) return [0, 0, l];
   const d = max - min;
@@ -342,10 +457,10 @@ function rgbToHsl(r, g, b) {
 // rc: {hue (deg), sat (mult), colorize (set hue instead of shifting), light (mult)}
 export function recolorSheet(sheet, rc) {
   const img = sheet.img;
-  const c = document.createElement('canvas');
+  const c = document.createElement("canvas");
   c.width = img.naturalWidth || img.width;
   c.height = img.naturalHeight || img.height;
-  const ctx = c.getContext('2d', { willReadFrequently: true });
+  const ctx = c.getContext("2d", { willReadFrequently: true });
   ctx.drawImage(img, 0, 0);
   const d = ctx.getImageData(0, 0, c.width, c.height);
   const px = d.data;
@@ -361,8 +476,10 @@ export function recolorSheet(sheet, rc) {
     }
     l = Math.min(1, l * (rc.light || 1));
     const [r, g, b] = hslToRgb(hh, s, l);
-    px[i] = r; px[i + 1] = g; px[i + 2] = b;
+    px[i] = r;
+    px[i + 1] = g;
+    px[i + 2] = b;
   }
   ctx.putImageData(d, 0, 0);
-  return { meta: sheet.meta, img: c, src: sheet.src + '#' + rc.hue };
+  return { meta: sheet.meta, img: c, src: sheet.src + "#" + rc.hue };
 }

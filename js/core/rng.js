@@ -13,8 +13,13 @@ export function hashString(str) {
 }
 
 export function seedState(seed) {
-  const s = typeof seed === 'number' ? String(seed >>> 0) : String(seed);
-  const st = [hashString(s + 'a'), hashString(s + 'b'), hashString(s + 'c'), hashString(s + 'd')];
+  const s = typeof seed === "number" ? String(seed >>> 0) : String(seed);
+  const st = [
+    hashString(s + "a"),
+    hashString(s + "b"),
+    hashString(s + "c"),
+    hashString(s + "d"),
+  ];
   const rng = new Rng(st);
   for (let i = 0; i < 15; i++) rng.next(); // warm up
   return rng.state();
@@ -22,7 +27,8 @@ export function seedState(seed) {
 
 export class Rng {
   constructor(state) {
-    if (!Array.isArray(state) || state.length !== 4) throw new Error('bad rng state');
+    if (!Array.isArray(state) || state.length !== 4)
+      throw new Error("bad rng state");
     [this.a, this.b, this.c, this.d] = state.map((v) => v >>> 0);
   }
 
@@ -37,7 +43,10 @@ export class Rng {
   // float in [0, 1)
   next() {
     let { a, b, c, d } = this;
-    a >>>= 0; b >>>= 0; c >>>= 0; d >>>= 0;
+    a >>>= 0;
+    b >>>= 0;
+    c >>>= 0;
+    d >>>= 0;
     const t = (a + b) | 0;
     a = b ^ (b >>> 9);
     b = (c + (c << 3)) | 0;
@@ -45,7 +54,10 @@ export class Rng {
     d = (d + 1) | 0;
     const r = (t + d) | 0;
     c = (c + r) | 0;
-    this.a = a; this.b = b; this.c = c; this.d = d;
+    this.a = a;
+    this.b = b;
+    this.c = c;
+    this.d = d;
     return (r >>> 0) / 4294967296;
   }
 

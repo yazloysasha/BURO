@@ -3,14 +3,14 @@
 let ctx = null;
 let master = null;
 let index = {};
-let base = './assets/';
+let base = "./assets/";
 const buffers = new Map();
 let volume = 0.8;
 let unlocked = false;
 let loading = null;
 let ignoreMute = true;
 
-export function configure(sfxIndex, assetBase = './assets/') {
+export function configure(sfxIndex, assetBase = "./assets/") {
   index = sfxIndex || {};
   base = assetBase;
 }
@@ -28,7 +28,8 @@ export function setIgnoreMute(on) {
 function applySession() {
   try {
     // 'playback' makes iOS play sound even with the silent switch on
-    if (navigator.audioSession) navigator.audioSession.type = ignoreMute ? 'playback' : 'ambient';
+    if (navigator.audioSession)
+      navigator.audioSession.type = ignoreMute ? "playback" : "ambient";
   } catch {
     /* unsupported */
   }
@@ -54,7 +55,7 @@ async function loadOne(name) {
     try {
       return await decode(base + e.mp3);
     } catch (err) {
-      console.warn('sfx failed', name, err);
+      console.warn("sfx failed", name, err);
       return null;
     }
   }
@@ -73,7 +74,7 @@ function loadAll() {
 }
 
 export function unlock() {
-  if (unlocked && ctx && ctx.state === 'running') return;
+  if (unlocked && ctx && ctx.state === "running") return;
   try {
     applySession();
     if (!ctx) {
@@ -91,10 +92,10 @@ export function unlock() {
       s.start(0);
       loadAll();
     }
-    if (ctx.state !== 'running') ctx.resume();
+    if (ctx.state !== "running") ctx.resume();
     unlocked = true;
   } catch (e) {
-    console.warn('audio unlock failed', e);
+    console.warn("audio unlock failed", e);
   }
 }
 
@@ -103,7 +104,7 @@ export function play(name, { vol = 1, rate = 1, delay = 0 } = {}) {
   const b = buffers.get(name);
   if (!b) return;
   try {
-    if (ctx.state !== 'running') ctx.resume();
+    if (ctx.state !== "running") ctx.resume();
     const src = ctx.createBufferSource();
     src.buffer = b;
     src.playbackRate.value = rate;
@@ -119,9 +120,14 @@ export function play(name, { vol = 1, rate = 1, delay = 0 } = {}) {
 
 export function installUnlock(target = window) {
   const handler = () => unlock();
-  target.addEventListener('pointerdown', handler, { capture: true });
-  target.addEventListener('touchend', handler, { capture: true });
-  document.addEventListener('visibilitychange', () => {
-    if (document.visibilityState === 'visible' && ctx && ctx.state !== 'running') ctx.resume().catch(() => {});
+  target.addEventListener("pointerdown", handler, { capture: true });
+  target.addEventListener("touchend", handler, { capture: true });
+  document.addEventListener("visibilitychange", () => {
+    if (
+      document.visibilityState === "visible" &&
+      ctx &&
+      ctx.state !== "running"
+    )
+      ctx.resume().catch(() => {});
   });
 }
