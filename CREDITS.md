@@ -29,6 +29,12 @@
 | Ambient Pixel Art Insects (cute bugs) | madameberry | https://opengameart.org/content/ambient-pixel-art-insects | мелкие жуки-враги и животные `bug_*` |
 | 16x16 Ant Enemies | ARoachIFoundOnMyPillow | https://opengameart.org/content/16x16-ant-enemies | враги ant_red, ant_grey |
 
+## Голоса кошек (Freesound, CC0 и CC BY)
+Настоящие мяуканья, мурлыканья, трели и шипение — сотни записей разных авторов с https://freesound.org,
+собраны скриптом `tools/prep/fetch_cat_sfx.py` (только CC0 и CC BY 3.0/4.0, без NonCommercial).
+Полный список (название, автор, лицензия, ссылка) — `assets/cats/CREDITS.md`, в игре — на экране «Авторы».
+Изменения: нарезка по паузам, обрезка, фильтры, нормализация громкости, перекодирование в mp3 mono.
+
 ## Шрифт (SIL OFL 1.1)
 - **Galmuri11** — Lee Minseo (quiple), https://github.com/quiple/galmuri, SIL Open Font License 1.1.
   Файл `fonts/Galmuri11.ttf` — подмножество глифов (латиница, кириллица, пунктуация)

@@ -91,6 +91,7 @@ export function unlock() {
       s.connect(master);
       s.start(0);
       loadAll();
+      warmCats();
     }
     if (ctx.state !== "running") ctx.resume();
     unlocked = true;
@@ -103,8 +104,94 @@ export function play(name, { vol = 1, rate = 1, delay = 0 } = {}) {
   if (!ctx || volume <= 0) return;
   const b = buffers.get(name);
   if (!b) return;
+  playBuffer(b, { vol, rate, delay });
+}
+
+// ---- Cat voices: a big pool of real recordings (assets/cats/index.json, built by tools/prep/fetch_cat_sfx.py).
+// Only a small rotating set per group is decoded at a time (iOS memory); every play swaps one clip for a
+// fresh random one, so over a session the player hears the whole pool. Missing pool -> fallback sfx.
+const CAT_WARM = 6; // decoded clips kept per group
+let cats = { groups: {}, core: 0 };
+let catBase = './assets/cats/';
+const catWarm = new Map(); // group -> [{ name, buf }]
+const catLoading = new Set();
+const catLast = new Map(); // group -> last played name
+
+export function configureCats(index, base = './assets/cats/') {
+  cats = index && index.groups ? index : { groups: {}, core: 0 };
+  catBase = base;
+  if (ctx) warmCats();
+}
+
+export function hasCats(group) {
+  return !!(cats.groups[group] && cats.groups[group].length);
+}
+
+async function loadCat(group, name) {
+  if (!ctx || catLoading.has(name)) return;
+  catLoading.add(name);
   try {
-    if (ctx.state !== "running") ctx.resume();
+    const buf = await decode(catBase + name);
+    const warm = catWarm.get(group) || [];
+    if (!warm.some((w) => w.name === name)) warm.push({ name, buf });
+    while (warm.length > CAT_WARM) warm.splice(warm.findIndex((w) => w.name !== catLast.get(group)), 1);
+    catWarm.set(group, warm);
+  } catch {
+    /* offline and not cached yet: fine, keep what we have */
+  } finally {
+    catLoading.delete(name);
+  }
+}
+
+function freshCat(group, preferCore) {
+  const list = cats.groups[group] || [];
+  if (!list.length) return null;
+  const warm = catWarm.get(group) || [];
+  const n = preferCore ? Math.min(list.length, cats.core || list.length) : list.length;
+  for (let i = 0; i < 8; i++) {
+    const [name] = list[Math.floor(Math.random() * n)];
+    if (!warm.some((w) => w.name === name) && !catLoading.has(name)) return name;
+  }
+  return null;
+}
+
+function warmCats() {
+  for (const group of Object.keys(cats.groups)) {
+    // core clips are precached, so the first few always work offline
+    for (let i = 0; i < Math.min(3, CAT_WARM); i++) {
+      const name = freshCat(group, true);
+      if (name) loadCat(group, name);
+    }
+    for (let i = 3; i < CAT_WARM; i++) {
+      const name = freshCat(group, false);
+      if (name) loadCat(group, name);
+    }
+  }
+}
+
+// Plays a random clip of a group ('meow', 'kitten', 'trill', 'purr', 'hiss'); falls back to `fallback` sfx.
+export function playCat(group, { fallback, vol = 1, rate = 1, delay = 0 } = {}) {
+  if (!ctx || volume <= 0) return;
+  const warm = (catWarm.get(group) || []).filter((w) => w.name !== catLast.get(group) || catWarm.get(group).length === 1);
+  if (!warm.length) {
+    if (fallback) play(fallback, { vol, rate, delay });
+    if (hasCats(group)) {
+      const name = freshCat(group, true);
+      if (name) loadCat(group, name);
+    }
+    return;
+  }
+  const pick = warm[Math.floor(Math.random() * warm.length)];
+  catLast.set(group, pick.name);
+  playBuffer(pick.buf, { vol, rate, delay });
+  // rotate: drop the clip just played once a new one arrives
+  const name = freshCat(group, false);
+  if (name) loadCat(group, name);
+}
+
+function playBuffer(b, { vol = 1, rate = 1, delay = 0 }) {
+  try {
+    if (ctx.state !== 'running') ctx.resume();
     const src = ctx.createBufferSource();
     src.buffer = b;
     src.playbackRate.value = rate;

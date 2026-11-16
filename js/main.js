@@ -2,7 +2,7 @@
 import { $, h } from './core/dom.js';
 import { setStrings, t } from './core/i18n.js';
 import { loadJSON, loadSheet, loadImages } from './core/assets.js';
-import { configure as configureAudio, installUnlock } from './core/audio.js';
+import { configure as configureAudio, configureCats, installUnlock } from './core/audio.js';
 import { loadSave, persist, requestPersistence, flush, writeBackup } from './core/storage.js';
 import { game, setPersist, commit } from './game/state.js';
 import { registerScreen, go, toast, button, rerender } from './ui/app.js';
@@ -82,6 +82,13 @@ async function boot() {
 
   const sfxIndex = await loadJSON('./' + data.assets.sfxIndex);
   configureAudio(sfxIndex, './assets/');
+  // real cat voices are optional extras: a missing or empty pool just keeps the stand-in blips
+  if (data.assets.catIndex) {
+    const catUrl = './' + data.assets.catIndex;
+    loadJSON(catUrl)
+      .then((idx) => configureCats(idx, catUrl.slice(0, catUrl.lastIndexOf('/') + 1)))
+      .catch(() => {});
+  }
   installUnlock();
 
   await Promise.all(Object.entries(data.assets.sheets).map(([k, url]) => loadSheet(k, './' + url)));

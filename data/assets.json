@@ -16,6 +16,7 @@
     "heal": "assets/sprites/items/kyrise_potion_01a.png"
   },
   "sfxIndex": "assets/sfx_index.json",
+  "catIndex": "assets/cats/index.json",
   "hubShelf": [
     "assets/sprites/items/kyrise_potion_01a.png",
     "assets/sprites/items/kyrise_book_01a.png",

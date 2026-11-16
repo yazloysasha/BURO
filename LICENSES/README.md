@@ -1,6 +1,7 @@
 # LICENSES
 - `CC0-1.0.txt` — текст CC0 1.0 (creativecommons.org). Применяется ко всем пакам, кроме Kyrise.
-- `CC-BY-4.0.txt` — текст CC BY 4.0. Применяется к Kyrise's Free 16x16 RPG Icon Pack.
+- `CC-BY-4.0.txt` — текст CC BY 4.0. Применяется к Kyrise's Free 16x16 RPG Icon Pack и части голосов кошек.
+- `CC-BY-3.0.txt` — текст CC BY 3.0 Unported. Применяется к части голосов кошек (`assets/cats/`, список — `assets/cats/CREDITS.md`).
 - `kenney_*.txt` — License.txt из каждого пака Kenney (CC0).
 - `tiny_creatures_clint_bellanger.txt` — License.txt из Tiny Creatures (CC0).
 - `luizmelo_pet_cats_pack.txt` — License.txt из Pet Cats Pack (CC0).

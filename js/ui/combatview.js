@@ -1,7 +1,7 @@
 // Combat screen: pixel stage (cats left, enemies right), intents, HP, statuses, action panel, event animations.
 import { h, setChildren } from '../core/dom.js';
 import { t } from '../core/i18n.js';
-import { play as playSfx } from '../core/audio.js';
+import { play as playSfx, playCat } from '../core/audio.js';
 import { tween, wait } from '../core/loop.js';
 import { CatSprite, enemyCanvas, iconCanvas, pixelCanvas } from '../core/sprite.js';
 import { loadImage } from '../core/assets.js';
@@ -339,7 +339,7 @@ export function renderCombat(root, { onEnd }) {
     if (busy) return;
     const cat = catByKey(c, k);
     const lines = cat.statuses.map((s) => h('div.dim', { text: game.data.statusById[s.id].name + ' — ' + game.data.statusById[s.id].desc }));
-    play('meow_sub');
+    playCat('meow', { fallback: 'meow_sub' });
     modal(
       h(
         'div',
@@ -418,7 +418,9 @@ export function renderCombat(root, { onEnd }) {
           if (cat) {
             const ad = game.data.cats[cat.key].actions[ev.action];
             log.textContent = t('combat.logAct', { who: nameOf(ev.actor), what: ad ? ad.name : '' });
-            play(ACTION_SFX[ev.action] || 'tap');
+            if (ev.action === 'hiss' || ev.action === 'purr') {
+              if (!skip.skipped) playCat(ev.action, { fallback: ACTION_SFX[ev.action], vol: ev.action === 'purr' ? 0.8 : 1 });
+            } else play(ACTION_SFX[ev.action] || 'tap');
             const v = views[ev.actor];
             if (ev.action === 'bite' || ev.action === 'special') {
               v.sp.play('attack', { loop: false, then: 'idle', fps: 14 });
