@@ -1,7 +1,7 @@
 // Room screen: dispatches to the view for the current room type and handles "continue" back to the map.
 import { h } from '../../core/dom.js';
 import { t } from '../../core/i18n.js';
-import { play } from '../../core/audio.js';
+import { play, playCat } from '../../core/audio.js';
 import { game, commit } from '../../game/state.js';
 import { completeRoom, restChoice } from '../../game/run.js';
 import { button, go, setTopbarTitle, modal, closeModal } from '../app.js';
@@ -118,8 +118,8 @@ roomViews.rest = (root, room) => {
     wrap.append(
       h('p.center', { text: t('rest.text') }),
       partyBar(game.save.run),
-      button(t('rest.sleep'), () => pick('sleep'), { cls: 'green block', sub: t('rest.sleepSub', { p: Math.round(game.data.balance.restHeal * 100) }) }),
-      button(t('rest.purr'), () => pick('purr'), { cls: 'blue block', sub: t('rest.purrSub') }),
+      button(t('rest.sleep'), () => pick('sleep'), { cls: 'green block', sound: null, sub: t('rest.sleepSub', { p: Math.round(game.data.balance.restHeal * 100) }) }),
+      button(t('rest.purr'), () => pick('purr'), { cls: 'blue block', sound: null, sub: t('rest.purrSub') }),
     );
   } else {
     wrap.append(h('p.center', { text: room.result.choice === 'sleep' ? t('rest.slept') : t('rest.purred') }), partyBar(game.save.run), button(t('common.continue'), leaveRoom, { cls: 'green big block', sound: 'confirm' }));
@@ -128,7 +128,7 @@ roomViews.rest = (root, room) => {
   function pick(choice) {
     restChoice(game.save, game.data, choice);
     commit();
-    play(choice === 'sleep' ? 'potion' : 'shiny');
+    playCat('purr', { vol: choice === 'sleep' ? 0.4 : 0.7 });
     go('room');
   }
 };

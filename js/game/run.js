@@ -6,7 +6,7 @@ import { createCombat, makeCatUnit, makeEnemyUnit, planIntents, resolveRound, CA
 import { combatCtx } from './data.js';
 import * as meta from './meta.js';
 import { rollRunBlocks, settleRoomBlocks } from './blocks.js';
-import { addItem, sellItem, grantSticker } from './collection.js';
+import { addItem, sellItem, grantSticker, parseKey } from './collection.js';
 import { runHooks } from './hooks.js';
 import { comboStatBonus, activeCombos, checkRunCombos, roomSequenceCombos } from './combos.js';
 import { initBackroom, initShelf, initWash, initEvent, initShop } from './rooms.js';
@@ -55,10 +55,10 @@ export function hasRelic(run, data, relic) {
   });
 }
 
-// Gear quirks in the backpack, counted (two thorny shields prick twice as hard). Glitchy gear adds "mirror".
+// Gear quirks from the backpack and equipped items, counted (two thorny shields prick twice as hard). Glitchy gear adds "mirror".
 export function gearQuirks(data, run) {
   const q = {};
-  for (const b of run.backpack) {
+  for (const b of [...run.backpack, ...Object.values(run.equipment || {})]) {
     const it = data.itemById[b.id];
     if (!it || !it.effect || it.effect.type !== 'stat') continue;
     if (it.effect.quirk) q[it.effect.quirk] = (q[it.effect.quirk] || 0) + 1;
@@ -111,6 +111,12 @@ export function startRun(save, data, { leader = 'peposya' } = {}) {
     party,
     coins: 0,
     backpack: [],
+    equipment: Object.fromEntries(CAT_KEYS.flatMap((cat) => {
+      const key = save.meta.equipment?.[cat];
+      if (!key || !save.collection.items[key]) return [];
+      const entry = parseKey(key);
+      return data.itemById[entry.id]?.effect?.type === 'stat' ? [[cat, entry]] : [];
+    })),
     stickers: [],
     room: null,
     nextUid: 1,
@@ -236,13 +242,18 @@ export function startCombat(save, data, run, kind) {
     }
     const gear = equipmentBonus(save, data, run);
     const quirks = gearQuirks(data, run);
-    // cursed gear is stronger but every fight costs the cats a little health
-    const cursed = run.backpack.filter((b) => b.mods.includes('cursed') && data.itemById[b.id] && data.itemById[b.id].effect && data.itemById[b.id].effect.type === 'stat').length;
-    if (cursed) for (const k of CAT_KEYS) if (run.party[k].hp > 1) run.party[k].hp = Math.max(1, run.party[k].hp - cursed);
+    const isCursed = (e) => e?.mods.includes('cursed') && data.itemById[e.id]?.effect?.type === 'stat';
+    const backpackCurses = run.backpack.filter(isCursed).length;
     const cats = CAT_KEYS.map((k) => {
+      const equipped = run.equipment?.[k];
+      const bonus = { ...gear };
+      addGearStats(bonus, data, equipped);
       const b = meta.catBonus(save, data, k);
-      for (const s of Object.keys(gear)) b[s] = (b[s] || 0) + gear[s];
-      return makeCatUnit(k, data.cats[k], run.party[k], b);
+      for (const s of Object.keys(bonus)) b[s] = (b[s] || 0) + bonus[s];
+      const partyCat = run.party[k];
+      const curses = backpackCurses + (isCursed(equipped) ? 1 : 0);
+      if (curses && partyCat.hp > 1) partyCat.hp = Math.max(1, partyCat.hp - curses);
+      return makeCatUnit(k, data.cats[k], partyCat, b);
     });
     const c = createCombat({ cats, enemies, kind, companion: companionUnit(data, run), quirks });
     if (quirks.opener) for (const e of c.enemies) e.statuses.push({ id: 'sticky', turns: 1 });
@@ -255,17 +266,19 @@ export function startCombat(save, data, run, kind) {
   });
 }
 
-// Equipment in the backpack (effect.type 'stat') boosts both cats for the whole run; crit is in percent points.
+function addGearStats(bonus, data, entry) {
+  const effect = entry && data.itemById[entry.id]?.effect;
+  if (effect?.type !== 'stat') return;
+  const value = effect.value * (entry.mods.includes('cursed') ? 1.5 : 1);
+  if (effect.stat === 'crit') bonus.crit += value / 100;
+  else if (bonus[effect.stat] !== undefined) bonus[effect.stat] += Math.floor(value);
+  if (entry.mods.includes('rainbow')) bonus.luck += 2;
+}
+
+// Backpack gear boosts both cats; the equipped item's bonus goes to its wearer separately.
 export function equipmentBonus(save, data, run) {
   const b = { atk: 0, def: 0, spd: 0, luck: 0, crit: 0 };
-  for (const e of run.backpack) {
-    const it = data.itemById[e.id];
-    if (!it || !it.effect || it.effect.type !== 'stat') continue;
-    const v = it.effect.value * (e.mods.includes('cursed') ? 1.5 : 1);
-    if (it.effect.stat === 'crit') b.crit += v / 100;
-    else if (b[it.effect.stat] !== undefined) b[it.effect.stat] += Math.floor(v);
-    if (e.mods.includes('rainbow')) b.luck += 2;
-  }
+  for (const entry of run.backpack) addGearStats(b, data, entry);
   // gear helps, but a backpack full of swords shouldn't trivialise the King
   const cap = data.balance.gearCap;
   for (const k of Object.keys(cap)) b[k] = Math.min(b[k], cap[k]);

@@ -81,15 +81,10 @@ async function boot() {
   game.data = data;
 
   const sfxIndex = await loadJSON('./' + data.assets.sfxIndex);
-  configureAudio(sfxIndex, './assets/');
-  // real cat voices are optional extras: a missing or empty pool just keeps the stand-in blips
-  if (data.assets.catIndex) {
-    const catUrl = './' + data.assets.catIndex;
-    loadJSON(catUrl)
-      .then((idx) => configureCats(idx, catUrl.slice(0, catUrl.lastIndexOf('/') + 1)))
-      .catch(() => {});
-  }
-  installUnlock();
+  configureAudio(sfxIndex, './assets/', './' + data.assets.music);
+  const catUrl = './' + data.assets.catIndex;
+  const voices = await loadJSON(catUrl).catch(() => ({ groups: {} }));
+  configureCats(voices, catUrl.slice(0, catUrl.lastIndexOf('/') + 1));
 
   await Promise.all(Object.entries(data.assets.sheets).map(([k, url]) => loadSheet(k, './' + url)));
   data.sheetsLoaded = Object.keys(data.assets.sheets);
@@ -108,6 +103,7 @@ async function boot() {
   writeBackup(save);
   requestPersistence().then((p) => (game.persisted = p));
   applySettings();
+  installUnlock();
 
   try {
     const m = await fetch('./precache-manifest.js').then((r) => r.text());

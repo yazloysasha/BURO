@@ -1,0 +1,70 @@
+{
+  "groups": {
+    "peposya": [
+      "voices/peposya-1.mp3",
+      "voices/peposya-2.mp3",
+      "voices/peposya-3.mp3"
+    ],
+    "dudonya": [
+      "voices/dudonya-1.mp3",
+      "voices/dudonya-2.mp3",
+      "voices/dudonya-3.mp3"
+    ],
+    "purr": [
+      "voices/purr.mp3"
+    ],
+    "hiss": [
+      "voices/hiss.mp3"
+    ]
+  },
+  "credits": [
+    [
+      "Single Meow",
+      "AlexisAndrews",
+      "CC0",
+      "https://freesound.org/people/AlexisAndrews/sounds/828045/"
+    ],
+    [
+      "Cat Meow",
+      "qubodup",
+      "CC0",
+      "https://freesound.org/people/qubodup/sounds/813119/"
+    ],
+    [
+      "cat meow short",
+      "skymary",
+      "CC0",
+      "https://freesound.org/people/skymary/sounds/412017/"
+    ],
+    [
+      "Cute Kitten Meow",
+      "Breviceps",
+      "CC0",
+      "https://freesound.org/people/Breviceps/sounds/448084/"
+    ],
+    [
+      "Mavis_cat-meow-soft_01",
+      "TBMcQueen",
+      "CC0",
+      "https://freesound.org/people/TBMcQueen/sounds/825631/"
+    ],
+    [
+      "CatMeow_Small.wav",
+      "ZJ-Davis",
+      "CC0",
+      "https://freesound.org/people/ZJ-Davis/sounds/618900/"
+    ],
+    [
+      "cat purring loop.wav",
+      "soundofsong",
+      "CC0",
+      "https://freesound.org/people/soundofsong/sounds/650575/"
+    ],
+    [
+      "Cat hissing",
+      "rickismyname",
+      "CC0",
+      "https://freesound.org/people/rickismyname/sounds/819958/"
+    ]
+  ]
+}

@@ -7,7 +7,7 @@ import { startRun } from '../../game/run.js';
 import { runFee, runIsFree, gritBonus } from '../../game/meta.js';
 import { button, go, pickLine, setTopbarTitle, modal, closeModal, toast } from '../app.js';
 import { nextGoal } from '../../game/progress.js';
-import { wantMatches, customerOffer, sellToCustomer, dismissCustomer } from '../../game/customers.js';
+import { customerOffer, sellToCustomer, dismissCustomer } from '../../game/customers.js';
 import { parseKey, sellPrice } from '../../game/collection.js';
 import { itemRow } from '../runwidgets.js';
 import { createHubScene } from '../hubscene.js';
@@ -57,13 +57,14 @@ function openCustomer(after) {
   const c = save.meta.customer;
   if (!c) return;
   const a = game.data.animalById[c.animal];
-  const fits = Object.keys(save.collection.items).filter((k) => wantMatches(game.data, c.want, k)).sort((x, y) => customerOffer(save, game.data, y) - customerOffer(save, game.data, x));
+  const fits = Object.keys(save.collection.items).filter((k) => customerOffer(save, game.data, k) > 0).sort((x, y) => customerOffer(save, game.data, y) - customerOffer(save, game.data, x));
   const list = h('div.col');
   for (const key of fits) {
     const { id, mods } = parseKey(key);
     const it = game.data.itemById[id];
     list.append(itemRow(it, { mods, extra: h('div.small.accent', { text: t('customer.offer', { n: customerOffer(save, game.data, key), base: sellPrice(save, game.data, key) }) }), onClick: () => {
       const coins = sellToCustomer(save, game.data, key);
+      if (!coins) return;
       commit();
       closeModal();
       play('coin');
@@ -75,9 +76,9 @@ function openCustomer(after) {
   play('door_open');
   modal(h('div.col', null, h('h2', { text: t('customer.title', { name: a.name }) }), h('p', { text: t('customer.wants', { what: t('customer.want.' + c.want.kind + '.' + c.want.value), x: c.mult }) }), list), [
     { label: t('customer.later'), value: 0, cls: 'grey', sound: 'back' },
-    { label: t('customer.bye'), value: 'bye', cls: 'blue', sound: 'door_close' },
+    { label: t('customer.bye'), value: 'bye', cls: 'red', sound: 'door_close' },
   ]).then((v) => {
-    if (v !== 'bye') return;
+    if (v !== 'bye' || save.meta.customer !== c) return;
     dismissCustomer(save);
     commit();
     after();
@@ -113,7 +114,10 @@ export function render(root) {
 
   const goal = nextGoal(game.save, game.data);
   const grit = gritBonus(game.save, game.data);
-  const scroll = h('div.scroll', null, h('div.col', null, h('div.goal-line', { text: t(goal.key, goal.params) }), grit.n ? h('div.center.dim', { text: t(grit.atk ? 'runEnd.gritAtk' : 'runEnd.grit', { hp: grit.hp, atk: grit.atk }) }) : null, runButton(), menu));
+  const openOffer = () => openCustomer(() => go('hub'));
+  const customer = game.save.meta.customer;
+  const offer = customer && button(t('customer.openOffer'), openOffer, { cls: 'yellow block small', sound: null });
+  const scroll = h('div.scroll', null, h('div.col', null, h('div.goal-line', { text: t(goal.key, goal.params) }), grit.n ? h('div.center.dim', { text: t(grit.atk ? 'runEnd.gritAtk' : 'runEnd.grit', { hp: grit.hp, atk: grit.atk }) }) : null, offer, runButton(), menu));
   a.append(note);
   b.append(scroll);
 
@@ -129,8 +133,8 @@ export function render(root) {
     sceneH = Math.max(120, Math.min(H * 0.4, left));
   }
   const scene = createHubScene(wide ? W * 0.52 : W, wide ? H - 40 : sceneH, {
-    customer: game.save.meta.customer,
-    onCustomer: () => openCustomer(() => go('hub')),
+    customer,
+    onCustomer: openOffer,
     anomaly: anomaly && anomaly.id,
     onAnomaly: (id) => {
       const r = catchHubAnomaly(game.save, game.data, id, localDate());

@@ -4,7 +4,8 @@ import { t } from '../../core/i18n.js';
 import { play } from '../../core/audio.js';
 import { iconCanvas, animalCanvas } from '../../core/sprite.js';
 import { game, commit } from '../../game/state.js';
-import { parseKey, sellPrice, sellItem, toggleShowcase, toggleGuest, collectionStats, SHOWCASE_MAX } from '../../game/collection.js';
+import { parseKey, sellPrice, sellItem, toggleShowcase, toggleGuest, collectionStats, SHOWCASE_MAX, availableCopies, equipItem } from '../../game/collection.js';
+import { CAT_KEYS } from '../../game/combat.js';
 import { guestSlots } from '../../game/meta.js';
 import { rank } from '../../game/loot.js';
 import { guestCombos } from '../../game/combos.js';
@@ -43,7 +44,7 @@ function itemsTab(redraw) {
       return rank(ib.rarity) - rank(ia.rarity) || ia.name.localeCompare(ib.name, 'ru') || a.key.localeCompare(b.key);
     });
   const wrap = h('div.col');
-  wrap.append(h('div.dim', { text: t('inv.codex', { n: st.itemsSeen, total: st.itemsTotal }) }));
+  wrap.append(equipmentSlots(entries, redraw), h('div.dim', { text: t('inv.codex', { n: st.itemsSeen, total: st.itemsTotal }) }));
   if (!entries.length) {
     wrap.append(h('p.center', { text: t('inv.empty') }));
     return wrap;
@@ -64,7 +65,10 @@ function itemsTab(redraw) {
     });
     grid.append(cell);
   }
-  const commons = entries.filter((e) => game.data.itemById[e.id].rarity === 'common' && !e.mods.length && !(save.meta.showcase || []).includes(e.key));
+  const commons = entries
+    .filter((e) => game.data.itemById[e.id].rarity === 'common' && !e.mods.length && !(save.meta.showcase || []).includes(e.key))
+    .map((e) => ({ ...e, n: availableCopies(save, e.key) }))
+    .filter((e) => e.n > 0);
   wrap.append(grid);
   if (commons.length) {
     const total = commons.reduce((s, e) => s + sellPrice(save, game.data, e.key) * e.n, 0);
@@ -83,11 +87,59 @@ function itemsTab(redraw) {
   return wrap;
 }
 
+function equipmentSlots(entries, redraw) {
+  const { save, data } = game;
+  const slots = CAT_KEYS.map((cat) => {
+    const key = save.meta.equipment[cat];
+    const entry = entries.find((e) => e.key === key);
+    const item = entry && data.itemById[entry.id];
+    const name = t('cats.' + cat);
+    const label = item ? displayName(item, entry.mods) : t('inv.emptySlot');
+
+    function pickGear() {
+      const options = entries.filter((e) => data.itemById[e.id].effect?.type === 'stat' && e.key !== key && availableCopies(save, e.key));
+      const change = (next) => {
+        if (!equipItem(save, data, cat, next)) return;
+        commit();
+        play(next ? 'equip' : 'shelf_place');
+        closeModal();
+        redraw();
+      };
+      modal(h('div.col', null,
+        h('h2', { text: t('inv.chooseGear', { cat: name }) }),
+        item ? button(t('inv.unequip', { name: label }), () => change(null), { cls: 'grey block', sound: null }) : null,
+        options.length ? options.map((e) => {
+          const gear = data.itemById[e.id];
+          return button(displayName(gear, e.mods), () => change(e.key), {
+            cls: 'blue block small',
+            sound: null,
+            icon: iconCanvas(gear.icon, { w: gear.w, h: gear.h, target: 32, mods: e.mods, seed: e.key }),
+            sub: effectText(gear.effect),
+          });
+        }) : h('p.dim', { text: t('inv.noGear') }),
+      ), [{ label: t('common.close'), value: 0, cls: 'grey', sound: 'back' }]);
+    }
+
+    return button(name, pickGear, {
+      cls: (item ? 'green' : 'blue') + ' small',
+      sub: label,
+      icon: item ? iconCanvas(item.icon, { w: item.w, h: item.h, target: 30, mods: entry.mods, seed: key }) : null,
+    });
+  });
+  return h('section.col.equipment', null,
+    h('h2', { text: t('inv.equipment') }),
+    h('p.dim', { text: t('inv.equipmentHint') }),
+    h('div.equipment-slots', null, slots),
+  );
+}
+
 function itemDetails(key, redraw) {
   const save = game.save;
   const { id, mods } = parseKey(key);
   const item = game.data.itemById[id];
   const n = save.collection.items[key] || 0;
+  const available = availableCopies(save, key);
+  const wearers = CAT_KEYS.filter((cat) => save.meta.equipment[cat] === key);
   const rar = game.data.rarityById[item.rarity];
   const price = sellPrice(save, game.data, key);
   const showcased = (save.meta.showcase || []).includes(key);
@@ -101,22 +153,23 @@ function itemDetails(key, redraw) {
       return h('div.small', null, h('span.accent', { text: d.name + ': ' }), d.desc);
     }),
     h('p', { text: item.flavor }),
+    wearers.length ? h('p.accent', { text: t('inv.equippedBy', { cats: wearers.map((cat) => t('cats.' + cat)).join(', ') }) }) : null,
     h('div', { text: t('inv.price', { n: price }) }),
   );
   modal(content, [{ label: t('common.close'), value: 0, cls: 'grey', sound: 'back' }]);
   const acts = document.querySelector('#overlay .actions');
   const extra = [
-    button(t('inv.sell', { n: price }), () => {
+    available ? button(t('inv.sell', { n: price }), () => {
       const c = sellItem(save, game.data, key, 1);
       commit();
       play('coin_small');
       toast(t('inv.sold', { n: c }));
       closeModal();
       redraw();
-    }, { cls: 'green', sound: null }),
-    n > 1
-      ? button(t('inv.sellAll', { n: price * n }), () => {
-          const c = sellItem(save, game.data, key, n);
+    }, { cls: 'green', sound: null }) : null,
+    available > 1
+      ? button(t('inv.sellAll', { n: price * available }), () => {
+          const c = sellItem(save, game.data, key, available);
           commit();
           play('coin');
           toast(t('inv.sold', { n: c }));

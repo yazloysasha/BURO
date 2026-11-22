@@ -1,6 +1,5 @@
 // The backroom scene (data/backroom.json), painted in pixels from its object list, and the loop view shared by the
-// map room and the night shift. An anomaly is just a different object list (see sceneWith), so the painter never
-// knows whether something is wrong — exactly like the player.
+// map room and the night shift. The same painter also draws the normal room for comparison.
 import { h, setChildren } from '../core/dom.js';
 import { t } from '../core/i18n.js';
 import { play } from '../core/audio.js';
@@ -35,9 +34,9 @@ function drawSprite(ctx, img, sx, sy, sw, sh, dx, dy, { flip = false, rot180 = f
     const d = o.getImageData(0, 0, sw, sh);
     for (let i = 0; i < d.data.length; i += 4) {
       const r = d.data[i];
-      d.data[i] = d.data[i + 1];
-      d.data[i + 1] = d.data[i + 2];
-      d.data[i + 2] = r;
+      d.data[i] = Math.min(255, (r + d.data[i + 2]) * 0.65 + 24);
+      d.data[i + 1] = Math.round(d.data[i + 1] * 0.65);
+      d.data[i + 2] = Math.min(255, r * 1.15 + 40);
     }
     o.putImageData(d, 0, 0);
   }
@@ -81,7 +80,7 @@ const PAINT = {
   floor(ctx, o) {
     rect(ctx, 0, 66, 128, 22, '#5a3a2a');
     for (let k = 0, y = 70; y < 88; y += 5, k++) {
-      if (o.seamMissing !== k) rect(ctx, 0, y, 128, 1, '#4a2e20');
+      if (o.seamMissing !== k) rect(ctx, 0, y, 128, 1, '#302018');
       for (let x = (k % 2) * 12; x < 128; x += 24) rect(ctx, x, y - 4, 1, 4, '#4a2e20');
     }
   },
@@ -110,10 +109,10 @@ const PAINT = {
     if (o.rain === 'tl') {
       const pw = Math.floor(w / 2);
       const ph = Math.floor(hh / 2);
-      for (let i = 0; i < 7; i++) {
+      for (let i = 0; i < 10; i++) {
         const px = x + ((i * 5 + Math.floor(time * 4)) % pw);
         const py = y + ((i * 7 + Math.floor(time * 18)) % ph);
-        rect(ctx, px, py, 1, 2, '#7fa8d8');
+        rect(ctx, px, py, 1, Math.min(3, y + ph - py), '#a4d4ff');
       }
     }
     if (o.barV) rect(ctx, x + Math.floor(w / 2), y, 1, hh, '#4a3a2a');
@@ -185,7 +184,7 @@ const PAINT = {
     if (o.hidden) return;
     const img = getImage(o.src);
     if (!img) return;
-    const x = o.x + (o.anim === 'creep' ? Math.min(7, Math.floor(time / 3)) : 0);
+    const x = o.x + (o.anim === 'creep' ? Math.round(4 + Math.sin(time * 2) * 4) : 0);
     drawSprite(ctx, img, 0, 0, img.naturalWidth, img.naturalHeight, x, o.y, { rot180: !!o.rot180, recolor: !!o.recolor });
     if (o.flame) {
       const top = iconTop(img);
@@ -298,8 +297,8 @@ export function createBackroomScene(availW, availH) {
   });
   const srcs = scene.objects.filter((o) => o.src).map((o) => o.src);
   for (const a of game.data.anomalies) for (const op of a.ops) if (op.object && op.object.src) srcs.push(op.object.src);
-  const ready = Promise.all(srcs.map(loadImage)).then(paint);
-  return { stage, set, ready };
+  Promise.all(srcs.map(loadImage)).then(paint);
+  return { stage, set };
 }
 
 // The loop view. getState() returns the backroom state; onCall(choice) performs it (state change + commit) and returns
@@ -315,12 +314,22 @@ export function renderBackroomLoop(root, { getState, onCall, onDone }) {
   scene.stage.el.append(plaque);
   const msg = h('div.combat-log.br-msg');
   const actions = h('div.row.br-actions');
-  root.append(h('div.split', null, h('div.split-a', null, scene.stage.el), h('div.split-b', null, msg, actions)));
+  let comparing = false;
+  let busy = false;
+  const compare = button(t('backroom.compare'), () => {
+    if (busy) return;
+    comparing = !comparing;
+    draw();
+  }, { cls: 'grey block br-compare', sound: 'select' });
+  compare.setAttribute('aria-pressed', 'false');
+  root.append(h('div.split', null, h('div.split-a', null, scene.stage.el), h('div.split-b', null, msg, actions, compare)));
 
   const draw = () => {
     const st = getState();
     plaque.textContent = String(st.at);
-    scene.set(sceneWith(game.data, st.cur));
+    scene.set(sceneWith(game.data, comparing ? null : st.cur));
+    scene.stage.el.classList.toggle('br-reference', comparing);
+    compare.setAttribute('aria-pressed', String(comparing));
     const last = st.last;
     let text = '';
     if (!last && st.firstVisit) text = t('backroom.intro');
@@ -328,18 +337,17 @@ export function renderBackroomLoop(root, { getState, onCall, onDone }) {
     else if (last && last.missed) text = t('backroom.missed');
     else if (last && last.falseAlarm) text = t('backroom.falseAlarm');
     if (st.cur && st.hints) text = (text ? text + ' ' : '') + t('backroom.hint');
-    msg.textContent = text;
-    msg.classList.toggle('accent', !!(last && last.anomaly));
+    msg.textContent = comparing ? t('backroom.reference') : text || t('backroom.inspect');
+    msg.classList.toggle('accent', comparing || !!(last && last.anomaly));
     setChildren(
       actions,
-      button(t('backroom.back'), () => go('back'), { cls: 'blue big grow br-back', sound: null }),
-      button(t('backroom.forward'), () => go('forward'), { cls: 'green big grow br-forward', sound: null }),
+      button(t('backroom.back'), () => go('back'), { cls: 'blue big grow br-back', sound: null, disabled: comparing }),
+      button(t('backroom.forward'), () => go('forward'), { cls: 'green big grow br-forward', sound: null, disabled: comparing }),
     );
   };
 
-  let busy = false;
   async function go(choice) {
-    if (busy) return;
+    if (busy || comparing) return;
     busy = true;
     play(choice === 'back' ? 'door_close' : 'step');
     actions.querySelectorAll('button').forEach((b) => (b.disabled = true));
@@ -363,5 +371,4 @@ export function renderBackroomLoop(root, { getState, onCall, onDone }) {
     if (!busy) el.style.opacity = '';
   }
   draw();
-  scene.ready.then(() => scene.set(sceneWith(game.data, getState().cur)));
 }

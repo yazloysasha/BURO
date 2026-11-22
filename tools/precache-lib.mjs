@@ -70,13 +70,10 @@ export function computeList() {
     files.add('assets/' + e.m4a);
     files.add('assets/' + e.mp3);
   }
-  // cat voices: only the first `core` clips of each group (the rest stream in and get cached on play)
-  const catIndex = path.join(ROOT, 'assets/cats/index.json');
-  if (fs.existsSync(catIndex)) {
-    const cats = JSON.parse(fs.readFileSync(catIndex, 'utf8'));
-    for (const list of Object.values(cats.groups || {})) {
-      for (const [f] of list.slice(0, cats.core || 0)) files.add('assets/cats/' + f);
-    }
+  const { catIndex } = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/assets.json'), 'utf8'));
+  const cats = JSON.parse(fs.readFileSync(path.join(ROOT, catIndex), 'utf8'));
+  for (const list of Object.values(cats.groups)) {
+    for (const file of list) files.add(path.posix.join(path.posix.dirname(catIndex), file));
   }
   return [...files].sort();
 }

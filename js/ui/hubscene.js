@@ -253,7 +253,7 @@ export function createHubScene(availW, availH, { anomaly = null, onAnomaly = nul
     const b = behaviours[Math.floor(Math.random() * behaviours.length)];
     cat.busy = true;
     if (b === 'meow') voice(cat, 0.45);
-    else if (b === 'sit' && Math.random() < 0.3) playCat('purr', { vol: 0.35, rate: cat === pep ? 0.95 : 1.05 });
+    else if (b === 'sit' && Math.random() < 0.3) playCat('purr', { vol: 0.35 });
     cat.play(b, { loop: false }).then(() => {
       setTimeout(() => {
         cat.busy = false;
@@ -262,12 +262,8 @@ export function createHubScene(availW, availH, { anomaly = null, onAnomaly = nul
     });
   }, 4200);
 
-  // Peposya sounds a touch lower, Dudonya a touch higher and sometimes kittenish
   function voice(cat, vol = 1) {
-    const r = Math.random();
-    const group = r < 0.2 ? 'trill' : cat === dud && r < 0.4 ? 'kitten' : 'meow';
-    const rate = (cat === pep ? 0.94 : 1.06) + (Math.random() - 0.5) * 0.06;
-    playCat(group, { vol, rate, fallback: vol < 1 ? null : cat === pep ? 'meow_sub' : 'meow_sub_2' });
+    playCat(cat === pep ? 'peposya' : 'dudonya', { vol });
   }
 
   const meow = (cat, bx, by) => {

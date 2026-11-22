@@ -1,5 +1,6 @@
 // The Lavka's collection: items (with modifiers) by key, animals, guests, showcase, selling.
 import { effectSum } from './meta.js';
+import { CAT_KEYS } from './combat.js';
 
 export function itemKey(id, mods = []) {
   return mods && mods.length ? id + '|' + mods.slice().sort().join('+') : id;
@@ -8,6 +9,19 @@ export function itemKey(id, mods = []) {
 export function parseKey(key) {
   const [id, m] = key.split('|');
   return { id, mods: m ? m.split('+') : [] };
+}
+
+export function availableCopies(save, key) {
+  const equipped = CAT_KEYS.filter((cat) => save.meta.equipment?.[cat] === key).length;
+  return Math.max(0, (save.collection.items[key] || 0) - equipped);
+}
+
+export function equipItem(save, data, cat, key) {
+  if (!CAT_KEYS.includes(cat)) return false;
+  if (key !== null && (!availableCopies(save, key) || data.itemById[parseKey(key).id]?.effect?.type !== 'stat')) return false;
+  save.meta.equipment ||= {};
+  save.meta.equipment[cat] = key;
+  return true;
 }
 
 export function addItem(save, id, mods = []) {
@@ -21,7 +35,7 @@ export function addItem(save, id, mods = []) {
 export function removeItem(save, key, n = 1) {
   const col = save.collection.items;
   if (!col[key]) return 0;
-  const k = Math.min(n, col[key]);
+  const k = Math.min(n, availableCopies(save, key));
   col[key] -= k;
   if (col[key] <= 0) {
     delete col[key];

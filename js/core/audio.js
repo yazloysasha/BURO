@@ -1,23 +1,40 @@
-// Web Audio SFX. The AudioContext is created/resumed on the first user gesture (iOS requirement).
-// Prefers .m4a, falls back to .mp3 if decoding fails.
+// Web Audio needs a user gesture before it can start on mobile browsers.
 let ctx = null;
-let master = null;
+let effects = null;
+let music = null;
+let musicSource = null;
 let index = {};
-let base = "./assets/";
-const buffers = new Map();
+let base = './assets/';
+let voices = {};
+let voiceBase = './assets/cats/';
+let musicPath = '';
 let volume = 0.8;
-let unlocked = false;
-let loading = null;
+let musicVolume = 0.35;
 let ignoreMute = true;
+const buffers = new Map();
+const lastVoice = new Map();
 
-export function configure(sfxIndex, assetBase = "./assets/") {
+export function configure(sfxIndex, assetBase, soundtrack) {
   index = sfxIndex || {};
   base = assetBase;
+  musicPath = soundtrack;
+}
+
+export function configureCats(index, assetBase) {
+  voices = index.groups || {};
+  voiceBase = assetBase;
 }
 
 export function setVolume(v) {
   volume = Math.max(0, Math.min(1, v));
-  if (master) master.gain.value = volume;
+  if (effects) effects.gain.value = volume;
+}
+
+export function setMusicVolume(v) {
+  musicVolume = Math.max(0, Math.min(1, v));
+  if (music) music.gain.value = musicVolume;
+  if (musicVolume) startMusic();
+  else stopMusic();
 }
 
 export function setIgnoreMute(on) {
@@ -27,194 +44,138 @@ export function setIgnoreMute(on) {
 
 function applySession() {
   try {
-    // 'playback' makes iOS play sound even with the silent switch on
-    if (navigator.audioSession)
-      navigator.audioSession.type = ignoreMute ? "playback" : "ambient";
+    if (navigator.audioSession) {
+      navigator.audioSession.type = ignoreMute ? 'playback' : 'ambient';
+    }
   } catch {
-    /* unsupported */
+    // Audio Session API is optional.
   }
 }
 
-async function decode(url) {
-  const r = await fetch(url);
-  if (!r.ok) throw new Error(url);
-  const ab = await r.arrayBuffer();
-  return await new Promise((resolve, reject) => {
-    // callback form for older Safari
-    const p = ctx.decodeAudioData(ab, resolve, reject);
-    if (p && p.then) p.then(resolve, reject);
+function load(paths) {
+  if (!buffers.has(paths[0])) {
+    const context = ctx;
+    const pending = (async () => {
+      for (const path of paths) {
+        try {
+          const response = await fetch(path);
+          if (response.ok) return await context.decodeAudioData(await response.arrayBuffer());
+        } catch {
+          // Try the alternate encoding.
+        }
+      }
+      if (buffers.get(paths[0]) === pending) buffers.delete(paths[0]);
+      return null;
+    })();
+    buffers.set(paths[0], pending);
+  }
+  return buffers.get(paths[0]);
+}
+
+function startMusic() {
+  if (!ctx || !musicPath || !musicVolume || document.hidden || musicSource || ctx.state !== 'running') return;
+  const context = ctx;
+  load([musicPath]).then((buffer) => {
+    if (!buffer || ctx !== context || musicSource || document.hidden || !musicVolume || context.state !== 'running') return;
+    const source = context.createBufferSource();
+    source.buffer = buffer;
+    source.loop = true;
+    source.connect(music);
+    source.start();
+    musicSource = source;
   });
 }
 
-async function loadOne(name) {
-  const e = index[name];
-  if (!e) return null;
-  try {
-    return await decode(base + e.m4a);
-  } catch {
-    try {
-      return await decode(base + e.mp3);
-    } catch (err) {
-      console.warn("sfx failed", name, err);
-      return null;
-    }
-  }
+function stopMusic() {
+  if (!musicSource) return;
+  musicSource.stop();
+  musicSource.disconnect();
+  musicSource = null;
 }
 
-function loadAll() {
-  if (!loading) {
-    loading = Promise.all(
-      Object.keys(index).map(async (name) => {
-        const b = await loadOne(name);
-        if (b) buffers.set(name, b);
-      }),
-    );
+function resume() {
+  if (!ctx || ctx.state === 'closed' || document.hidden) return;
+  if (ctx.state === 'running') {
+    startMusic();
+    return;
   }
-  return loading;
+  applySession();
+  return ctx.resume().then(startMusic).catch(() => {});
 }
 
 export function unlock() {
-  if (unlocked && ctx && ctx.state === "running") return;
-  try {
+  const AC = window.AudioContext || window.webkitAudioContext;
+  if (!AC) return;
+  if (!ctx || ctx.state === 'closed') {
+    const isFirstContext = !ctx;
     applySession();
-    if (!ctx) {
-      const AC = window.AudioContext || window.webkitAudioContext;
-      if (!AC) return;
-      ctx = new AC();
-      master = ctx.createGain();
-      master.gain.value = volume;
-      master.connect(ctx.destination);
-      // a silent buffer kicks iOS into playing state
-      const b = ctx.createBuffer(1, 1, 22050);
-      const s = ctx.createBufferSource();
-      s.buffer = b;
-      s.connect(master);
-      s.start(0);
-      loadAll();
-      warmCats();
+    ctx = new AC();
+    if (!isFirstContext) {
+      buffers.clear();
+      musicSource = null;
     }
-    if (ctx.state !== "running") ctx.resume();
-    unlocked = true;
-  } catch (e) {
-    console.warn("audio unlock failed", e);
+    effects = ctx.createGain();
+    effects.gain.value = volume;
+    effects.connect(ctx.destination);
+    music = ctx.createGain();
+    music.gain.value = musicVolume;
+    music.connect(ctx.destination);
+
+    // A silent source helps older iOS versions unlock output on the first tap.
+    const silent = ctx.createBufferSource();
+    silent.buffer = ctx.createBuffer(1, 1, 22050);
+    silent.connect(effects);
+    silent.start();
   }
+  resume();
 }
 
-export function play(name, { vol = 1, rate = 1, delay = 0 } = {}) {
-  if (!ctx || volume <= 0) return;
-  const b = buffers.get(name);
-  if (!b) return;
-  playBuffer(b, { vol, rate, delay });
+export function play(name, options = {}) {
+  const entry = index[name];
+  if (!entry || !ctx || !volume) return;
+  playWhenReady([base + entry.m4a, base + entry.mp3], options);
 }
 
-// ---- Cat voices: a big pool of real recordings (assets/cats/index.json, built by tools/prep/fetch_cat_sfx.py).
-// Only a small rotating set per group is decoded at a time (iOS memory); every play swaps one clip for a
-// fresh random one, so over a session the player hears the whole pool. Missing pool -> fallback sfx.
-const CAT_WARM = 6; // decoded clips kept per group
-let cats = { groups: {}, core: 0 };
-let catBase = './assets/cats/';
-const catWarm = new Map(); // group -> [{ name, buf }]
-const catLoading = new Set();
-const catLast = new Map(); // group -> last played name
-
-export function configureCats(index, base = './assets/cats/') {
-  cats = index && index.groups ? index : { groups: {}, core: 0 };
-  catBase = base;
-  if (ctx) warmCats();
+export function playCat(group, options = {}) {
+  const clips = voices[group];
+  if (!clips?.length || !ctx || !volume) return;
+  const choices = clips.length === 1 ? clips : clips.filter((name) => name !== lastVoice.get(group));
+  const name = choices[Math.floor(Math.random() * choices.length)];
+  lastVoice.set(group, name);
+  playWhenReady([voiceBase + name], { ...options, maxWait: 1500 });
 }
 
-export function hasCats(group) {
-  return !!(cats.groups[group] && cats.groups[group].length);
-}
-
-async function loadCat(group, name) {
-  if (!ctx || catLoading.has(name)) return;
-  catLoading.add(name);
-  try {
-    const buf = await decode(catBase + name);
-    const warm = catWarm.get(group) || [];
-    if (!warm.some((w) => w.name === name)) warm.push({ name, buf });
-    while (warm.length > CAT_WARM) warm.splice(warm.findIndex((w) => w.name !== catLast.get(group)), 1);
-    catWarm.set(group, warm);
-  } catch {
-    /* offline and not cached yet: fine, keep what we have */
-  } finally {
-    catLoading.delete(name);
-  }
-}
-
-function freshCat(group, preferCore) {
-  const list = cats.groups[group] || [];
-  if (!list.length) return null;
-  const warm = catWarm.get(group) || [];
-  const n = preferCore ? Math.min(list.length, cats.core || list.length) : list.length;
-  for (let i = 0; i < 8; i++) {
-    const [name] = list[Math.floor(Math.random() * n)];
-    if (!warm.some((w) => w.name === name) && !catLoading.has(name)) return name;
-  }
-  return null;
-}
-
-function warmCats() {
-  for (const group of Object.keys(cats.groups)) {
-    // core clips are precached, so the first few always work offline
-    for (let i = 0; i < Math.min(3, CAT_WARM); i++) {
-      const name = freshCat(group, true);
-      if (name) loadCat(group, name);
-    }
-    for (let i = 3; i < CAT_WARM; i++) {
-      const name = freshCat(group, false);
-      if (name) loadCat(group, name);
-    }
-  }
-}
-
-// Plays a random clip of a group ('meow', 'kitten', 'trill', 'purr', 'hiss'); falls back to `fallback` sfx.
-export function playCat(group, { fallback, vol = 1, rate = 1, delay = 0 } = {}) {
-  if (!ctx || volume <= 0) return;
-  const warm = (catWarm.get(group) || []).filter((w) => w.name !== catLast.get(group) || catWarm.get(group).length === 1);
-  if (!warm.length) {
-    if (fallback) play(fallback, { vol, rate, delay });
-    if (hasCats(group)) {
-      const name = freshCat(group, true);
-      if (name) loadCat(group, name);
-    }
-    return;
-  }
-  const pick = warm[Math.floor(Math.random() * warm.length)];
-  catLast.set(group, pick.name);
-  playBuffer(pick.buf, { vol, rate, delay });
-  // rotate: drop the clip just played once a new one arrives
-  const name = freshCat(group, false);
-  if (name) loadCat(group, name);
-}
-
-function playBuffer(b, { vol = 1, rate = 1, delay = 0 }) {
-  try {
-    if (ctx.state !== 'running') ctx.resume();
-    const src = ctx.createBufferSource();
-    src.buffer = b;
-    src.playbackRate.value = rate;
-    const g = ctx.createGain();
-    g.gain.value = vol;
-    src.connect(g);
-    g.connect(master);
-    src.start(ctx.currentTime + delay);
-  } catch {
-    /* ignore */
-  }
+function playWhenReady(paths, { vol = 1, rate = 1, delay = 0, maxWait = 500 } = {}) {
+  const context = ctx;
+  const started = performance.now();
+  const ready = context.state === 'running' ? null : resume();
+  Promise.all([load(paths), ready]).then(([buffer]) => {
+    if (!buffer || ctx !== context || document.hidden || context.state !== 'running' || !volume) return;
+    if (performance.now() - started > maxWait) return;
+    const source = context.createBufferSource();
+    source.buffer = buffer;
+    source.playbackRate.value = rate;
+    const gain = context.createGain();
+    gain.gain.value = vol;
+    source.connect(gain);
+    gain.connect(effects);
+    source.start(context.currentTime + delay);
+  });
 }
 
 export function installUnlock(target = window) {
-  const handler = () => unlock();
-  target.addEventListener("pointerdown", handler, { capture: true });
-  target.addEventListener("touchend", handler, { capture: true });
-  document.addEventListener("visibilitychange", () => {
-    if (
-      document.visibilityState === "visible" &&
-      ctx &&
-      ctx.state !== "running"
-    )
-      ctx.resume().catch(() => {});
+  for (const event of ['pointerdown', 'touchend', 'click', 'keydown']) {
+    target.addEventListener(event, unlock, { capture: true });
+  }
+  target.addEventListener('pageshow', resume);
+  target.addEventListener('focus', resume);
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      if (ctx?.state === 'running') {
+        ctx.suspend().then(() => {
+          if (!document.hidden) resume();
+        }).catch(() => {});
+      }
+    } else resume();
   });
 }

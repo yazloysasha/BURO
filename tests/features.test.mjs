@@ -2,11 +2,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { Rng } from '../js/core/rng.js';
-import { newSave } from '../js/core/save.js';
+import { newSave, parseSave, serializeSave } from '../js/core/save.js';
 import { makeCatUnit, makeEnemyUnit, createCombat, planIntents, resolveRound, computeDamage } from '../js/game/combat.js';
 import { combatCtx } from '../js/game/data.js';
-import { startRun, enterNode, playRound, addToBackpack, finishRun, gearQuirks, companionUnit, hasRelic, completeRoom } from '../js/game/run.js';
-import { addItem } from '../js/game/collection.js';
+import { startRun, startCombat, enterNode, playRound, addToBackpack, finishRun, gearQuirks, companionUnit, hasRelic, completeRoom } from '../js/game/run.js';
+import { addItem, equipItem, sellItem } from '../js/game/collection.js';
 import { rollCustomer, customerOffer, sellToCustomer, wantMatches } from '../js/game/customers.js';
 import { openMilestones, comboQuests } from '../js/game/combos.js';
 import { claimComboMilestone } from '../js/game/blocks.js';
@@ -122,6 +122,33 @@ test('the purse relic pays for every room; the torch adds a block to nests', () 
   const before = save.run.coins;
   completeRoom(save, data);
   assert.equal(save.run.coins, before + 3);
+});
+
+test('each cat takes its own gear into the run and equipped copies cannot be sold', () => {
+  const fresh = newSave(new Date(), 'equipment');
+  const bow = addItem(fresh, 'gold_bow');
+  const shield = addItem(fresh, 'shield_01a');
+  assert.equal(equipItem(fresh, data, 'peposya', bow), true);
+  assert.equal(equipItem(fresh, data, 'dudonya', bow), false);
+  assert.equal(equipItem(fresh, data, 'dudonya', shield), true);
+
+  const save = parseSave(serializeSave(fresh));
+  save.meta.customer = { want: { kind: 'category', value: 'weapon_tool' }, mult: 2 };
+  assert.equal(customerOffer(save, data, bow), 0);
+  assert.equal(sellToCustomer(save, data, bow), 0);
+  addItem(save, 'shield_01a');
+  const price = sellItem(save, data, shield, 2);
+  assert.ok(price > 0);
+  assert.equal(save.collection.items[shield], 1);
+
+  const run = startRun(save, data);
+  run.floorNo = 1;
+  assert.equal(equipItem(save, data, 'dudonya', null), true);
+  const { cats: [pep, dud] } = startCombat(save, data, run, 'combat');
+  assert.equal(pep.crit, data.cats.peposya.stats.crit + 0.04);
+  assert.equal(dud.crit, data.cats.dudonya.stats.crit);
+  assert.equal(pep.def, data.cats.peposya.stats.def);
+  assert.equal(dud.def, data.cats.dudonya.stats.def + 1);
 });
 
 test('customers want something specific, pay a premium once, and only for a match', () => {

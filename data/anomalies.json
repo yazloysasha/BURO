@@ -29,7 +29,7 @@
   {"id": "window_bar", "level": 3, "name": "Окно без перекладины", "desc": "Из рамы пропала поперечная планка.", "ops": [{"op": "set", "target": "window", "props": {"barH": false}}]},
   {"id": "poster_looks", "level": 3, "name": "Клобстер на плакате отвернулся", "desc": "Разыскиваемый смотрит в другую сторону.", "ops": [{"op": "set", "target": "poster", "props": {"iconFlip": true}}]},
   {"id": "second_hole", "level": 3, "name": "Вторая норка", "desc": "Норок стало две. Мыши расширяют бизнес.", "ops": [{"op": "add", "object": {"id": "hole2", "kind": "hole", "x": 84, "y": 58, "light": false}}]},
-  {"id": "box_moved", "level": 3, "name": "Коробка сдвинулась", "desc": "Коробка стоит чуть левее. Внутри тихо.", "ops": [{"op": "set", "target": "box", "props": {"x": 97}}]},
+  {"id": "box_moved", "level": 3, "name": "Коробка сдвинулась", "desc": "Коробка стоит чуть левее. Внутри тихо.", "ops": [{"op": "set", "target": "box", "props": {"x": 82}}]},
   {"id": "hub_moon_red", "where": "hub", "name": "Красная луна над Лавкой", "desc": "Даже Лавка иногда бывает немного не такой.", "ops": []},
   {"id": "hub_ceiling", "where": "hub", "name": "Клобстер под потолком Лавки", "desc": "Висит над прилавком и всё видит.", "ops": []},
   {"id": "hub_window_eyes", "where": "hub", "name": "Глаза в окне Лавки", "desc": "Кто-то смотрит в окно Лавки. Добрыми глазами. Наверное.", "ops": []}

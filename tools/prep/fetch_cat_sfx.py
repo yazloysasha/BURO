@@ -331,11 +331,12 @@ def main():
         paths = dict(zip(allsrc, ex.map(lambda s: download(s, work), allsrc.values())))
 
     # 4. cut, normalise, encode
-    if OUT.exists():
-        shutil.rmtree(OUT)
     index, credits = {'groups': {}, 'core': a.core}, {}
     for g, (picked, want, lo, hi, per_src) in plan.items():
-        (OUT / g).mkdir(parents=True, exist_ok=True)
+        group_dir = OUT / g
+        if group_dir.exists():
+            shutil.rmtree(group_dir)
+        group_dir.mkdir(parents=True)
         clips, n = [], 0
         for s in picked:
             if len(clips) >= want:

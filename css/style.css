@@ -527,6 +527,13 @@ input[type='range'] {
 .br-msg {
   min-height: 3.2em;
 }
+.br-compare {
+  margin-top: 8px;
+}
+.br-compare[aria-pressed='true'],
+.br-reference {
+  outline: 2px solid var(--accent);
+}
 .grow-fill {
   flex: 1;
   min-height: 0;
@@ -921,6 +928,23 @@ body.kbd .map-node.avail::before {
 .tabs .btn {
   flex: 1;
 }
+.equipment {
+  padding: 8px;
+  background: var(--bg2);
+  border: 2px solid #4a3d70;
+}
+.equipment p {
+  margin: 0;
+}
+.equipment-slots {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+.equipment-slots .btn {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
 .inv-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(64px, 1fr));
@@ -1050,11 +1074,13 @@ body.kbd .map-node.avail::before {
 }
 .sticker {
   position: relative;
-  height: 76px;
-  display: flex;
+  min-width: 0;
+  min-height: 86px;
+  display: grid;
+  grid-template-rows: 1fr auto;
   align-items: center;
-  justify-content: center;
-  padding: 0;
+  justify-items: center;
+  padding: 4px;
   border: 3px dashed #4a3d70;
   background: #1f1834;
 }
@@ -1071,13 +1097,20 @@ body.kbd .map-node.avail::before {
 .sticker.new canvas {
   opacity: 0.55;
 }
+.sticker-art,
+.sticker-preview {
+  display: grid;
+  width: 100%;
+  place-items: center;
+}
+.sticker-art canvas,
+.sticker-preview canvas {
+  max-width: 100%;
+  object-fit: contain;
+}
 .sticker-tag {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  font-size: var(--fs);
-  line-height: 1.1;
+  font-size: var(--fs-s);
+  line-height: 1.15;
   color: var(--accent);
   text-shadow: 1px 1px 0 #000;
 }

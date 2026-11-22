@@ -30,10 +30,13 @@
 | 16x16 Ant Enemies | ARoachIFoundOnMyPillow | https://opengameart.org/content/16x16-ant-enemies | враги ant_red, ant_grey |
 
 ## Голоса кошек (Freesound, CC0 и CC BY)
-Настоящие мяуканья, мурлыканья, трели и шипение — сотни записей разных авторов с https://freesound.org,
-собраны скриптом `tools/prep/fetch_cat_sfx.py` (только CC0 и CC BY 3.0/4.0, без NonCommercial).
-Полный список (название, автор, лицензия, ссылка) — `assets/cats/CREDITS.md`, в игре — на экране «Авторы».
-Изменения: нарезка по паузам, обрезка, фильтры, нормализация громкости, перекодирование в mp3 mono.
+В игре используются записи из `assets/cats/voices.json`. Их авторы, лицензии и ссылки отображаются на экране «Авторы».
+Записи мяуканья сохранены целиком, с выравниванием громкости и перекодированием. Мурлыканье и шипение — отрывки исходных записей.
+Атрибуция остального звукового архива находится в `assets/cats/CREDITS.md`.
+
+## Фоновая музыка
+
+`assets/music/lavka.mp3` — оригинальная инструментальная петля для игры.
 
 ## Шрифт (SIL OFL 1.1)
 - **Galmuri11** — Lee Minseo (quiple), https://github.com/quiple/galmuri, SIL Open Font License 1.1.

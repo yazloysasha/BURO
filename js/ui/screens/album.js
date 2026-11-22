@@ -8,7 +8,8 @@ import { pixelCanvas, iconCanvas, enemyCanvas } from '../../core/sprite.js';
 import { game, commit } from '../../game/state.js';
 import { pageState, placeSticker, slotFound, slotKey } from '../../game/progress.js';
 import { button, modal, closeModal, screenHeader, setTopbarTitle } from '../app.js';
-import { passiveText } from '../runwidgets.js';
+import { passiveText, assistText } from '../runwidgets.js';
+import { companionUnit } from '../../game/run.js';
 import { burst } from '../particles.js';
 import { uiZoom } from '../layout.js';
 
@@ -18,11 +19,18 @@ function slotInfo(slot) {
   if (slot.kind === 'animal') {
     const a = game.data.animalById[slot.id];
     const side = a.art ? Math.max(a.art.w, a.art.h) + 1 : Math.max(a.w || 16, a.h || 16);
-    return { name: a.name, src: a.sprite, w: side, h: side, art: a.art || null };
+    return {
+      name: a.name, src: a.sprite, w: side, h: side, art: a.art || null,
+      description: t('inv.passive') + ' ' + passiveText(a.passive),
+      assist: t('inv.inRuns') + ' ' + assistText(companionUnit(game.data, { companion: a.id, backpack: [] }).assist),
+    };
   }
-  if (slot.kind === 'enemy') return { name: game.data.enemyById[slot.id].name, enemy: game.data.enemyById[slot.id].sprite };
+  if (slot.kind === 'enemy') {
+    const enemy = game.data.enemyById[slot.id];
+    return { name: enemy.name, enemy: enemy.sprite, description: enemy.flavor };
+  }
   const it = game.data.itemById[slot.id];
-  return { name: it.name, src: it.icon, w: it.w, h: it.h };
+  return { name: it.name, src: it.icon, w: it.w, h: it.h, description: it.flavor };
 }
 
 function stickerIcon(info, target) {
@@ -78,12 +86,14 @@ export function render(root) {
       const info = slotInfo(slot);
       const found = slotFound(game.save, slot);
       const placed = !!game.save.album.placed[slotKey(page.id, i)];
-      const cell = h('button.sticker' + (placed ? '.placed' : found ? '.new' : '.empty'), { type: 'button' });
+      const cell = h('button.sticker' + (placed ? '.placed' : found ? '.new' : '.empty'), {
+        type: 'button',
+        'aria-label': found ? info.name : t('album.emptySlot'),
+      });
       cell.style.setProperty('--tilt', ((i * 37) % 7) - 3 + 'deg');
-      if (placed) cell.append(stickerIcon(info, 44));
-      else if (found) cell.append(stickerIcon(info, 44), h('span.sticker-tag', { text: t('album.place') }));
-      else cell.append(silhouette(info, 44));
-      cell.addEventListener('click', () => onSlot(page, i, cell, info, found, placed));
+      cell.append(h('span.sticker-art', null, found ? stickerIcon(info, 52) : silhouette(info, 52)));
+      if (found && !placed) cell.append(h('span.sticker-tag', { text: t('album.place') }));
+      cell.addEventListener('click', () => onSlot(page, i, cell, info, found));
       grid.append(cell);
     });
     const box = h(
@@ -104,15 +114,20 @@ export function render(root) {
     draw(d);
   }
 
-  function onSlot(page, i, cell, info, found, placed) {
+  function onSlot(page, i, cell, info, found) {
     if (!found) {
       play('tap');
       modal(h('p', { text: t('album.unknown') }), [{ label: t('common.ok'), value: 1, cls: 'green' }]);
       return;
     }
-    if (placed) {
+    if (game.save.album.placed[slotKey(page.id, i)]) {
       play('select');
-      modal(h('div.col.center', null, stickerIcon(info, 80), h('h2', { text: info.name })), [{ label: t('common.ok'), value: 1, cls: 'green' }]);
+      modal(h('div.col.center', null,
+        h('div.sticker-preview', null, stickerIcon(info, 80)),
+        h('h2', { text: info.name }),
+        h('p', { text: info.description }),
+        info.assist ? h('p', { text: info.assist }) : null,
+      ), [{ label: t('common.ok'), value: 1, cls: 'green' }]);
       return;
     }
     const res = placeSticker(game.save, game.data, page.id, i);
@@ -120,7 +135,8 @@ export function render(root) {
     commit();
     play('sticker_place');
     cell.className = 'sticker placed';
-    setChildren(cell, stickerIcon(info, 44));
+    cell.querySelector('.sticker-tag').remove();
+    cell.disabled = true;
     tween(260, (k) => (cell.style.transform = `scale(${1.5 - 0.5 * k}) rotate(var(--tilt))`), ease.outBack).then(() => {
       cell.style.transform = '';
       if (!res.completed) draw();

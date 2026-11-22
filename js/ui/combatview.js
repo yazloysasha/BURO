@@ -25,7 +25,7 @@ const BOSS_SLOT = [44, 40];
 const MINION_SLOTS = [[78, 10], [80, 76], [78, 44]];
 
 
-const ACTION_SFX = { bite: 'scratch', hiss: 'meow_sub_2', purr: 'shiny', special: 'hit_medium', item: 'potion' };
+const ACTION_SFX = { bite: 'scratch', special: 'hit_medium', item: 'potion' };
 
 export function renderCombat(root, { onEnd }) {
   const run = game.save.run;
@@ -339,7 +339,7 @@ export function renderCombat(root, { onEnd }) {
     if (busy) return;
     const cat = catByKey(c, k);
     const lines = cat.statuses.map((s) => h('div.dim', { text: game.data.statusById[s.id].name + ' — ' + game.data.statusById[s.id].desc }));
-    playCat('meow', { fallback: 'meow_sub' });
+    playCat(k);
     modal(
       h(
         'div',
@@ -419,7 +419,7 @@ export function renderCombat(root, { onEnd }) {
             const ad = game.data.cats[cat.key].actions[ev.action];
             log.textContent = t('combat.logAct', { who: nameOf(ev.actor), what: ad ? ad.name : '' });
             if (ev.action === 'hiss' || ev.action === 'purr') {
-              if (!skip.skipped) playCat(ev.action, { fallback: ACTION_SFX[ev.action], vol: ev.action === 'purr' ? 0.8 : 1 });
+              if (!skip.skipped) playCat(ev.action, { vol: ev.action === 'purr' ? 0.65 : 0.85 });
             } else play(ACTION_SFX[ev.action] || 'tap');
             const v = views[ev.actor];
             if (ev.action === 'bite' || ev.action === 'special') {

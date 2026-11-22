@@ -22,7 +22,7 @@ self.addEventListener('install', (event) => {
     (async () => {
       const cache = await caches.open(CACHE);
       // small batches with retries: gentle on slow connections and tiny dev servers
-      const list = self.BURO_PRECACHE;
+      const list = [...self.BURO_PRECACHE, "./precache-manifest.js"];
       for (let i = 0; i < list.length; i += 16) {
         await Promise.all(list.slice(i, i + 16).map((u) => cacheWithRetry(cache, u)));
       }

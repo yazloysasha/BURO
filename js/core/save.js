@@ -7,6 +7,7 @@ export const EXPORT_TAG = "buro";
 export function defaultSettings() {
   return {
     sfx: 0.8,
+    music: 0.35,
     shake: true,
     animSpeed: 2,
     vibration: true,
@@ -31,6 +32,7 @@ export function newSave(now = new Date(), seed = Date.now()) {
       ownedSkins: [],
       guests: [],
       showcase: [],
+      equipment: { peposya: null, dudonya: null },
       rng: seedState("meta:" + seed),
       runsStarted: 0,
       grit: 0,
@@ -181,6 +183,18 @@ export function normalizeSave(s) {
     }
   };
   fill(s, d);
+  const equipped = new Map();
+  for (const cat of Object.keys(d.meta.equipment)) {
+    const key = s.meta.equipment[cat];
+    const copies = equipped.get(key) || 0;
+    if (typeof key === "string" && Object.hasOwn(s.collection.items, key) && s.collection.items[key] > copies)
+      equipped.set(key, copies + 1);
+    else s.meta.equipment[cat] = null;
+  }
+  for (const key of ["sfx", "music"]) {
+    if (!isNum(s.settings[key])) s.settings[key] = d.settings[key];
+    else s.settings[key] = Math.max(0, Math.min(1, s.settings[key]));
+  }
   if (!Array.isArray(s.meta.rng) || s.meta.rng.length !== 4)
     s.meta.rng = d.meta.rng;
   if (!Array.isArray(s.combos.discovered)) s.combos.discovered = [];

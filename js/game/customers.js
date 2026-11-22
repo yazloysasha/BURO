@@ -1,6 +1,6 @@
 // Customers of the Lavka: after a run an animal may come in asking for a kind of item and pays a premium for it.
 // This is what makes hoarding a decision: the right thing on the shelf can sell for much more than the usual price.
-import { parseKey, sellPrice, removeItem } from './collection.js';
+import { parseKey, sellPrice, removeItem, availableCopies } from './collection.js';
 
 const WANTS = ['category', 'category', 'category', 'rarity', 'mod'];
 
@@ -17,7 +17,7 @@ export function wantMatches(data, want, key) {
 // Rolls the next visitor (or nobody). Prefers wishes the shelves can answer, so a visit is rarely a tease.
 export function rollCustomer(save, data, rng) {
   if (!rng.chance(data.balance.customers.chance)) return null;
-  const keys = Object.keys(save.collection.items);
+  const keys = Object.keys(save.collection.items).filter((key) => availableCopies(save, key));
   const kind = rng.pick(WANTS);
   let value;
   if (kind === 'category') {
@@ -33,7 +33,7 @@ export function rollCustomer(save, data, rng) {
 
 export function customerOffer(save, data, key) {
   const c = save.meta.customer;
-  if (!c || !save.collection.items[key] || !wantMatches(data, c.want, key)) return 0;
+  if (!c || !availableCopies(save, key) || !wantMatches(data, c.want, key)) return 0;
   return Math.round(sellPrice(save, data, key) * c.mult);
 }
 

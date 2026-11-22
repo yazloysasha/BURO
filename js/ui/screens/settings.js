@@ -1,7 +1,7 @@
 // Settings: sound, vibration, shake, animation speed, save export/import/reset.
 import { h } from '../../core/dom.js';
 import { t } from '../../core/i18n.js';
-import { play, setVolume, setIgnoreMute } from '../../core/audio.js';
+import { play, setVolume, setMusicVolume, setIgnoreMute } from '../../core/audio.js';
 import { setAnimSpeed } from '../../core/loop.js';
 import { exportSave, importSave, newSave } from '../../core/save.js';
 import { wipe, writeBackup } from '../../core/storage.js';
@@ -24,7 +24,7 @@ function toggle(key, label, hint) {
 export function render(root) {
   setTopbarTitle('');
   const s = game.save.settings;
-  const vol = h('input', { type: 'range', min: '0', max: '100', step: '5', value: String(Math.round(s.sfx * 100)) });
+  const vol = h('input', { type: 'range', min: '0', max: '100', step: '5', value: String(Math.round(s.sfx * 100)), 'aria-label': t('settings.sound') });
   vol.addEventListener('input', () => {
     s.sfx = Number(vol.value) / 100;
     setVolume(s.sfx);
@@ -33,6 +33,13 @@ export function render(root) {
     commit();
     play('tap');
   });
+
+  const music = h('input', { type: 'range', min: '0', max: '100', step: '5', value: String(Math.round(s.music * 100)), 'aria-label': t('settings.music') });
+  music.addEventListener('input', () => {
+    s.music = Number(music.value) / 100;
+    setMusicVolume(s.music);
+  });
+  music.addEventListener('change', () => commit());
 
   const speeds = [1, 1.5, 2, 3];
   const seg = h('div.seg');
@@ -54,6 +61,7 @@ export function render(root) {
     'div.col',
     null,
     h('div.setting', null, h('span', { text: t('settings.sound') }), vol),
+    h('div.setting', null, h('span', { text: t('settings.music') }), music),
     toggle('ignoreMute', t('settings.ignoreMute'), t('settings.ignoreMuteHint')),
     hapticsSupported() ? toggle('vibration', t('settings.vibration')) : null,
     toggle('shake', t('settings.shake')),
@@ -174,6 +182,7 @@ async function doReset() {
 export function applySettings() {
   const s = game.save.settings;
   setVolume(s.sfx);
+  setMusicVolume(s.music);
   setAnimSpeed(s.animSpeed);
   setIgnoreMute(s.ignoreMute);
 }
